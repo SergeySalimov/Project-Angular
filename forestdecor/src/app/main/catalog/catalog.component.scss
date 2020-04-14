@@ -1,0 +1,85 @@
+@import "bootstrap";
+@import "custom.variables";
+
+:host {
+  margin-top: -16px;
+  background-image: url("/assets/images/wall.jpg");
+  background-size: contain;
+  height: 600px;
+  display: block;
+
+  //background-image: url("/assets/images/wall.jpg");
+  //background-repeat: repeat;
+  //background-attachment: fixed;
+  //background-size: auto;
+
+  #catalog-navigation {
+    font-weight: bolder;
+    li {
+      cursor: pointer;
+    }
+
+    #btn-catalog.active {
+      background-color: $blue;
+      color: $mainFontColor;
+    }
+  }
+
+  #product-place {
+    //transition: opacity 1s;
+    .card {
+      h5 {
+        @media (min-width: map-get($grid-breakpoints, "sm")) {
+          font-size: 0.9rem;
+          text-align: left;
+        }
+        @media (min-width: map-get($grid-breakpoints, "md")) {
+          font-size: 0.7rem;
+        }
+        @media (min-width: map-get($grid-breakpoints, "lg")) {
+          font-size: 1.2rem;
+        }
+        @media (min-width: map-get($grid-breakpoints, "xl")) {
+          font-size: 1.1rem;
+        }
+        font-size: 1.5rem;
+        text-align: center;
+      }
+
+      .like {
+        position: absolute;
+        color: red;
+        right: 10px;
+        top: 10px;
+        font-size: 2rem;
+        @media (min-width: map-get($grid-breakpoints, "sm")) {
+          font-size: 1rem;
+        }
+      }
+
+      button {
+        @media (min-width: map-get($grid-breakpoints, "sm")) {
+          font-size: 0.8rem;
+        }
+        font-size: 1.5rem;
+        padding: 3px 10px;
+      }
+    }
+  }
+
+  .list-group {
+    details {
+      li::before {
+        content: "» ";
+      }
+
+    }
+
+    .alert {
+      font-size: 1.1rem;
+    }
+
+    font-size: 0.8rem;
+  }
+
+}

@@ -9,6 +9,13 @@ import { NavigationElementComponent } from './navigation/navigation-element/navi
 import { NavigationLinkComponent } from './navigation/navigation-link/navigation-link.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FooterComponent } from './footer/footer.component';
+import { MainComponent } from './main/main.component';
+import { HomeComponent } from './main/home/home.component';
+import { CatalogComponent } from './main/catalog/catalog.component';
+import { MessagesComponent } from './main/messages/messages.component';
+import { DeliveryComponent } from './main/delivery/delivery.component';
+import { PaymentComponent } from './main/payment/payment.component';
+import { ContactsComponent } from './main/contacts/contacts.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +25,14 @@ import { FooterComponent } from './footer/footer.component';
     NavigationElementComponent,
     NavigationLinkComponent,
     BreadcrumbComponent,
-    FooterComponent
+    FooterComponent,
+    MainComponent,
+    HomeComponent,
+    CatalogComponent,
+    MessagesComponent,
+    DeliveryComponent,
+    PaymentComponent,
+    ContactsComponent
   ],
   imports: [
     BrowserModule,
