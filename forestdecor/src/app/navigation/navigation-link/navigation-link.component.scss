@@ -1,0 +1,30 @@
+@import "custom.variables";
+
+#navbar {
+  ul {
+    li {
+      padding: 3px;
+
+      a {
+        cursor: pointer;
+
+        // if expand navigation on sm toogle on font-size!!!!
+        //  @media (min-width: map-get($grid-breakpoints, "sm")) {
+        //    font-size: 0.7rem;
+        //}
+        //@media (min-width: map-get($grid-breakpoints, "md")) {
+        //  font-size: 1.1rem;
+        //}
+      }
+
+      li:hover {
+        background-color: $mainFontColor;
+
+        a {
+          color: $alterFontColor;
+        }
+
+      }
+    }
+  }
+}

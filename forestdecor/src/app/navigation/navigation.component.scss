@@ -1,0 +1,29 @@
+@import "bootstrap";
+@import "custom.variables";
+
+.nav1 {
+  a {
+    cursor: pointer;
+  }
+
+  .btn-nav-registration.active {
+    color: yellow;
+  }
+
+  .navbar-brand {
+    padding: 5px;
+
+    img {
+      height: 40px;
+      width: auto;
+    }
+  }
+
+  .navbar-brand:hover {
+    background-color: $additFontColor;
+  }
+
+  .navbar-brand.no-autoriz:hover {
+    background-color: $red;
+  }
+}
