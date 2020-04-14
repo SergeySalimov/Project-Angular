@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { NavigationElementComponent } from './navigation/navigation-element/navigation-element.component';
 import { NavigationLinkComponent } from './navigation/navigation-link/navigation-link.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     HeaderComponent,
     NavigationElementComponent,
     NavigationLinkComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
