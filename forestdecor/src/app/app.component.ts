@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'forestdecor';
+
+  isLogged: boolean = false;
+
+  onChangeLog(log) {
+    this.isLogged = log;
+  }
+
 }
