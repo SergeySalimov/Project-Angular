@@ -1,0 +1,13 @@
+$breadcrumb-divider: quote(">");
+@import "bootstrap";
+
+@import "custom.variables";
+
+.nav2 {
+  background-color: $backGrey;
+  //margin-bottom: -16px;
+
+  .active {
+    text-transform: uppercase;
+  }
+}
