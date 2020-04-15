@@ -7,16 +7,17 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class AuthenticationComponent implements OnInit {
 
-  @ViewChild('recovery') recovery: ElementRef;
+  @ViewChild('recovery', {static: true}) recovery: ElementRef;
   isRecovery: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.recovery.nativeElement.checked = this.isRecovery;
   }
 
   onClickRecovery() {
-    // this.isRecovery = e.toElement.checked;
+    // this.isRecovery = event.toElement.checked;
     this.isRecovery = this.recovery.nativeElement.checked;
   }
 
