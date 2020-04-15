@@ -1,0 +1,23 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-12 offset-md-1 col-md-7 text-justify">
+
+      <app-form-toogle-buttons [isRegistration]="isRegistration"
+                               (formToogleClick)="onFormChange($event)">
+      </app-form-toogle-buttons>
+
+    </div>
+
+    <div class="card my-3 col-sm-12 offset-md-1 col-md-7">
+
+      <div class="card-body">
+
+        <app-authentication *ngIf="!isRegistration"></app-authentication>
+
+        <app-registration *ngIf="isRegistration"></app-registration>
+
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<h3 class="card-title text-center">Авторизация</h3>
+
+<form class="autorization-form">
+
+  <label class="sr-only" for="authorEmail">Email</label>
+  <small id="authorEmailHelpBlock" class="form-text text-muted">
+    Введите Email
+  </small>
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text"><i class="icon-at"></i></div>
+    </div>
+    <input type="email"
+           class="form-control"
+           id="authorEmail"
+           placeholder="Email"
+           required
+           aria-describedby="authorEmailHelpBlock">
+  </div>
+
+  <label class="sr-only" for="authorPswd">Password</label>
+  <small id="authorPswdHelpBlock" class="form-text text-muted">
+    Введите пароль (минимум 6 символов)
+  </small>
+  <input type="password"
+         class="form-control mb-2"
+         id="authorPswd"
+         placeholder="Пароль"
+         minlength="6"
+         [disabled]="isRecovery"
+         required
+         aria-describedby="authorPswdHelpBlock">
+
+  <div class="custom-control custom-checkbox form-check-inline mt-1">
+    <input class="custom-control-input"
+           type="checkbox"
+           (click)="onClickRecovery($event)"
+           id="recovery-pswd">
+    <label class="custom-control-label" for="recovery-pswd">
+      Вспомнить пароль
+    </label>
+  </div>
+  <hr/>
+
+  <div class="place-for-alert-auth"></div>
+
+  <button type="submit"
+          class="btn btn-danger mt-3"
+          id="submit-author-btn">
+    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+    Отправить данные
+  </button>
+
+  <button type="button"
+          class="btn btn-primary mt-3 ml-2"
+          id="clear-author-btn">
+    Очистить данные
+  </button>
+
+</form>

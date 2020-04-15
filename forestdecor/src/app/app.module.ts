@@ -16,6 +16,10 @@ import { MessagesComponent } from './main/messages/messages.component';
 import { DeliveryComponent } from './main/delivery/delivery.component';
 import { PaymentComponent } from './main/payment/payment.component';
 import { ContactsComponent } from './main/contacts/contacts.component';
+import { FormComponent } from './main/form/form.component';
+import { RegistrationComponent } from './main/form/registration/registration.component';
+import { AuthenticationComponent } from './main/form/authentication/authentication.component';
+import { FormToogleButtonsComponent } from './main/form/form-toogle-buttons/form-toogle-buttons.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { ContactsComponent } from './main/contacts/contacts.component';
     MessagesComponent,
     DeliveryComponent,
     PaymentComponent,
-    ContactsComponent
+    ContactsComponent,
+    FormComponent,
+    RegistrationComponent,
+    AuthenticationComponent,
+    FormToogleButtonsComponent,
   ],
   imports: [
     BrowserModule,

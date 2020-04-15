@@ -7,6 +7,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
+  collapse: boolean = true;
+
   @Input() isLogged;
   @Output() logged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
