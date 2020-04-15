@@ -15,7 +15,8 @@
 
     <app-navigation-link class="navbar-collapse"
                          [ngClass]="{'collapse': collapse}"
-                         [isLogged]="isLogged"></app-navigation-link>
+                         [isLogged]="isLogged">
+    </app-navigation-link>
 
     <a class="navbar-brand btn-nav-registration" *ngIf="!isLogged"
        (click)="toFakeLogin()">

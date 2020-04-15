@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-authentication',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthenticationComponent implements OnInit {
 
+  @ViewChild('recovery') recovery: ElementRef;
   isRecovery: boolean = false;
 
   constructor() { }
@@ -14,8 +15,9 @@ export class AuthenticationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onClickRecovery(e) {
-    this.isRecovery = e.toElement.checked;
+  onClickRecovery() {
+    // this.isRecovery = e.toElement.checked;
+    this.isRecovery = this.recovery.nativeElement.checked;
   }
 
 }

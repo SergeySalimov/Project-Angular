@@ -33,8 +33,9 @@
 
   <div class="custom-control custom-checkbox form-check-inline mt-1">
     <input class="custom-control-input"
+           #recovery
            type="checkbox"
-           (click)="onClickRecovery($event)"
+           (click)="onClickRecovery()"
            id="recovery-pswd">
     <label class="custom-control-label" for="recovery-pswd">
       Вспомнить пароль
