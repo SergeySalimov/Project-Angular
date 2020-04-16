@@ -2,7 +2,9 @@
   <!--      Если убрать justify-content-center все прижмется влево!!!-->
   <ul class="navbar-nav ml-auto w-100 justify-content-center">
     <li class="nav-item btn-nav-catalog" *ngFor="let link of navigationLinks">
-      <a class="nav-link">{{link}}</a>
+      <a class="nav-link"
+         [ngClass]="{'active': link === activeLink}"
+         (click)="onNavigationClick(link)">{{link}}</a>
     </li>
   </ul>
 </div>

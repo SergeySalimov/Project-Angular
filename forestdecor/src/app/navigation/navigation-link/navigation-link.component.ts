@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-navigation-link',
@@ -14,13 +14,21 @@ export class NavigationLinkComponent implements OnChanges, OnInit {
     'Контакты'
   ];
 
+  @Input() activeLink;
   @Input() isLogged;
+  @Output() navigationClick: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnChanges(): void {
     if (this.isLogged) {
-      this.navigationLinks.splice(1,0, 'Сообщения');
+      this.navigationLinks = [
+        'Каталог',
+        'Сообщения',
+        'Доставка',
+        'Оплата',
+        'Контакты'
+      ];
     } else {
       this.navigationLinks = [
         'Каталог',
@@ -33,6 +41,11 @@ export class NavigationLinkComponent implements OnChanges, OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  onNavigationClick(elStr) {
+    console.log('Emit: ' ,elStr);
+    this.navigationClick.emit(elStr);
   }
 
 

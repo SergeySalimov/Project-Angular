@@ -1,1 +1,6 @@
-<app-form></app-form>
+<app-catalog *ngIf="activeLink === 'Каталог'"></app-catalog>
+<app-delivery *ngIf="activeLink === 'Доставка'"></app-delivery>
+<app-payment *ngIf="activeLink === 'Оплата'"></app-payment>
+<app-contacts *ngIf="activeLink === 'Контакты'"></app-contacts>
+<app-messages *ngIf="activeLink === 'Сообщения'"></app-messages>
+<app-form *ngIf="activeLink === 'Форма'"></app-form>

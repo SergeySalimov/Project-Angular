@@ -1,9 +1,8 @@
 <nav class="nav1 navbar navbar-expand-md navbar-dark bg-dark sticky-top ">
   <div class="container form-inline">
 
-    <a class="navbar-brand home-page-btn">
-      <img src="assets/images/oak-sm.png" class="d-inline-block align-top"
-           alt="oak">
+    <a class="navbar-brand home-page-btn" (click)="onNavChange('Форма')">
+      <img src="assets/images/oak-sm.png" class="d-inline-block align-top" alt="oak">
     </a>
 
     <button class="navbar-toggler float-right"
@@ -15,6 +14,8 @@
 
     <app-navigation-link class="navbar-collapse"
                          [ngClass]="{'collapse': collapse}"
+                         (navigationClick)="onNavChange($event)"
+                         [activeLink]="activeLink"
                          [isLogged]="isLogged">
     </app-navigation-link>
 

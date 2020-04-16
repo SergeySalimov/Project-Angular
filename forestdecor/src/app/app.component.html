@@ -1,6 +1,10 @@
 <app-header [isLogged]="isLogged"></app-header>
-<app-navigation [isLogged]="isLogged" (logged)="onChangeLog($event)"></app-navigation>
+<app-navigation [isLogged]="isLogged"
+                [activeLink]="activeLink"
+                (navigationClick)="onNavChange($event)"
+                (logged)="onChangeLog($event)">
+</app-navigation>
 <app-breadcrumb></app-breadcrumb>
-<app-main></app-main>
+<app-main [activeLink]="activeLink"></app-main>
 <hr>
 <app-footer></app-footer>
