@@ -1,1 +1,38 @@
 <h2>catalog nav</h2>
+
+<button class="alert alert-success text-left active" id="btn-catalog">
+  Каталог
+</button>
+
+<h3>Basic Buttons</h3>
+<div class="example-button-row">
+  <button class="btn btn-block" aria-checked="true" mat-button>Basic</button>
+  <button class="btn btn-block" mat-button color="primary">Primary</button>
+  <button class="btn btn-block" mat-button color="accent">Accent</button>
+  <button class="btn btn-block" mat-button color="warn">Warn</button>
+  <button class="btn btn-block" mat-button color="blue">Blue</button>
+  <button class="btn btn-block" mat-button disabled>Disabled</button>
+  <a mat-button routerLink=".">Link</a>
+</div>
+
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <mat-button-toggle-group>
+  <!-- This is the tree node template for leaf nodes -->
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <!-- use a disabled button to provide padding for tree leaf -->
+    <button class="btn btn-lg" mat-icon-button disabled></button>
+    <mat-button-toggle class="btn btn-block" value="bold">{{node.name}}</mat-button-toggle>
+  </mat-tree-node>
+  <!-- This is the tree node template for expandable nodes -->
+  <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+    <button mat-icon-button matTreeNodeToggle
+            [attr.aria-label]="'toggle ' + node.name">
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+      </mat-icon>
+    </button>
+    <button mat-button>{{node.name}}</button>
+  </mat-tree-node>
+  </mat-button-toggle-group>
+</mat-tree>
+
