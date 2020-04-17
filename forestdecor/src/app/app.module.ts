@@ -23,6 +23,7 @@ import { FormToogleButtonsComponent } from './main/form/form-toogle-buttons/form
 import { SetHeightDirective } from './shared/setHeight/set-height.directive';
 import { CatalogNavigationComponent } from './main/catalog/catalog-navigation/catalog-navigation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule} from "./shared/material/material-module";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
