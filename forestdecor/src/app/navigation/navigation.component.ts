@@ -28,7 +28,7 @@ export class NavigationComponent implements OnInit {
   }
 
   onNavChange(ev) {
-    this.navigationClick.emit(ev)
+    this.navigationClick.emit(ev);
     console.log('Nav-comp' ,ev);
   }
 }

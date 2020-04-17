@@ -44,7 +44,6 @@ export class NavigationLinkComponent implements OnChanges, OnInit {
   }
 
   onNavigationClick(elStr) {
-    console.log('Emit: ' ,elStr);
     this.navigationClick.emit(elStr);
   }
 

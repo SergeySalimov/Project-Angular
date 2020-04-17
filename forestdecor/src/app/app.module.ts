@@ -20,6 +20,9 @@ import { FormComponent } from './main/form/form.component';
 import { RegistrationComponent } from './main/form/registration/registration.component';
 import { AuthenticationComponent } from './main/form/authentication/authentication.component';
 import { FormToogleButtonsComponent } from './main/form/form-toogle-buttons/form-toogle-buttons.component';
+import { SetHeightDirective } from './shared/setHeight/set-height.directive';
+import { CatalogNavigationComponent } from './main/catalog/catalog-navigation/catalog-navigation.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -41,10 +44,13 @@ import { FormToogleButtonsComponent } from './main/form/form-toogle-buttons/form
     RegistrationComponent,
     AuthenticationComponent,
     FormToogleButtonsComponent,
+    SetHeightDirective,
+    CatalogNavigationComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
