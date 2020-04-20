@@ -1,44 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FlatTreeControl } from "@angular/cdk/tree";
 import { MatTreeFlatDataSource, MatTreeFlattener } from "@angular/material/tree";
-
-/**
- * Food data with nested structure.
- * Each node has a name and an optional list of children.
- */
-interface FoodNode {
-  name: string;
-  children?: FoodNode[];
-}
-
-const TREE_DATA: FoodNode[] = [
-  {
-    name: 'Fruit',
-    children: [
-      {
-        name: 'Apple',
-        children: [
-          {name: 'Green'}
-        ],
-      },
-      {name: 'Banana'},
-      {name: 'Fruit loops'},
-    ]
-  }, {
-    name: 'Vegetables'
-  },
-];
+import { ProductsService } from "../../../shared/services/products.service";
+import { Product } from "../../../shared/models/product.model";
 
 /** Flat node with expandable and level information */
-interface ExampleFlatNode {
+interface FlatNode {
   expandable: boolean;
   name: string;
   level: number;
 }
-
-/**
- * @title Tree with flat nodes
- */
 
 @Component({
   selector: 'app-catalog-navigation',
@@ -48,22 +19,22 @@ interface ExampleFlatNode {
 
 export class CatalogNavigationComponent implements OnInit {
 
-  constructor() {
-    this.dataSource.data = TREE_DATA;
+  constructor(private productsService: ProductsService) {
+    this.dataSource.data = productsService.products;
   }
 
   ngOnInit(): void {
   }
 
-  private _transformer = (node: FoodNode, level: number) => {
+  private _transformer = (node: Product, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
       level: level,
     };
-  }
+  };
 
-  treeControl = new FlatTreeControl<ExampleFlatNode>(
+  treeControl = new FlatTreeControl<FlatNode>(
     node => node.level, node => node.expandable);
 
   treeFlattener = new MatTreeFlattener(
@@ -71,6 +42,6 @@ export class CatalogNavigationComponent implements OnInit {
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+  hasChild = (_: number, node: FlatNode) => node.expandable;
 
 }
