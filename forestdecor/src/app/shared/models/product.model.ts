@@ -1,7 +1,9 @@
 export interface Product {
-  header: string,
-  description: string,
-  img: string,
-  photos: Array<string | null>,
-  uniqueId?: string
+  name: string,
+  urlName: string,
+  description?: string,
+  img?: string,
+  photos?: [],
+  id?: string,
+  children?: Product[]
 }
