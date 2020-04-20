@@ -1,110 +1,91 @@
 import { Injectable } from '@angular/core';
-import { ProductLink } from "../models/product-link.model";
+import { Product } from "../models/product.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-  // MOK data now => then will be from server
-  private _products: ProductLink[] = [
+  // MOK data now => then will be loaded from server
+  private _products: Product[] = [
     {
       "id": "1",
       "name": "Плоды",
-      "transName": "plody",
-      "subItems": true,
-      "content": [
+      "urlName": "plody",
+      "children": [
         {
           "id": "1-1",
           "name": "Шишки",
-          "transName": "shishki",
-          "subItems": false,
-          "content": [
+          "urlName": "shishki",
+          "children": [
             {
-              "header": "Шишки ольхи",
+              "name": "Шишки ольхи",
+              "urlName": "shishki-olkhi",
               "description": "Lorem ipsum",
               "img": "/assets/images/cones-of-alder.jpg",
               "photos": [],
-              "uniqueId": "1-1"
             },
             {
-              "header": "Шишки еловые",
+              "name": "Шишки еловые",
+              "urlName": "shishki-elovye",
               "description": "Lorem ipsum",
               "img": "/assets/images/fir-cones.jpg",
               "photos": [],
-              "uniqueId": "1-2"
             },
             {
-              "header": "Шишки сосновые",
+              "name": "Шишки сосновые",
+              "urlName": "shishki-sosnovye",
               "description": "Lorem ipsum",
               "img": "/assets/images/pine-cones.jpg",
               "photos": [],
-              "uniqueId": "1-3"
             },
             {
-              "header": "Шишки хмеля",
+              "name": "Шишки хмеля",
+              "urlName": "shishki-chmelya",
               "description": "Lorem ipsum",
               "img": "/assets/images/hop-cones.jpg",
               "photos": [],
-              "uniqueId": "1-4"
             }
           ]
         },
         {
-          "id": "1-2",
           "name": "Желуди",
-          "transName": "zheludi",
-          "subItems": false,
-          "content": [
-            {
-              "header": "Желуди",
-              "description": "Lorem ipsum",
-              "img": "/assets/images/zhyoludi.jpg",
-              "photos": [],
-              "uniqueId": "1-5"
-            }
-          ]
+          "urlName": "zheludi",
+          "description": "Lorem ipsum",
+          "img": "/assets/images/zhyoludi.jpg",
+          "photos": [],
         },
         {
-          "id": "1-3",
           "name": "Каштаны",
-          "transName": "kashtany",
-          "subItems": false,
-          "content": [
-            {
-              "header": "Каштаны",
-              "description": "Lorem ipsum",
-              "img": "/assets/images/cashtany.jpg",
-              "photos": [],
-              "uniqueId": "1-6"
-            }
-          ]
+          "urlName": "kashtany",
+          "description": "Lorem ipsum",
+          "img": "/assets/images/cashtany.jpg",
+          "photos": [],
         },
         {
           "id": "1-4",
           "name": "Ягоды",
-          "transName": "yagody",
-          "subItems": false,
-          "content": [
+          "urlName": "yagody",
+          "children": [
             {
-              "header": "Ягоды черемухи",
+              "name": "Ягоды черемухи",
+              "urlName": "yagody-tcheryomuhi",
               "description": "Lorem ipsum",
               "img": "/assets/images/cherjomuha.jpg",
               "photos": [],
-              "uniqueId": "1-7"
             },
             {
-              "header": "Ягоды бузины",
+              "name": "Ягоды бузины",
+              "urlName": "yagody-buziny",
               "description": "Lorem ipsum",
               "img": "/assets/images/buzina.jpg",
               "photos": [],
-              "uniqueId": "1-8"
             },
             {
-              "header": "Ягоды можжевельника",
+              "name": "Ягоды можжевельника",
+              "urlName": "yagody-mozhzhevelnika",
               "description": "Lorem ipsum",
               "img": "/assets/images/mozhzhevel.jpg",
               "photos": [],
-              "uniqueId": "1-9"
             }
           ]
         }
@@ -113,230 +94,218 @@ export class ProductsService {
     {
       "id": "2",
       "name": "Травы",
-      "transName": "travy",
-      "subItems": false,
-      "content": [
+      "urlName": "travy",
+      "children": [
         {
-          "header": "Шалфей",
+          "name": "Шалфей",
+          "urlName": "chalfei",
           "description": "Lorem ipsum",
           "img": "/assets/images/shalfej.jpg",
           "photos": [],
-          "uniqueId": "2-1"
         },
         {
-          "header": "Мята",
+          "name": "Мята",
+          "urlName": "mayata",
           "description": "Lorem ipsum",
           "img": "/assets/images/mint.jpg",
           "photos": [],
-          "uniqueId": "2-2"
         },
         {
-          "header": "Душица",
+          "name": "Душица",
+          "urlName": "duchica",
           "description": "Lorem ipsum",
           "img": "/assets/images/dushitsa.jpg",
           "photos": [],
-          "uniqueId": "2-3"
         },
         {
-          "header": "Мелисcа",
+          "name": "Мелисcа",
+          "urlName": "melissa",
           "description": "Lorem ipsum",
           "img": "/assets/images/melissa.jpg",
           "photos": [],
-          "uniqueId": "2-4"
         },
         {
-          "header": "Чистотел",
+          "name": "Чистотел",
+          "urlName": "tchistotel",
           "description": "Lorem ipsum",
           "img": "/assets/images/chistotel.jpg",
           "photos": [],
-          "uniqueId": "2-5"
         },
         {
-          "header": "Лаванда",
+          "name": "Лаванда",
+          "urlName": "lavanda",
           "description": "Lorem ipsum",
           "img": "/assets/images/lavanda.jpg",
           "photos": [],
-          "uniqueId": "2-6"
         },
         {
-          "header": "Зверобой",
+          "name": "Зверобой",
+          "urlName": "zveroboi",
           "description": "Lorem ipsum",
           "img": "/assets/images/zveroboj.jpg",
           "photos": [],
-          "uniqueId": "2-7"
         },
         {
-          "header": "Полынь",
+          "name": "Полынь",
+          "urlName": "polyn",
           "description": "Lorem ipsum",
           "img": "/assets/images/polyn.jpg",
           "photos": [],
-          "uniqueId": "2-8"
         },
         {
-          "header": "Тысячелистник",
+          "name": "Тысячелистник",
+          "urlName": "tysiyatchelistnik",
           "description": "Lorem ipsum",
           "img": "/assets/images/tysiachelistnik.jpg",
           "photos": [],
-          "uniqueId": "2-9"
         },
         {
-          "header": "Пижма",
+          "name": "Пижма",
+          "urlName": "pigma",
           "description": "Lorem ipsum",
           "img": "/assets/images/pizhma.jpg",
           "photos": [],
-          "uniqueId": "2-10"
         },
         {
-          "header": "Иван-Чай",
+          "name": "Иван-Чай",
+          "urlName": "ivan-tchai",
           "description": "Lorem ipsum",
           "img": "/assets/images/ivan.jpg",
           "photos": [],
-          "uniqueId": "2-11"
         }
       ]
     },
     {
       "id": "3",
       "name": "Стружка декоративная древесная",
-      "transName": "struzhka-dekorativnaya-drevesnaya",
-      "subItems": false,
-      "content": [
+      "urlName": "struzhka-dekorativnaya-drevesnaya",
+      "children": [
         {
-          "header": "Стружка декоративная древесная липы",
+          "name": "Стружка липы",
+          "urlName": "struzhka-lipy",
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-lipa.jpg",
           "photos": [],
-          "uniqueId": "3-1"
         },
         {
-          "header": "Стружка декоративная древесная осины",
+          "name": "Стружка осины",
+          "urlName": "struzhka-osiny",
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-osina.jpg",
           "photos": [],
-          "uniqueId": "3-2"
         },
         {
-          "header": "Стружка декоративная древесная елки",
+          "name": "Стружка елки",
+          "urlName": "struzhka-elki",
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-elka.jpg",
           "photos": [],
-          "uniqueId": "3-3"
         },
         {
-          "header": "Стружка декоративная древесная ольхи",
+          "name": "Стружка ольхи",
+          "urlName": "struzhka-olhi",
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-olha.jpg",
           "photos": [],
-          "uniqueId": "3-4"
         },
         {
-          "header": "Стружка декоративная древесная сосны",
+          "name": "Стружка сосны",
+          "urlName": "struzhka-sosny",
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-sosna.jpg",
           "photos": [],
-          "uniqueId": "3-5"
         }
       ]
     },
     {
       "id": "4",
       "name": "Торцевые спилы дерева",
-      "transName": "torcevye-spily-dereva",
-      "subItems": false,
-      "content": [
+      "urlName": "torcevye-spily-dereva",
+      "children": [
         {
-          "header": "Торцевые спилы дуба",
+          "name": "Спилы дуба",
+          "urlName": "spily-duba",
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-dub.jpg",
           "photos": [],
-          "uniqueId": "4-1"
         },
         {
-          "header": "Торцевые спилы ясеня",
+          "name": "Спилы ясеня",
+          "urlName": "spily-yasenia",
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-yasen.jpg",
           "photos": [],
-          "uniqueId": "4-2"
         },
         {
-          "header": "Торцевые спилы березы",
+          "name": "Спилы березы",
+          "urlName": "spily-beriozy",
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-bereza.jpg",
           "photos": [],
-          "uniqueId": "4-3"
         },
         {
-          "header": "Торцевые спилы акации",
+          "name": "Спилы акации",
+          "urlName": "spily-akacii",
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-akacia.jpg",
           "photos": [],
-          "uniqueId": "4-4"
         },
         {
-          "header": "Торцевые спилы вяза",
+          "name": "Спилы вяза",
+          "urlName": "spily-viaza",
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-viaz.jpg",
           "photos": [],
-          "uniqueId": "4-5"
         }
       ]
     },
     {
       "id": "5",
       "name": "Мох",
-      "transName": "moh",
-      "subItems": false,
-      "content": [
+      "urlName": "moh",
+      "children": [
         {
-          "header": "Сфагнум",
+          "name": "Сфагнум",
+          "urlName": "sfagnum",
           "description": "Lorem ipsum",
           "img": "/assets/images/sfagnum.jpg",
           "photos": [],
-          "uniqueId": "5-1"
         },
         {
-          "header": "Ягель",
+          "name": "Ягель",
+          "urlName": "yagel",
           "description": "Lorem ipsum",
           "img": "/assets/images/yagel.jpg",
           "photos": [],
-          "uniqueId": "5-2"
         }
       ]
     },
     {
       "id": "6",
-      "name": "Грибы",
-      "transName": "griby",
-      "subItems": false,
-      "content": [
-        {
-          "header": "Чага",
-          "description": "Lorem ipsum",
-          "img": "/assets/images/chaga.jpg",
-          "photos": [],
-          "uniqueId": "6-1"
-        }
-      ]
+      "name": "Чага",
+      "urlName": "tchaga",
+      "description": "Lorem ipsum",
+      "img": "/assets/images/chaga.jpg",
+      "photos": [],
     },
     {
       "id": "7",
       "name": "Капы и сувели",
-      "transName": "kapy-i-suveli",
-      "subItems": false,
-      "content": [
+      "urlName": "kapy-i-suveli",
+      "children": [
         {
-          "header": "Капы",
+          "name": "Капы",
+          "urlName": "kapy",
           "description": "Lorem ipsum",
           "img": "/assets/images/kapa.jpg",
           "photos": [],
-          "uniqueId": "7-1"
         },
         {
-          "header": "Сувели",
+          "name": "Сувели",
+          "urlName": "suveli",
           "description": "Lorem ipsum",
           "img": "/assets/images/suvel.jpg",
           "photos": [],
-          "uniqueId": "7-2"
         }
       ]
     }
@@ -344,8 +313,7 @@ export class ProductsService {
 
   constructor() { }
 
-
-
-
-
+  get products() {
+    return [...this._products];
+  }
 }
