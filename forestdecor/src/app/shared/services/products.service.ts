@@ -4,14 +4,14 @@ import { Product } from "../models/product.model";
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
+export class ProductsService{
   // MOK data now => then will be loaded from server
   private _products: Product[] = [
     {
       "id": "1",
       "name": "Плоды",
       "urlName": "plody",
-      "active": true,
+      "active": false,
       "children": [
         {
           "id": "1-1",
@@ -299,7 +299,7 @@ export class ProductsService {
       "id": "5",
       "name": "Мох",
       "urlName": "moh",
-      "active": true,
+      "active": false,
       "children": [
         {
           "name": "Сфагнум",
@@ -345,7 +345,7 @@ export class ProductsService {
         {
           "name": "Сувели",
           "urlName": "suveli",
-          "active": true,
+          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/suvel.jpg",
           "photos": [],
@@ -354,9 +354,60 @@ export class ProductsService {
     }
   ];
 
-  constructor() { }
+  // activeEl: string = 'Плоды';
+  activeEl: string;
+  prevEl: string;
+
+  constructor() {
+    // this.setActive(this.activeEl);
+  }
+
+  public setInactivePrevious(newEl: string, prodArr: Product[] = this._products) {
+    console.log('new iteration');
+    if (newEl !== this.prevEl) {
+      this.activeEl = newEl;
+      this.setInactive(newEl);
+      this.prevEl = newEl;
+    }
+  }
+
+  public setActive(newEl: string, prodArr: Product[] = this._products) {
+    console.log('new iteration');
+    if (newEl !== this.prevEl) {
+      this.activeEl = newEl;
+      this.parseArr(newEl);
+      this.prevEl = newEl;
+    }
+  }
+
+  private parseArr(newEl: string, prodArr: Product[] = this._products) {
+    for (const item of prodArr) {
+      if (item.name === this.prevEl) {item.active = false}
+      if (item.name === newEl) {item.active = true}
+      if (item.children) {
+        this.parseArr(newEl, item.children);
+        if (item.name === this.prevEl) {item.active = false}
+        if (item.name === newEl) {item.active = true}
+      }
+    }
+  }
+
+  public setInactive(prev: string = this.prevEl, prodArr: Product[] = this._products) {
+    for (const item of prodArr) {
+      if (prev === 'all') {item.active = false} else {
+        if (item.name === prev) {item.active = false; break}
+      }
+      if (item.children) {
+        this.setInactive(prev, item.children);
+        if (prev === 'all') {item.active = false} else {
+          if (item.name === prev) {item.active = false; break}
+        }
+      }
+    }
+  }
+
 
   get products() {
-    return [...this._products];
+    return this._products;
   }
 }

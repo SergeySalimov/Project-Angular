@@ -7,10 +7,10 @@ export class SetHeightDirective implements OnInit, AfterViewInit {
 
   constructor(public element: ElementRef, public renderer: Renderer2) { }
 
-  @HostListener('click', ['$event']) onMouseEnter(event: MouseEvent): void {
-    console.dir((event.target as HTMLElement).innerText);
-    console.log('in');
-  }
+  // @HostListener('click', ['$event']) onMouseEnter(event: MouseEvent): void {
+    // console.dir((event.target as HTMLElement).innerText);
+    // console.log('in');
+  // }
 
   @HostBinding('style.height') get height() {
     return '700px';

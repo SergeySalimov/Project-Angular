@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FlatTreeControl } from "@angular/cdk/tree";
 import { MatTreeFlatDataSource, MatTreeFlattener } from "@angular/material/tree";
 import { ProductsService } from "../../../shared/services/products.service";
@@ -17,13 +17,47 @@ interface FlatNode {
   styleUrls: ['./catalog-navigation.component.scss']
 })
 
-export class CatalogNavigationComponent implements OnInit {
+export class CatalogNavigationComponent implements OnInit, OnChanges {
 
-  constructor(private productsService: ProductsService) {
+  private prevLink: {
+    expandable?: boolean,
+    name: string,
+    level?: number,
+    active?: boolean,
+  };
+
+
+  constructor(public productsService: ProductsService) {
     this.dataSource.data = productsService.products;
+    console.log(this.dataSource.data);
   }
 
   ngOnInit(): void {
+    // works only for all
+    this.prevLink = { name: 'all' };
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
+
+  onClickAll() {
+    if (this.prevLink.name !== 'all') {
+      this.prevLink.active = false;
+      this.prevLink = {name: 'all'};
+    }
+  }
+
+  onClick(el: any, name: string) {
+    console.dir(el);
+    if (!el.active) {
+      if (this.prevLink.name !== 'all') this.prevLink.active = false;
+      el.active = true;
+      this.prevLink = el;
+      this.productsService.setActive(name);
+      console.log(this.productsService.products);
+      // this.productsService.setActive(name);
+    }
   }
 
   private _transformer = (node: Product, level: number) => {
