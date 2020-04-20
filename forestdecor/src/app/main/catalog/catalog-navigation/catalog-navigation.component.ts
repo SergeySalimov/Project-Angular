@@ -31,6 +31,7 @@ export class CatalogNavigationComponent implements OnInit {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
       level: level,
+      active: node.active,
     };
   };
 
