@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
-  isRegistration: boolean = false;
+  isRegistration = false;
 
   constructor() {
   }

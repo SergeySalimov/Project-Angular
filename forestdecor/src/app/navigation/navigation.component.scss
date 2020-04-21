@@ -7,12 +7,14 @@
   }
 
   .btn-nav-registration {
-    color: $backGrey;
+    //color: $backGrey;
+    color: $mainFontColor;
 
   }
 
   .btn-nav-registration.active {
-    color: $mainFontColor;
+    //color: $mainFontColor;
+    color: yellow;
   }
 
   .navbar-brand {

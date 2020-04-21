@@ -26,10 +26,10 @@ export class SetHeightDirective implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // console.log((this.element.nativeElement as HTMLElement).clientHeight);
-    const elHeight = (this.element.nativeElement as HTMLElement).clientHeight;
+    // const elHeight = (this.element.nativeElement as HTMLElement).clientHeight;
     // this.renderer.setStyle(this.element.nativeElement, 'height', 700);
-    this.renderer.setStyle(this.element.nativeElement, 'height', `${elHeight * 2}px`);
-    console.log((this.element.nativeElement as HTMLElement).clientHeight);
+    // this.renderer.setStyle(this.element.nativeElement, 'height', `${elHeight * 2}px`);
+    // console.log((this.element.nativeElement as HTMLElement).clientHeight);
   }
 
 

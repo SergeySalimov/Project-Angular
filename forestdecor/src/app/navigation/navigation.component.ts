@@ -8,7 +8,7 @@ import { AuthService } from "../shared/services/auth/auth.service";
 })
 export class NavigationComponent implements OnInit {
 
-  collapse: boolean = true;
+  collapse = true;
 
   doCollapse() {
     this.collapse = true;

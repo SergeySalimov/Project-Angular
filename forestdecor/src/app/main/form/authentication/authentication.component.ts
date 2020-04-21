@@ -10,7 +10,7 @@ export class AuthenticationComponent implements OnInit {
 
   @ViewChild('recovery', {static: true}) recovery: ElementRef;
   // @ViewChild('authForm', {static: true}) authForm: ElementRef;
-  isRecovery: boolean = false;
+  isRecovery = false;
 
   // @HostListener('click', ['$event']) onFormSubmit(event: MouseEvent): void {
   // console.dir((event.target as HTMLElement).innerText);
