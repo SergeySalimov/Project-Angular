@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FlatTreeControl } from "@angular/cdk/tree";
 import { MatTreeFlatDataSource, MatTreeFlattener } from "@angular/material/tree";
-import { ProductsService } from "../../../shared/services/products.service";
+import { ProductsService } from "../../../shared/services/products/products.service";
 import { Product } from "../../../shared/models/product.model";
 
 /** Flat node with expandable and level information */

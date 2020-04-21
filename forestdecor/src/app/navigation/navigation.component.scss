@@ -6,8 +6,13 @@
     cursor: pointer;
   }
 
+  .btn-nav-registration {
+    color: $backGrey;
+
+  }
+
   .btn-nav-registration.active {
-    color: yellow;
+    color: $mainFontColor;
   }
 
   .navbar-brand {

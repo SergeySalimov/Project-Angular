@@ -1,12 +1,8 @@
-<app-header [isLogged]="isLogged"></app-header>
+<app-header></app-header>
 <div class="sticky-top">
-  <app-navigation [isLogged]="isLogged"
-                  [activeLink]="activeLink"
-                  (navigationClick)="onNavChange($event)"
-                  (logged)="onChangeLog($event)">
-  </app-navigation>
+  <app-navigation></app-navigation>
   <app-breadcrumb></app-breadcrumb>
 </div>
-<app-main [activeLink]="activeLink"></app-main>
+<app-main></app-main>
 <hr>
 <app-footer></app-footer>

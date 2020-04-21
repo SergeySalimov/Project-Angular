@@ -3,8 +3,10 @@
   <ul class="navbar-nav ml-auto w-100 justify-content-center">
     <li class="nav-item btn-nav-catalog" *ngFor="let link of navigationLinks">
       <a class="nav-link"
-         [ngClass]="{'active': link === activeLink}"
-         (click)="onNavigationClick(link)">{{link}}</a>
+         (click)="needToCollapse.emit()"
+         [routerLink]="link.routerLink"
+         [routerLinkActive]="'active'"
+      >{{link.name}}</a>
     </li>
   </ul>
 </div>
