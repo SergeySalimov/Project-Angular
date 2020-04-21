@@ -1,0 +1,96 @@
+@import "custom.variables";
+//@import '~@angular/material/theming';
+//
+//@include mat-core();
+//
+//$app-primary: mat-palette($mat-blue);
+//$app-accent:  mat-palette($mat-pink, A200, A100, A400);
+//
+//$app-theme: mat-light-theme($app-primary, $app-accent);
+//
+//@mixin mix-app-theme($app-theme) {
+//  $primary: map-get($app-theme, primary);
+//  $accent: map-get($app-theme, accent);
+//
+//  .mat-button-toggle {
+//    background-color: mat-color($primary);
+//    color: mat-color($primary, default-contrast);
+//  }
+//
+//  .mat-button-toggle-checked {
+//    background-color: mat-color($accent);
+//    color: mat-color($accent, default-contrast);
+//  }
+//}
+//
+//// Include the mixin
+//@include mix-app-theme($app-theme);
+
+button {
+  font-size: 1.2rem;
+  background-color: $backGrey;
+}
+button.active {
+  background-color: #0088cc;
+  color: $mainFontColor;
+  text-shadow: #FFFFFF 0 0 2px;
+}
+
+mat-tree {
+  background-color: $backGrey;
+  border: 0px solid;
+  border-radius: 7px;
+  padding-right: 6px;
+  padding-bottom: 6px;
+  button {
+    font-size: 0.9rem;
+  }
+  button.active {
+    background-color: #0088cc;
+    color: $mainFontColor;
+    text-shadow: #FFFFFF 0 0 2px;
+  }
+}
+//
+//mat-button-toggle {
+//  outline: none;
+//  font-size: 1.8rem;
+//}
+//
+mat-tree {
+
+}
+//
+//mat-tree-node {
+//  border-radius: 5px;
+//  font-size: 1.4rem;
+//}
+//
+button {
+  white-space: normal;
+}
+
+button span {
+  font-size: 1.4rem;
+}
+//
+//.mat-button-toggle,
+//.mat-button-toggle-checked {
+//  //background-color: transparent;
+//  //color: $alterFontColor;
+//  font-size: 1.4rem;
+//  white-space: normal;
+//}
+
+//.mat-button-toggle-checked {
+//  //background-color: $backGrey;
+//  color: $alterFontColor;
+//  font-size: 1.4rem;
+//}
+
+//.mat-button-toggle-checked,
+//.mat-button-toggle-checked:active,
+//.mat-button-toggle-checked:checked,
+//.mat-button-toggle-checked:focus {
+//  outline: none;
+//}

@@ -1,9 +1,12 @@
-<nav class="nav1 navbar navbar-expand-md navbar-dark bg-dark sticky-top ">
+<nav class="nav1 navbar navbar-expand-md navbar-dark bg-dark">
   <div class="container form-inline">
 
-    <a class="navbar-brand home-page-btn">
-      <img src="assets/images/oak-sm.png" class="d-inline-block align-top"
-           alt="oak">
+    <a class="navbar-brand home-page-btn active"
+       routerLink="/"
+       [routerLinkActive]="'active'"
+       [routerLinkActiveOptions]="{exact: true}"
+    >
+      <img src="assets/images/oak-sm.png" class="d-inline-block align-top" alt="oak">
     </a>
 
     <button class="navbar-toggler float-right"
@@ -14,16 +17,21 @@
     </button>
 
     <app-navigation-link class="navbar-collapse"
+                         (needToCollapse)="doCollapse()"
                          [ngClass]="{'collapse': collapse}"
-                         [isLogged]="isLogged">
-    </app-navigation-link>
+    ></app-navigation-link>
 
-    <a class="navbar-brand btn-nav-registration" *ngIf="!isLogged"
-       (click)="toFakeLogin()">
+    <a class="navbar-brand btn-nav-registration"
+       *ngIf="!authService.isLogged"
+       routerLink="/form"
+       [routerLinkActive]="'active'"
+    >
       <i class="icon-login" style="font-size: 2rem"></i>
     </a>
-    <a class="navbar-brand btn-nav-log-out" *ngIf="isLogged"
-       (click)="toFakeLogout()">
+    <a class="navbar-brand btn-nav-log-out btn-nav-registration"
+       *ngIf="authService.isLogged"
+       (click)="authService.logout()"
+    >
       <i class="icon-logout" style="font-size: 2rem"></i>
     </a>
 

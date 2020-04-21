@@ -1,0 +1,33 @@
+<div class="btn-group btn-block mb-1">
+  <button class="btn text-center text-sm-left active"
+          (click)="onClickAll()"
+          #allCatalog
+          mat-raised-button>Весь каталог</button>
+  <button class="btn text-center" mat-raised-button><i class="icon-angle-double-left"></i></button>
+</div>
+
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <!-- This is the tree node template for leaf nodes -->
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <!-- use a disabled button to provide padding for tree leaf -->
+    <button mat-icon-button disabled></button>
+    <button class="btn btn-block text-center text-sm-left"
+            (click)="onClick(node, node.name)"
+            [ngClass]="{active: node.active}"
+            mat-raised-button>{{node.name}}</button>
+  </mat-tree-node>
+  <!-- This is the tree node template for expandable nodes -->
+  <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+    <button mat-icon-button matTreeNodeToggle
+            [attr.aria-label]="'toggle ' + node.name">
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+      </mat-icon>
+    </button>
+    <button class="btn btn-block text-center text-sm-left"
+            (click)="onClick(node, node.name)"
+            [ngClass]="{active: node.active}"
+            mat-raised-button>{{node.name}}</button>
+  </mat-tree-node>
+</mat-tree>
+

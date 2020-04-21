@@ -1,6 +1,8 @@
-<app-header [isLogged]="isLogged"></app-header>
-<app-navigation [isLogged]="isLogged" (logged)="onChangeLog($event)"></app-navigation>
-<app-breadcrumb></app-breadcrumb>
+<app-header></app-header>
+<div class="sticky-top">
+  <app-navigation></app-navigation>
+  <app-breadcrumb></app-breadcrumb>
+</div>
 <app-main></app-main>
 <hr>
 <app-footer></app-footer>

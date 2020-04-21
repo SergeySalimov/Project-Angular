@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AuthService } from "../../../shared/services/auth/auth.service";
 
 @Component({
   selector: 'app-authentication',
@@ -8,9 +9,15 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class AuthenticationComponent implements OnInit {
 
   @ViewChild('recovery', {static: true}) recovery: ElementRef;
-  isRecovery: boolean = false;
+  // @ViewChild('authForm', {static: true}) authForm: ElementRef;
+  isRecovery = false;
 
-  constructor() { }
+  // @HostListener('click', ['$event']) onFormSubmit(event: MouseEvent): void {
+  // console.dir((event.target as HTMLElement).innerText);
+  // console.log('in');
+  // }
+
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
     this.recovery.nativeElement.checked = this.isRecovery;

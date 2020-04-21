@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from "../shared/services/auth/auth.service";
 
 @Component({
   selector: 'app-navigation',
@@ -7,22 +8,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
-  collapse: boolean = true;
+  collapse = true;
 
-  @Input() isLogged;
-  @Output() logged: EventEmitter<boolean> = new EventEmitter<boolean>();
+  doCollapse() {
+    this.collapse = true;
+  }
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-  }
-
-  toFakeLogin() {
-    this.logged.emit(true);
-  }
-
-  toFakeLogout() {
-    this.logged.emit(false);
   }
 
 }

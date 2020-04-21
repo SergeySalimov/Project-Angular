@@ -1,6 +1,6 @@
 <h3 class="card-title text-center">Авторизация</h3>
 
-<form class="autorization-form">
+<form class="autorization-form" #authForm>
 
   <label class="sr-only" for="authorEmail">Email</label>
   <small id="authorEmailHelpBlock" class="form-text text-muted">
@@ -47,7 +47,8 @@
 
   <button type="submit"
           class="btn btn-danger mt-3"
-          id="submit-author-btn">
+          (click)="authService.login()"
+  >
     <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
     Отправить данные
   </button>
