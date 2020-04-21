@@ -1,0 +1,31 @@
+<nav class="nav1 navbar navbar-expand-md navbar-dark bg-dark sticky-top ">
+  <div class="container form-inline">
+
+    <a class="navbar-brand home-page-btn">
+      <img src="assets/images/oak-sm.png" class="d-inline-block align-top"
+           alt="oak">
+    </a>
+
+    <button class="navbar-toggler float-right"
+            type="button"
+            (click)="collapse = !collapse"
+            data-target="#navbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <app-navigation-link class="navbar-collapse"
+                         [ngClass]="{'collapse': collapse}"
+                         [isLogged]="isLogged">
+    </app-navigation-link>
+
+    <a class="navbar-brand btn-nav-registration" *ngIf="!isLogged"
+       (click)="toFakeLogin()">
+      <i class="icon-login" style="font-size: 2rem"></i>
+    </a>
+    <a class="navbar-brand btn-nav-log-out" *ngIf="isLogged"
+       (click)="toFakeLogout()">
+      <i class="icon-logout" style="font-size: 2rem"></i>
+    </a>
+
+  </div>
+</nav>
