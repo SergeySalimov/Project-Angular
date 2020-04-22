@@ -6,5 +6,4 @@ export interface Product {
   photos?: [],
   id?: string,
   children?: Product[],
-  active: boolean;
 }

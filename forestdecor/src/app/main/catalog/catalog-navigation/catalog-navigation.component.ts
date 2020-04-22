@@ -1,8 +1,9 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FlatTreeControl } from "@angular/cdk/tree";
 import { MatTreeFlatDataSource, MatTreeFlattener } from "@angular/material/tree";
 import { ProductsService } from "../../../shared/services/products/products.service";
 import { Product } from "../../../shared/models/product.model";
+import { ActivatedRoute, ParamMap } from "@angular/router";
 
 /** Flat node with expandable and level information */
 interface FlatNode {
@@ -17,47 +18,30 @@ interface FlatNode {
   styleUrls: ['./catalog-navigation.component.scss']
 })
 
-export class CatalogNavigationComponent implements OnInit, OnChanges {
+export class CatalogNavigationComponent implements OnInit {
 
-  private prevLink: {
-    expandable?: boolean,
-    name: string,
-    level?: number,
-    active?: boolean,
-  };
+  // products: Product[];
 
-
-  constructor(public productsService: ProductsService) {
+  constructor(
+    public productsService: ProductsService,
+    private activatedRoute: ActivatedRoute
+  ) {
     this.dataSource.data = productsService.products;
-    console.log(this.dataSource.data);
   }
 
   ngOnInit(): void {
-    // works only for all
-    this.prevLink = { name: 'all' };
+    console.log(this.activatedRoute.snapshot.paramMap.get('urlName'));
+    // this.products =  this.productsService.products;
+    // this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+    //   console.log(paramMap.get('urlName'));
+    // });
+
+    // console.log(this.products);
+
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-  }
-
-  onClickAll() {
-    if (this.prevLink.name !== 'all') {
-      this.prevLink.active = false;
-      this.prevLink = {name: 'all'};
-    }
-  }
-
-  onClick(el: any, name: string) {
-    console.dir(el);
-    if (!el.active) {
-      if (this.prevLink.name !== 'all') this.prevLink.active = false;
-      el.active = true;
-      this.prevLink = el;
-      this.productsService.setActive(name);
-      console.log(this.productsService.products);
-      // this.productsService.setActive(name);
-    }
+  onClick(el: string) {
+    console.log(el);
   }
 
   private _transformer = (node: Product, level: number) => {
@@ -65,7 +49,7 @@ export class CatalogNavigationComponent implements OnInit, OnChanges {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
       level: level,
-      active: node.active,
+      routerName: node.urlName,
     };
   };
 
