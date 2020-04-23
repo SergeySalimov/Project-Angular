@@ -25,7 +25,8 @@ import { CatalogNavigationComponent } from './main/catalog/catalog-navigation/ca
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule} from "./shared/material/material-module";
 import { CatalogProductsComponent } from './main/catalog/catalog-products/catalog-products.component';
-import { CatalogSingleProductComponent } from './main/catalog/catalog-single-product/catalog-single-product.component';
+import { CatalogSingleProductComponent } from './main/catalog/catalog-products/catalog-single-product/catalog-single-product.component';
+import { CatalogCardDeskComponent } from './main/catalog/catalog-products/catalog-card-desk/catalog-card-desk.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { CatalogSingleProductComponent } from './main/catalog/catalog-single-pro
     CatalogNavigationComponent,
     CatalogProductsComponent,
     CatalogSingleProductComponent,
+    CatalogCardDeskComponent,
   ],
   imports: [
     BrowserModule,

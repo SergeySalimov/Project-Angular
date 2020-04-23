@@ -1,4 +1,6 @@
-<div class="row card-group" id="product-place">
-<p class="ml-5">products-catalog</p>
+<div class="row" id="product-place">
+
+  <app-catalog-single-product *ngIf="curProducts.length === 1"></app-catalog-single-product>
+  <app-catalog-card-desk *ngIf="curProducts.length > 1"></app-catalog-card-desk>
 
 </div>
