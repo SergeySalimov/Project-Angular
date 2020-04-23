@@ -1,12 +1,11 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Product } from "../../models/product.model";
-import { CatalogProductsComponent } from "../../../main/catalog/catalog-products/catalog-products.component";
-import { CatalogSingleProductComponent } from "../../../main/catalog/catalog-single-product/catalog-single-product.component";
+import { ProductPlacer } from "../../models/productsPlacer";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService implements OnInit{
+export class ProductsService implements OnInit {
   // MOK data now => then will be loaded from server
   private _products: Product[] = [
     {
@@ -313,67 +312,48 @@ export class ProductsService implements OnInit{
     }
   ];
 
-  // activeEl: string = 'Плоды';
+  // productsPlacer: ProductPlacer[] = [{
+  //   name: 'все',
+  //   urlName: 'all',
+  //   hasChildren: true,
+  //   parents: [],
+  //   content: [],
+  // }];
 
-
-  // childrenRoutes: Route[] = [
-  //   {path: 'plody', component: CatalogProductsComponent},
-  //   {path: 'tchaga', component: CatalogSingleProductComponent},
-  //   {path: 'plody/shishki/shishki-olkhi', component: CatalogSingleProductComponent},
-  // ];
+  accumulator: Product[];
 
   constructor() {
-
   }
 
   ngOnInit(): void {
   }
 
-
-  public setInactivePrevious(newEl: string, prodArr: Product[] = this._products) {
-    // console.log('new iteration');
-    // if (newEl !== this.prevEl) {
-    //   this.activeEl = newEl;
-    //   this.setInactive(newEl);
-    //   this.prevEl = newEl;
-    // }
+  getAllElements(forUrl: string) {
+    return this.initProducts(this._products, forUrl);
   }
 
-  public setActive(newEl: string, prodArr: Product[] = this._products) {
-    // console.log('new iteration');
-    // if (newEl !== this.prevEl) {
-    //   this.activeEl = newEl;
-    //   this.parseArr(newEl);
-    //   this.prevEl = newEl;
-    // }
+  initProducts(data: Product[], url = 'all') {
+    this.accumulator = [];
+    url === 'all' ? this.parsingProducts(data) : this.findUrlContent(data, url);
+    return this.accumulator;
   }
 
-  private parseArr(newEl: string, prodArr: Product[] = this._products) {
-    // for (const item of prodArr) {
-    //   if (item.name === this.prevEl) {item.active = false}
-    //   if (item.name === newEl) {item.active = true}
-    //   if (item.children) {
-    //     this.parseArr(newEl, item.children);
-    //     if (item.name === this.prevEl) {item.active = false}
-    //     if (item.name === newEl) {item.active = true}
-    //   }
-    // }
+  findUrlContent(data: Product[], url: string) {
+    for (const item of data) {
+      if (item.children) {
+        if (item.urlName === url) { this.initProducts(item.children);  break; }
+        this.findUrlContent(item.children, url);
+      } else {
+        if (item.urlName === url) { this.accumulator.push(item); break; }
+      }
+    }
   }
 
-  // public setInactive(prev: string = this.prevEl, prodArr: Product[] = this._products) {
-    // for (const item of prodArr) {
-    //   if (prev === 'all') {item.active = false} else {
-    //     if (item.name === prev) {item.active = false; break}
-    //   }
-    //   if (item.children) {
-    //     this.setInactive(prev, item.children);
-    //     if (prev === 'all') {item.active = false} else {
-    //       if (item.name === prev) {item.active = false; break}
-    //     }
-    //   }
-    // }
-  // }
-
+  parsingProducts(data: Product[],) {
+    for (const item of data) {
+      item.children ? this.parsingProducts(item.children) : this.accumulator.push(item);
+    }
+  }
 
   get products() {
     return [...this._products];
