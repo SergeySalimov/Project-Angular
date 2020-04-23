@@ -17,32 +17,32 @@ export class ProductsService implements OnInit{
         {
           "id": "1-1",
           "name": "Шишки",
-          "urlName": "plody/shishki",
+          "urlName": "shishki",
           "children": [
             {
               "name": "Шишки ольхи",
-              "urlName": "plody/shishki/shishki-olkhi",
+              "urlName": "shishki-olkhi",
               "description": "Lorem ipsum",
               "img": "/assets/images/cones-of-alder.jpg",
               "photos": [],
             },
             {
               "name": "Шишки еловые",
-              "urlName": "plody/shishki/shishki-elovye",
+              "urlName": "shishki-elovye",
               "description": "Lorem ipsum",
               "img": "/assets/images/fir-cones.jpg",
               "photos": [],
             },
             {
               "name": "Шишки сосновые",
-              "urlName": "plody/shishki/shishki-sosnovye",
+              "urlName": "shishki-sosnovye",
               "description": "Lorem ipsum",
               "img": "/assets/images/pine-cones.jpg",
               "photos": [],
             },
             {
               "name": "Шишки хмеля",
-              "urlName": "plody/shishki/shishki-chmelya",
+              "urlName": "shishki-chmelya",
               "description": "Lorem ipsum",
               "img": "/assets/images/hop-cones.jpg",
               "photos": [],
@@ -51,14 +51,14 @@ export class ProductsService implements OnInit{
         },
         {
           "name": "Желуди",
-          "urlName": "plody/zheludi",
+          "urlName": "zheludi",
           "description": "Lorem ipsum",
           "img": "/assets/images/zhyoludi.jpg",
           "photos": [],
         },
         {
           "name": "Каштаны",
-          "urlName": "plody/kashtany",
+          "urlName": "kashtany",
           "description": "Lorem ipsum",
           "img": "/assets/images/cashtany.jpg",
           "photos": [],
@@ -66,25 +66,25 @@ export class ProductsService implements OnInit{
         {
           "id": "1-4",
           "name": "Ягоды",
-          "urlName": "plody/yagody",
+          "urlName": "yagody",
           "children": [
             {
               "name": "Ягоды черемухи",
-              "urlName": "plody/yagody/yagody-tcheryomuhi",
+              "urlName": "yagody-tcheryomuhi",
               "description": "Lorem ipsum",
               "img": "/assets/images/cherjomuha.jpg",
               "photos": [],
             },
             {
               "name": "Ягоды бузины",
-              "urlName": "plody/yagody/yagody-buziny",
+              "urlName": "yagody-buziny",
               "description": "Lorem ipsum",
               "img": "/assets/images/buzina.jpg",
               "photos": [],
             },
             {
               "name": "Ягоды можжевельника",
-              "urlName": "plody/yagody/yagody-mozhzhevelnika",
+              "urlName": "yagody-mozhzhevelnika",
               "description": "Lorem ipsum",
               "img": "/assets/images/mozhzhevel.jpg",
               "photos": [],
@@ -100,14 +100,14 @@ export class ProductsService implements OnInit{
       "children": [
         {
           "name": "Шалфей",
-          "urlName": "travy/chalfei",
+          "urlName": "chalfei",
           "description": "Lorem ipsum",
           "img": "/assets/images/shalfej.jpg",
           "photos": [],
         },
         {
           "name": "Мята",
-          "urlName": "travy/mayata",
+          "urlName": "mayata",
           "description": "Lorem ipsum",
           "img": "/assets/images/mint.jpg",
           "photos": [],
@@ -121,56 +121,56 @@ export class ProductsService implements OnInit{
         },
         {
           "name": "Мелисcа",
-          "urlName": "travy/melissa",
+          "urlName": "melissa",
           "description": "Lorem ipsum",
           "img": "/assets/images/melissa.jpg",
           "photos": [],
         },
         {
           "name": "Чистотел",
-          "urlName": "travy/tchistotel",
+          "urlName": "tchistotel",
           "description": "Lorem ipsum",
           "img": "/assets/images/chistotel.jpg",
           "photos": [],
         },
         {
           "name": "Лаванда",
-          "urlName": "travy/lavanda",
+          "urlName": "lavanda",
           "description": "Lorem ipsum",
           "img": "/assets/images/lavanda.jpg",
           "photos": [],
         },
         {
           "name": "Зверобой",
-          "urlName": "travy/zveroboi",
+          "urlName": "zveroboi",
           "description": "Lorem ipsum",
           "img": "/assets/images/zveroboj.jpg",
           "photos": [],
         },
         {
           "name": "Полынь",
-          "urlName": "travy/polyn",
+          "urlName": "polyn",
           "description": "Lorem ipsum",
           "img": "/assets/images/polyn.jpg",
           "photos": [],
         },
         {
           "name": "Тысячелистник",
-          "urlName": "travy/tysiyatchelistnik",
+          "urlName": "tysiyatchelistnik",
           "description": "Lorem ipsum",
           "img": "/assets/images/tysiachelistnik.jpg",
           "photos": [],
         },
         {
           "name": "Пижма",
-          "urlName": "travy/pigma",
+          "urlName": "pigma",
           "description": "Lorem ipsum",
           "img": "/assets/images/pizhma.jpg",
           "photos": [],
         },
         {
           "name": "Иван-Чай",
-          "urlName": "travy/ivan-tchai",
+          "urlName": "ivan-tchai",
           "description": "Lorem ipsum",
           "img": "/assets/images/ivan.jpg",
           "photos": [],
@@ -184,35 +184,35 @@ export class ProductsService implements OnInit{
       "children": [
         {
           "name": "Стружка липы",
-          "urlName": "struzhka-dekorativnaya-drevesnaya/struzhka-lipy",
+          "urlName": "/struzhka-lipy",
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-lipa.jpg",
           "photos": [],
         },
         {
           "name": "Стружка осины",
-          "urlName": "struzhka-dekorativnaya-drevesnaya/struzhka-osiny",
+          "urlName": "struzhka-osiny",
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-osina.jpg",
           "photos": [],
         },
         {
           "name": "Стружка елки",
-          "urlName": "struzhka-dekorativnaya-drevesnaya/struzhka-elki",
+          "urlName": "struzhka-elki",
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-elka.jpg",
           "photos": [],
         },
         {
           "name": "Стружка ольхи",
-          "urlName": "struzhka-dekorativnaya-drevesnaya/struzhka-olhi",
+          "urlName": "struzhka-olhi",
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-olha.jpg",
           "photos": [],
         },
         {
           "name": "Стружка сосны",
-          "urlName": "struzhka-dekorativnaya-drevesnaya/struzhka-sosny",
+          "urlName": "struzhka-sosny",
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-sosna.jpg",
           "photos": [],
@@ -226,35 +226,35 @@ export class ProductsService implements OnInit{
       "children": [
         {
           "name": "Спилы дуба",
-          "urlName": "torcevye-spily-dereva/spily-duba",
+          "urlName": "spily-duba",
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-dub.jpg",
           "photos": [],
         },
         {
           "name": "Спилы ясеня",
-          "urlName": "torcevye-spily-dereva/spily-yasenia",
+          "urlName": "spily-yasenia",
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-yasen.jpg",
           "photos": [],
         },
         {
           "name": "Спилы березы",
-          "urlName": "torcevye-spily-dereva/spily-beriozy",
+          "urlName": "spily-beriozy",
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-bereza.jpg",
           "photos": [],
         },
         {
           "name": "Спилы акации",
-          "urlName": "torcevye-spily-dereva/spily-akacii",
+          "urlName": "spily-akacii",
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-akacia.jpg",
           "photos": [],
         },
         {
           "name": "Спилы вяза",
-          "urlName": "torcevye-spily-dereva/spily-viaza",
+          "urlName": "spily-viaza",
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-viaz.jpg",
           "photos": [],
@@ -268,14 +268,14 @@ export class ProductsService implements OnInit{
       "children": [
         {
           "name": "Сфагнум",
-          "urlName": "moh/sfagnum",
+          "urlName": "sfagnum",
           "description": "Lorem ipsum",
           "img": "/assets/images/sfagnum.jpg",
           "photos": [],
         },
         {
           "name": "Ягель",
-          "urlName": "moh/yagel",
+          "urlName": "yagel",
           "description": "Lorem ipsum",
           "img": "/assets/images/yagel.jpg",
           "photos": [],
@@ -297,14 +297,14 @@ export class ProductsService implements OnInit{
       "children": [
         {
           "name": "Капы",
-          "urlName": "kapy-i-suveli/kapy",
+          "urlName": "kapy",
           "description": "Lorem ipsum",
           "img": "/assets/images/kapa.jpg",
           "photos": [],
         },
         {
           "name": "Сувели",
-          "urlName": "kapy-i-suveli/suveli",
+          "urlName": "suveli",
           "description": "Lorem ipsum",
           "img": "/assets/images/suvel.jpg",
           "photos": [],
@@ -314,8 +314,7 @@ export class ProductsService implements OnInit{
   ];
 
   // activeEl: string = 'Плоды';
-  activeEl: string;
-  prevEl: string;
+
 
   // childrenRoutes: Route[] = [
   //   {path: 'plody', component: CatalogProductsComponent},
@@ -332,21 +331,21 @@ export class ProductsService implements OnInit{
 
 
   public setInactivePrevious(newEl: string, prodArr: Product[] = this._products) {
-    console.log('new iteration');
-    if (newEl !== this.prevEl) {
-      this.activeEl = newEl;
-      this.setInactive(newEl);
-      this.prevEl = newEl;
-    }
+    // console.log('new iteration');
+    // if (newEl !== this.prevEl) {
+    //   this.activeEl = newEl;
+    //   this.setInactive(newEl);
+    //   this.prevEl = newEl;
+    // }
   }
 
   public setActive(newEl: string, prodArr: Product[] = this._products) {
-    console.log('new iteration');
-    if (newEl !== this.prevEl) {
-      this.activeEl = newEl;
-      this.parseArr(newEl);
-      this.prevEl = newEl;
-    }
+    // console.log('new iteration');
+    // if (newEl !== this.prevEl) {
+    //   this.activeEl = newEl;
+    //   this.parseArr(newEl);
+    //   this.prevEl = newEl;
+    // }
   }
 
   private parseArr(newEl: string, prodArr: Product[] = this._products) {
@@ -361,7 +360,7 @@ export class ProductsService implements OnInit{
     // }
   }
 
-  public setInactive(prev: string = this.prevEl, prodArr: Product[] = this._products) {
+  // public setInactive(prev: string = this.prevEl, prodArr: Product[] = this._products) {
     // for (const item of prodArr) {
     //   if (prev === 'all') {item.active = false} else {
     //     if (item.name === prev) {item.active = false; break}
@@ -373,7 +372,7 @@ export class ProductsService implements OnInit{
     //     }
     //   }
     // }
-  }
+  // }
 
 
   get products() {

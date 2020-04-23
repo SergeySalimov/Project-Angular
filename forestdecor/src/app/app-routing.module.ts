@@ -15,18 +15,6 @@ const routes: Routes = [
       {
         path: ':urlName',
         component: CatalogProductsComponent,
-        children: [
-          {
-            path: ':urlName',
-            component: CatalogProductsComponent,
-            children: [
-              {
-                path: ':urlName',
-                component: CatalogProductsComponent
-              }
-            ]
-          }
-        ]
       },
     ]
 

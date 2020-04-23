@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router, UrlSegment } from "@angular/router";
 
 @Component({
   selector: 'app-catalog-products',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CatalogProductsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-  }
+    this.activatedRoute.paramMap
+      .subscribe((paramMap: ParamMap) => {
+        console.log(paramMap.get('urlName'));
 
+        console.log(this.router.url);
+      });
+
+  }
 }

@@ -3,7 +3,6 @@ import { FlatTreeControl } from "@angular/cdk/tree";
 import { MatTreeFlatDataSource, MatTreeFlattener } from "@angular/material/tree";
 import { ProductsService } from "../../../shared/services/products/products.service";
 import { Product } from "../../../shared/models/product.model";
-import { ActivatedRoute, ParamMap } from "@angular/router";
 
 /** Flat node with expandable and level information */
 interface FlatNode {
@@ -20,17 +19,19 @@ interface FlatNode {
 
 export class CatalogNavigationComponent implements OnInit {
 
-  // products: Product[];
+  // products: Product[] = [
+  //   {name: '1111', urlName: 'all1'},
+  //   {name: '2222', urlName: 'all2'},
+  //   {name: '3333', urlName: 'all3'},
+  // ];
 
   constructor(
-    public productsService: ProductsService,
-    private activatedRoute: ActivatedRoute
+    public productsService: ProductsService
   ) {
     this.dataSource.data = productsService.products;
   }
 
   ngOnInit(): void {
-    console.log(this.activatedRoute.snapshot.paramMap.get('urlName'));
     // this.products =  this.productsService.products;
     // this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
     //   console.log(paramMap.get('urlName'));
@@ -41,7 +42,7 @@ export class CatalogNavigationComponent implements OnInit {
   }
 
   onClick(el: string) {
-    console.log(el);
+    // console.log(el);
   }
 
   private _transformer = (node: Product, level: number) => {
@@ -49,7 +50,7 @@ export class CatalogNavigationComponent implements OnInit {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
       level: level,
-      routerName: node.urlName,
+      urlName: node.urlName,
     };
   };
 
