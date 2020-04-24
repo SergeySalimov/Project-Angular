@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-catalog-card-desk',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./catalog-card-desk.component.scss']
 })
 export class CatalogCardDeskComponent implements OnInit {
+
+  @Input() curProducts;
 
   constructor() { }
 

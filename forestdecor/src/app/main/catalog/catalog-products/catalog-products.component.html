@@ -1,6 +1,3 @@
-<div class="row" id="product-place">
+<app-catalog-single-product *ngIf="curProducts.length === 1"></app-catalog-single-product>
+<app-catalog-card-desk [curProducts]="curProducts" *ngIf="curProducts.length > 1"></app-catalog-card-desk>
 
-  <app-catalog-single-product *ngIf="curProducts.length === 1"></app-catalog-single-product>
-  <app-catalog-card-desk *ngIf="curProducts.length > 1"></app-catalog-card-desk>
-
-</div>

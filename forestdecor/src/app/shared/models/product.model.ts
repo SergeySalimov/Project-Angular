@@ -3,7 +3,7 @@ export interface Product {
   urlName: string,
   description?: string,
   img?: string,
-  photos?: [],
+  photos?: string[],
   id?: string,
   children?: Product[],
 }

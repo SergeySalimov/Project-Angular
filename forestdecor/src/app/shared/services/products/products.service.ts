@@ -1,6 +1,12 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Product } from "../../models/product.model";
 import { ProductPlacer } from "../../models/productsPlacer";
+import { ProductsProcessingService } from "../products-processing/products-processing.service";
+
+// interface productsUrl {
+//   url: string,
+//   data: Product[]
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -277,7 +283,7 @@ export class ProductsService implements OnInit {
           "urlName": "yagel",
           "description": "Lorem ipsum",
           "img": "/assets/images/yagel.jpg",
-          "photos": [],
+          "photos": ['1'],
         }
       ]
     },
@@ -299,7 +305,7 @@ export class ProductsService implements OnInit {
           "urlName": "kapy",
           "description": "Lorem ipsum",
           "img": "/assets/images/kapa.jpg",
-          "photos": [],
+          "photos": ['1'],
         },
         {
           "name": "Сувели",
@@ -312,21 +318,11 @@ export class ProductsService implements OnInit {
     }
   ];
 
-  // productsPlacer: ProductPlacer[] = [{
-  //   name: 'все',
-  //   urlName: 'all',
-  //   hasChildren: true,
-  //   parents: [],
-  //   content: [],
-  // }];
-
   accumulator: Product[];
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getAllElements(forUrl: string) {
     return this.initProducts(this._products, forUrl);
@@ -341,10 +337,16 @@ export class ProductsService implements OnInit {
   findUrlContent(data: Product[], url: string) {
     for (const item of data) {
       if (item.children) {
-        if (item.urlName === url) { this.initProducts(item.children);  break; }
+        if (item.urlName === url) {
+          this.initProducts(item.children);
+          break;
+        }
         this.findUrlContent(item.children, url);
       } else {
-        if (item.urlName === url) { this.accumulator.push(item); break; }
+        if (item.urlName === url) {
+          this.accumulator.push(item);
+          break;
+        }
       }
     }
   }

@@ -19,31 +19,11 @@ interface FlatNode {
 
 export class CatalogNavigationComponent implements OnInit {
 
-  // products: Product[] = [
-  //   {name: '1111', urlName: 'all1'},
-  //   {name: '2222', urlName: 'all2'},
-  //   {name: '3333', urlName: 'all3'},
-  // ];
-
-  constructor(
-    public productsService: ProductsService
-  ) {
+  constructor( private productsService: ProductsService ) {
     this.dataSource.data = productsService.products;
   }
 
-  ngOnInit(): void {
-    // this.products =  this.productsService.products;
-    // this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-    //   console.log(paramMap.get('urlName'));
-    // });
-
-    // console.log(this.products);
-
-  }
-
-  onClick(el: string) {
-    // console.log(el);
-  }
+  ngOnInit(): void {}
 
   private _transformer = (node: Product, level: number) => {
     return {

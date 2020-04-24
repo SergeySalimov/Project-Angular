@@ -10,20 +10,18 @@ import { Product } from "../../../shared/models/product.model";
 })
 export class CatalogProductsComponent implements OnInit {
 
-  curState: string;
   curProducts: Product[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    public productsService: ProductsService
+    private productsService: ProductsService
     ) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap
       .subscribe((paramMap: ParamMap) => {
-        // this.curState = paramMap.get('urlName');
-        this.curProducts = this.productsService.getAllElements(paramMap.get('urlName'))
-        // console.log(this.productsService.getAllElements(this.curState));
+        this.curProducts = this.productsService.getAllElements(paramMap.get('urlName'));
+        console.log(this.curProducts);
         // console.log(this.router.url);
       });
   }

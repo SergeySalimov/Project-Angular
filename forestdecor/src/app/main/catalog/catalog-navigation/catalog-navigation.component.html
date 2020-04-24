@@ -1,22 +1,11 @@
 <div class="btn-group btn-block mb-1">
   <button class="btn text-center text-sm-left"
           [routerLink]="'all'"
-          [routerLinkActive]="'active'"
+          routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}"
-          (click)="onClick('all')"
           mat-raised-button>Весь каталог</button>
   <button class="btn text-center" mat-raised-button><i class="icon-angle-double-left"></i></button>
 </div>
-
-<!--<div *ngFor="let prd of products">-->
-<!--  <button class="btn text-center mt-3 text-sm-left"-->
-<!--          [routerLink]="['/catalog', prd.urlName]"-->
-<!--          [routerLinkActive]="'active'"-->
-<!--          [routerLinkActiveOptions]="{exact: true}"-->
-<!--          (click)="onClick()"-->
-<!--          mat-raised-button>{{prd.name}}</button>-->
-
-<!--</div>-->
 
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
   <!-- This is the tree node template for leaf nodes -->
@@ -25,9 +14,8 @@
     <button mat-icon-button disabled></button>
     <button class="btn btn-block text-center text-sm-left"
             [routerLink]="[node.urlName]"
-            [routerLinkActive]="'active'"
+            routerLinkActive="active"
             [routerLinkActiveOptions]="{exact: true}"
-            (click)="onClick(node.urlName)"
             mat-raised-button
     >{{node.name}}</button>
   </mat-tree-node>
@@ -43,7 +31,6 @@
             [routerLink]="[node.urlName]"
             [routerLinkActive]="'active'"
             [routerLinkActiveOptions]="{exact: true}"
-            (click)="onClick(node.urlName)"
             mat-raised-button
     >{{node.name}}</button>
   </mat-tree-node>
