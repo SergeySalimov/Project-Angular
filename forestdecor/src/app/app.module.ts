@@ -27,6 +27,7 @@ import { MaterialModule} from "./shared/material/material-module";
 import { CatalogProductsComponent } from './main/catalog/catalog-products/catalog-products.component';
 import { CatalogSingleProductComponent } from './main/catalog/catalog-products/catalog-single-product/catalog-single-product.component';
 import { CatalogCardDeskComponent } from './main/catalog/catalog-products/catalog-card-desk/catalog-card-desk.component';
+import { DotPipe } from './shared/pipes/dot.pipe';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { CatalogCardDeskComponent } from './main/catalog/catalog-products/catalo
     CatalogProductsComponent,
     CatalogSingleProductComponent,
     CatalogCardDeskComponent,
+    DotPipe,
   ],
   imports: [
     BrowserModule,

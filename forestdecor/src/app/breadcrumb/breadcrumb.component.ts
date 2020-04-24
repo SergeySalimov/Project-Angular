@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from "@angular/router";
 
 @Component({
   selector: 'app-breadcrumb',
@@ -8,9 +7,10 @@ import { ActivatedRoute, ParamMap } from "@angular/router";
 })
 export class BreadcrumbComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit(): void {
+
   }
 
 
