@@ -7,8 +7,23 @@
   background-repeat: repeat;
   //height: 600px;
   display: block;
+  position: relative;
 
-  #catalog-navigation {
+  button {
+    position: absolute;
+    background: $backGrey;
+    font-size: 1.2rem;
+    left: 0;
+    height: 90%;
+    top: 14px;
+
+    @media (min-width: map-get($grid-breakpoints, "md")) {
+      left: 20px;
+    }
+
+  }
+
+  .catalog-navigation {
     font-weight: bolder;
     li {
       cursor: pointer;

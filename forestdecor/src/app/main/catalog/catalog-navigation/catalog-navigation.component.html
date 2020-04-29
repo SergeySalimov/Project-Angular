@@ -4,7 +4,7 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}"
           mat-raised-button>Весь каталог</button>
-  <button class="btn text-center" mat-raised-button><i class="icon-angle-double-left"></i></button>
+  <button class="btn text-center" mat-raised-button (click)="hideNav.emit()"><i class="icon-angle-double-left"></i></button>
 </div>
 
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">

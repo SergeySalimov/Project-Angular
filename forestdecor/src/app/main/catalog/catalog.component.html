@@ -1,14 +1,22 @@
 <div class="container clearfix">
   <div class="row">
 
-    <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3 mt-2" id="catalog-navigation">
-      <app-catalog-navigation class="mt-2"></app-catalog-navigation>
+    <button *ngIf="!showNav" (click)="showNav = true">
+      <i class="icon-angle-double-right"></i>
+    </button>
+
+    <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3 mt-2 catalog-navigation" *ngIf="showNav">
+      <app-catalog-navigation (hideNav)="showNav = false"></app-catalog-navigation>
     </div>
 
-    <div class="col-sm-6 col-md-7 col-lg-8 col-xl-9 mt-2">
-
-        <router-outlet></router-outlet>
-
+    <div class="mt-2" [ngClass]="{
+      'col-sm-6': this.showNav,
+      'col-md-7': this.showNav,
+      'col-lg-8': this.showNav,
+      'col-xl-9': this.showNav,
+      'col-12': !this.showNav
+        }">
+      <router-outlet></router-outlet>
     </div>
 
   </div>
