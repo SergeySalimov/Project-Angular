@@ -22,7 +22,7 @@ export class CatalogProductsComponent implements OnInit {
     this.activatedRoute.paramMap
       .subscribe((paramMap: ParamMap) => {
         this.curProducts = this.productsService.getAllElements(paramMap.get('urlName'));
-        // console.log(this.curProducts);
+        console.log(this.curProducts);
         // console.log(this.router.url);
       });
   }

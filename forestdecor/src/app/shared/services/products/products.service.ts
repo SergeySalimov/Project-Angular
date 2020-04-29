@@ -183,7 +183,7 @@ export class ProductsService implements OnInit {
       "children": [
         {
           "name": "Стружка липы",
-          "urlName": "/struzhka-lipy",
+          "urlName": "struzhka-lipy",
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-lipa.jpg",
           "photos": [],

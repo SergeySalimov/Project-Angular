@@ -1,6 +1,15 @@
 <div class="container">
   <div class="row card-group">
-    <div class="my-1" [ngClass]="classForProduct" *ngFor="let product of curProducts">
+    <div class="my-1" [ngClass]="{
+          'col-sm-12': catalogNavigation.status,
+          'col-md-6': catalogNavigation.status,
+          'col-lg-4': catalogNavigation.status,
+          'col-xl-3': catalogNavigation.status,
+          'col-sm-6': !catalogNavigation.status,
+          'col-md-4': !catalogNavigation.status,
+          'col-lg-3': !catalogNavigation.status,
+          'col-xl-2': !catalogNavigation.status}"
+         *ngFor="let product of curProducts">
       <mat-card (click)="onCardClick(product.urlName)">
         <mat-card-header>
           <mat-card-title style="font-size: 1rem">{{product.name}}</mat-card-title>

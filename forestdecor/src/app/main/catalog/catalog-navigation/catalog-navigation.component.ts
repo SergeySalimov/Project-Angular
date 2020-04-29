@@ -3,6 +3,7 @@ import { FlatTreeControl } from "@angular/cdk/tree";
 import { MatTreeFlatDataSource, MatTreeFlattener } from "@angular/material/tree";
 import { ProductsService } from "../../../shared/services/products/products.service";
 import { Product } from "../../../shared/models/product.model";
+import { CatalogNavigationService } from "../../../shared/services/catalogNavigation/catalog-navigation.service";
 
 
 /** Flat node with expandable and level information */
@@ -23,7 +24,8 @@ export class CatalogNavigationComponent implements OnInit {
 
   @Output() hideNav: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor( private productsService: ProductsService ) {
+  constructor( private productsService: ProductsService,
+               public catalogNavigation: CatalogNavigationService) {
     this.dataSource.data = productsService.products;
   }
 

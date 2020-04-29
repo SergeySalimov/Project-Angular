@@ -1,36 +1,38 @@
 @import "bootstrap";
 @import "custom.variables";
 
-.nav1 {
-  a {
-    cursor: pointer;
-  }
-
-  .btn-nav-registration {
-    //color: $backGrey;
-    color: $mainFontColor;
-
-  }
-
-  .btn-nav-registration.active {
-    //color: $mainFontColor;
-    color: yellow;
-  }
-
-  .navbar-brand {
-    padding: 5px;
-
-    img {
-      height: 40px;
-      width: auto;
+:host {
+  .nav1 {
+    a {
+      cursor: pointer;
     }
-  }
 
-  .navbar-brand:hover {
-    background-color: $additFontColor;
-  }
+    .btn-nav-registration {
+      //color: $backGrey;
+      color: $mainFontColor;
 
-  .navbar-brand.no-autoriz:hover {
-    background-color: $red;
+    }
+
+    .btn-nav-registration.active {
+      //color: $mainFontColor;
+      color: yellow;
+    }
+
+    .navbar-brand {
+      padding: 5px;
+
+      img {
+        height: 40px;
+        width: auto;
+      }
+    }
+
+    .navbar-brand:hover {
+      background-color: $additFontColor;
+    }
+
+    .navbar-brand.no-autoriz:hover {
+      background-color: $red;
+    }
   }
 }

@@ -28,7 +28,6 @@ import { CatalogProductsComponent } from './main/catalog/catalog-products/catalo
 import { CatalogSingleProductComponent } from './main/catalog/catalog-products/catalog-single-product/catalog-single-product.component';
 import { CatalogCardDeskComponent } from './main/catalog/catalog-products/catalog-card-desk/catalog-card-desk.component';
 import { DotPipe } from './shared/pipes/dot.pipe';
-import { SetBtnPosDirective } from './shared/directives/setButtonPosition/set-btn-pos.directive';
 
 @NgModule({
   declarations: [
@@ -56,7 +55,6 @@ import { SetBtnPosDirective } from './shared/directives/setButtonPosition/set-bt
     CatalogSingleProductComponent,
     CatalogCardDeskComponent,
     DotPipe,
-    SetBtnPosDirective,
   ],
   imports: [
     BrowserModule,

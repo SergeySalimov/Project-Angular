@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BehaviorSubject, Observable } from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { CatalogNavigationService } from "../../shared/services/catalogNavigation/catalog-navigation.service";
 
 @Component({
   selector: 'app-catalog',
@@ -8,30 +8,9 @@ import { BehaviorSubject, Observable } from "rxjs";
 })
 export class CatalogComponent implements OnInit {
 
-  showNav = true;
-
-  classForContent = {
-    'col-sm-6': this.showNav,
-    'col-md-7': this.showNav,
-    'col-lg-8': this.showNav,
-    'col-xl-9': this.showNav,
-    'col-12': !this.showNav
-  };
-
-  constructor() { }
+ constructor(public catalogNavigation: CatalogNavigationService) { }
 
   ngOnInit(): void {
   }
-
-  onClick() {
-    console.log('show');
-    this.showNav = true;
-  }
-
-  doHideNav() {
-    console.log('hide');
-    this.showNav = false;
-  }
-
 
 }
