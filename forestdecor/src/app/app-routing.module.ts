@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { CatalogProductsComponent } from "./main/catalog/catalog-products/catalog-products.component";
-import { CatalogSingleProductComponent } from './main/catalog/catalog-products/catalog-single-product/catalog-single-product.component';
-import { CatalogComponent, ContactsComponent, DeliveryComponent, FormComponent, HomeComponent, MessagesComponent, PaymentComponent } from "./main";
+import {
+  CatalogComponent,
+  CatalogProductsComponent,
+  ContactsComponent,
+  DeliveryComponent,
+  FormComponent,
+  HomeComponent,
+  MessagesComponent,
+  PaymentComponent
+} from './main';
 
 
 const routes: Routes = [

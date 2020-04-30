@@ -1,10 +1,11 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Product } from "../../models/product.model";
+import { Injectable } from '@angular/core';
+import { Product } from '../../models/product.model';
+import { ProductPlacer } from '../../models/productsPlacer';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService implements OnInit {
+export class ProductsService {
   // MOK data now => then will be loaded from server
   private _products: Product[] = [
     {
@@ -113,7 +114,7 @@ export class ProductsService implements OnInit {
         },
         {
           "name": "Душица",
-          "urlName": "travy/duchica",
+          "urlName": "duchica",
           "description": "Lorem ipsum",
           "img": "/assets/images/dushitsa.jpg",
           "photos": [],
@@ -312,25 +313,50 @@ export class ProductsService implements OnInit {
     }
   ];
 
-  accumulator: Product[];
+  private accumulator: Product[];
+  private productsPlacer: ProductPlacer[] = [];
 
   constructor() {
+    console.time('urlsCreate');
+    this.createPlacingProduct('all', 'весь каталог');
+    this.createUrlsInformation();
+    console.timeEnd('urlsCreate');
   }
 
-  ngOnInit(): void {
+  getProductUrlInfo(url): ProductPlacer {
+    return this.productsPlacer.filter((item) => item.urlName === url)[0];
   }
 
-  getAllElements(forUrl: string) {
+  createUrlsInformation(data: Product[] = this._products, parents: string[] = []): void {
+    for (const item of data) {
+      if (item.children) {
+        this.createPlacingProduct(item.urlName, item.name, [...parents]);
+        parents.push(item.urlName);
+        this.createUrlsInformation(item.children, [...parents]);
+        parents.pop();
+      } else {
+        this.createPlacingProduct(item.urlName, item.name, [...parents]);
+      }
+    }
+  }
+
+  createPlacingProduct(urlName: string, name: string, parents: string[] = []): void {
+    const content: Product[] = this.getAllElements(urlName);
+    // this.prdTemp = {name, urlName, content, parents};
+    this.productsPlacer.push({urlName, name, content, parents});
+  }
+
+  getAllElements(forUrl: string): Product[] {
     return this.initProducts(this._products, forUrl);
   }
 
-  initProducts(data: Product[], url = 'all') {
+  initProducts(data: Product[], url = 'all'): Product[] {
     this.accumulator = [];
     url === 'all' ? this.parsingProducts(data) : this.findUrlContent(data, url);
     return this.accumulator;
   }
 
-  findUrlContent(data: Product[], url: string) {
+  findUrlContent(data: Product[], url: string): void {
     for (const item of data) {
       if (item.children) {
         if (item.urlName === url) {
@@ -347,7 +373,7 @@ export class ProductsService implements OnInit {
     }
   }
 
-  parsingProducts(data: Product[],) {
+  parsingProducts(data: Product[]): void {
     for (const item of data) {
       item.children ? this.parsingProducts(item.children) : this.accumulator.push(item);
     }

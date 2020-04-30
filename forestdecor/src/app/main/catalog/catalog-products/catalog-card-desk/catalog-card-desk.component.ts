@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CatalogNavigationService } from "../../../../shared/services/catalogNavigation/catalog-navigation.service";
+import { CatalogNavigationService } from '../../../../shared/services/catalogNavigation/catalog-navigation.service';
 
 @Component({
   selector: 'app-catalog-card-desk',
@@ -8,7 +8,7 @@ import { CatalogNavigationService } from "../../../../shared/services/catalogNav
 })
 export class CatalogCardDeskComponent implements OnInit {
 
-  @Input() curProducts;
+  @Input() curProductData;
 
   constructor(public catalogNavigation: CatalogNavigationService) { }
 

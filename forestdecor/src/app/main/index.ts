@@ -5,3 +5,7 @@ export * from './delivery/delivery.component';
 export * from './form/form.component';
 export * from './messages/messages.component';
 export * from './catalog/catalog.component';
+export * from './main.component';
+export * from './catalog/catalog-products/catalog-products.component';
+export * from './catalog/catalog-products/catalog-card-desk/catalog-card-desk.component';
+export * from './catalog/catalog-products/catalog-single-product/catalog-single-product.component';
