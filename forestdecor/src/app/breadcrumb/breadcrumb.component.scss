@@ -3,11 +3,16 @@ $breadcrumb-divider: quote(">");
 
 @import "custom.variables";
 
-.nav2 {
-  background-color: $backGrey;
-  margin-bottom: -16px;
+:host {
 
-  .active {
-    text-transform: uppercase;
+  .nav2 {
+    background-color: $backGrey;
+    margin-bottom: -16px;
+
+    .active {
+      text-transform: uppercase;
+    }
   }
 }
+
+

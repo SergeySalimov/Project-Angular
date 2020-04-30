@@ -1,53 +1,48 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Product } from "../../models/product.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService{
+export class ProductsService implements OnInit {
   // MOK data now => then will be loaded from server
   private _products: Product[] = [
     {
       "id": "1",
       "name": "Плоды",
       "urlName": "plody",
-      "active": false,
       "children": [
         {
           "id": "1-1",
           "name": "Шишки",
           "urlName": "shishki",
-          "active": false,
           "children": [
             {
               "name": "Шишки ольхи",
               "urlName": "shishki-olkhi",
-              "active": false,
-              "description": "Lorem ipsum",
+              "description": "Шишки ольхи разных размеров являются плодами. В зависимости от ее вида они бывают пленчатыми и кожистыми, а другие бескрылыми. Всю зиму шишки висят на ольхе закрытыми, открываясь только в марте и засеивая своими семенами почву.\n Урожай шишек можно собрать в конце осени и зимой, если ольха растет на приусадебном участке. При заготовке шишек их срезают садовыми ножницами. Шишки сушат при комнатной температуре. Высушенные плоды приобретают коричневый или бурый цвет. От них исходит легкий аромат. У них вяжущий вкус." +
+                "  \n Существует загадка: «Какое дерево не относится к хвойным, но при этом имеет шишки?» Ответом на нее служит полное спокойного достоинства слово «ольха». Одно из 13 священных деревьев друидов, обладательница красноватой поделочной древесины и полезных веществ, ольха всегда пользовалась вниманием составителей заклинаний, столяров и врачей....\n",
               "img": "/assets/images/cones-of-alder.jpg",
               "photos": [],
             },
             {
               "name": "Шишки еловые",
               "urlName": "shishki-elovye",
-              "active": false,
-              "description": "Lorem ipsum",
+              "description": "Шишки ели продолговато-цилиндрические, заострённые, опадают по созревании семян целыми в первый год по опылении. Созревшие шишки висячие и сухие, длина их до 15 см, а диаметр 3—4 см. Шишки ели — длинные коричневатых оттенков, а шишки сосны удлиненно-яйцевидные, серого цвета. Так же еловые шишки имеют целебные свойства, их настой и отвар, ингаляции — применяют при заболевании верхних дыхательных путей и бронхиальной астмы. Еловые шишки богаты дубильными веществами и эфирными маслами. Они также содержат медь, марганец, алюминий, железо.",
               "img": "/assets/images/fir-cones.jpg",
               "photos": [],
             },
             {
               "name": "Шишки сосновые",
               "urlName": "shishki-sosnovye",
-              "active": false,
-              "description": "Lorem ipsum",
+              "description": "Трудно найти человека, который не знает, что на сосне растут шишки. Их величину можно сравнить с крупным грецким орехом. Если шишка старая, то она коричневого цвета. На ощупь деревянистая, а ее чешуйки рыхлые и топоращатся в разные стороны. \n Немногие знают, что в число самых древних деревьев входит сосна. Обыкновенная шишка с семечками внутри является соплодием вечнозеленого растения. Женские плоды сосны называются мегастробилы, мужские – микростробилы. В народной медицине используют сырье из соплодий хвойного дерева при низком гемоглобине, полиартрите, пневмонии, авитаминозе, острых респираторных заболеваниях. В пыльце шишки содержатся эфирное масло, каротин, аскорбиновые и смоляные кислоты. Благодаря их лечебным свойствам, плодам сосны посвящено большое количество лекарственных рецептов. ",
               "img": "/assets/images/pine-cones.jpg",
               "photos": [],
             },
             {
               "name": "Шишки хмеля",
               "urlName": "shishki-chmelya",
-              "active": false,
-              "description": "Lorem ipsum",
+              "description": "Полезные свойства хмеля определяет состав его плодов. Собирают шишки в августе, пока они находятся с стадии созревания. Состав шишек пивного хмеля изучен достаточно хорошо. Основной интерес представляет «желтая пыльца», вырабатываемая железками на стенках плодов. Она называется лупулин, включает до семидесяти процентов смолистых веществ, до пяти процентов горечей и около двух процентов эфирного масла. В состав лупулина входят органические кислоты, желтое красящее вещество, холин — натуральный стимулятор активности желчного пузыря. Масло из шишек хмеля богато эфирами, объем которых составляет до трех процентов, хмелевыми смолами, камедью и горькими веществами. В нем присутствуют кислоты, витамины А и РР, тиамин и холин, — биологически активный комплекс, применяемый производителями БАДов в основе пищевых добавок.",
               "img": "/assets/images/hop-cones.jpg",
               "photos": [],
             }
@@ -56,7 +51,6 @@ export class ProductsService{
         {
           "name": "Желуди",
           "urlName": "zheludi",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/zhyoludi.jpg",
           "photos": [],
@@ -64,7 +58,6 @@ export class ProductsService{
         {
           "name": "Каштаны",
           "urlName": "kashtany",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/cashtany.jpg",
           "photos": [],
@@ -73,12 +66,10 @@ export class ProductsService{
           "id": "1-4",
           "name": "Ягоды",
           "urlName": "yagody",
-          "active": false,
           "children": [
             {
               "name": "Ягоды черемухи",
               "urlName": "yagody-tcheryomuhi",
-              "active": false,
               "description": "Lorem ipsum",
               "img": "/assets/images/cherjomuha.jpg",
               "photos": [],
@@ -86,7 +77,6 @@ export class ProductsService{
             {
               "name": "Ягоды бузины",
               "urlName": "yagody-buziny",
-              "active": false,
               "description": "Lorem ipsum",
               "img": "/assets/images/buzina.jpg",
               "photos": [],
@@ -94,7 +84,6 @@ export class ProductsService{
             {
               "name": "Ягоды можжевельника",
               "urlName": "yagody-mozhzhevelnika",
-              "active": false,
               "description": "Lorem ipsum",
               "img": "/assets/images/mozhzhevel.jpg",
               "photos": [],
@@ -107,12 +96,10 @@ export class ProductsService{
       "id": "2",
       "name": "Травы",
       "urlName": "travy",
-      "active": false,
       "children": [
         {
           "name": "Шалфей",
           "urlName": "chalfei",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/shalfej.jpg",
           "photos": [],
@@ -120,15 +107,13 @@ export class ProductsService{
         {
           "name": "Мята",
           "urlName": "mayata",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/mint.jpg",
           "photos": [],
         },
         {
           "name": "Душица",
-          "urlName": "duchica",
-          "active": false,
+          "urlName": "travy/duchica",
           "description": "Lorem ipsum",
           "img": "/assets/images/dushitsa.jpg",
           "photos": [],
@@ -136,7 +121,6 @@ export class ProductsService{
         {
           "name": "Мелисcа",
           "urlName": "melissa",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/melissa.jpg",
           "photos": [],
@@ -144,7 +128,6 @@ export class ProductsService{
         {
           "name": "Чистотел",
           "urlName": "tchistotel",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/chistotel.jpg",
           "photos": [],
@@ -152,7 +135,6 @@ export class ProductsService{
         {
           "name": "Лаванда",
           "urlName": "lavanda",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/lavanda.jpg",
           "photos": [],
@@ -160,7 +142,6 @@ export class ProductsService{
         {
           "name": "Зверобой",
           "urlName": "zveroboi",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/zveroboj.jpg",
           "photos": [],
@@ -168,7 +149,6 @@ export class ProductsService{
         {
           "name": "Полынь",
           "urlName": "polyn",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/polyn.jpg",
           "photos": [],
@@ -176,7 +156,6 @@ export class ProductsService{
         {
           "name": "Тысячелистник",
           "urlName": "tysiyatchelistnik",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/tysiachelistnik.jpg",
           "photos": [],
@@ -184,7 +163,6 @@ export class ProductsService{
         {
           "name": "Пижма",
           "urlName": "pigma",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/pizhma.jpg",
           "photos": [],
@@ -192,7 +170,6 @@ export class ProductsService{
         {
           "name": "Иван-Чай",
           "urlName": "ivan-tchai",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/ivan.jpg",
           "photos": [],
@@ -203,12 +180,10 @@ export class ProductsService{
       "id": "3",
       "name": "Стружка декоративная древесная",
       "urlName": "struzhka-dekorativnaya-drevesnaya",
-      "active": false,
       "children": [
         {
           "name": "Стружка липы",
           "urlName": "struzhka-lipy",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-lipa.jpg",
           "photos": [],
@@ -216,7 +191,6 @@ export class ProductsService{
         {
           "name": "Стружка осины",
           "urlName": "struzhka-osiny",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-osina.jpg",
           "photos": [],
@@ -224,7 +198,6 @@ export class ProductsService{
         {
           "name": "Стружка елки",
           "urlName": "struzhka-elki",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-elka.jpg",
           "photos": [],
@@ -232,7 +205,6 @@ export class ProductsService{
         {
           "name": "Стружка ольхи",
           "urlName": "struzhka-olhi",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-olha.jpg",
           "photos": [],
@@ -240,7 +212,6 @@ export class ProductsService{
         {
           "name": "Стружка сосны",
           "urlName": "struzhka-sosny",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/strugka-sosna.jpg",
           "photos": [],
@@ -251,12 +222,10 @@ export class ProductsService{
       "id": "4",
       "name": "Торцевые спилы дерева",
       "urlName": "torcevye-spily-dereva",
-      "active": false,
       "children": [
         {
           "name": "Спилы дуба",
           "urlName": "spily-duba",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-dub.jpg",
           "photos": [],
@@ -264,7 +233,6 @@ export class ProductsService{
         {
           "name": "Спилы ясеня",
           "urlName": "spily-yasenia",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-yasen.jpg",
           "photos": [],
@@ -272,7 +240,6 @@ export class ProductsService{
         {
           "name": "Спилы березы",
           "urlName": "spily-beriozy",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-bereza.jpg",
           "photos": [],
@@ -280,7 +247,6 @@ export class ProductsService{
         {
           "name": "Спилы акации",
           "urlName": "spily-akacii",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-akacia.jpg",
           "photos": [],
@@ -288,7 +254,6 @@ export class ProductsService{
         {
           "name": "Спилы вяза",
           "urlName": "spily-viaza",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/torc-viaz.jpg",
           "photos": [],
@@ -299,12 +264,10 @@ export class ProductsService{
       "id": "5",
       "name": "Мох",
       "urlName": "moh",
-      "active": false,
       "children": [
         {
           "name": "Сфагнум",
           "urlName": "sfagnum",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/sfagnum.jpg",
           "photos": [],
@@ -312,10 +275,9 @@ export class ProductsService{
         {
           "name": "Ягель",
           "urlName": "yagel",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/yagel.jpg",
-          "photos": [],
+          "photos": ['1'],
         }
       ]
     },
@@ -323,7 +285,6 @@ export class ProductsService{
       "id": "6",
       "name": "Чага",
       "urlName": "tchaga",
-      "active": false,
       "description": "Lorem ipsum",
       "img": "/assets/images/chaga.jpg",
       "photos": [],
@@ -332,20 +293,17 @@ export class ProductsService{
       "id": "7",
       "name": "Капы и сувели",
       "urlName": "kapy-i-suveli",
-      "active": false,
       "children": [
         {
           "name": "Капы",
           "urlName": "kapy",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/kapa.jpg",
-          "photos": [],
+          "photos": ['1'],
         },
         {
           "name": "Сувели",
           "urlName": "suveli",
-          "active": false,
           "description": "Lorem ipsum",
           "img": "/assets/images/suvel.jpg",
           "photos": [],
@@ -354,60 +312,48 @@ export class ProductsService{
     }
   ];
 
-  // activeEl: string = 'Плоды';
-  activeEl: string;
-  prevEl: string;
+  accumulator: Product[];
 
   constructor() {
-    // this.setActive(this.activeEl);
   }
 
-  public setInactivePrevious(newEl: string, prodArr: Product[] = this._products) {
-    console.log('new iteration');
-    if (newEl !== this.prevEl) {
-      this.activeEl = newEl;
-      this.setInactive(newEl);
-      this.prevEl = newEl;
-    }
+  ngOnInit(): void {
   }
 
-  public setActive(newEl: string, prodArr: Product[] = this._products) {
-    console.log('new iteration');
-    if (newEl !== this.prevEl) {
-      this.activeEl = newEl;
-      this.parseArr(newEl);
-      this.prevEl = newEl;
-    }
+  getAllElements(forUrl: string) {
+    return this.initProducts(this._products, forUrl);
   }
 
-  private parseArr(newEl: string, prodArr: Product[] = this._products) {
-    for (const item of prodArr) {
-      if (item.name === this.prevEl) {item.active = false}
-      if (item.name === newEl) {item.active = true}
+  initProducts(data: Product[], url = 'all') {
+    this.accumulator = [];
+    url === 'all' ? this.parsingProducts(data) : this.findUrlContent(data, url);
+    return this.accumulator;
+  }
+
+  findUrlContent(data: Product[], url: string) {
+    for (const item of data) {
       if (item.children) {
-        this.parseArr(newEl, item.children);
-        if (item.name === this.prevEl) {item.active = false}
-        if (item.name === newEl) {item.active = true}
-      }
-    }
-  }
-
-  public setInactive(prev: string = this.prevEl, prodArr: Product[] = this._products) {
-    for (const item of prodArr) {
-      if (prev === 'all') {item.active = false} else {
-        if (item.name === prev) {item.active = false; break}
-      }
-      if (item.children) {
-        this.setInactive(prev, item.children);
-        if (prev === 'all') {item.active = false} else {
-          if (item.name === prev) {item.active = false; break}
+        if (item.urlName === url) {
+          this.initProducts(item.children);
+          break;
+        }
+        this.findUrlContent(item.children, url);
+      } else {
+        if (item.urlName === url) {
+          this.accumulator.push(item);
+          break;
         }
       }
     }
   }
 
+  parsingProducts(data: Product[],) {
+    for (const item of data) {
+      item.children ? this.parsingProducts(item.children) : this.accumulator.push(item);
+    }
+  }
 
   get products() {
-    return this._products;
+    return [...this._products];
   }
 }

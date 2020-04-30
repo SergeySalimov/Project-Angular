@@ -1,17 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from "./main/home/home.component";
-import { CatalogComponent } from "./main/catalog/catalog.component";
-import { DeliveryComponent } from "./main/delivery/delivery.component";
-import { PaymentComponent } from "./main/payment/payment.component";
-import { ContactsComponent } from "./main/contacts/contacts.component";
-import { MessagesComponent } from "./main/messages/messages.component";
-import { FormComponent } from "./main/form/form.component";
+
+import { CatalogProductsComponent } from "./main/catalog/catalog-products/catalog-products.component";
+import { CatalogSingleProductComponent } from './main/catalog/catalog-products/catalog-single-product/catalog-single-product.component';
+import { CatalogComponent, ContactsComponent, DeliveryComponent, FormComponent, HomeComponent, MessagesComponent, PaymentComponent } from "./main";
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'catalog', component: CatalogComponent},
+  {
+    path: 'catalog',
+    component: CatalogComponent,
+    children: [
+      {
+        path: ':urlName',
+        component: CatalogProductsComponent,
+      },
+    ]
+
+  },
   {path: 'delivery', component: DeliveryComponent},
   {path: 'payment', component: PaymentComponent},
   {path: 'contacts', component: ContactsComponent},
@@ -23,4 +30,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

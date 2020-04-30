@@ -28,6 +28,8 @@
 
 button {
   font-size: 1.2rem;
+  margin-top: 4px;
+  margin-bottom: 4px;
   background-color: $backGrey;
 }
 button.active {
@@ -43,7 +45,7 @@ mat-tree {
   padding-right: 6px;
   padding-bottom: 6px;
   button {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   button.active {
     background-color: #0088cc;

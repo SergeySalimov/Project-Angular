@@ -1,9 +1,10 @@
 <div class="btn-group btn-block mb-1">
-  <button class="btn text-center text-sm-left active"
-          (click)="onClickAll()"
-          #allCatalog
+  <button class="btn text-center text-sm-left"
+          [routerLink]="'all'"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}"
           mat-raised-button>Весь каталог</button>
-  <button class="btn text-center" mat-raised-button><i class="icon-angle-double-left"></i></button>
+  <button class="btn text-center" mat-raised-button (click)="catalogNavigation.hide()"><i class="icon-angle-double-left"></i></button>
 </div>
 
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
@@ -12,9 +13,11 @@
     <!-- use a disabled button to provide padding for tree leaf -->
     <button mat-icon-button disabled></button>
     <button class="btn btn-block text-center text-sm-left"
-            (click)="onClick(node, node.name)"
-            [ngClass]="{active: node.active}"
-            mat-raised-button>{{node.name}}</button>
+            [routerLink]="[node.urlName]"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}"
+            mat-raised-button
+    >{{node.name}}</button>
   </mat-tree-node>
   <!-- This is the tree node template for expandable nodes -->
   <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
@@ -25,9 +28,11 @@
       </mat-icon>
     </button>
     <button class="btn btn-block text-center text-sm-left"
-            (click)="onClick(node, node.name)"
-            [ngClass]="{active: node.active}"
-            mat-raised-button>{{node.name}}</button>
+            [routerLink]="[node.urlName]"
+            [routerLinkActive]="'active'"
+            [routerLinkActiveOptions]="{exact: true}"
+            mat-raised-button
+    >{{node.name}}</button>
   </mat-tree-node>
 </mat-tree>
 

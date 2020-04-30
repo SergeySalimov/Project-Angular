@@ -20,10 +20,14 @@ import { FormComponent } from './main/form/form.component';
 import { RegistrationComponent } from './main/form/registration/registration.component';
 import { AuthenticationComponent } from './main/form/authentication/authentication.component';
 import { FormToogleButtonsComponent } from './main/form/form-toogle-buttons/form-toogle-buttons.component';
-import { SetHeightDirective } from './shared/setHeight/set-height.directive';
+import { SetHeightDirective } from './shared/directives/setHeight/set-height.directive';
 import { CatalogNavigationComponent } from './main/catalog/catalog-navigation/catalog-navigation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule} from "./shared/material/material-module";
+import { CatalogProductsComponent } from './main/catalog/catalog-products/catalog-products.component';
+import { CatalogSingleProductComponent } from './main/catalog/catalog-products/catalog-single-product/catalog-single-product.component';
+import { CatalogCardDeskComponent } from './main/catalog/catalog-products/catalog-card-desk/catalog-card-desk.component';
+import { DotPipe } from './shared/pipes/dot.pipe';
 
 @NgModule({
   declarations: [
@@ -47,6 +51,10 @@ import { MaterialModule} from "./shared/material/material-module";
     FormToogleButtonsComponent,
     SetHeightDirective,
     CatalogNavigationComponent,
+    CatalogProductsComponent,
+    CatalogSingleProductComponent,
+    CatalogCardDeskComponent,
+    DotPipe,
   ],
   imports: [
     BrowserModule,

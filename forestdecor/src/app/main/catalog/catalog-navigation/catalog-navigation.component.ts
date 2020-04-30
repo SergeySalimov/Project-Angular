@@ -1,8 +1,10 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FlatTreeControl } from "@angular/cdk/tree";
 import { MatTreeFlatDataSource, MatTreeFlattener } from "@angular/material/tree";
 import { ProductsService } from "../../../shared/services/products/products.service";
 import { Product } from "../../../shared/models/product.model";
+import { CatalogNavigationService } from "../../../shared/services/catalogNavigation/catalog-navigation.service";
+
 
 /** Flat node with expandable and level information */
 interface FlatNode {
@@ -17,55 +19,24 @@ interface FlatNode {
   styleUrls: ['./catalog-navigation.component.scss']
 })
 
-export class CatalogNavigationComponent implements OnInit, OnChanges {
 
-  private prevLink: {
-    expandable?: boolean,
-    name: string,
-    level?: number,
-    active?: boolean,
-  };
+export class CatalogNavigationComponent implements OnInit {
 
+  @Output() hideNav: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(public productsService: ProductsService) {
+  constructor( private productsService: ProductsService,
+               public catalogNavigation: CatalogNavigationService) {
     this.dataSource.data = productsService.products;
-    console.log(this.dataSource.data);
   }
 
-  ngOnInit(): void {
-    // works only for all
-    this.prevLink = { name: 'all' };
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-  }
-
-  onClickAll() {
-    if (this.prevLink.name !== 'all') {
-      this.prevLink.active = false;
-      this.prevLink = {name: 'all'};
-    }
-  }
-
-  onClick(el: any, name: string) {
-    console.dir(el);
-    if (!el.active) {
-      if (this.prevLink.name !== 'all') this.prevLink.active = false;
-      el.active = true;
-      this.prevLink = el;
-      this.productsService.setActive(name);
-      console.log(this.productsService.products);
-      // this.productsService.setActive(name);
-    }
-  }
+  ngOnInit(): void {}
 
   private _transformer = (node: Product, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
       level: level,
-      active: node.active,
+      urlName: node.urlName,
     };
   };
 
