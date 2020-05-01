@@ -11,7 +11,7 @@ export class NavigationLinkComponent implements OnInit {
 
   @Output() needToCollapse: EventEmitter<void> = new EventEmitter<void>();
 
-  private navigationLinks: NavigationLink[];
+  public navigationLinks: NavigationLink[];
 
   constructor( private navigationService: NavigationService ) { }
 
