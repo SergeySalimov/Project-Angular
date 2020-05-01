@@ -23,7 +23,6 @@ const routes: Routes = [
         component: CatalogProductsComponent,
       },
     ]
-
   },
   {path: 'delivery', component: DeliveryComponent},
   {path: 'payment', component: PaymentComponent},

@@ -1,9 +1,6 @@
 import { Component, Output, OnInit, EventEmitter } from '@angular/core';
-
-interface NavigationLink {
-  name: string;
-  routerLink: string;
-}
+import { NavigationService } from '../../shared/services/navigation/navigation.service';
+import { NavigationLink } from '../../shared/models/navigationLink';
 
 @Component({
   selector: 'app-navigation-link',
@@ -14,16 +11,13 @@ export class NavigationLinkComponent implements OnInit {
 
   @Output() needToCollapse: EventEmitter<void> = new EventEmitter<void>();
 
-  public navigationLinks: NavigationLink[] = [
-    { name: 'Каталог', routerLink: '/catalog/all'},
-    { name: 'Сообщения', routerLink: '/messages'},
-    { name: 'Доставка', routerLink: '/delivery'},
-    { name: 'Оплата', routerLink: '/payment'},
-    { name: 'Контакты', routerLink: '/contacts'},
-  ];
+  private navigationLinks: NavigationLink[];
 
-  constructor() { }
+  constructor( private navigationService: NavigationService ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.navigationLinks = this.navigationService.navigationLinks;
+    this.navigationLinks.pop();
+  }
 
 }
