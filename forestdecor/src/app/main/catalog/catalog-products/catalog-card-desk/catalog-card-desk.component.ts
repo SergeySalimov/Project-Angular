@@ -19,8 +19,4 @@ export class CatalogCardDeskComponent implements OnInit {
     console.log(prodPhoto);
   }
 
-  onCardClick(url: string) {
-    console.log(url);
-  }
-
 }

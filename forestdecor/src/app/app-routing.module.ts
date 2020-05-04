@@ -14,6 +14,7 @@ import {
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'catalog', redirectTo: '/catalog/all', pathMatch: 'full'},
   {
     path: 'catalog',
     component: CatalogComponent,

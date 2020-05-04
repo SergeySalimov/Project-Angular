@@ -7,7 +7,7 @@ import { NavigationLink } from '../../models/navigationLink';
 export class NavigationService {
 
   private _navigationLinks: NavigationLink[] = [
-    { name: 'Каталог', routerLink: '/catalog/all'},
+    { name: 'Каталог', routerLink: '/catalog'},
     { name: 'Сообщения', routerLink: '/messages'},
     { name: 'Доставка', routerLink: '/delivery'},
     { name: 'Оплата', routerLink: '/payment'},

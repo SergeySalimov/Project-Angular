@@ -37,7 +37,7 @@ export class BreadcrumbComponent implements OnInit {
         this.breadcrumb.splice(1);
         // create second element
         if (urlArr[1]) {
-          this.breadcrumb.push(this.navLinks.filter((item) => item.routerLink.split('/')[1] === urlArr[1])[0]);
+          this.breadcrumb.push(this.navLinks.filter(item => item.routerLink.split('/')[1] === urlArr[1])[0]);
           // create the rest
           if (urlArr[2]) {
             const curPrd: ProductPlacer = this.productsService.getProductUrlInfo(urlArr[2]);
