@@ -17,7 +17,6 @@ export class NavigationLinkComponent implements OnInit {
 
   ngOnInit(): void {
     this.navigationLinks = this.navigationService.navigationLinks;
-    this.navigationLinks.pop();
   }
 
 }

@@ -324,7 +324,7 @@ export class ProductsService {
   }
 
   getProductUrlInfo(url): ProductPlacer {
-    return this.productsPlacer.filter((item) => item.urlName === url)[0];
+    return this.productsPlacer.filter(item => item.urlName === url)[0];
   }
 
   createUrlsInformation(data: Product[] = this._products, parents: string[] = []): void {

@@ -13,9 +13,7 @@ import { ProductPlacer } from '../shared/models/productsPlacer';
 })
 export class BreadcrumbComponent implements OnInit {
 
-  breadcrumb: NavigationLink[] = [
-    { name: 'Главная', routerLink: '/'}
-  ];
+  breadcrumbTree: NavigationLink[];
 
   navLinks: NavigationLink[];
 
@@ -26,25 +24,26 @@ export class BreadcrumbComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.navLinks = this.navigation.navigationLinks;
+    this.navLinks = this.navigation.allLinks;
     this.router.events.pipe(
       filter( event => event instanceof NavigationEnd),
-      map( event => (event as NavigationEnd).url),
+      map( event => (event as NavigationEnd).urlAfterRedirects),
       distinctUntilChanged(),
       map ( strUrl => strUrl.split('/'))
     )
       .subscribe((urlArr: string[]) => {
-        this.breadcrumb.splice(1);
+        // first element
+        this.breadcrumbTree = this.navigation.mainPage;
         // create second element
         if (urlArr[1]) {
-          this.breadcrumb.push(this.navLinks.filter(item => item.routerLink.split('/')[1] === urlArr[1])[0]);
+          this.breadcrumbTree.push(this.navLinks.filter(item => item.routerLink.split('/')[1] === urlArr[1])[0]);
           // create the rest
           if (urlArr[2]) {
             const curPrd: ProductPlacer = this.productsService.getProductUrlInfo(urlArr[2]);
             if (curPrd.parents.length > 0) {
-              curPrd.parents.forEach(url => this.breadcrumb.push(this.doBreadCrumb(url, urlArr[1])));
+              curPrd.parents.forEach(url => this.breadcrumbTree.push(this.doBreadCrumb(url, urlArr[1])));
             }
-            this.breadcrumb.push({ name: curPrd.name, routerLink: `${urlArr[1]}/${curPrd.urlName}` });
+            this.breadcrumbTree.push({ name: curPrd.name, routerLink: `${urlArr[1]}/${curPrd.urlName}` });
           }
         }
     })

@@ -26,6 +26,7 @@ import {
   DeliveryComponent,
   FormComponent,
   HomeComponent,
+  ErrorPageComponent,
   MainComponent,
   MessagesComponent,
   PaymentComponent
@@ -57,6 +58,7 @@ import {
     CatalogSingleProductComponent,
     CatalogCardDeskComponent,
     DotPipe,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,

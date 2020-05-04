@@ -5,6 +5,7 @@ import {
   CatalogProductsComponent,
   ContactsComponent,
   DeliveryComponent,
+  ErrorPageComponent,
   FormComponent,
   HomeComponent,
   MessagesComponent,
@@ -30,6 +31,8 @@ const routes: Routes = [
   {path: 'contacts', component: ContactsComponent},
   {path: 'messages', component: MessagesComponent},
   {path: 'form', component: FormComponent},
+  {path: '404', component: ErrorPageComponent},
+  {path: '**', redirectTo: '404'},
 ];
 
 @NgModule({

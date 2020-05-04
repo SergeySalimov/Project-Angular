@@ -13,11 +13,23 @@ export class NavigationService {
     { name: 'Оплата', routerLink: '/payment'},
     { name: 'Контакты', routerLink: '/contacts'},
     { name: 'Регистрация', routerLink: '/form'},
+    { name: 'Главная', routerLink: '/'},
+    { name: 'Указанная страница не найдена', routerLink: '/404'},
   ];
 
   constructor() { }
 
-  get navigationLinks() {
+  get navigationLinks(): NavigationLink[] {
+    const navLinks: NavigationLink[] = this.allLinks;
+    navLinks.splice(5);
+    return navLinks;
+  }
+
+  get allLinks(): NavigationLink[] {
     return [...this._navigationLinks];
+  }
+
+  get mainPage(): NavigationLink[] {
+    return this._navigationLinks.filter(item => item.routerLink === '/');
   }
 }
