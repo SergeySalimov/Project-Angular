@@ -1,3 +1,32 @@
 <div class="row">
-  <p class="ml-5">SINGLE CARD</p>
+  <div class="col-12">
+    <div class="card mt-1 mb-3">
+      <div class="card-header h3 pl-5 pl-md-3" [ngClass]="{'pl-md-5': !catalogNavigation.status}">{{curProduct.name}}</div>
+      <div class="card-body row">
+
+        <div class="col-sm-12 col-lg-5">
+          <h5 class="card-title" [ngClass]="{'pl-5': !catalogNavigation.status}">
+            <button mat-button
+                    class="mx-auto"
+                    [disabled]="!curProduct.photos.length"
+                    (click)="needPhotos(curProduct.photos); $event.stopPropagation()">
+              <span *ngIf="!!curProduct.photos.length; else noPhoto"><i class="icon-camera mr-1"></i>Посмотреть</span>
+              <ng-template #noPhoto>Нет фотографий</ng-template>
+            </button>
+          </h5>
+          <img src="{{curProduct.img}}" class="img-fluid" alt="{{curProduct.name}}">
+        </div>
+
+        <div class="col-sm-12 col-lg-7">
+          <p class="card-text pl-md-2 mt-2" [ngClass]="{'pl-4': !catalogNavigation.status}">
+            {{curProduct.description}}
+          </p>
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-link" (click)="goBack(curProduct.urlName)">Назад</button>
+      </div>
+    </div>
+  </div>
 </div>

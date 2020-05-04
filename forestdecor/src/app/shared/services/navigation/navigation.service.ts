@@ -20,9 +20,7 @@ export class NavigationService {
   constructor() { }
 
   get navigationLinks(): NavigationLink[] {
-    const navLinks: NavigationLink[] = this.allLinks;
-    navLinks.splice(5);
-    return navLinks;
+    return this.allLinks.slice(0,5);
   }
 
   get allLinks(): NavigationLink[] {
@@ -30,6 +28,6 @@ export class NavigationService {
   }
 
   get mainPage(): NavigationLink[] {
-    return this._navigationLinks.filter(item => item.routerLink === '/');
+    return this.allLinks.filter(item => item.routerLink === '/');
   }
 }

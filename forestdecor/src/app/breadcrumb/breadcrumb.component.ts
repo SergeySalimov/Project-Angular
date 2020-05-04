@@ -28,8 +28,8 @@ export class BreadcrumbComponent implements OnInit {
     this.router.events.pipe(
       filter( event => event instanceof NavigationEnd),
       map( event => (event as NavigationEnd).urlAfterRedirects),
+      map ( strUrl => strUrl.split('/')),
       distinctUntilChanged(),
-      map ( strUrl => strUrl.split('/'))
     )
       .subscribe((urlArr: string[]) => {
         // first element
