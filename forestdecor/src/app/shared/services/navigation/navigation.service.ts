@@ -12,7 +12,7 @@ export class NavigationService {
     { name: 'Доставка', routerLink: '/delivery'},
     { name: 'Оплата', routerLink: '/payment'},
     { name: 'Контакты', routerLink: '/contacts'},
-    { name: 'Регистрация', routerLink: '/form'},
+    { name: 'Регистрация', routerLink: '/registration'},
     { name: 'Главная', routerLink: '/'},
     { name: 'Указанная страница не найдена', routerLink: '/404'},
   ];
@@ -30,4 +30,10 @@ export class NavigationService {
   get mainPage(): NavigationLink[] {
     return this.allLinks.filter(item => item.routerLink === '/');
   }
+
+  get registration(): NavigationLink[] {
+    return this.allLinks.filter(item => item.routerLink === '/registration');
+  }
+
+
 }

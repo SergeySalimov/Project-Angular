@@ -30,7 +30,7 @@ const routes: Routes = [
   {path: 'payment', component: PaymentComponent},
   {path: 'contacts', component: ContactsComponent},
   {path: 'messages', component: MessagesComponent},
-  {path: 'form', component: FormComponent},
+  {path: 'registration', component: FormComponent},
   {path: '404', component: ErrorPageComponent},
   {path: '**', redirectTo: '404'},
 ];

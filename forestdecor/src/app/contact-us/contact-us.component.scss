@@ -1,0 +1,8 @@
+@import "custom.variables";
+
+form {
+  background-color: $mainFontColor;
+  border: solid 1px $alterFontColor;
+  border-radius: 15px;
+  box-shadow: 0 0 3px $alterFontColor;
+}

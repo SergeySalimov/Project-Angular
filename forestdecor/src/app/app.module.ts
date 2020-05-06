@@ -1,11 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { HeaderComponent } from './header/header.component';
-import { NavigationElementComponent } from './navigation/navigation-element/navigation-element.component';
 import { NavigationLinkComponent } from './navigation/navigation-link/navigation-link.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FooterComponent } from './footer/footer.component';
@@ -31,13 +30,15 @@ import {
   MessagesComponent,
   PaymentComponent
 } from './main';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { BtnCloseComponent } from './shared/components/btn-close/btn-close.component';
+import { PhoneBYPipe } from './shared/pipes/phone-by.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     HeaderComponent,
-    NavigationElementComponent,
     NavigationLinkComponent,
     BreadcrumbComponent,
     FooterComponent,
@@ -59,12 +60,18 @@ import {
     CatalogCardDeskComponent,
     DotPipe,
     ErrorPageComponent,
+    ContactUsComponent,
+    BtnCloseComponent,
+    BtnCloseComponent,
+    PhoneBYPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,64 @@
+<ng-container *ngIf="curRoute !== 'registration' && curRoute !=='catalog'">
+  <div class="container my-4">
+    <div class="row">
+      <div class="col-sm-12 offset-md-2 col-md-8">
+
+        <form class="p-4" autocomplete="off">
+          <div class="text-center mb-3 h4 col-12">Форма обратной связи</div>
+
+          <div class="form-row">
+            <mat-form-field hintLabel="Мин 2 символа" appearance="fill" class="form-group col-sm-12">
+              <mat-label>Представьтесь пожалуйста</mat-label>
+              <input matInput
+                     #name
+                     minlength="2"
+                     maxlength="100"
+                     placeholder="Имя (Фамилия)">
+              <mat-hint align="end">{{name.value?.length || 0}}/100</mat-hint>
+              <app-btn-close matSuffix *ngIf="name.value.length > 0"></app-btn-close>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <div class="text-center my-1 h6 col-sm-12 mb-2">Введите email и(или) телефон</div>
+            <mat-form-field appearance="fill" class="form-group col-sm-12 col-md-6">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="pat@example.com" [formControl]="email">
+              <app-btn-close matSuffix *ngIf="email.value.length > 0"></app-btn-close>
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="form-group col-sm-12 col-md-6">
+              <mat-label>Телефон</mat-label>
+              <span matPrefix>+375 &nbsp;</span>
+              <input matInput
+                     [ngModel]="phoneNumber | phoneBY"
+                     (ngModelChange)="onChangePhone($event)"
+                     [ngModelOptions]="{standalone: true}"
+                     type="tel"
+                     #phone
+                     placeholder="(33) 555-55-33"
+                     maxlength="14">
+              <mat-hint align="start">+375 33 5555533</mat-hint>
+              <app-btn-close matSuffix *ngIf="phone.value.length > 0"></app-btn-close>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="fill" class="example-full-width form-group col-sm-12">
+              <mat-label>Оставьте свое сообщение</mat-label>
+              <textarea matInput #message minlength="10" maxlength="2048" rows="4"></textarea>
+              <mat-hint align="start">Не менее 10 символов</mat-hint>
+              <mat-hint align="end">{{message.value.length}} / 2048</mat-hint>
+              <app-btn-close matSuffix *ngIf="message.value.length > 0"></app-btn-close>
+            </mat-form-field>
+          </div>
+
+          <button type="submit" mat-raised-button class="h5">Отправить</button>
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>
