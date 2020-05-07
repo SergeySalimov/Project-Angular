@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -11,7 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { RegistrationComponent } from './main/form/registration/registration.component';
 import { AuthenticationComponent } from './main/form/authentication/authentication.component';
 import { FormToogleButtonsComponent } from './main/form/form-toogle-buttons/form-toogle-buttons.component';
-import { SetHeightDirective } from './shared/directives/setHeight/set-height.directive';
+import { SetHeightDirective } from './shared/directives/set-height/set-height.directive';
 import { CatalogNavigationComponent } from './main/catalog/catalog-navigation/catalog-navigation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule} from './shared/material/material-module';
