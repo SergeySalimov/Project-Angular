@@ -1,9 +1,9 @@
 .card {
   .card-body {
     .card-text {
-      text-indent: 1.5rem;
+      text-indent: 1rem;
       text-align: justify;
-
+      white-space: pre-wrap;
     }
   }
 }
