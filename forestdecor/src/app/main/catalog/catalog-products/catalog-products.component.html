@@ -1,8 +1,20 @@
-<app-catalog-single-product [curProduct]="curProducts.content[0]"
-                            *ngIf="curProducts.content.length === 1">
+<app-catalog-single-product [curProduct]="curProducts?.content[0]"
+                            *ngIf="curProducts?.content.length === 1">
 </app-catalog-single-product>
 
-<app-catalog-card-desk [curProductData]="curProducts.content"
-                       *ngIf="curProducts.content.length > 1">
+<app-catalog-card-desk [curProductData]="curProducts?.content"
+                       *ngIf="curProducts?.content.length > 1">
 </app-catalog-card-desk>
 
+<ng-container *ngIf="!curProducts">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 no-prd">
+        <div class="alert alert-danger h4 text-center" role="alert">
+          Такой продукт не найден
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<!--style="height: 100%"-->

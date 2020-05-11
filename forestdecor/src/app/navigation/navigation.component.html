@@ -23,6 +23,7 @@
     <a class="navbar-brand btn-nav-registration"
        *ngIf="!authService.isLogged"
        routerLink="/{{registration.routerLink}}"
+       [routerLinkActiveOptions]="{exact: true}"
        [routerLinkActive]="'active'"
     >
       <i class="icon-login" style="font-size: 2rem"></i>

@@ -20,10 +20,7 @@ const routes: Routes = [
     path: 'catalog',
     component: CatalogComponent,
     children: [
-      {
-        path: ':urlName',
-        component: CatalogProductsComponent,
-      },
+      { path: ':urlName', component: CatalogProductsComponent, },
     ]
   },
   {path: 'delivery', component: DeliveryComponent},
