@@ -46,15 +46,16 @@
 
     <input type="tel"
            class="form-control col-3 text-center"
-           id="registrPhonePre"
+           disabled
            value="+375"
-           placeholder="prefix"
-           aria-describedby="registrPhoneHelpBlock">
+           placeholder="prefix">
     <input type="tel"
            class="form-control col-9"
            id="registrPhone"
-           placeholder="Мобильный телефон"
-           aria-describedby="registrPhoneHelpBlock">
+           [ngModel]="phoneNumber | phoneBY"
+           (ngModelChange)="onChangePhone($event)"
+           [ngModelOptions]="{standalone: true}"
+           placeholder="Мобильный телефон">
   </div>
 
 

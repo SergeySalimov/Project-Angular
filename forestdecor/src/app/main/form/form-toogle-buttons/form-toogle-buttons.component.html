@@ -1,14 +1,14 @@
 <div class="row">
 
   <button type="button"
-          (click)="isRegistration = false; emitClick(isRegistration)"
-          [ngClass]="{'active': !isRegistration}"
+          [routerLink]="['/form', 'authorization']"
+          routerLinkActive="active"
           class="btn btn-block btn-sm btn-outline-primary col-6">
     Авторизация
   </button>
   <button type="button"
-          (click)="isRegistration = true; emitClick(isRegistration)"
-          [ngClass]="{'active': isRegistration}"
+          [routerLink]="['/form', 'registration']"
+          routerLinkActive="active"
           class="btn btn-sm btn-outline-success col-6">
     Регистрация
   </button>

@@ -1,6 +1,6 @@
-<h3 class="card-title text-center">Авторизация</h3>
+<h3 class="card-title text-center">{{isRecovery ? 'Восстановление пароля' : 'Авторизация'}}</h3>
 
-<form class="autorization-form" #authForm>
+<form (ngSubmit)="onAuthSubmit(authForm)" #authForm="ngForm">
 
   <label class="sr-only" for="authorEmail">Email</label>
   <small id="authorEmailHelpBlock" class="form-text text-muted">
@@ -11,6 +11,9 @@
       <div class="input-group-text"><i class="icon-at"></i></div>
     </div>
     <input type="email"
+           ngModel
+           email
+           name="authEmail"
            class="form-control"
            id="authorEmail"
            placeholder="Email"
@@ -23,6 +26,8 @@
     Введите пароль (минимум 6 символов)
   </small>
   <input type="password"
+         ngModel
+         name="authPsw"
          class="form-control mb-2"
          id="authorPswd"
          placeholder="Пароль"
@@ -37,26 +42,23 @@
            type="checkbox"
            (click)="onClickRecovery()"
            id="recovery-pswd">
-    <label class="custom-control-label" for="recovery-pswd">
+    <label class="custom-control-label small" for="recovery-pswd">
       Вспомнить пароль
     </label>
   </div>
   <hr/>
 
-  <div class="place-for-alert-auth"></div>
+<!--  <div class="place-for-alert-auth"></div>-->
 
   <button type="submit"
-          class="btn btn-danger mt-3"
-          (click)="authService.login()"
-  >
-    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+          [disabled]="authForm.invalid"
+          [ngClass]="{ 'btn-danger': authForm.invalid,
+                       'btn-success': !authForm.invalid }"
+          class="btn mt-3">
+<!--    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>-->
     Отправить данные
   </button>
 
-  <button type="button"
-          class="btn btn-primary mt-3 ml-2"
-          id="clear-author-btn">
-    Очистить данные
-  </button>
+  <button type="button" class="btn btn-primary mt-3 ml-2" (click)="authForm.resetForm()"> Очистить данные </button>
 
 </form>

@@ -21,7 +21,7 @@ export class NavigationComponent implements OnInit {
               private navigation: NavigationService) { }
 
   ngOnInit(): void {
-    this.registration = this.navigation.registration[0];
+    this.registration = this.navigation.logLinks[1];
   }
 
 }

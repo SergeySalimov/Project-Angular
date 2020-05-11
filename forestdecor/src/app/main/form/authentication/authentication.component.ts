@@ -1,5 +1,8 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth/auth.service';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-authentication',
@@ -9,23 +12,39 @@ import { AuthService } from '../../../shared/services/auth/auth.service';
 export class AuthenticationComponent implements OnInit {
 
   @ViewChild('recovery', {static: true}) recovery: ElementRef;
-  // @ViewChild('authForm', {static: true}) authForm: ElementRef;
-  isRecovery = false;
+  @ViewChild('authForm', {static: true}) authForm: NgForm;
 
-  // @HostListener('click', ['$event']) onFormSubmit(event: MouseEvent): void {
-  // console.dir((event.target as HTMLElement).innerText);
-  // console.log('in');
-  // }
+  isRecovery: boolean;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, route: ActivatedRoute, private router: Router) {
+    const children: ActivatedRouteSnapshot = route.snapshot.firstChild;
+    this.isRecovery = (!!children);
+  }
 
   ngOnInit(): void {
     this.recovery.nativeElement.checked = this.isRecovery;
+
+    this.router.events.pipe(
+      filter( event => event instanceof NavigationEnd),
+      map( event => (event as NavigationEnd).urlAfterRedirects),
+      map ( strUrl => strUrl.split('/')),
+      map(urlArr => (urlArr.length === 4)),
+      distinctUntilChanged(),
+    )
+      .subscribe( recoveryState => {
+        this.isRecovery = recoveryState;
+        this.recovery.nativeElement.checked = this.isRecovery;
+      })
   }
 
   onClickRecovery() {
-    // this.isRecovery = event.toElement.checked;
+    this.isRecovery ? this.router.navigate(['/form', 'authorization']) :
+      this.router.navigate(['/form', 'authorization', 'recovery']);
     this.isRecovery = this.recovery.nativeElement.checked;
+  }
+
+  onAuthSubmit(form: NgForm) {
+    console.log(form.value);
   }
 
 }

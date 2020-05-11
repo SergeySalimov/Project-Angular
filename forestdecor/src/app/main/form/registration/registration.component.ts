@@ -7,9 +7,15 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
+  phoneNumber = '';
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onChangePhone(event): void {
+    this.phoneNumber = event;
   }
 
 }
