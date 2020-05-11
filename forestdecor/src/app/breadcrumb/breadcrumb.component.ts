@@ -37,26 +37,31 @@ export class BreadcrumbComponent implements OnInit {
         // create second element
         if (urlArr[1]) {
           this.breadcrumbTree.push(this.navLinks.filter(item => item.routerLink.split('/')[1] === urlArr[1])[0]);
-          // create the rest
+          // create the rest forms or catalog of products
           if (urlArr[2]) {
-            //if loggin
-            if (urlArr[1] === 'form') {
-
-            } else {
-              //if catalog of products
-              const curPrd: ProductPlacer = this.productsService.getProductUrlInfo(urlArr[2]);
-              if (curPrd) {
-                if (curPrd.parents.length > 0) {
-                  curPrd.parents.forEach(url => this.breadcrumbTree.push(this.doBreadCrumb(url, urlArr[1])));
-                }
-                this.breadcrumbTree.push({name: curPrd.name, routerLink: `${urlArr[1]}/${curPrd.urlName}`});
-              } else {
-                this.breadcrumbTree.push({name: 'Такой продукт не найден', routerLink: `404`});
-              }
-            }
+            (urlArr[1] === 'form') ? this.doBreadcrumbForForm(urlArr) : this.doBreadcrumbForProducts(urlArr);
           }
         }
     })
+  }
+
+  doBreadcrumbForProducts(urlArr: string[]): void {
+    const curPrd: ProductPlacer = this.productsService.getProductUrlInfo(urlArr[2]);
+    if (curPrd) {
+      if (curPrd.parents.length > 0) {
+        curPrd.parents.forEach(url => this.breadcrumbTree.push(this.doBreadCrumb(url, urlArr[1])));
+      }
+      this.breadcrumbTree.push({name: curPrd.name, routerLink: `${urlArr[1]}/${curPrd.urlName}`});
+    } else {
+      this.breadcrumbTree.push({name: 'Такой продукт не найден', routerLink: `404`});
+    }
+  }
+
+  doBreadcrumbForForm(urlArr: string[]): void {
+    const elem: NavigationLink = this.navigation.logLinks.filter(item => item.routerLink.split('/')[2] === urlArr[2])[0];
+    this.breadcrumbTree.push(elem);
+    // recovery state added if exists in router
+    if (!!urlArr[3]) this.breadcrumbTree.push(this.navigation.recovery);
   }
 
   doBreadCrumb(url: string, parentUrl: string): NavigationLink {
