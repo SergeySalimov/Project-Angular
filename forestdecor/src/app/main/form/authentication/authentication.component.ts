@@ -1,22 +1,23 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from '../../../shared/services/auth/auth.service';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
   styleUrls: ['./authentication.component.scss']
 })
-export class AuthenticationComponent implements OnInit {
+export class AuthenticationComponent implements OnInit, OnDestroy {
 
   @ViewChild('recovery', {static: true}) recovery: ElementRef;
   @ViewChild('authForm', {static: true}) authForm: NgForm;
 
   isRecovery: boolean;
+  subscription: Subscription;
 
-  constructor(public authService: AuthService, route: ActivatedRoute, private router: Router) {
+  constructor( route: ActivatedRoute, private router: Router) {
     const children: ActivatedRouteSnapshot = route.snapshot.firstChild;
     this.isRecovery = (!!children);
   }
@@ -24,7 +25,7 @@ export class AuthenticationComponent implements OnInit {
   ngOnInit(): void {
     this.recovery.nativeElement.checked = this.isRecovery;
 
-    this.router.events.pipe(
+    this.subscription = this.router.events.pipe(
       filter( event => event instanceof NavigationEnd),
       map( event => (event as NavigationEnd).urlAfterRedirects),
       map ( strUrl => strUrl.split('/')),
@@ -38,13 +39,19 @@ export class AuthenticationComponent implements OnInit {
   }
 
   onClickRecovery() {
+    this.authForm.control.controls.authPsw.reset('');
     this.isRecovery ? this.router.navigate(['/form', 'authorization']) :
       this.router.navigate(['/form', 'authorization', 'recovery']);
     this.isRecovery = this.recovery.nativeElement.checked;
   }
 
   onAuthSubmit(form: NgForm) {
+    console.log(form);
     console.log(form.value);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
   }
 
 }
