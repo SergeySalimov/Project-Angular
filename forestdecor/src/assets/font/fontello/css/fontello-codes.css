@@ -30,6 +30,10 @@
 .icon-cancel-circled:before { content: '\e81c'; } /* '' */
 .icon-cancel:before { content: '\e81d'; } /* '' */
 .icon-cancel-squared:before { content: '\e81e'; } /* '' */
+.icon-eye-off:before { content: '\e81f'; } /* '' */
+.icon-lock:before { content: '\e820'; } /* '' */
+.icon-lock-open:before { content: '\e821'; } /* '' */
+.icon-key:before { content: '\e822'; } /* '' */
 .icon-spin1:before { content: '\e830'; } /* '' */
 .icon-spin4:before { content: '\e834'; } /* '' */
 .icon-spin5:before { content: '\e838'; } /* '' */
@@ -47,6 +51,7 @@
 .icon-spinner:before { content: '\f110'; } /* '' */
 .icon-attention-alt:before { content: '\f12a'; } /* '' */
 .icon-anchor:before { content: '\f13d'; } /* '' */
+.icon-lock-open-alt:before { content: '\f13e'; } /* '' */
 .icon-instagram:before { content: '\f16d'; } /* '' */
 .icon-skype:before { content: '\f17e'; } /* '' */
 .icon-vkontakte:before { content: '\f189'; } /* '' */

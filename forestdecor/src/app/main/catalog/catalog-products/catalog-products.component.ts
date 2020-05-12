@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from "@angular/router";
-import { ProductsService } from "../../../shared/services/products/products.service";
-import { Product } from "../../../shared/models/product.model";
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ProductsService } from '../../../shared/services/products/products.service';
+import { ProductPlacer } from '../../../shared/models/productsPlacer';
 
 @Component({
   selector: 'app-catalog-products',
@@ -10,7 +10,7 @@ import { Product } from "../../../shared/models/product.model";
 })
 export class CatalogProductsComponent implements OnInit {
 
-  curProducts: Product[];
+  curProducts: ProductPlacer;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -21,9 +21,7 @@ export class CatalogProductsComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap
       .subscribe((paramMap: ParamMap) => {
-        this.curProducts = this.productsService.getAllElements(paramMap.get('urlName'));
-        console.log(this.curProducts);
-        // console.log(this.router.url);
+        this.curProducts = this.productsService.getProductUrlInfo(paramMap.get('urlName'));
       });
   }
 

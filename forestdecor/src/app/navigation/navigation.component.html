@@ -22,9 +22,8 @@
 
     <a class="navbar-brand btn-nav-registration"
        *ngIf="!authService.isLogged"
-       routerLink="/form"
-       [routerLinkActive]="'active'"
-    >
+       [routerLink]="['/form']"
+       [routerLinkActive]="'active'">
       <i class="icon-login" style="font-size: 2rem"></i>
     </a>
     <a class="navbar-brand btn-nav-log-out btn-nav-registration"

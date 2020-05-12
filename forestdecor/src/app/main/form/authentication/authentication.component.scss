@@ -1,0 +1,9 @@
+@import "custom.variables";
+
+.ng-invalid.ng-touched {
+  border-color: $invalidField;
+}
+
+.ng-valid.ng-touched {
+  border-color: $validField;
+}

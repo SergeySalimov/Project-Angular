@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FlatTreeControl } from "@angular/cdk/tree";
-import { MatTreeFlatDataSource, MatTreeFlattener } from "@angular/material/tree";
-import { ProductsService } from "../../../shared/services/products/products.service";
-import { Product } from "../../../shared/models/product.model";
-import { CatalogNavigationService } from "../../../shared/services/catalogNavigation/catalog-navigation.service";
+import { Component, OnInit } from '@angular/core';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { ProductsService } from '../../../shared/services/products/products.service';
+import { Product } from '../../../shared/models/product.model';
+import { CatalogNavigationService } from '../../../shared/services/catalogNavigation/catalog-navigation.service';
 
 
 /** Flat node with expandable and level information */
@@ -18,18 +18,7 @@ interface FlatNode {
   templateUrl: './catalog-navigation.component.html',
   styleUrls: ['./catalog-navigation.component.scss']
 })
-
-
 export class CatalogNavigationComponent implements OnInit {
-
-  @Output() hideNav: EventEmitter<void> = new EventEmitter<void>();
-
-  constructor( private productsService: ProductsService,
-               public catalogNavigation: CatalogNavigationService) {
-    this.dataSource.data = productsService.products;
-  }
-
-  ngOnInit(): void {}
 
   private _transformer = (node: Product, level: number) => {
     return {
@@ -47,6 +36,13 @@ export class CatalogNavigationComponent implements OnInit {
     this._transformer, node => node.level, node => node.expandable, node => node.children);
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+  constructor( private productsService: ProductsService,
+               public catalogNavigation: CatalogNavigationService) {
+    this.dataSource.data = productsService.products;
+  }
+
+  ngOnInit(): void {}
 
   hasChild = (_: number, node: FlatNode) => node.expandable;
 

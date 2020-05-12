@@ -1,4 +1,5 @@
 @import "custom.variables";
+@import "bootstrap";
 //@import '~@angular/material/theming';
 //
 //@include mat-core();
@@ -26,11 +27,14 @@
 //// Include the mixin
 //@include mix-app-theme($app-theme);
 
-button {
+.btn {
   font-size: 1.2rem;
   margin-top: 4px;
   margin-bottom: 4px;
   background-color: $backGrey;
+}
+.btn:focus {
+  color: $mainFontColor;
 }
 button.active {
   background-color: #0088cc;
@@ -40,13 +44,23 @@ button.active {
 
 mat-tree {
   background-color: $backGrey;
-  border: 0px solid;
+  border: 0 solid;
   border-radius: 7px;
   padding-right: 6px;
   padding-bottom: 6px;
   button {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    @media (min-width: map-get($grid-breakpoints, "sm")) {
+      font-size: 0.65rem;
+    }
+    @media (min-width: map-get($grid-breakpoints, "md")) {
+      font-size: 0.7rem;
+    }
+    @media (min-width: map-get($grid-breakpoints, "lg")) {
+      font-size: 0.75rem;
+    }
   }
+
   button.active {
     background-color: #0088cc;
     color: $mainFontColor;

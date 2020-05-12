@@ -9,8 +9,8 @@
           'col-md-4': !catalogNavigation.status,
           'col-lg-3': !catalogNavigation.status,
           'col-xl-2': !catalogNavigation.status}"
-         *ngFor="let product of curProducts">
-      <mat-card (click)="onCardClick(product.urlName)">
+         *ngFor="let product of curProductData">
+      <mat-card routerLink="/catalog/{{product.urlName}}">
         <mat-card-header>
           <mat-card-title style="font-size: 1rem">{{product.name}}</mat-card-title>
           <!--        <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->

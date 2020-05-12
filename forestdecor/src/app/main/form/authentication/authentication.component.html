@@ -1,6 +1,6 @@
-<h3 class="card-title text-center">Авторизация</h3>
+<h3 class="card-title text-center">{{isRecovery ? 'Восстановление пароля' : 'Авторизация'}}</h3>
 
-<form class="autorization-form" #authForm>
+<form (ngSubmit)="onAuthSubmit(authForm)" #authForm="ngForm">
 
   <label class="sr-only" for="authorEmail">Email</label>
   <small id="authorEmailHelpBlock" class="form-text text-muted">
@@ -11,25 +11,43 @@
       <div class="input-group-text"><i class="icon-at"></i></div>
     </div>
     <input type="email"
+           ngModel
+           email
+           #authEmail="ngModel"
+           name="authEmail"
+           [ngClass]="{'is-valid': authEmail.valid && authEmail.touched, 'is-invalid': authEmail.invalid && authEmail.touched}"
            class="form-control"
            id="authorEmail"
            placeholder="Email"
            required
            aria-describedby="authorEmailHelpBlock">
+    <div class="invalid-feedback">Введите корректный email.</div>
+    <div class="valid-feedback">Все хорошо.</div>
   </div>
 
   <label class="sr-only" for="authorPswd">Password</label>
   <small id="authorPswdHelpBlock" class="form-text text-muted">
     Введите пароль (минимум 6 символов)
   </small>
-  <input type="password"
-         class="form-control mb-2"
-         id="authorPswd"
-         placeholder="Пароль"
-         minlength="6"
-         [disabled]="isRecovery"
-         required
-         aria-describedby="authorPswdHelpBlock">
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text"><i class="icon-lock"></i></div>
+    </div>
+    <input type="password"
+           ngModel
+           name="authPsw"
+           #authPsw="ngModel"
+           [ngClass]="{'is-valid': authPsw.valid && authPsw.touched, 'is-invalid': authPsw.invalid && authPsw.touched}"
+           class="form-control"
+           id="authorPswd"
+           placeholder="Пароль"
+           minlength="6"
+           [disabled]="isRecovery"
+           required
+           aria-describedby="authorPswdHelpBlock">
+    <div class="invalid-feedback">{{authPsw.value?.length}} / 6(мин) Введите минимум 6 символов.</div>
+    <div class="valid-feedback">{{authPsw.value?.length}} / 6(мин) Все хорошо.</div>
+  </div>
 
   <div class="custom-control custom-checkbox form-check-inline mt-1">
     <input class="custom-control-input"
@@ -37,26 +55,23 @@
            type="checkbox"
            (click)="onClickRecovery()"
            id="recovery-pswd">
-    <label class="custom-control-label" for="recovery-pswd">
+    <label class="custom-control-label small" for="recovery-pswd">
       Вспомнить пароль
     </label>
   </div>
   <hr/>
 
-  <div class="place-for-alert-auth"></div>
+  <!--  <div class="place-for-alert-auth"></div>-->
 
   <button type="submit"
-          class="btn btn-danger mt-3"
-          (click)="authService.login()"
-  >
-    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+          [disabled]="authForm.invalid"
+          [ngClass]="{ 'btn-danger': authForm.invalid,
+                       'btn-success': !authForm.invalid }"
+          class="btn mt-3">
+    <!--    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>-->
     Отправить данные
   </button>
 
-  <button type="button"
-          class="btn btn-primary mt-3 ml-2"
-          id="clear-author-btn">
-    Очистить данные
-  </button>
+  <button type="button" class="btn btn-primary mt-3 ml-2" (click)="authForm.resetForm()"> Очистить данные</button>
 
 </form>

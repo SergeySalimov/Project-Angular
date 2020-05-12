@@ -1,6 +1,5 @@
 $breadcrumb-divider: quote(">");
 @import "bootstrap";
-
 @import "custom.variables";
 
 :host {
@@ -9,8 +8,29 @@ $breadcrumb-divider: quote(">");
     background-color: $backGrey;
     margin-bottom: -16px;
 
-    .active {
+    ol {
+      padding-left: 0;
+      padding-right: 0;
+
+      button {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 0.6rem;
+        @media (min-width: map-get($grid-breakpoints, "md")) {
+          font-size: 1rem;
+        }
+        @media (min-width: map-get($grid-breakpoints, "xl")) {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+
+    ol > li:last-child > button {
       text-transform: uppercase;
+      pointer-events: none;
+      cursor: default;
+      color: $alterFontColor;
     }
   }
 }
