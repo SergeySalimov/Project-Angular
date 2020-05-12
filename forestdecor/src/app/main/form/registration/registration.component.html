@@ -1,11 +1,9 @@
 <h3 class="card-title text-center">Регистрация</h3>
 
-<form class="registration-form">
+<form (ngSubmit)="onRegistrSubmit(registrForm)" #registrForm="ngForm">
 
   <label class="sr-only" for="registrEmail">Email</label>
-  <small id="registrEmailHelpBlock" class="form-text text-muted">
-    Введите Email
-  </small>
+  <small id="registrEmailHelpBlock" class="form-text text-muted">Введите Email</small>
   <div class="input-group mb-2">
     <div class="input-group-prepend">
       <div class="input-group-text"><i class="icon-at"></i></div>
@@ -13,26 +11,38 @@
     <input type="email"
            class="form-control"
            id="registrEmail"
+           ngModel
+           email
+           #registrEmail="ngModel"
+           name="registEmail"
+           [ngClass]="{'is-valid': registrEmail.valid && registrEmail.touched, 'is-invalid': registrEmail.invalid && registrEmail.touched}"
            placeholder="Email"
            required
            aria-describedby="registrEmailHelpBlock">
+    <div class="invalid-feedback">Введите корректный email.</div>
+    <div class="valid-feedback">Все хорошо.</div>
   </div>
 
   <label class="sr-only" for="registrName">Name</label>
-  <small id="registrNameHelpBlock" class="form-text text-muted">
-    Представьтесь (минимум 2 символа)
-  </small>
+  <small id="registrNameHelpBlock" class="form-text text-muted">Представьтесь (минимум 2 символа)</small>
   <div class="input-group mb-2">
     <div class="input-group-prepend">
       <div class="input-group-text"><i class="icon-user"></i></div>
     </div>
+
     <input type="text"
+           ngModel
+           minlength="2"
+           name="registName"
+           #registName="ngModel"
            class="form-control"
+           [ngClass]="{'is-valid': registName.valid && registName.touched, 'is-invalid': registName.invalid && registName.touched}"
            id="registrName"
            placeholder="Имя (Фамилия)"
-           minlength="2"
            required
            aria-describedby="registrNameHelpBlock">
+    <div class="invalid-feedback">{{registName.value?.length}} / 2(мин) Введите минимум 2 символа.</div>
+    <div class="valid-feedback">{{registName.value?.length}} / 2(мин) Все хорошо.</div>
   </div>
 
   <label class="sr-only" for="registrPhone">Phone</label>
@@ -52,49 +62,75 @@
     <input type="tel"
            class="form-control col-9"
            id="registrPhone"
+           #registrPhone="ngModel"
+           name="registrPhone"
            [ngModel]="phoneNumber | phoneBY"
            (ngModelChange)="onChangePhone($event)"
-           [ngModelOptions]="{standalone: true}"
+           maxlength="14"
            placeholder="Мобильный телефон">
   </div>
 
+  <div ngModelGroup="regPsw" #regPsw="ngModelGroup">
 
-  <label class="sr-only" for="registrPswd">Password</label>
-  <small id="registrPswdHelpBlock" class="form-text text-muted">
-    Введите пароль (минимум 6 символов)
-  </small>
-  <input type="password"
-         class="form-control mb-2"
-         id="registrPswd"
-         placeholder="Пароль"
-         minlength="6"
-         required
-         aria-describedby="registrPswdHelpBlock">
+    <label class="sr-only" for="registrPswd">Password</label>
+    <small id="registrPswdHelpBlock" class="form-text text-muted">Введите пароль (минимум 6 символов)</small>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text"><i class="icon-lock"></i></div>
+      </div>
+      <input type="password"
+             class="form-control"
+             ngModel
+             name="regPsw1"
+             #registrPsw1="ngModel"
+             [ngClass]="{'is-valid': registrPsw1.valid && registrPsw1.touched, 'is-invalid': registrPsw1.errors && registrPsw1.touched}"
+             id="registrPswd"
+             placeholder="Пароль"
+             minlength="6"
+             required
+             aria-describedby="registrPswdHelpBlock">
+      <div class="invalid-feedback">{{registrPsw1.value?.length}} / 6(мин) Введите минимум 6 символов.</div>
+      <div class="valid-feedback">{{registrPsw1.value?.length}} / 6(мин) Все хорошо.</div>
+    </div>
 
+    <label class="sr-only" for="registrPswd2">Password</label>
+    <small id="registrPswdHelpBlock2" class="form-text text-muted">Введите пароль еще раз</small>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text"><i class="icon-lock"></i></div>
+      </div>
+      <input type="password"
+             class="form-control"
+             ngModel
+             name="regPsw2"
+             #registrPsw2="ngModel"
+             [ngClass]="{'is-valid': registrPsw2.valid && registrPsw2.touched, 'is-invalid': registrPsw2.errors && registrPsw2.touched}"
+             id="registrPswd2"
+             placeholder="Пароль"
+             minlength="6"
+             required
+             aria-describedby="registrPswdHelpBlock2">
+      <div class="invalid-feedback">{{registrPsw2.value?.length}} / 6(мин) Введите минимум 6 символов.</div>
+      <div class="valid-feedback">{{registrPsw2.value?.length}} / 6(мин) Все хорошо.</div>
+    </div>
 
-  <label class="sr-only" for="registrPswd2">Password</label>
-  <small id="registrPswdHelpBlock2" class="form-text text-muted">
-    Введите пароль еще раз
-  </small>
-  <input type="password"
-         class="form-control mb-2"
-         id="registrPswd2"
-         placeholder="Пароль"
-         minlength="6"
-         aria-describedby="registrPswdHelpBlock2">
+    <div class="small text-danger" *ngIf="registrPsw1.value !==registrPsw2.value && registrPsw1.valid && registrPsw2.valid">
+      Пароли должны совпадать!!
+    </div>
+  </div>
 
   <div class="place-for-alert-registr"></div>
 
   <button type="submit"
-          class="btn btn-danger mt-3"
-          id="submit-registr-btn">
-    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+          [disabled]="registrForm.invalid || registrPsw1.value !==registrPsw2.value"
+          [ngClass]="{ 'btn-danger': registrForm.invalid,
+                       'btn-success': !registrForm.invalid }"
+          class="btn mt-3">
+    <!--    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>-->
     Отправить данные
   </button>
 
-  <button type="button"
-          class="btn btn-primary mt-3 ml-2"
-          id="clear-registr-btn">
+  <button type="button" class="btn btn-primary mt-3 ml-2" (click)="registrForm.resetForm(); phoneNumber=''">
     Очистить данные
   </button>
 

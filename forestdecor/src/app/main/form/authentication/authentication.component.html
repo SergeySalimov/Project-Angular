@@ -29,20 +29,25 @@
   <small id="authorPswdHelpBlock" class="form-text text-muted">
     Введите пароль (минимум 6 символов)
   </small>
-  <input type="password"
-         ngModel
-         name="authPsw"
-         #authPsw="ngModel"
-         [ngClass]="{'is-valid': authPsw.valid && authPsw.touched, 'is-invalid': authPsw.invalid && authPsw.touched}"
-         class="form-control mb-2"
-         id="authorPswd"
-         placeholder="Пароль"
-         minlength="6"
-         [disabled]="isRecovery"
-         required
-         aria-describedby="authorPswdHelpBlock">
-  <div class="invalid-feedback">{{authPsw.value?.length}} / 6(мин) Введите минимум 6 символов.</div>
-  <div class="valid-feedback">{{authPsw.value?.length}} / 6(мин) Все хорошо.</div>
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text"><i class="icon-lock"></i></div>
+    </div>
+    <input type="password"
+           ngModel
+           name="authPsw"
+           #authPsw="ngModel"
+           [ngClass]="{'is-valid': authPsw.valid && authPsw.touched, 'is-invalid': authPsw.invalid && authPsw.touched}"
+           class="form-control"
+           id="authorPswd"
+           placeholder="Пароль"
+           minlength="6"
+           [disabled]="isRecovery"
+           required
+           aria-describedby="authorPswdHelpBlock">
+    <div class="invalid-feedback">{{authPsw.value?.length}} / 6(мин) Введите минимум 6 символов.</div>
+    <div class="valid-feedback">{{authPsw.value?.length}} / 6(мин) Все хорошо.</div>
+  </div>
 
   <div class="custom-control custom-checkbox form-check-inline mt-1">
     <input class="custom-control-input"
@@ -56,17 +61,17 @@
   </div>
   <hr/>
 
-<!--  <div class="place-for-alert-auth"></div>-->
+  <!--  <div class="place-for-alert-auth"></div>-->
 
   <button type="submit"
           [disabled]="authForm.invalid"
           [ngClass]="{ 'btn-danger': authForm.invalid,
                        'btn-success': !authForm.invalid }"
           class="btn mt-3">
-<!--    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>-->
+    <!--    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>-->
     Отправить данные
   </button>
 
-  <button type="button" class="btn btn-primary mt-3 ml-2" (click)="authForm.resetForm()"> Очистить данные </button>
+  <button type="button" class="btn btn-primary mt-3 ml-2" (click)="authForm.resetForm()"> Очистить данные</button>
 
 </form>
