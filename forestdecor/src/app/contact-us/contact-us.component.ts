@@ -11,25 +11,20 @@ import { FormControl, Validators } from '@angular/forms';
 export class ContactUsComponent implements OnInit {
 
   phoneNumber = '';
-  show: boolean;
-
-
   curRoute: string;
   email = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(private router: Router) {  }
 
   ngOnInit(): void {
-    this.router.events.pipe(
+   this.router.events.pipe(
       filter( event => event instanceof NavigationEnd),
       map( event => (event as NavigationEnd).urlAfterRedirects),
       distinctUntilChanged(),
       map ( strUrl => strUrl.split('/')[1]),
     )
       .subscribe((route: string) => {
-        console.log(route);
         this.curRoute = route;
-        this.show = (this.curRoute !== 'form' && this.curRoute !=='catalog' && this.curRoute !=='404')
       })
   }
 

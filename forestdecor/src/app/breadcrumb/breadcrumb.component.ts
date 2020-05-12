@@ -47,13 +47,13 @@ export class BreadcrumbComponent implements OnInit {
 
   doBreadcrumbForProducts(urlArr: string[]): void {
     const curPrd: ProductPlacer = this.productsService.getProductUrlInfo(urlArr[2]);
-    if (curPrd) {
+    if (!!curPrd) {
       if (curPrd.parents.length > 0) {
         curPrd.parents.forEach(url => this.breadcrumbTree.push(this.doBreadCrumb(url, urlArr[1])));
       }
       this.breadcrumbTree.push({name: curPrd.name, routerLink: `${urlArr[1]}/${curPrd.urlName}`});
     } else {
-      this.breadcrumbTree.push({name: 'Такой продукт не найден', routerLink: `404`});
+      this.breadcrumbTree.push({name: 'Такой продукт не найден', routerLink: `/404`});
     }
   }
 
