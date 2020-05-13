@@ -33,7 +33,8 @@ import {
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { BtnCloseComponent } from './shared/components/btn-close/btn-close.component';
 import { PhoneBYPipe } from './shared/pipes/phone-by.pipe';
-
+import { GoTopDirective } from './shared/components/button-go-top/go-top.directive';
+import { ButtonGoTopComponent } from './shared/components/button-go-top/button-go-top.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +65,8 @@ import { PhoneBYPipe } from './shared/pipes/phone-by.pipe';
     BtnCloseComponent,
     BtnCloseComponent,
     PhoneBYPipe,
+    GoTopDirective,
+    ButtonGoTopComponent,
   ],
   imports: [
     BrowserModule,
