@@ -67,21 +67,7 @@ mat-tree {
     text-shadow: #FFFFFF 0 0 2px;
   }
 }
-//
-//mat-button-toggle {
-//  outline: none;
-//  font-size: 1.8rem;
-//}
-//
-mat-tree {
 
-}
-//
-//mat-tree-node {
-//  border-radius: 5px;
-//  font-size: 1.4rem;
-//}
-//
 button {
   white-space: normal;
 }
@@ -89,24 +75,19 @@ button {
 button span {
   font-size: 1.4rem;
 }
-//
-//.mat-button-toggle,
-//.mat-button-toggle-checked {
-//  //background-color: transparent;
-//  //color: $alterFontColor;
-//  font-size: 1.4rem;
-//  white-space: normal;
-//}
 
-//.mat-button-toggle-checked {
-//  //background-color: $backGrey;
-//  color: $alterFontColor;
-//  font-size: 1.4rem;
-//}
+.sticky {
+  @media (min-width: map-get($grid-breakpoints, "sm")) {
+    position: sticky;
+    top: 120px;
+  }
+  @media (min-width: map-get($grid-breakpoints, "md")) {
+    position: sticky;
+    top: 130px;
+  }
+  @media (min-width: map-get($grid-breakpoints, "xl")) {
+    position: sticky;
+    top: 135px;
+  }
+}
 
-//.mat-button-toggle-checked,
-//.mat-button-toggle-checked:active,
-//.mat-button-toggle-checked:checked,
-//.mat-button-toggle-checked:focus {
-//  outline: none;
-//}
