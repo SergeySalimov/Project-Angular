@@ -1,6 +1,7 @@
-@import "bootstrap";
-
+@import "custom.variables";
+:host {
   .go-top {
+    stroke: $alterFontColor;
     background-color: transparent;
     pointer-events: none;
     opacity: 0;
@@ -14,6 +15,10 @@
     display: block;
     width: 90px;
     height: 90px;
+  }
+
+  .go-top:hover {
+    stroke: $blue;
   }
 
   .go-top.left{
@@ -31,3 +36,4 @@
     transition: opacity 1.6s;
     cursor: pointer;
   }
+}

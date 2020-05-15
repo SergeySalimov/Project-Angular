@@ -4,3 +4,13 @@ $additFontColor: #0088cc;
 $backGrey: #e9ecef;
 $invalidField: #ffaaaa;
 $validField: lightgreen;
+$blue:    #007bff;
+$red:     #dc3545;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
