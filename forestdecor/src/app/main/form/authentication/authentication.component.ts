@@ -40,13 +40,12 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
 
   onClickRecovery() {
     this.authForm.control.controls.authPsw.reset('');
-    this.isRecovery ? this.router.navigate(['/form', 'authorization']) :
-      this.router.navigate(['/form', 'authorization', 'recovery']);
     this.isRecovery = this.recovery.nativeElement.checked;
+    this.isRecovery ? this.router.navigate(['/form', 'authorization', 'recovery']) :
+      this.router.navigate(['/form', 'authorization']);
   }
 
   onAuthSubmit(form: NgForm) {
-    console.log(form);
     console.log(form.value);
   }
 
