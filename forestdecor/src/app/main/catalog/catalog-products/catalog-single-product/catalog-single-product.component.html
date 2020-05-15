@@ -26,8 +26,11 @@
 
       </div>
       <div class="card-footer">
-        <button class="btn btn-link" (click)="goBack(curProduct.urlName)">Назад</button>
+        <button class="btn btn-link btn-sm m-1 " (click)="goBack(curProduct.urlName)">Назад</button>
+        <button class="btn btn-link btn-sm m-1" (click)="goBack(curProduct.urlName, true)">Наверх</button>
+        <button class="btn btn-link btn-sm m-1" [routerLink]="['/catalog','all']">Все</button>
       </div>
+
     </div>
   </div>
 </div>
