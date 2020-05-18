@@ -5,4 +5,14 @@ form {
   border: solid 1px $alterFontColor;
   border-radius: 15px;
   box-shadow: 0 0 3px $alterFontColor;
+
+  .invalid-hint {
+    color: $red;
+  }
+
+  .valid-hint {
+    color: $green;
+  }
+
+
 }
