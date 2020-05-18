@@ -17,7 +17,7 @@
               <mat-hint align="end" [ngClass]="{'invalid-hint': name.invalid && name.dirty, 'valid-hint': name.valid}">
                 {{name.value.length || 0}}/100
               </mat-hint>
-              <app-btn-close (click)="onClick()" matSuffix *ngIf="name.value.length > 0"></app-btn-close>
+              <app-btn-close (click)="formContactUs.patchValue({name: ''})" matSuffix *ngIf="name.value.length > 0"></app-btn-close>
             </mat-form-field>
           </div>
 
@@ -30,7 +30,7 @@
                        [required]="!phone.value"
                        formControlName="email"
                        placeholder="pat@example.com">
-                <app-btn-close matSuffix *ngIf="email.value.length > 0"></app-btn-close>
+                <app-btn-close (click)="formContactUs.patchValue({email: ''})" matSuffix *ngIf="email.value.length > 0"></app-btn-close>
                 <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field>
 
@@ -44,7 +44,7 @@
                        placeholder="(33) 555-55-33"
                        maxlength="14">
                 <mat-hint align="start">+375 33 5555533</mat-hint>
-                <app-btn-close matSuffix *ngIf="phone.value.length > 0"></app-btn-close>
+                <app-btn-close (click)="formContactUs.patchValue({phone: ''})" matSuffix *ngIf="phone.value.length > 0"></app-btn-close>
               </mat-form-field>
           </div>
 
@@ -60,7 +60,7 @@
                         [ngClass]="{'invalid-hint': message.invalid && message.dirty, 'valid-hint': message.valid}">
                 {{message.value.length}} / 2048
               </mat-hint>
-              <app-btn-close matSuffix *ngIf="message.value.length > 0"></app-btn-close>
+              <app-btn-close (click)="formContactUs.patchValue({message: ''})" matSuffix *ngIf="message.value.length > 0"></app-btn-close>
             </mat-form-field>
           </div>
 

@@ -62,10 +62,6 @@ export class ContactUsComponent implements OnInit {
     console.log(this.formContactUs);
   }
 
-  onClick() {
-    return false;
-  }
-
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'Введите email или телефон';
