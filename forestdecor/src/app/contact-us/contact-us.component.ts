@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { formatDate } from '@angular/common';
+import { ContactUsMsg } from '../shared/models/contactUsMsg.model';
 
 @Component({
   selector: 'app-contact-us',
@@ -11,12 +15,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class ContactUsComponent implements OnInit {
 
   curRoute: string;
-
   formContactUs: FormGroup;
+  isRegisterAfter: boolean;
 
-  constructor(private router: Router) {
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
+
+  constructor(private router: Router, private http: HttpClient) {
   }
-
+//
   ngOnInit(): void {
     this._initform();
     this.router.events.pipe(
@@ -30,6 +36,51 @@ export class ContactUsComponent implements OnInit {
       })
   }
 
+  onSubmit() {
+    // console.log(this.formContactUs.value);
+    // this.isRegisterAfter = this.formContactUs.value.isRegisterAfter;
+    // const date: number = +Date.now();
+    // const folder = formatDate(date, 'yyyy-MM-dd', 'en-US');
+    // const newMsg: ContactUsMsg = {...this.formContactUs.value, date};
+    // delete newMsg.isRegisterAfter;
+    // console.log(newMsg);
+    // this.http.post(environment.messagesUrl, newMsg)
+    //   .subscribe(data => {
+    //     console.log(data)
+    //     this.resetForm();
+    //   });
+  }
+
+  get name() {
+    return this.formContactUs.get('name').value || '';
+  }
+
+  get email() {
+    return this.formContactUs.get('email').value || '';
+  }
+
+  get phone() {
+    const phone = this.formContactUs.get('phone').value || '';
+    if (phone === '(') this.formContactUs.patchValue({phone: ''});
+    return phone;
+  }
+  //
+
+  get message() {
+    return this.formContactUs.get('message').value || '';
+  }
+
+  get msgState() {
+    return this.formContactUs.get('message');
+  }
+
+  getErrorMessage() {
+    if (this.formContactUs.get('email').hasError('required')) {
+      return 'Введите email или телефон';
+    }
+    return this.formContactUs.get('email').hasError('email') ? 'Не правильный email' : '';
+  }
+
   private _initform() {
     this.formContactUs = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -38,36 +89,18 @@ export class ContactUsComponent implements OnInit {
       message: new FormControl('', [Validators.required, Validators.minLength(10)]),
       isRegisterAfter: new FormControl(false),
     });
+    // this.formContactUs.patchValue({name: 'Sergey'});
+    // this.formContactUs.controls['name'].disable()
   }
 
-  get name() {
-    return this.formContactUs.get('name');
+  resetForm() {
+    console.log(this.formGroupDirective);
+    this.formGroupDirective.resetForm();
+    return false;
+    // this.formContactUs.patchValue({name: '', email: '', phone: '', message: '', isRegisterAfter: false});
+    // this.formContactUs.reset();
   }
 
-  get email() {
-    return this.formContactUs.get('email');
-  }
 
-  get phone() {
-    let phone = this.formContactUs.get('phone');
-    if (phone.value === '(') this.formContactUs.patchValue({phone: ''});
-    return phone;
-  }
-
-  get message() {
-    return this.formContactUs.get('message');
-  }
-
-  onSubmit() {
-    console.log(this.formContactUs);
-  }
-
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'Введите email или телефон';
-    }
-
-    return this.email.hasError('email') ? 'Не правильный email' : '';
-  }
 
 }
