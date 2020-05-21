@@ -2,10 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { formatDate } from '@angular/common';
-import { ContactUsMsg } from '../shared/models/contactUsMsg.model';
+import { ContactUsService } from '../shared/services/contact-us/contact-us.service';
+import { UserData } from '../shared/models/userData';
 
 @Component({
   selector: 'app-contact-us',
@@ -20,7 +18,7 @@ export class ContactUsComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private contactUs: ContactUsService) {
   }
 //
   ngOnInit(): void {
@@ -37,22 +35,26 @@ export class ContactUsComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this.formContactUs.value);
-    // this.isRegisterAfter = this.formContactUs.value.isRegisterAfter;
-    // const date: number = +Date.now();
-    // const folder = formatDate(date, 'yyyy-MM-dd', 'en-US');
-    // const newMsg: ContactUsMsg = {...this.formContactUs.value, date};
-    // delete newMsg.isRegisterAfter;
-    // console.log(newMsg);
-    // this.http.post(environment.messagesUrl, newMsg)
-    //   .subscribe(data => {
-    //     console.log(data)
-    //     this.resetForm();
-    //   });
+    this.isRegisterAfter = this.formContactUs.value.isRegisterAfter;
+    this.contactUs.sendMessage(this.formContactUs.value)
+      .subscribe(() => {
+        if (this.isRegisterAfter) {
+          const forQueryParams = this.formContactUs.value;
+          delete forQueryParams.message;
+          delete forQueryParams.isRegisterAfter;
+          this.router.navigate(['/form', 'registration'], { queryParams: (forQueryParams as UserData)})
+        }
+        this.resetForm();
+      });
+
   }
 
   get name() {
     return this.formContactUs.get('name').value || '';
+  }
+
+  get nameState() {
+    return this.formContactUs.get('name');
   }
 
   get email() {
@@ -64,7 +66,6 @@ export class ContactUsComponent implements OnInit {
     if (phone === '(') this.formContactUs.patchValue({phone: ''});
     return phone;
   }
-  //
 
   get message() {
     return this.formContactUs.get('message').value || '';
@@ -94,11 +95,7 @@ export class ContactUsComponent implements OnInit {
   }
 
   resetForm() {
-    console.log(this.formGroupDirective);
     this.formGroupDirective.resetForm();
-    return false;
-    // this.formContactUs.patchValue({name: '', email: '', phone: '', message: '', isRegisterAfter: false});
-    // this.formContactUs.reset();
   }
 
 

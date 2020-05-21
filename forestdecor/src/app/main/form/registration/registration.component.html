@@ -11,7 +11,7 @@
     <input type="email"
            class="form-control"
            id="registrEmail"
-           ngModel
+           [ngModel]="email"
            email
            #registrEmail="ngModel"
            name="registEmail"
@@ -31,7 +31,7 @@
     </div>
 
     <input type="text"
-           ngModel
+           [ngModel]="name"
            minlength="2"
            name="registName"
            #registName="ngModel"
@@ -64,7 +64,7 @@
            id="registrPhone"
            #registrPhone="ngModel"
            name="registrPhone"
-           [ngModel]="phoneNumber | phoneBY"
+           [ngModel]="phone | phoneBY"
            (ngModelChange)="onChangePhone($event)"
            maxlength="14"
            placeholder="Мобильный телефон">

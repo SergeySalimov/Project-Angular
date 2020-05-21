@@ -14,7 +14,7 @@
                      formControlName="name"
                      maxlength="100"
                      placeholder="Имя (Фамилия)">
-              <mat-hint align="end" [ngClass]="{'invalid-hint': name.invalid && name.dirty, 'valid-hint': name.valid}">
+              <mat-hint align="end" [ngClass]="{'invalid-hint': nameState.invalid && nameState.dirty, 'valid-hint': nameState.valid}">
                 {{name.length || 0}}/100
               </mat-hint>
               <app-btn-close (click)="formContactUs.patchValue({name: ''})" matSuffix *ngIf="name.length > 0"></app-btn-close>
