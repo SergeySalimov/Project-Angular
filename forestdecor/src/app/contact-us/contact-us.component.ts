@@ -61,6 +61,10 @@ export class ContactUsComponent implements OnInit {
     return this.formContactUs.get('email').value || '';
   }
 
+  get emailState() {
+    return this.formContactUs.get('email');
+  }
+
   get phone() {
     const phone = this.formContactUs.get('phone').value || '';
     if (phone === '(') this.formContactUs.patchValue({phone: ''});
@@ -76,10 +80,10 @@ export class ContactUsComponent implements OnInit {
   }
 
   getErrorMessage() {
-    if (this.formContactUs.get('email').hasError('required')) {
+    if (this.emailState.hasError('required')) {
       return 'Введите email или телефон';
     }
-    return this.formContactUs.get('email').hasError('email') ? 'Не правильный email' : '';
+    return this.emailState.hasError('email') ? 'Не правильный email' : '';
   }
 
   private _initform() {

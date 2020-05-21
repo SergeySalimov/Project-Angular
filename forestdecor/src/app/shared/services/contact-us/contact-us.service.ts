@@ -14,13 +14,14 @@ export class ContactUsService {
   constructor( private http: HttpClient) {
   }
 
-  sendMessage(msg: ContactUsMsg, folder = 'new'): Observable<Object> {
-    if (folder = 'new') {
+  sendMessage(msg: ContactUsMsg, folder: string = 'new'): Observable<Object> {
+    this.message = {...msg};
+    if (folder === 'new') {
       const date: number = +Date.now();
       this.message = {...msg, date};
       delete this.message.isRegisterAfter;
     }
-    return this.http.post(`${environment.messagesUrl}/${folder}.json`, this.message);
+    return this.http.post<Object>(`${environment.messagesUrl}/${folder}.json`, this.message);
   }
 
 

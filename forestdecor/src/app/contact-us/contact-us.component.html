@@ -31,7 +31,7 @@
                        formControlName="email"
                        placeholder="pat@example.com">
                 <app-btn-close (click)="formContactUs.patchValue({email: ''})" matSuffix *ngIf="email.length > 0"></app-btn-close>
-                <mat-error *ngIf="formContactUs.get('email').invalid">{{getErrorMessage()}}</mat-error>
+                <mat-error *ngIf="emailState.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="fill" class="form-group col-sm-12 col-md-6">
