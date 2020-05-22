@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
 import { NavigationLink } from '../shared/models/navigationLink';
 import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
@@ -21,13 +21,14 @@ export class BreadcrumbComponent implements OnInit {
     private router: Router,
     private navigation: NavigationService,
     private productsService: ProductsService
-  ) { }
+  ) {  }
 
   ngOnInit(): void {
     this.navLinks = this.navigation.allLinks;
     this.router.events.pipe(
       filter( event => event instanceof NavigationEnd),
       map( event => (event as NavigationEnd).urlAfterRedirects),
+      map ( strUrl => strUrl.split('?')[0]),
       map ( strUrl => strUrl.split('/')),
       distinctUntilChanged(),
     )

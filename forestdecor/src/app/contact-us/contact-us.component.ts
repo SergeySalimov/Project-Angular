@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { ContactUsService } from '../shared/services/contact-us/contact-us.service';
+import { UserData } from '../shared/models/userData';
 
 @Component({
   selector: 'app-contact-us',
@@ -10,34 +12,103 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class ContactUsComponent implements OnInit {
 
-  phoneNumber = '';
   curRoute: string;
-  email = new FormControl('', [Validators.required, Validators.email]);
+  formContactUs: FormGroup;
+  isRegisterAfter: boolean;
 
-  constructor(private router: Router) {  }
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
 
+  constructor(private router: Router, private contactUs: ContactUsService) {
+  }
+//
   ngOnInit(): void {
-   this.router.events.pipe(
-      filter( event => event instanceof NavigationEnd),
-      map( event => (event as NavigationEnd).urlAfterRedirects),
+    this._initform();
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(event => (event as NavigationEnd).urlAfterRedirects),
       distinctUntilChanged(),
-      map ( strUrl => strUrl.split('/')[1]),
+      map(strUrl => strUrl.split('/')[1]),
     )
       .subscribe((route: string) => {
         this.curRoute = route;
       })
   }
 
-  onChangePhone(event): void {
-    this.phoneNumber = event;
+  onSubmit() {
+    this.isRegisterAfter = this.formContactUs.value.isRegisterAfter;
+    this.contactUs.sendMessage(this.formContactUs.value)
+      .subscribe(() => {
+        if (this.isRegisterAfter) {
+          const forQueryParams = this.formContactUs.value;
+          delete forQueryParams.message;
+          delete forQueryParams.isRegisterAfter;
+          this.router.navigate(['/form', 'registration'], { queryParams: (forQueryParams as UserData)})
+        }
+        this.resetForm();
+      });
+
+  }
+
+  get name() {
+    return this.formContactUs.get('name').value || '';
+  }
+
+  get nameState() {
+    return this.formContactUs.get('name');
+  }
+
+  get email() {
+    return this.formContactUs.get('email').value || '';
+  }
+
+  get emailState() {
+    return this.formContactUs.get('email');
+  }
+
+  get phone() {
+    const phone = this.formContactUs.get('phone').value || '';
+    if (phone === '(') {
+      this.formContactUs.patchValue({phone: ''});
+    }
+    return phone;
+  }
+
+  get message() {
+    return this.formContactUs.get('message').value || '';
+  }
+
+  get msgState() {
+    return this.formContactUs.get('message');
   }
 
   getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
+    if (this.emailState.hasError('required')) {
+      return 'Введите email или телефон';
     }
+    return this.emailState.hasError('email') ? 'Не правильный email' : '';
+  }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+  private _initform() {
+    this.formContactUs = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      phone: new FormControl(''),
+      message: new FormControl('', [Validators.required, Validators.minLength(10)]),
+      isRegisterAfter: new FormControl(false),
+    });
+    // this.formContactUs.patchValue({name: 'Sergey'});
+    // this.formContactUs.controls['name'].disable()
+  }
+
+  resetForm() {
+    this.formGroupDirective.resetForm();
+  }
+
+  onPhoneChange() {
+    const phone = this.phone;
+    (phone === '' || phone ==='(') ? this.emailState.setValidators([Validators.required, Validators.email]) :
+      this.emailState.setValidators([Validators.email]);
+    this.emailState.updateValueAndValidity();
   }
 
 }

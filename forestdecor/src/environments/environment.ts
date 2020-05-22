@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiKey: 'AIzaSyDIGANkFkG2s7bszuIFcyJrByruYVSsYPg',
+  messagesUrl: 'https://prj-forestdecor.firebaseio.com/messages',
+  getUserDataUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=',
 };
 
 /*

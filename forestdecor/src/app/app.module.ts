@@ -8,8 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { NavigationLinkComponent } from './navigation/navigation-link/navigation-link.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FooterComponent } from './footer/footer.component';
-import { RegistrationComponent } from './main/form/registration/registration.component';
-import { AuthenticationComponent } from './main/form/authentication/authentication.component';
 import { FormToogleButtonsComponent } from './main/form/form-toogle-buttons/form-toogle-buttons.component';
 import { SetHeightDirective } from './shared/directives/set-height/set-height.directive';
 import { CatalogNavigationComponent } from './main/catalog/catalog-navigation/catalog-navigation.component';
@@ -28,12 +26,15 @@ import {
   ErrorPageComponent,
   MainComponent,
   MessagesComponent,
-  PaymentComponent
+  PaymentComponent, RegistrationComponent, AuthenticationComponent
 } from './main';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { BtnCloseComponent } from './shared/components/btn-close/btn-close.component';
 import { PhoneBYPipe } from './shared/pipes/phone-by.pipe';
-
+import { GoTopDirective } from './shared/components/button-go-top/go-top.directive';
+import { ButtonGoTopComponent } from './shared/components/button-go-top/button-go-top.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +65,9 @@ import { PhoneBYPipe } from './shared/pipes/phone-by.pipe';
     BtnCloseComponent,
     BtnCloseComponent,
     PhoneBYPipe,
+    GoTopDirective,
+    ButtonGoTopComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +76,7 @@ import { PhoneBYPipe } from './shared/pipes/phone-by.pipe';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

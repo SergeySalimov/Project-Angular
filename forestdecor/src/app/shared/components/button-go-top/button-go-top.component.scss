@@ -1,0 +1,39 @@
+@import "custom.variables";
+:host {
+  .go-top {
+    stroke: $alterFontColor;
+    background-color: transparent;
+    pointer-events: none;
+    opacity: 0;
+    position: fixed;
+    z-index: 2000;
+    right: 6px;
+    @media (min-width: map-get($grid-breakpoints, "sm")) {
+      left: 12%;
+    }
+    bottom: 0;
+    display: block;
+    width: 90px;
+    height: 90px;
+  }
+
+  .go-top:hover {
+    stroke: $blue;
+  }
+
+  .go-top.left{
+    @media (min-width: map-get($grid-breakpoints, "sm")) {
+      left: 3%;
+    }
+  }
+
+  .go-top.show {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    -webkit-transition: opacity 1.6s;
+    -o-transition: opacity 1.6s;
+    transition: opacity 1.6s;
+    cursor: pointer;
+  }
+}

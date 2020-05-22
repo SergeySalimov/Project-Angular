@@ -1,0 +1,53 @@
+@import "custom.variables";
+:host {
+  .background {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  svg {
+    display: block;
+    //width: 258px;
+    //height: 258px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+
+  }
+
+  span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 115%);
+    z-index: 9999;
+    color: $green;
+  }
+
+  .tree {
+    fill: $green;
+  }
+
+  .circle-mask {
+    transform-origin: 50% 90%;
+    animation: scale 5s infinite ease-out;
+  }
+
+  @keyframes scale {
+    0%, 100% {
+      transform: scale(0.0);
+    }
+    7%, 90% {
+      transform: scale(0.4);
+    }
+    50% {
+      transform: scale(1);
+    }
+  }
+}
