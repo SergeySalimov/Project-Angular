@@ -67,7 +67,9 @@ export class ContactUsComponent implements OnInit {
 
   get phone() {
     const phone = this.formContactUs.get('phone').value || '';
-    if (phone === '(') this.formContactUs.patchValue({phone: ''});
+    if (phone === '(') {
+      this.formContactUs.patchValue({phone: ''});
+    }
     return phone;
   }
 
@@ -89,7 +91,7 @@ export class ContactUsComponent implements OnInit {
   private _initform() {
     this.formContactUs = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      email: new FormControl('', Validators.email),
+      email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl(''),
       message: new FormControl('', [Validators.required, Validators.minLength(10)]),
       isRegisterAfter: new FormControl(false),
@@ -102,6 +104,11 @@ export class ContactUsComponent implements OnInit {
     this.formGroupDirective.resetForm();
   }
 
-
+  onPhoneChange() {
+    const phone = this.phone;
+    (phone === '' || phone ==='(') ? this.emailState.setValidators([Validators.required, Validators.email]) :
+      this.emailState.setValidators([Validators.email]);
+    this.emailState.updateValueAndValidity();
+  }
 
 }
