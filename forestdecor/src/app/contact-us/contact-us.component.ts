@@ -1,29 +1,43 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ContactUsService } from '../shared/services/contact-us/contact-us.service';
 import { UserData } from '../shared/models/userData';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.scss']
 })
-export class ContactUsComponent implements OnInit {
+export class ContactUsComponent implements OnInit, OnDestroy {
 
   curRoute: string;
   formContactUs: FormGroup;
   isRegisterAfter: boolean;
+  controlPhoneSubscription: Subscription;
+  routerSubscription: Subscription;
+
 
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
 
   constructor(private router: Router, private contactUs: ContactUsService) {
   }
-//
+
   ngOnInit(): void {
     this._initform();
-    this.router.events.pipe(
+    this.controlPhoneSubscription = this.formContactUs.controls['phone'].valueChanges.pipe(
+      map(phone => phone === '(' ? '' : phone)
+    )
+      .subscribe(
+        phone => {
+          phone === '' ? this.emailState.setValidators([Validators.required, Validators.email]) :
+            this.emailState.setValidators([Validators.email]);
+          this.emailState.updateValueAndValidity();
+        }
+      );
+    this.routerSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       map(event => (event as NavigationEnd).urlAfterRedirects),
       distinctUntilChanged(),
@@ -66,11 +80,7 @@ export class ContactUsComponent implements OnInit {
   }
 
   get phone() {
-    const phone = this.formContactUs.get('phone').value || '';
-    if (phone === '(') {
-      this.formContactUs.patchValue({phone: ''});
-    }
-    return phone;
+    return this.formContactUs.get('phone').value || '';
   }
 
   get message() {
@@ -96,19 +106,15 @@ export class ContactUsComponent implements OnInit {
       message: new FormControl('', [Validators.required, Validators.minLength(10)]),
       isRegisterAfter: new FormControl(false),
     });
-    // this.formContactUs.patchValue({name: 'Sergey'});
-    // this.formContactUs.controls['name'].disable()
   }
 
   resetForm() {
     this.formGroupDirective.resetForm();
   }
 
-  onPhoneChange() {
-    const phone = this.phone;
-    (phone === '' || phone ==='(') ? this.emailState.setValidators([Validators.required, Validators.email]) :
-      this.emailState.setValidators([Validators.email]);
-    this.emailState.updateValueAndValidity();
+  ngOnDestroy(): void {
+    this.controlPhoneSubscription.unsubscribe();
+    this.routerSubscription.unsubscribe();
   }
 
 }
