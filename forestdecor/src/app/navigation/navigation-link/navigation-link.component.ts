@@ -16,7 +16,8 @@ export class NavigationLinkComponent implements OnInit {
   constructor( private navigationService: NavigationService ) { }
 
   ngOnInit(): void {
-    this.navigationLinks = this.navigationService.navigationLinks;
+    //ToDo if Admin show all Links
+    this.navigationLinks = this.navigationService.getNavigationLinks(false);
   }
 
 }
