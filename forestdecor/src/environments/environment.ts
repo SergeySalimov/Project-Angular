@@ -5,6 +5,8 @@
 export const environment = {
   production: false,
   apiKey: 'AIzaSyDIGANkFkG2s7bszuIFcyJrByruYVSsYPg',
+  dataBasesUrl: 'https://prj-forestdecor.firebaseio.com/',
+  productsUrl: 'https://prj-forestdecor.firebaseio.com/products.json',
   messagesUrl: 'https://prj-forestdecor.firebaseio.com/messages',
   getUserDataUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=',
 };

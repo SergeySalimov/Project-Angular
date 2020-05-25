@@ -13,7 +13,7 @@ import { filter, map, pairwise } from 'rxjs/operators';
 export class CatalogProductsComponent implements OnInit, OnDestroy {
 
   curProducts: ProductPlacer;
-  subscription: Subscription;
+  routerSubscription: Subscription;
   previous: string = null;
 
   constructor(
@@ -22,13 +22,12 @@ export class CatalogProductsComponent implements OnInit, OnDestroy {
     private router: Router,
   ) {}
 
-
   ngOnInit(): void {
     this.activatedRoute.paramMap
       .subscribe((paramMap: ParamMap) => {
         this.curProducts = this.productsService.getProductUrlInfo(paramMap.get('urlName'));
       });
-    this.subscription = this.router.events.pipe(
+    this.routerSubscription = this.router.events.pipe(
       filter( event => event instanceof NavigationEnd),
       map( event => (event as NavigationEnd).url),
       map ( strUrl => strUrl.split('/')),
@@ -40,7 +39,7 @@ export class CatalogProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.routerSubscription.unsubscribe();
   }
 
 }

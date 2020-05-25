@@ -24,9 +24,9 @@
         <mat-card-actions>
           <button mat-button
                   class="mx-auto"
-                  [disabled]="!product.photos.length"
+                  [disabled]="!product.photos?.length"
                   (click)="needPhotos(product.photos); $event.stopPropagation()">
-            <span *ngIf="!!product.photos.length; else noPhoto"><i class="icon-camera mr-1"></i>Посмотреть</span>
+            <span *ngIf="!!product.photos?.length; else noPhoto"><i class="icon-camera mr-1"></i>Посмотреть</span>
             <ng-template #noPhoto>Нет фотографий</ng-template>
           </button>
         </mat-card-actions>
