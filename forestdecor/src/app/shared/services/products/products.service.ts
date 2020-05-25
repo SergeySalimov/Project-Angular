@@ -10,9 +10,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProductsService{
-  // MOK data now => then will be loaded from server
-  private _products: Product[];
 
+  private _products: Product[];
   private accumulator: Product[];
   private productsPlacer: ProductPlacer[] = [];
 

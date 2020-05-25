@@ -14,6 +14,7 @@ export class CatalogProductsComponent implements OnInit, OnDestroy {
 
   curProducts: ProductPlacer;
   routerSubscription: Subscription;
+  activatedRouteSubscription: Subscription;
   previous: string = null;
 
   constructor(
@@ -23,7 +24,7 @@ export class CatalogProductsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap
+    this.activatedRouteSubscription = this.activatedRoute.paramMap
       .subscribe((paramMap: ParamMap) => {
         this.curProducts = this.productsService.getProductUrlInfo(paramMap.get('urlName'));
       });
@@ -40,6 +41,7 @@ export class CatalogProductsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routerSubscription.unsubscribe();
+    this.activatedRouteSubscription.unsubscribe();
   }
 
 }
