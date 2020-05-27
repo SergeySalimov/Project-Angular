@@ -21,7 +21,7 @@ export class ContactUsService {
       this.message = {...msg, date};
       delete this.message.isRegisterAfter;
     }
-    return this.http.post<Object>(`${environment.messagesUrl}/${folder}.json`, this.message);
+    return this.http.post<Object>(`${environment.dataBasesUrl}/messages/${folder}.json`, this.message);
   }
 
 

@@ -8,10 +8,10 @@ export class NavigationService {
 
   private _navigationLinks: NavigationLink[] = [
     { name: 'Каталог', routerLink: '/catalog'},
-    { name: 'Сообщения', routerLink: '/messages'},
     { name: 'Доставка', routerLink: '/delivery'},
     { name: 'Оплата', routerLink: '/payment'},
     { name: 'Контакты', routerLink: '/contacts'},
+    { name: 'Сообщения', routerLink: '/messages'},
     { name: 'Форма', routerLink: '/form'},
     { name: 'Регистрация', routerLink: '/form/registration'},
     { name: 'Авторизация', routerLink: '/form/authorization'},
@@ -22,8 +22,8 @@ export class NavigationService {
 
   constructor() { }
 
-  get navigationLinks(): NavigationLink[] {
-    return this.allLinks.slice(0,5);
+  getNavigationLinks(all = false): NavigationLink[] {
+    return all ? this.allLinks.slice(0,5) : this.allLinks.slice(0,4);
   }
 
   get allLinks(): NavigationLink[] {

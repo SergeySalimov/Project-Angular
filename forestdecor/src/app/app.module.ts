@@ -12,7 +12,7 @@ import { FormToogleButtonsComponent } from './main/form/form-toogle-buttons/form
 import { SetHeightDirective } from './shared/directives/set-height/set-height.directive';
 import { CatalogNavigationComponent } from './main/catalog/catalog-navigation/catalog-navigation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule} from './shared/material/material-module';
+import { MaterialModule } from './shared/material/material-module';
 import { DotPipe } from './shared/pipes/dot.pipe';
 import {
   CatalogCardDeskComponent,
@@ -31,10 +31,15 @@ import {
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { BtnCloseComponent } from './shared/components/btn-close/btn-close.component';
 import { PhoneBYPipe } from './shared/pipes/phone-by.pipe';
-import { GoTopDirective } from './shared/components/button-go-top/go-top.directive';
 import { ButtonGoTopComponent } from './shared/components/button-go-top/button-go-top.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
+import { ErrorsComponent } from './shared/services/errors/errors.component';
+import { ErrorsInterceptor } from './shared/interceptors/errors.interceptor';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,9 +70,9 @@ import { SpinnerComponent } from './shared/components/spinner/spinner.component'
     BtnCloseComponent,
     BtnCloseComponent,
     PhoneBYPipe,
-    GoTopDirective,
     ButtonGoTopComponent,
     SpinnerComponent,
+    ErrorsComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,9 +81,15 @@ import { SpinnerComponent } from './shared/components/spinner/spinner.component'
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorsInterceptor, multi: true },
+    { provide: BUCKET, useValue: 'gs://prj-forestdecor.appspot.com/'}
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

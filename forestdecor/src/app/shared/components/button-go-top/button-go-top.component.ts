@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { CatalogNavigationService } from '../../services/catalogNavigation/catalog-navigation.service';
 
 @Component({
@@ -6,11 +6,28 @@ import { CatalogNavigationService } from '../../services/catalogNavigation/catal
   templateUrl: './button-go-top.component.html',
   styleUrls: ['./button-go-top.component.scss']
 })
-export class ButtonGoTopComponent implements OnInit {
+export class ButtonGoTopComponent{
 
-  constructor(public catalogNavigation: CatalogNavigationService) { }
+  @ViewChild('goTop', {static: true}) goTop: ElementRef;
 
-  ngOnInit(): void {
+  @HostListener('window:scroll', ['$event']) onWindowScroll(): void {
+    (window.scrollY > 1000) ? (this.goTop.nativeElement as HTMLElement).classList.add('show') :
+      (this.goTop.nativeElement as HTMLElement).classList.remove('show');
   }
 
+  @HostListener('click') onClick():void {
+    let topScroll = window.scrollY;
+    let iteration = Math.round(topScroll / 60);
+    let intervalId = setInterval(() => {
+      window.scrollTo(0, topScroll);
+      topScroll -= iteration;
+      if (topScroll < iteration) {
+        window.scrollTo(0, 0);
+        clearInterval(intervalId);
+      }
+    }, 1000 / 60);
+  }
+
+  constructor(public catalogNavigation: CatalogNavigationService) {
+  }
 }

@@ -42,10 +42,9 @@
                        formControlName="phone"
                        [value]="phone | phoneBY"
                        placeholder="(33) 555-55-33"
-                       (input)="onPhoneChange()"
                        maxlength="14">
                 <mat-hint align="start">+375 33 5555533</mat-hint>
-                <app-btn-close (click)="formContactUs.patchValue({phone: ''}); onPhoneChange()" matSuffix *ngIf="phone.length > 0"></app-btn-close>
+                <app-btn-close (click)="formContactUs.patchValue({phone: ''})" matSuffix *ngIf="phone.length > 0"></app-btn-close>
               </mat-form-field>
           </div>
 

@@ -9,9 +9,9 @@
           <h5 class="card-title" [ngClass]="{'pl-5': !catalogNavigation.status}">
             <button mat-button
                     class="mx-auto mt-2"
-                    [disabled]="!curProduct.photos.length"
+                    [disabled]="!curProduct.photos?.length"
                     (click)="needPhotos(curProduct.photos); $event.stopPropagation()">
-              <span *ngIf="!!curProduct.photos.length; else noPhoto"><i class="icon-camera mr-1"></i>Посмотреть</span>
+              <span *ngIf="!!curProduct.photos?.length; else noPhoto"><i class="icon-camera mr-1"></i>Посмотреть</span>
               <ng-template #noPhoto>Нет фотографий</ng-template>
             </button>
           </h5>

@@ -13,6 +13,7 @@ import {
   PaymentComponent,
   RegistrationComponent
 } from './main';
+import { ProductsResolver } from './shared/services/products/products.resolver';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {
     path: 'catalog',
     component: CatalogComponent,
+    resolve: {products: ProductsResolver},
     children: [
       { path: ':urlName', component: CatalogProductsComponent, },
     ]
