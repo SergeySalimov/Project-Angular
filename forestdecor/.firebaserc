@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "forestdecor-base": {
+      "hosting": {
+        "forestdecor": [
+          "forestdecor-base"
+        ]
+      }
+    }
+  }
+}

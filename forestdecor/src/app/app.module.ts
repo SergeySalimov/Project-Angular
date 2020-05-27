@@ -36,6 +36,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import { ErrorsComponent } from './shared/services/errors/errors.component';
 import { ErrorsInterceptor } from './shared/interceptors/errors.interceptor';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -78,10 +81,13 @@ import { ErrorsInterceptor } from './shared/interceptors/errors.interceptor';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorsInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorsInterceptor, multi: true },
+    { provide: BUCKET, useValue: 'gs://prj-forestdecor.appspot.com/'}
   ],
   bootstrap: [AppComponent]
 })
