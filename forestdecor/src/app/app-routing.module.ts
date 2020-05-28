@@ -1,58 +1,29 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {
-  AuthenticationComponent,
-  CatalogComponent,
-  CatalogProductsComponent,
-  ContactsComponent,
-  DeliveryComponent,
-  ErrorPageComponent,
-  FormComponent,
-  HomeComponent,
-  MessagesComponent,
-  PaymentComponent,
-  RegistrationComponent
-} from './main';
-import { ProductsResolver } from './shared/services/products/products.resolver';
-
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { ContactsComponent, DeliveryComponent, ErrorPageComponent, HomeComponent, PaymentComponent } from './main';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'catalog', redirectTo: '/catalog/all', pathMatch: 'full'},
-  {
-    path: 'catalog',
-    component: CatalogComponent,
-    resolve: {products: ProductsResolver},
-    children: [
-      { path: ':urlName', component: CatalogProductsComponent, },
-    ]
-  },
   {path: 'delivery', component: DeliveryComponent},
-  {path: 'payment', component: PaymentComponent},
   {path: 'contacts', component: ContactsComponent},
-  {path: 'messages', component: MessagesComponent},
-  {path: 'form', redirectTo: 'form/authorization', pathMatch: 'full'},
-  {
-    path: 'form',
-    component: FormComponent,
-    children: [
-      {path: 'registration', component: RegistrationComponent},
-      {
-        path: 'authorization',
-        component: AuthenticationComponent,
-        children: [
-          {path: 'recovery', component: AuthenticationComponent},
-        ]},
-    ]},
-  {path: 'registration', component: FormComponent},
-  {path: 'authorization', component: FormComponent},
-  {path: 'recovery', component: FormComponent},
+  {path: 'payment', component: PaymentComponent},
   {path: '404', component: ErrorPageComponent},
-  {path: '**', redirectTo: '404'},
+  {path: 'catalog', redirectTo: 'catalog/all', pathMatch: 'full'},
+  {path: 'catalog', loadChildren: () => import('./main/catalog/catalog.module').then(m => m.CatalogModule)},
+  {path: 'form', redirectTo: 'form/authorization', pathMatch: 'full'},
+  {path: 'form/authorization', redirectTo: 'form/authorization', pathMatch: 'full'},
+  {path: 'form/authorization/recovery', redirectTo: 'form/authorization/recovery', pathMatch: 'full'},
+  {path: 'form/registration', redirectTo: 'form/registration', pathMatch: 'full'},
+  {path: 'messages', redirectTo: 'messages', pathMatch: 'full'},
+  {path: '**', redirectTo: '404'}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules,
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+
+//npm i ngx-quicklink --save

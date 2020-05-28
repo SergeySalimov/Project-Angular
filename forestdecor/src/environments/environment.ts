@@ -4,9 +4,6 @@
 
 export const environment = {
   production: false,
-  apiKey: 'AIzaSyDIGANkFkG2s7bszuIFcyJrByruYVSsYPg',
-  dataBasesUrl: 'https://prj-forestdecor.firebaseio.com/',
-  messagesUrl: 'https://prj-forestdecor.firebaseio.com/messages',
   firebase: {
     apiKey: "AIzaSyDIGANkFkG2s7bszuIFcyJrByruYVSsYPg",
     authDomain: "prj-forestdecor.firebaseapp.com",

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../../../../shared/models/product.model';
-import { CatalogNavigationService } from '../../../../shared/services/catalogNavigation/catalog-navigation.service';
+import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
 import { ProductsService } from '../../../../shared/services/products/products.service';
 import { ProductPlacer } from '../../../../shared/models/productsPlacer';
 import { Router } from '@angular/router';

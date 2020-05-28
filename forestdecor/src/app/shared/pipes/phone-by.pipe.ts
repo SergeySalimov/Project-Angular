@@ -7,7 +7,7 @@ export class PhoneBYPipe implements PipeTransform {
 
   transform(value: number |  string | null, cut = true): string {
     let newVal = '';
-    if (value !== null) {
+    if (value !== null && value) {
       newVal = value.toString().replace(/\D/g, '');
       if (cut) newVal = newVal.substring(0, 9);
 

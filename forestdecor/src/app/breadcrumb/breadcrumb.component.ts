@@ -14,7 +14,6 @@ import { ProductPlacer } from '../shared/models/productsPlacer';
 export class BreadcrumbComponent implements OnInit {
 
   breadcrumbTree: NavigationLink[];
-
   navLinks: NavigationLink[];
 
   constructor(

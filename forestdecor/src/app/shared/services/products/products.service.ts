@@ -21,7 +21,7 @@ export class ProductsService {
   }
 
   getProductsFromServer(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${environment.dataBasesUrl}/products.json`).pipe(
+    return this.http.get<Product[]>(`${environment.firebase.databaseURL}/products.json`).pipe(
       tap((prd: Product[]) => this._products = [...prd]),
     );
   }

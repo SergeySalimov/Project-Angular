@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ContactUsMsg } from '../../models/contactUsMsg.model';
+import { ContactUsMsg } from '../../shared/models/contactUsMsg.model';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class ContactUsService {
       this.message = {...msg, date};
       delete this.message.isRegisterAfter;
     }
-    return this.http.post<Object>(`${environment.dataBasesUrl}/messages/${folder}.json`, this.message);
+    return this.http.post<Object>(`${environment.firebase.databaseURL}/messages/${folder}.json`, this.message);
   }
 
 
