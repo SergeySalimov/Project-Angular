@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CatalogNavigationService } from '../../shared/services/catalogNavigation/catalog-navigation.service';
+import { CatalogNavigationService } from './catalog-service/catalog-navigation.service';
 
 @Component({
   selector: 'app-catalog',

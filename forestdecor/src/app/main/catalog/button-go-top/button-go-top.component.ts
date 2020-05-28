@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { CatalogNavigationService } from '../../services/catalogNavigation/catalog-navigation.service';
+import { CatalogNavigationService } from '../catalog-service/catalog-navigation.service';
 
 @Component({
   selector: 'app-button-go-top',
