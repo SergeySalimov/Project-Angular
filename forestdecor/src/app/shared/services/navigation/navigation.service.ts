@@ -16,6 +16,7 @@ export class NavigationService {
     { name: 'Регистрация', routerLink: '/form/registration'},
     { name: 'Авторизация', routerLink: '/form/authorization'},
     { name: 'Восстановление пароля', routerLink: '/form/authorization/recovery'},
+    { name: 'дом', routerLink: '/home'},
     { name: 'Главная', routerLink: '/'},
     { name: 'Указанная страница не найдена', routerLink: '/404'},
   ];
