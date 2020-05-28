@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { ContactUsService } from '../shared/services/contact-us/contact-us.service';
+import { ContactUsService } from './contact-us-service/contact-us.service';
 import { UserData } from '../shared/models/userData';
 import { Subscription } from 'rxjs';
 
@@ -60,7 +60,6 @@ export class ContactUsComponent implements OnInit, OnDestroy {
         }
         this.resetForm();
       });
-
   }
 
   get name() {
