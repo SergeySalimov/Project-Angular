@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PhoneBYPipe implements PipeTransform {
 
-  transform(value: number |  string | null, cut = true): string {
+  transform(value: number | string | null, cut = true): string {
     let newVal = '';
     if (value !== null && value) {
       newVal = value.toString().replace(/\D/g, '');
