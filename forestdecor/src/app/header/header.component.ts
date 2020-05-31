@@ -8,12 +8,10 @@ import { AuthService } from '../shared/services/auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isLogged: boolean;
 
   constructor(public readonly authService: AuthService) { }
 
   ngOnInit(): void {
-    this.isLogged = this.authService.isLogged;
   }
 
 }

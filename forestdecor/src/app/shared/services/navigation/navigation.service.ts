@@ -12,7 +12,7 @@ export class NavigationService {
     { name: 'Оплата', routerLink: '/payment'},
     { name: 'Контакты', routerLink: '/contacts'},
     { name: 'Сообщения', routerLink: '/messages'},
-    { name: 'Форма', routerLink: '/form'},
+    { name: 'Форма', routerLink: '/form'}, // log links
     { name: 'Регистрация', routerLink: '/form/registration'},
     { name: 'Авторизация', routerLink: '/form/authorization'},
     { name: 'Восстановление пароля', routerLink: '/form/authorization/recovery'},

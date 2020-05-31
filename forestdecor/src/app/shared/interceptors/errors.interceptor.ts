@@ -7,13 +7,22 @@ import { ErrorsService } from '../errors/errors.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ErrorsInterceptor implements HttpInterceptor{
-  constructor (private errorsService: ErrorsService) {
+export class ErrorsInterceptor implements HttpInterceptor {
+  constructor(private errorsService: ErrorsService) {
   }
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error) => {
-        this.errorsService.showError({title: error.error.error, message: error.message}, 0);
+        let title, timer;
+        if ((typeof error.error.error) === 'string') {
+          title = error.error.error;
+          timer = 0;
+        } else {
+          title = error.error.error.message;
+          timer = 5000;
+        }
+        this.errorsService.showError({title, message: error.message}, timer);
         return throwError(error);
       }),
     );

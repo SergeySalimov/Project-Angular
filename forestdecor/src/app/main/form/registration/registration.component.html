@@ -15,7 +15,7 @@
            email
            #registrEmail="ngModel"
            name="registEmail"
-           [ngClass]="{'is-valid': registrEmail.valid && registrEmail.touched, 'is-invalid': registrEmail.invalid && registrEmail.touched}"
+           [ngClass]="{'is-valid': registrEmail.valid && registrEmail.dirty, 'is-invalid': registrEmail.invalid && registrEmail.dirty}"
            placeholder="Email"
            required
            aria-describedby="registrEmailHelpBlock">
@@ -36,7 +36,7 @@
            name="registName"
            #registName="ngModel"
            class="form-control"
-           [ngClass]="{'is-valid': registName.valid && registName.touched, 'is-invalid': registName.invalid && registName.touched}"
+           [ngClass]="{'is-valid': registName.valid && registName.dirty, 'is-invalid': registName.invalid && registName.dirty}"
            id="registrName"
            placeholder="Имя (Фамилия)"
            required
@@ -83,7 +83,7 @@
              ngModel
              name="regPsw1"
              #registrPsw1="ngModel"
-             [ngClass]="{'is-valid': registrPsw1.valid && registrPsw1.touched, 'is-invalid': registrPsw1.errors && registrPsw1.touched}"
+             [ngClass]="{'is-valid': registrPsw1.valid && registrPsw1.dirty, 'is-invalid': registrPsw1.errors && registrPsw1.dirty}"
              id="registrPswd"
              placeholder="Пароль"
              minlength="6"
@@ -104,7 +104,7 @@
              ngModel
              name="regPsw2"
              #registrPsw2="ngModel"
-             [ngClass]="{'is-valid': registrPsw2.valid && registrPsw2.touched, 'is-invalid': registrPsw2.errors && registrPsw2.touched}"
+             [ngClass]="{'is-valid': registrPsw2.valid && registrPsw2.dirty, 'is-invalid': registrPsw2.errors && registrPsw2.dirty}"
              id="registrPswd2"
              placeholder="Пароль"
              minlength="6"
@@ -119,14 +119,10 @@
     </div>
   </div>
 
-  <div class="place-for-alert-registr"></div>
-
   <button type="submit"
           [disabled]="registrForm.invalid || registrPsw1.value !==registrPsw2.value"
-          [ngClass]="{ 'btn-danger': registrForm.invalid,
-                       'btn-success': !registrForm.invalid }"
+          [ngClass]="{ 'btn-danger': registrForm.invalid, 'btn-success': !registrForm.invalid }"
           class="btn mt-3">
-    <!--    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>-->
     Отправить данные
   </button>
 

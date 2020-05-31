@@ -17,8 +17,8 @@ export class NavigationComponent implements OnInit {
     this.collapse = true;
   }
 
-  constructor(public authService: AuthService,
-              private navigation: NavigationService) { }
+  constructor(public authService: AuthService, private navigation: NavigationService) {
+  }
 
   ngOnInit(): void {
     this.registration = this.navigation.logLinks[1];

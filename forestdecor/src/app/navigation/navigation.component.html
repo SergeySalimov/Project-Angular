@@ -21,15 +21,15 @@
     ></app-navigation-link>
 
     <a class="navbar-brand btn-nav-registration"
-       *ngIf="!authService.isLogged"
+       *ngIf="true"
        [routerLink]="['/form']"
        [routerLinkActive]="'active'">
       <i class="icon-login" style="font-size: 2rem"></i>
     </a>
     <a class="navbar-brand btn-nav-log-out btn-nav-registration"
-       *ngIf="authService.isLogged"
-       (click)="authService.logout()"
-    >
+       *ngIf="false && authService.isLogged">
+<!--       (click)="authService.logout()"-->
+
       <i class="icon-logout" style="font-size: 2rem"></i>
     </a>
 

@@ -1,7 +1,7 @@
-<div class="alert alert-warning fixed-bottom" @fade role="alert" *ngIf="error">
+<div class="alert alert-danger fixed-bottom" @fade role="alert" *ngIf="error">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="hide()">
     <span aria-hidden="true">&times;</span>
   </button>
   <div class="h3">{{error.title}}</div>
-  {{error.message}}
+  <div class="h6 small">{{error.message}}</div>
 </div>

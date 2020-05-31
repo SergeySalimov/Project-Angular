@@ -3,6 +3,11 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../../shared/services/auth/auth.service';
+import { UserData } from '../../../shared/models/userData';
+import { AuthResponse } from '../../../shared/services/auth/auth-response';
+import { SpinnerService } from '../../../shared/components/spinner/spinner.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-authentication',
@@ -15,24 +20,29 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   @ViewChild('authForm', {static: true}) authForm: NgForm;
 
   isRecovery: boolean;
-  subscription: Subscription;
+  routerSubscription: Subscription;
 
-  constructor( route: ActivatedRoute, private router: Router) {
-    const children: ActivatedRouteSnapshot = route.snapshot.firstChild;
+  constructor(
+    private Activatedroute: ActivatedRoute,
+    private router: Router,
+    private auth: AuthService,
+    private spinner: SpinnerService,
+  ) {
+    const children: ActivatedRouteSnapshot = Activatedroute.snapshot.firstChild;
     this.isRecovery = (!!children);
   }
 
   ngOnInit(): void {
     this.recovery.nativeElement.checked = this.isRecovery;
 
-    this.subscription = this.router.events.pipe(
-      filter( event => event instanceof NavigationEnd),
-      map( event => (event as NavigationEnd).urlAfterRedirects),
-      map ( strUrl => strUrl.split('/')),
+    this.routerSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(event => (event as NavigationEnd).urlAfterRedirects),
+      map(strUrl => strUrl.split('/')),
       map(urlArr => (urlArr.length === 4)),
       distinctUntilChanged(),
     )
-      .subscribe( recoveryState => {
+      .subscribe(recoveryState => {
         this.isRecovery = recoveryState;
         this.recovery.nativeElement.checked = this.isRecovery;
       })
@@ -46,11 +56,17 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   }
 
   onAuthSubmit(form: NgForm) {
-    console.log(form.value);
+    const email = form.value.authEmail;
+    const $authObs = this.isRecovery ? this.auth.recovery(email) : this.auth.authentication(email, form.value.authPsw);
+    $authObs.subscribe( (response: AuthResponse) => {
+      console.log(response);
+      this.router.navigate(['']);
+      this.authForm.resetForm();
+    });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.routerSubscription.unsubscribe()
   }
 
 }
