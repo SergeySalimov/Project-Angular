@@ -25,39 +25,16 @@
 //
 //// Include the mixin
 //@include mix-app-theme($app-theme);
+:host {
+  .btn {
+    font-size: 1.2rem;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    background-color: $backGrey;
+  }
 
-.btn {
-  font-size: 1.2rem;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  background-color: $backGrey;
-}
-.btn:focus {
-  color: $mainFontColor;
-}
-button.active {
-  background-color: #0088cc;
-  color: $mainFontColor;
-  text-shadow: #FFFFFF 0 0 2px;
-}
-
-mat-tree {
-  background-color: $backGrey;
-  border: 0 solid;
-  border-radius: 7px;
-  padding-right: 6px;
-  padding-bottom: 6px;
-  button {
-    font-size: 0.85rem;
-    @media (min-width: map-get($grid-breakpoints, "sm")) {
-      font-size: 0.65rem;
-    }
-    @media (min-width: map-get($grid-breakpoints, "md")) {
-      font-size: 0.7rem;
-    }
-    @media (min-width: map-get($grid-breakpoints, "lg")) {
-      font-size: 0.75rem;
-    }
+  .btn:focus {
+    color: $mainFontColor;
   }
 
   button.active {
@@ -65,28 +42,68 @@ mat-tree {
     color: $mainFontColor;
     text-shadow: #FFFFFF 0 0 2px;
   }
-}
 
-button {
-  white-space: normal;
-}
+  mat-tree {
+    background-color: $backGrey;
+    border: 0 solid;
+    border-radius: 7px;
+    padding-right: 6px;
+    padding-bottom: 6px;
 
-button span {
-  font-size: 1.4rem;
-}
+    button {
+      font-size: 0.85rem;
+      @media (min-width: map-get($grid-breakpoints, "sm")) {
+        font-size: 0.65rem;
+      }
+      @media (min-width: map-get($grid-breakpoints, "md")) {
+        font-size: 0.7rem;
+      }
+      @media (min-width: map-get($grid-breakpoints, "lg")) {
+        font-size: 0.75rem;
+      }
+    }
 
-.sticky {
-  @media (min-width: map-get($grid-breakpoints, "sm")) {
-    position: sticky;
-    top: 120px;
+    button.active {
+      background-color: #0088cc;
+      color: $mainFontColor;
+      text-shadow: #FFFFFF 0 0 2px;
+    }
   }
-  @media (min-width: map-get($grid-breakpoints, "md")) {
-    position: sticky;
-    top: 130px;
+
+  button {
+    white-space: normal;
   }
-  @media (min-width: map-get($grid-breakpoints, "xl")) {
-    position: sticky;
-    top: 135px;
+
+  button span {
+    font-size: 1.4rem;
+  }
+
+  .sticky {
+    position: fixed;
+    bottom: 0;
+    width: 92%;
+    opacity: 80%;
+    z-index: 2;
+    @media (min-width: map-get($grid-breakpoints, "sm")) {
+      position: sticky;
+      top: 120px;
+      width: 100%;
+      opacity: 1;
+      bottom: unset;
+    }
+    @media (min-width: map-get($grid-breakpoints, "md")) {
+      position: sticky;
+      top: 130px;
+      width: 100%;
+      opacity: 1;
+      bottom: unset;
+    }
+    @media (min-width: map-get($grid-breakpoints, "xl")) {
+      position: sticky;
+      top: 135px;
+      width: 100%;
+      opacity: 1;
+      bottom: unset;
+    }
   }
 }
-
