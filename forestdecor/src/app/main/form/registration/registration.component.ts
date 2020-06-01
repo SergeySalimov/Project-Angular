@@ -44,7 +44,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       phone: form.value.registrPhone,
     };
     this.auth.registration(userData, form.value.regPsw.regPsw1).subscribe((response: AuthResponse) => {
-        this.router.navigate(['']);
         this.registrForm.resetForm();
       },
       () => this.registrForm.controls['regPsw'].reset()

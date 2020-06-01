@@ -1,27 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../shared/services/auth/auth.service';
-import { NavigationService } from '../shared/services/navigation/navigation.service';
-import { NavigationLink } from '../shared/models/navigationLink';
+import { User } from '../shared/services/auth/user';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  styleUrls: ['./navigation.component.scss'],
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent{
 
   collapse = true;
-  registration: NavigationLink;
+  showDropdown = false;
+  user$: Observable<User> = this.auth.user;
+
+  constructor(public auth: AuthService) {
+  }
+
+  userLogout() {
+    this.auth.logout();
+  }
+
+  hideDropDown() {
+    setTimeout(() => this.showDropdown = false, 500);
+  }
 
   doCollapse() {
     this.collapse = true;
-  }
-
-  constructor(public authService: AuthService, private navigation: NavigationService) {
-  }
-
-  ngOnInit(): void {
-    this.registration = this.navigation.logLinks[1];
   }
 
 }

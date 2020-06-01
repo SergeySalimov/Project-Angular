@@ -15,15 +15,9 @@ export class ErrorsInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error) => {
-        let title, timer;
-        if ((typeof error.error.error) === 'string') {
-          title = ERROR_LIST[error.error.error] || error.error.error;
-          timer = 0;
-        } else {
-          title = ERROR_LIST[error.error.error.message] || error.error.error.message;
-          timer = 15000;
-        }
-        this.errorsService.showError({title, message: error.message}, timer);
+        const title = (ERROR_LIST[error.error.error.message] || error.error.error.message) ||
+          (ERROR_LIST[error.error.error] || error.error.error);
+        this.errorsService.showError({title, message: error.message}, 15000);
         return throwError(error);
       }),
     );

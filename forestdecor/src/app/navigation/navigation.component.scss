@@ -6,15 +6,43 @@
       cursor: pointer;
     }
 
-    .btn-nav-registration {
+    .btn-nav {
       //color: $backGrey;
       color: $mainFontColor;
 
     }
 
-    .btn-nav-registration.active {
+    .btn-nav.active {
       //color: $mainFontColor;
       color: yellow;
+    }
+
+    .dropdown {
+      margin-top: -12px;
+      margin-bottom: -12px;
+      opacity: 0.9;
+      outline: none;
+      button {
+        background-color: transparent;
+        border: solid transparent;
+        color: $mainFontColor;
+      }
+      button:active, button:focus {
+        outline: none;
+        border: solid transparent;
+        color: yellow;
+      }
+      button:hover {
+        background-color: $additFontColor;
+      }
+      .dropdown-menu {
+        a:hover {
+          background-color: $blue;
+        }
+        a.cancel:hover {
+          background-color: $red;
+        }
+      }
     }
 
     .navbar-brand {

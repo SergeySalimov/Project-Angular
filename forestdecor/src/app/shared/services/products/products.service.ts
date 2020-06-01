@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../../models/product.model';
 import { ProductPlacer } from '../../models/productsPlacer';
 import { environment } from '../../../../environments/environment';
-import { exhaustMap, take, tap } from 'rxjs/operators';
+import { exhaustMap, mergeMap, take, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
@@ -20,8 +20,7 @@ export class ProductsService {
     this.getProductsFromServer().pipe(
       take(1),
       exhaustMap(() => this.auth.getAdminsFromServer()),
-      )
-      .subscribe(() => this.createAllUrls());
+      ).subscribe(() => {});
   }
 
   get products() {
@@ -31,6 +30,7 @@ export class ProductsService {
   getProductsFromServer(): Observable<Product[]> {
     return this.http.get<Product[]>(`${environment.firebase.databaseURL}/products.json`).pipe(
       tap((prd: Product[]) => this._products = [...prd]),
+      tap(() => this.createAllUrls()),
     );
   }
 
@@ -39,10 +39,8 @@ export class ProductsService {
   }
 
   createAllUrls() {
-    console.time('urlsCreate');
     this.createPlacingProduct('all', 'весь каталог');
     this.createUrlsInformation();
-    console.timeEnd('urlsCreate');
   }
 
   createUrlsInformation(data: Product[] = this._products, parents: string[] = []): void {

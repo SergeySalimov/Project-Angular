@@ -3,13 +3,12 @@
     <div class="row">
       <div class="col-xs-12 col-sm-6">
         <div class="mobile-number text-center text-sm-left">
-          <i class="icon-mobile"><a href="tel:+375291234567">+375 29 123-45-67</a></i>
+          <i class="icon-mobile"><a href="tel:+375 {{phoneNumber}}">+375{{phoneNumber | phoneBY}}</a></i>
         </div>
       </div>
-      <div class="col-xs-12 col-sm-6 text-center text-sm-right" *ngIf="authService.isLogged">
-        <i class="icon-user"><a>Test User</a></i>
+      <div class="col-xs-12 col-sm-6 text-center text-sm-right" *ngIf="user$ | async">
+        <i class="icon-user"><a>{{(user$ | async).name}}</a></i>
       </div>
     </div>
   </div>
 </div>
-

@@ -5,12 +5,12 @@ export const fade = trigger('fade', [
     style({
       opacity: 0,
     }),
-    animate(300, style({
+    animate(700, style({
       opacity: 0.8,
     }))
   ]),
   transition('* => void', [
-    animate(300, style({
+    animate(700, style({
       opacity: 0,
     }))
   ])

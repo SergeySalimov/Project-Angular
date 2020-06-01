@@ -12,7 +12,7 @@ import { NavigationLinkComponent } from './navigation-link/navigation-link.compo
   exports: [NavigationComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([])
+    RouterModule.forChild([]),
   ]
 })
 export class NavigationModule { }

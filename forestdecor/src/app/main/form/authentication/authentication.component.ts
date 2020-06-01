@@ -59,7 +59,6 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     const email = form.value.authEmail;
     const $authObs = this.isRecovery ? this.auth.recovery(email) : this.auth.authentication(email, form.value.authPsw);
     $authObs.subscribe( (response) => {
-      this.router.navigate(['']);
       this.authForm.resetForm();
     },
         () => this.authForm.controls['authPsw'].reset()

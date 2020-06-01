@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { IsLog } from '../../models/isLog';
+import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserData } from '../../models/userData';
 import { environment } from '../../../../environments/environment';
-import { Product } from '../../models/product.model';
-import { exhaustMap, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { User } from './user';
 import { AuthResponse } from './auth-response';
 
@@ -15,24 +13,15 @@ import { AuthResponse } from './auth-response';
 })
 export class AuthService {
 
-  _isLogged: BehaviorSubject<IsLog> = new BehaviorSubject<IsLog>({
-    isLogged: false,
-    isAdmin: false
-  });
-
   private _admins: string[];
 
-  private _user: Subject<User> = new Subject<User>();
+  private _user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(private router: Router, private http: HttpClient) {
   }
 
   get user() {
-    return this._user;
-  }
-
-  get isLogged() {
-    return this._isLogged;
+    return this._user.asObservable();
   }
 
   get admins() {
@@ -43,6 +32,10 @@ export class AuthService {
     return this.http.get<string[]>(`${environment.firebase.databaseURL}/admins.json`).pipe(
       tap((admins: string[]) => this._admins = [...admins]),
     );
+  }
+
+  logout() {
+    this._user.next(null);
   }
 
   registration(userData: UserData, password: string) {
@@ -83,6 +76,8 @@ export class AuthService {
       data.refreshToken,
     );
     this._user.next(user);
+    user.isAdmin ? this.router.navigate([environment.afterLoginRedirectAdminUrl]) :
+    this.router.navigate([environment.afterLoginRedirectUrl]);
   }
 
 }
