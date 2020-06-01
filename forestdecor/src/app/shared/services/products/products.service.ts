@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Product } from '../../models/product.model';
 import { ProductPlacer } from '../../models/productsPlacer';
 import { environment } from '../../../../environments/environment';
-import { take, tap } from 'rxjs/operators';
+import { exhaustMap, take, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,11 @@ export class ProductsService {
   private accumulator: Product[];
   private productsPlacer: ProductPlacer[] = [];
 
-  constructor(private http: HttpClient) {
-    this.getProductsFromServer().pipe(take(1))
+  constructor(private http: HttpClient, private auth: AuthService) {
+    this.getProductsFromServer().pipe(
+      take(1),
+      exhaustMap(() => this.auth.getAdminsFromServer()),
+      )
       .subscribe(() => this.createAllUrls());
   }
 

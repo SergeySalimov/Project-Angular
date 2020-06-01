@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { distinctUntilChanged, exhaustMap, filter, map, mergeMap, tap } from 'rxjs/operators';
+import { forkJoin, Observable, of, Subscription } from 'rxjs';
 import { AuthService } from '../../../shared/services/auth/auth.service';
 import { UserData } from '../../../shared/models/userData';
 import { AuthResponse } from '../../../shared/services/auth/auth-response';
@@ -58,15 +58,18 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   onAuthSubmit(form: NgForm) {
     const email = form.value.authEmail;
     const $authObs = this.isRecovery ? this.auth.recovery(email) : this.auth.authentication(email, form.value.authPsw);
-    $authObs.subscribe( (response: AuthResponse) => {
-      console.log(response);
+    $authObs.subscribe( (response) => {
       this.router.navigate(['']);
       this.authForm.resetForm();
-    });
+    },
+        () => this.authForm.controls['authPsw'].reset()
+    );
   }
 
   ngOnDestroy() {
     this.routerSubscription.unsubscribe()
   }
+
+  // mergeMap((data: AuthResponse) => forkJoin([of(data), this.auth.getAdminsFromServer()])),
 
 }
