@@ -7,7 +7,7 @@ import { environment } from '../../../../environments/environment';
 import { tap } from 'rxjs/operators';
 import { User } from './user';
 import { AuthResponse } from './auth-response';
-import { ConsoleService } from '../../console/console.service';
+import { ConsoleService } from '../console/console.service';
 
 @Injectable({
   providedIn: 'root'
@@ -117,7 +117,7 @@ export class AuthService {
     );
     this._user.next(user);
     localStorage.setItem(environment.USER_KEY_IN_LOCAL_STORAGE, JSON.stringify(user));
-    this.autoLogout(Number(data.expiresIn) * 1000)
+    this.autoLogout(Number(data.expiresIn) * 1000);
     user.isAdmin ? this.router.navigate([environment.afterLoginRedirectAdminUrl]) :
     this.router.navigate([environment.afterLoginRedirectUrl]);
   }

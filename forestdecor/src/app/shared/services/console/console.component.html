@@ -1,0 +1,7 @@
+<div class="alert alert-{{console.style || 'danger'}} fixed-bottom" @fade role="alert" *ngIf="console">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="h4">{{console.title}}</div>
+  <div class="h6 small">{{console.message}}</div>
+</div>

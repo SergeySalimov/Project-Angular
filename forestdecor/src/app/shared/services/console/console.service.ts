@@ -7,28 +7,28 @@ import { CustomConsole } from './customConsole';
 })
 export class ConsoleService {
 
-  private _errorsSubject: BehaviorSubject<CustomConsole> = new BehaviorSubject<CustomConsole>(null);
+  private _consoleSubject: BehaviorSubject<CustomConsole> = new BehaviorSubject<CustomConsole>(null);
 
   constructor() { }
 
+  setConsole(console: CustomConsole) {
+    this._consoleSubject.next(console);
+  }
+
+  get console() {
+    return this._consoleSubject;
+  }
+
   showInfoMessage(customConsole: CustomConsole, timer: number = 8000) {
-    this.setError(customConsole);
+    this.setConsole(customConsole);
     if (timer !== 0) {
       setTimeout(() => {
-        this.hideError();
+        this.hideConsole();
       }, timer);
     }
   }
 
-  setError(error: CustomConsole) {
-    this._errorsSubject.next(error);
-  }
-
-  get error() {
-    return this._errorsSubject;
-  }
-
-  hideError() {
-    this._errorsSubject.next(null);
+  hideConsole() {
+    this._consoleSubject.next(null);
   }
 }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { DotPipe } from './pipes/dot.pipe';
 import { PhoneBYPipe } from './pipes/phone-by.pipe';
-import { ConsoleComponent } from './console/console.component';
+import { ConsoleComponent } from './services/console/console.component';
 
 @NgModule({
   declarations: [

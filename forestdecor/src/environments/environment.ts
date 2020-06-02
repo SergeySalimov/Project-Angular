@@ -8,6 +8,7 @@ export const environment = {
   authUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=', // sign in
   registrUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=', // sign up
   recvUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=', //Send password reset email
+  bucketUrl: 'gs://prj-forestdecor.appspot.com/',
   refreshTokenUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=', //exchange a custom Auth token for an ID and refresh token
   afterLoginRedirectUrl: '/',
   afterLoginRedirectAdminUrl: '/messages',
