@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="col-xs-12 col-sm-6 text-center text-sm-right" *ngIf="user$ | async">
-        <i class="icon-user"><a>{{(user$ | async).name}}</a></i>
+        <i class="icon-user"><a>{{(user$ | async).name | dot: 29}}</a></i>
       </div>
     </div>
   </div>

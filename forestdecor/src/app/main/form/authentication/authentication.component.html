@@ -19,6 +19,7 @@
            class="form-control"
            id="authorEmail"
            placeholder="Email"
+           maxlength="50"
            required
            aria-describedby="authorEmailHelpBlock">
     <div class="invalid-feedback">Введите корректный email.</div>
@@ -42,6 +43,7 @@
            id="authorPswd"
            placeholder="Пароль"
            minlength="6"
+           maxlength="30"
            [disabled]="isRecovery"
            required
            aria-describedby="authorPswdHelpBlock">

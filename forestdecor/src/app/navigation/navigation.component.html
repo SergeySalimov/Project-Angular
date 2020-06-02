@@ -37,7 +37,7 @@
       </button>
       <div class="dropdown-menu dropdown-menu-right"
            [ngClass]="{'show': showDropdown}">
-        <a class="dropdown-item" (click)="userLogout()">Выйти из {{(user$ | async).email}}</a>
+        <a class="dropdown-item" (click)="userLogout()">Выйти из {{(user$ | async).email | dot: 30}}</a>
         <a class="dropdown-item cancel" (click)="showDropdown = false">Отменить</a>
       </div>
     </div>

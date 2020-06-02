@@ -10,6 +10,7 @@
     </div>
     <input type="email"
            class="form-control"
+           maxlength="50"
            id="registrEmail"
            [ngModel]="email"
            email
@@ -33,6 +34,7 @@
     <input type="text"
            [ngModel]="name"
            minlength="2"
+           maxlength="50"
            name="registName"
            #registName="ngModel"
            class="form-control"
@@ -87,6 +89,7 @@
              id="registrPswd"
              placeholder="Пароль"
              minlength="6"
+             maxlength="30"
              required
              aria-describedby="registrPswdHelpBlock">
       <div class="invalid-feedback">{{registrPsw1.value?.length}} / 6(мин) Введите минимум 6 символов.</div>
@@ -108,6 +111,7 @@
              id="registrPswd2"
              placeholder="Пароль"
              minlength="6"
+             maxlength="30"
              required
              aria-describedby="registrPswdHelpBlock2">
       <div class="invalid-feedback">{{registrPsw2.value?.length}} / 6(мин) Введите минимум 6 символов.</div>
