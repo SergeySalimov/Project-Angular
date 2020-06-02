@@ -11,7 +11,7 @@ export class ConsoleService {
 
   constructor() { }
 
-  showInfoMessage(customConsole: CustomConsole, timer: number = 4000) {
+  showInfoMessage(customConsole: CustomConsole, timer: number = 8000) {
     this.setError(customConsole);
     if (timer !== 0) {
       setTimeout(() => {

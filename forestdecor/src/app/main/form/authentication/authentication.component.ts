@@ -54,17 +54,18 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
 
   onAuthSubmit(form: NgForm) {
     const email = form.value.authEmail;
-    const $authObs = this.isRecovery ? this.auth.recovery(email) : this.auth.authentication(email, form.value.authPsw);
+    const isRecovery = this.isRecovery;
+    const $authObs = isRecovery ? this.auth.recovery(email) : this.auth.authentication(email, form.value.authPsw);
     $authObs.subscribe((response) => {
         this.authForm.resetForm();
       },
       () => this.authForm.controls['authPsw'].reset(),
-      () => this.console.showInfoMessage(
-        {
+      () => {
+      if (isRecovery) this.console.showInfoMessage({
           title: 'Проверьте Вашу почту',
           message: 'Вам на почту было выслано письмо с ссылкой для изменения пароля',
           style: 'success'
-        }, 10000)
+        }, 10000)}
     );
   }
 
