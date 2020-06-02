@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CustomError } from './customError';
+import { CustomConsole } from './customConsole';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ErrorsService {
+export class ConsoleService {
 
-  private _errorsSubject: BehaviorSubject<CustomError> = new BehaviorSubject<CustomError>(null);
+  private _errorsSubject: BehaviorSubject<CustomConsole> = new BehaviorSubject<CustomConsole>(null);
 
   constructor() { }
 
-  showError(error: CustomError, timer: number = 4000) {
-    this.setError(error);
+  showInfoMessage(customConsole: CustomConsole, timer: number = 4000) {
+    this.setError(customConsole);
     if (timer !== 0) {
       setTimeout(() => {
         this.hideError();
@@ -20,7 +20,7 @@ export class ErrorsService {
     }
   }
 
-  setError(error: CustomError) {
+  setError(error: CustomConsole) {
     this._errorsSubject.next(error);
   }
 
