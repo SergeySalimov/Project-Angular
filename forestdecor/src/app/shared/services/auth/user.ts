@@ -17,6 +17,4 @@ export class User {
     }
     return null;
   }
-
-
 }

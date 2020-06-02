@@ -14,7 +14,6 @@ import { AuthResponse } from './auth-response';
 export class AuthService {
 
   private _admins: string[];
-
   private _user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(private router: Router, private http: HttpClient) {

@@ -7,6 +7,7 @@ import { MaterialModule } from './material/material-module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorsInterceptor } from './shared/interceptors/errors.interceptor';
 import { LoaderInterceptor } from './shared/interceptors/loader.interceptor';
+import { AddTokenInterceptor } from './shared/interceptors/add-token.interceptor';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
@@ -47,6 +48,7 @@ import { ContactsComponent, DeliveryComponent, ErrorPageComponent, HomeComponent
     AngularFireStorageModule,
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorsInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: BUCKET, useValue: 'gs://prj-forestdecor.appspot.com/'}
