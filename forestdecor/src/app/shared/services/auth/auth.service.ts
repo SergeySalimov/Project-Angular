@@ -7,6 +7,7 @@ import { environment } from '../../../../environments/environment';
 import { tap } from 'rxjs/operators';
 import { User } from './user';
 import { AuthResponse } from './auth-response';
+import { ConsoleService } from '../../console/console.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthService {
   private _admins: string[];
   private _user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private http: HttpClient, private consoleService: ConsoleService) {
   }
 
   get user() {
@@ -29,6 +30,8 @@ export class AuthService {
 
   logout() {
     this._user.next(null);
+    localStorage.removeItem(environment.USER_KEY_IN_LOCAL_STORAGE);
+    this.router.navigate(['/']);
   }
 
   getAdminsFromServer() {
@@ -60,6 +63,45 @@ export class AuthService {
       {requestType: 'PASSWORD_RESET', email}, {headers});
   }
 
+  autoLogin() {
+    let storageUser: { email: string, name: string, phone: string, isAdmin: boolean, id: string, _token: string,
+      _expirationDate: Date, _refreshToken: string};
+
+    if (localStorage.getItem(environment.USER_KEY_IN_LOCAL_STORAGE)) {
+      storageUser = JSON.parse(localStorage.getItem(environment.USER_KEY_IN_LOCAL_STORAGE));
+    } else {
+      return false;
+    }
+
+    if (storageUser.isAdmin) {
+      storageUser.isAdmin = this.admins.includes(storageUser.email);
+    }
+
+    const loadedUser: User = new User(
+      storageUser.email,
+      storageUser.name,
+      storageUser.phone,
+      storageUser. isAdmin,
+      storageUser.id,
+      storageUser._token,
+      new Date(storageUser._expirationDate),
+      storageUser._refreshToken,
+    );
+
+    if (loadedUser.token) {
+      const duration = (new Date(storageUser._expirationDate)).getTime() - (new Date()).getTime();
+      this.autoLogout(duration);
+      this._user.next(loadedUser);
+    }
+  }
+
+  autoLogout(duration: number) {
+    setTimeout(() => {
+      this.logout();
+      this.consoleService.showInfoMessage({title: 'Вы были разлогинены', message: 'Время истекло', style: 'warning'}, 0)
+    }, duration);
+  }
+
   private _loginHandler(data: AuthResponse) {
     const expirationDate: Date = new Date(new Date().getTime() + Number(data.expiresIn) * 1000);
     const nameAndPhone: string[] = data.displayName.split(environment.dividerForDisplayName);
@@ -74,6 +116,8 @@ export class AuthService {
       data.refreshToken,
     );
     this._user.next(user);
+    localStorage.setItem(environment.USER_KEY_IN_LOCAL_STORAGE, JSON.stringify(user));
+    this.autoLogout(Number(data.expiresIn) * 1000)
     user.isAdmin ? this.router.navigate([environment.afterLoginRedirectAdminUrl]) :
     this.router.navigate([environment.afterLoginRedirectUrl]);
   }

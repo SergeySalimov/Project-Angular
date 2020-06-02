@@ -1,13 +1,10 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
-import { distinctUntilChanged, exhaustMap, filter, map, mergeMap, tap } from 'rxjs/operators';
-import { forkJoin, Observable, of, Subscription } from 'rxjs';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../../../shared/services/auth/auth.service';
-import { UserData } from '../../../shared/models/userData';
-import { AuthResponse } from '../../../shared/services/auth/auth-response';
-import { SpinnerService } from '../../../shared/components/spinner/spinner.service';
-import { HttpHeaders } from '@angular/common/http';
+import { ConsoleService } from '../../../shared/console/console.service';
 
 @Component({
   selector: 'app-authentication',
@@ -26,7 +23,7 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     private Activatedroute: ActivatedRoute,
     private router: Router,
     private auth: AuthService,
-    private spinner: SpinnerService,
+    private console: ConsoleService,
   ) {
     const children: ActivatedRouteSnapshot = Activatedroute.snapshot.firstChild;
     this.isRecovery = (!!children);
@@ -58,10 +55,16 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   onAuthSubmit(form: NgForm) {
     const email = form.value.authEmail;
     const $authObs = this.isRecovery ? this.auth.recovery(email) : this.auth.authentication(email, form.value.authPsw);
-    $authObs.subscribe( (response) => {
-      this.authForm.resetForm();
-    },
-        () => this.authForm.controls['authPsw'].reset()
+    $authObs.subscribe((response) => {
+        this.authForm.resetForm();
+      },
+      () => this.authForm.controls['authPsw'].reset(),
+      () => this.console.showInfoMessage(
+        {
+          title: 'Проверьте Вашу почту',
+          message: 'Вам на почту было выслано письмо с ссылкой для изменения пароля',
+          style: 'success'
+        }, 10000)
     );
   }
 
