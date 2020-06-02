@@ -27,18 +27,18 @@ export class AuthService {
     return [...this._admins];
   }
 
+  logout() {
+    this._user.next(null);
+  }
+
   getAdminsFromServer() {
     return this.http.get<string[]>(`${environment.firebase.databaseURL}/admins.json`).pipe(
       tap((admins: string[]) => this._admins = [...admins]),
     );
   }
 
-  logout() {
-    this._user.next(null);
-  }
-
   registration(userData: UserData, password: string) {
-    const headers: HttpHeaders = new HttpHeaders({'X-loader': 'spinnerNeeded'});
+    const headers: HttpHeaders = new HttpHeaders({[environment.GLOBAL_SPINNER]: 'spinnerNeeded'});
     const displayName = `${userData.name}${environment.dividerForDisplayName}${userData.phone}`;
     return this.http.post(`${environment.registrUrl}${environment.firebase.apiKey}`,
       {email: userData.email, password, displayName, returnSecureToken: true}, {headers}).pipe(
@@ -47,8 +47,7 @@ export class AuthService {
   }
 
   authentication(email: string, password: string) {
-    // const loader = environment.globalSpinnerName;
-    const headers: HttpHeaders = new HttpHeaders({'X-loader': 'spinnerNeeded'});
+    const headers: HttpHeaders = new HttpHeaders({[environment.GLOBAL_SPINNER]: 'spinnerNeeded'});
     return this.http.post(`${environment.authUrl}${environment.firebase.apiKey}`,
       {email, password, returnSecureToken: true}, {headers}).pipe(
       tap((data: AuthResponse) => this._loginHandler(data)),
@@ -56,7 +55,7 @@ export class AuthService {
   }
 
   recovery(email: string) {
-    const headers: HttpHeaders = new HttpHeaders({'X-loader': 'spinnerNeeded'});
+    const headers: HttpHeaders = new HttpHeaders({[environment.GLOBAL_SPINNER]: 'spinnerNeeded'});
     return this.http.post(`${environment.recvUrl}${environment.firebase.apiKey}`,
       {requestType: 'PASSWORD_RESET', email}, {headers});
   }
@@ -78,5 +77,4 @@ export class AuthService {
     user.isAdmin ? this.router.navigate([environment.afterLoginRedirectAdminUrl]) :
     this.router.navigate([environment.afterLoginRedirectUrl]);
   }
-
 }

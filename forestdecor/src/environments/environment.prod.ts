@@ -7,7 +7,7 @@ export const environment = {
   afterLoginRedirectUrl: '/',
   afterLoginRedirectAdminUrl: '/messages',
   dividerForDisplayName: '-|-',
-  globalSpinnerName: {'X-loader': 'spinnerNeeded'},
+  GLOBAL_SPINNER: 'X-loader',
   firebase: {
     apiKey: "AIzaSyDIGANkFkG2s7bszuIFcyJrByruYVSsYPg",
     authDomain: "prj-forestdecor.firebaseapp.com",
