@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NavigationComponent } from './navigation.component';
 import { NavigationLinkComponent } from './navigation-link/navigation-link.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { NavigationLinkComponent } from './navigation-link/navigation-link.compo
   exports: [NavigationComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([])
+    RouterModule.forChild([]),
+    SharedModule,
   ]
 })
 export class NavigationModule { }

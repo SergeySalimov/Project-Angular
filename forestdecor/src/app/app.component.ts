@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from './shared/services/auth/user';
+import { AuthService } from './shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +10,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent{
 
-  isLoading = false;
   title = 'forestdecor';
+  user$: Observable<User> = this.auth.user;
+
+  constructor(public auth: AuthService) {
+  }
 
 }

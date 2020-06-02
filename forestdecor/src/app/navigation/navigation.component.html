@@ -1,4 +1,6 @@
-<nav class="nav1 navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="nav1 navbar navbar-expand-md navbar-dark bg-info"
+     [class.bg-dark]="!(user$ | async)?.isAdmin"
+     [class.bg-danger]="(user$ | async)?.isAdmin">
   <div class="container form-inline">
 
     <a class="navbar-brand home-page-btn active"
@@ -17,21 +19,28 @@
 
     <app-navigation-link class="navbar-collapse"
                          (needToCollapse)="doCollapse()"
-                         [ngClass]="{'collapse': collapse}"
-    ></app-navigation-link>
+                         [ngClass]="{'collapse': collapse}">
+    </app-navigation-link>
 
-    <a class="navbar-brand btn-nav-registration"
-       *ngIf="!authService.isLogged"
+    <a class="navbar-brand btn-nav"
+       *ngIf="!(user$ | async)"
        [routerLink]="['/form']"
        [routerLinkActive]="'active'">
       <i class="icon-login" style="font-size: 2rem"></i>
     </a>
-    <a class="navbar-brand btn-nav-log-out btn-nav-registration"
-       *ngIf="authService.isLogged"
-       (click)="authService.logout()"
-    >
-      <i class="icon-logout" style="font-size: 2rem"></i>
-    </a>
+
+    <div class="dropdown" [ngClass]="{'show': showDropdown}" *ngIf="user$ | async">
+      <button class="btn btn-secondary dropdown-toggle"
+              (click)="showDropdown = !showDropdown"
+              (focusout)="hideDropDown()">
+              <i class="icon-logout" style="font-size: 2rem"></i>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right"
+           [ngClass]="{'show': showDropdown}">
+        <a class="dropdown-item" (click)="userLogout()">Выйти из {{(user$ | async).email | dot: 30}}</a>
+        <a class="dropdown-item cancel" (click)="showDropdown = false">Отменить</a>
+      </div>
+    </div>
 
   </div>
 </nav>

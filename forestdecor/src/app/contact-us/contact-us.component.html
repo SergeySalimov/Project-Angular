@@ -1,4 +1,4 @@
-<ng-container *ngIf="!(['form', 'catalog', '404'].includes(curRoute))">
+<ng-container *ngIf="!(['form', 'catalog', '404', 'messages'].includes(curRoute))">
   <div class="container my-4">
     <div class="row">
       <div class="col-sm-12 offset-md-2 col-md-8">
@@ -12,10 +12,10 @@
               <input matInput
                      type="text"
                      formControlName="name"
-                     maxlength="100"
+                     maxlength="50"
                      placeholder="Имя (Фамилия)">
               <mat-hint align="end" [ngClass]="{'invalid-hint': nameState.invalid && nameState.dirty, 'valid-hint': nameState.valid}">
-                {{name.length || 0}}/100
+                {{name.length || 0}}/50
               </mat-hint>
               <app-btn-close (click)="formContactUs.patchValue({name: ''})" matSuffix *ngIf="name.length > 0"></app-btn-close>
             </mat-form-field>
@@ -27,7 +27,7 @@
                 <mat-label>Email</mat-label>
                 <input matInput
                        type="email"
-
+                       maxlength="50"
                        formControlName="email"
                        placeholder="pat@example.com">
                 <app-btn-close (click)="formContactUs.patchValue({email: ''})" matSuffix *ngIf="email.length > 0"></app-btn-close>

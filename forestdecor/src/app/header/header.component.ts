@@ -1,19 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../shared/services/auth/auth.service';
+import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
+import { User } from '../shared/services/auth/user';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  isLogged: boolean;
+  user$: Observable<User> = this.auth.user;
+  phoneNumber = environment.phoneNumber;
 
-  constructor(public readonly authService: AuthService) { }
-
-  ngOnInit(): void {
-    this.isLogged = this.authService.isLogged;
+  constructor(public auth: AuthService) {
   }
 
 }

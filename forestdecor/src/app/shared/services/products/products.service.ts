@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Product } from '../../models/product.model';
 import { ProductPlacer } from '../../models/productsPlacer';
 import { environment } from '../../../../environments/environment';
-import { Observable, Subscription } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { exhaustMap, mergeMap, take, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,27 +15,34 @@ export class ProductsService {
   private _products: Product[];
   private accumulator: Product[];
   private productsPlacer: ProductPlacer[] = [];
-  private getProductsSubscription: Subscription;
 
-  constructor(private http: HttpClient) {
-    this.getProductsFromServer().pipe(take(1)).subscribe(() => this.createAllUrls());
+  constructor(private http: HttpClient, private auth: AuthService) {
+    this.getProductsFromServer().pipe(
+      take(1),
+      exhaustMap(() => this.auth.getAdminsFromServer()),
+      ).subscribe(() => {
+        this.auth.autoLogin();
+    });
+  }
+
+  get products() {
+    return [...this._products];
   }
 
   getProductsFromServer(): Observable<Product[]> {
     return this.http.get<Product[]>(`${environment.firebase.databaseURL}/products.json`).pipe(
       tap((prd: Product[]) => this._products = [...prd]),
+      tap(() => this.createAllUrls()),
     );
-  }
-
-  createAllUrls() {
-    console.time('urlsCreate');
-    this.createPlacingProduct('all', 'весь каталог');
-    this.createUrlsInformation();
-    console.timeEnd('urlsCreate');
   }
 
   getProductUrlInfo(url): ProductPlacer {
     return this.productsPlacer.filter(item => item.urlName === url)[0];
+  }
+
+  createAllUrls() {
+    this.createPlacingProduct('all', 'весь каталог');
+    this.createUrlsInformation();
   }
 
   createUrlsInformation(data: Product[] = this._products, parents: string[] = []): void {
@@ -88,9 +96,4 @@ export class ProductsService {
       item.children ? this.parsingProducts(item.children) : this.accumulator.push(item);
     }
   }
-
-  get products() {
-    return [...this._products];
-  }
-
 }

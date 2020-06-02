@@ -15,10 +15,11 @@
            email
            #authEmail="ngModel"
            name="authEmail"
-           [ngClass]="{'is-valid': authEmail.valid && authEmail.touched, 'is-invalid': authEmail.invalid && authEmail.touched}"
+           [ngClass]="{'is-valid': authEmail.valid && authEmail.dirty, 'is-invalid': authEmail.invalid && authEmail.dirty}"
            class="form-control"
            id="authorEmail"
            placeholder="Email"
+           maxlength="50"
            required
            aria-describedby="authorEmailHelpBlock">
     <div class="invalid-feedback">Введите корректный email.</div>
@@ -37,11 +38,12 @@
            ngModel
            name="authPsw"
            #authPsw="ngModel"
-           [ngClass]="{'is-valid': authPsw.valid && authPsw.touched, 'is-invalid': authPsw.invalid && authPsw.touched}"
+           [ngClass]="{'is-valid': authPsw.valid && authPsw.dirty, 'is-invalid': authPsw.invalid && authPsw.dirty}"
            class="form-control"
            id="authorPswd"
            placeholder="Пароль"
            minlength="6"
+           maxlength="30"
            [disabled]="isRecovery"
            required
            aria-describedby="authorPswdHelpBlock">
@@ -61,14 +63,10 @@
   </div>
   <hr/>
 
-  <!--  <div class="place-for-alert-auth"></div>-->
-
   <button type="submit"
           [disabled]="authForm.invalid"
-          [ngClass]="{ 'btn-danger': authForm.invalid,
-                       'btn-success': !authForm.invalid }"
+          [ngClass]="{ 'btn-danger': authForm.invalid, 'btn-success': !authForm.invalid }"
           class="btn mt-3">
-    <!--    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>-->
     Отправить данные
   </button>
 

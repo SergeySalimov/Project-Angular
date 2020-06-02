@@ -5,11 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PhoneBYPipe implements PipeTransform {
 
-  transform(value: number | string | null, cut = true): string {
+  transform(value: number | string | null): string {
     let newVal = '';
     if (value !== null && value) {
       newVal = value.toString().replace(/\D/g, '');
-      if (cut) newVal = newVal.substring(0, 9);
 
       if (newVal.length === 0) {
         newVal = '';

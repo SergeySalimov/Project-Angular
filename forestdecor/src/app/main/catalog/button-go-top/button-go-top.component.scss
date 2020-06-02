@@ -8,10 +8,11 @@
     position: fixed;
     z-index: 2000;
     right: 6px;
+    bottom: 30px;
     @media (min-width: map-get($grid-breakpoints, "sm")) {
       left: 12%;
+      bottom: 0;
     }
-    bottom: 0;
     display: block;
     width: 90px;
     height: 90px;
