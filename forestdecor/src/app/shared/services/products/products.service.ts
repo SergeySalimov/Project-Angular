@@ -20,7 +20,9 @@ export class ProductsService {
     this.getProductsFromServer().pipe(
       take(1),
       exhaustMap(() => this.auth.getAdminsFromServer()),
-      ).subscribe(() => {});
+      ).subscribe(() => {
+        this.auth.autoLogin();
+    });
   }
 
   get products() {

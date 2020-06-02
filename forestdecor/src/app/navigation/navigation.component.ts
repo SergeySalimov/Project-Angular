@@ -19,6 +19,7 @@ export class NavigationComponent{
 
   userLogout() {
     this.auth.logout();
+    return false;
   }
 
   hideDropDown() {
