@@ -37,6 +37,12 @@ export class AuthService {
   getAdminsFromServer() {
     return this.http.get<string[]>(`${environment.firebase.databaseURL}/admins.json`).pipe(
       tap((admins: string[]) => this._admins = [...admins]),
+      tap((admins: string[]) => {
+          if (this._user.getValue().isAdmin && !admins.includes(this._user.getValue().email)) {
+            this.logout();
+          }
+        }
+      )
     );
   }
 
@@ -64,8 +70,10 @@ export class AuthService {
   }
 
   autoLogin() {
-    let storageUser: { email: string, name: string, phone: string, isAdmin: boolean, id: string, _token: string,
-      _expirationDate: Date, _refreshToken: string};
+    let storageUser: {
+      email: string, name: string, phone: string, isAdmin: boolean, id: string, _token: string,
+      _expirationDate: Date, _refreshToken: string
+    };
 
     if (localStorage.getItem(environment.USER_KEY_IN_LOCAL_STORAGE)) {
       storageUser = JSON.parse(localStorage.getItem(environment.USER_KEY_IN_LOCAL_STORAGE));
@@ -73,15 +81,11 @@ export class AuthService {
       return false;
     }
 
-    if (storageUser.isAdmin) {
-      storageUser.isAdmin = this.admins.includes(storageUser.email);
-    }
-
     const loadedUser: User = new User(
       storageUser.email,
       storageUser.name,
       storageUser.phone,
-      storageUser. isAdmin,
+      storageUser.isAdmin,
       storageUser.id,
       storageUser._token,
       new Date(storageUser._expirationDate),
@@ -119,6 +123,6 @@ export class AuthService {
     localStorage.setItem(environment.USER_KEY_IN_LOCAL_STORAGE, JSON.stringify(user));
     this.autoLogout(Number(data.expiresIn) * 1000);
     user.isAdmin ? this.router.navigate([environment.afterLoginRedirectAdminUrl]) :
-    this.router.navigate([environment.afterLoginRedirectUrl]);
+      this.router.navigate([environment.afterLoginRedirectUrl]);
   }
 }

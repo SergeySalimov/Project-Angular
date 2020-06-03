@@ -10,7 +10,7 @@ export const environment = {
   recvUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=', //Send password reset email
   bucketUrl: 'gs://prj-forestdecor.appspot.com/',
   refreshTokenUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=', //exchange a custom Auth token for an ID and refresh token
-  afterLoginRedirectUrl: '/',
+  afterLoginRedirectUrl: '/catalog',
   afterLoginRedirectAdminUrl: '/messages',
   dividerForDisplayName: '-|-',
   GLOBAL_SPINNER: 'X-loader',
