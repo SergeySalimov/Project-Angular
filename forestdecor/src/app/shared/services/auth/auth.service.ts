@@ -38,7 +38,7 @@ export class AuthService {
     return this.http.get<string[]>(`${environment.firebase.databaseURL}/admins.json`).pipe(
       tap((admins: string[]) => this._admins = [...admins]),
       tap((admins: string[]) => {
-          if (this._user.getValue().isAdmin && !admins.includes(this._user.getValue().email)) {
+          if (this._user.getValue()?.isAdmin && !admins.includes(this._user.getValue().email)) {
             this.logout();
           }
         }
