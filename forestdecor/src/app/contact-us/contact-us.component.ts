@@ -7,6 +7,7 @@ import { UserData } from '../shared/models/userData';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../shared/services/auth/auth.service';
 import { User } from '../shared/services/auth/user';
+import { ConsoleService } from '../shared/services/console/console.service';
 
 @Component({
   selector: 'app-contact-us',
@@ -15,18 +16,20 @@ import { User } from '../shared/services/auth/user';
 })
 export class ContactUsComponent implements OnInit, OnDestroy {
 
-  curRoute: string;
   formContactUs: FormGroup;
+  user: User;
+  curRoute: string;
   isRegisterAfter: boolean;
-  isUserNotLog = true;
-  isUserAdmin = false;
   phoneSubscr: Subscription;
-  routerSubscription: Subscription;
+  routerSubscr: Subscription;
   auhtSubscr: Subscription;
 
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
 
-  constructor(private router: Router, private contactUs: ContactUsService, private auth: AuthService) {
+  constructor(private router: Router,
+              private contactUs: ContactUsService,
+              private console: ConsoleService,
+              private auth: AuthService) {
   }
 
   ngOnInit(): void {
@@ -39,17 +42,15 @@ export class ContactUsComponent implements OnInit, OnDestroy {
           this.emailState.updateValueAndValidity();
         });
 
-    this.routerSubscription = this.router.events.pipe(
+    this.routerSubscr = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       map(event => (event as NavigationEnd).urlAfterRedirects),
       distinctUntilChanged(),
       map(strUrl => strUrl.split('/')[1]))
       .subscribe((route: string) => this.curRoute = route);
 
-    this.auhtSubscr = this.auth.user.pipe(
-      tap(user => !!user ? [this.isUserNotLog, this.isUserAdmin]=[false, user.isAdmin] :
-        [this.isUserNotLog, this.isUserAdmin]=[true, false]))
-      .subscribe((user: User) => ((!!user && !this.isUserAdmin) || !user) ? this.patchUserData(user) : null);
+    this.auhtSubscr = this.auth.user.pipe( tap(user => this.user = user))
+      .subscribe((user: User) => ((!!user && !this.user.isAdmin) || !user) ? this.patchUserData() : null);
   }
 
   get name() {
@@ -89,7 +90,14 @@ export class ContactUsComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.isRegisterAfter = this.formContactUs.value.isRegisterAfter;
-    this.contactUs.sendMessage(this.formContactUs.value)
+    this.contactUs.sendMessage(this.formContactUs.value).pipe(
+      tap(() => this.console.showInfoMessage(
+        {
+          title: 'Ваше сообщение было отправлено',
+          message: 'Ваше сообщение было отправлено',
+          style: 'success'})
+      )
+    )
       .subscribe(() => {
         if (this.isRegisterAfter) {
           const forQueryParams = this.formContactUs.value;
@@ -98,6 +106,7 @@ export class ContactUsComponent implements OnInit, OnDestroy {
           this.router.navigate(['/form', 'registration'], { queryParams: (forQueryParams as UserData)})
         }
         this.resetForm();
+        if (this.user) this.patchUserData();
       });
   }
 
@@ -105,20 +114,14 @@ export class ContactUsComponent implements OnInit, OnDestroy {
     this.formGroupDirective.resetForm();
   }
 
-  patchUserData(user: User) {
-    console.log('srabotalo');
-    if (!!user) {
-      const [name, email, phone] = [user.name, user.email, user.phone];
-      this.formContactUs.patchValue({name, email, phone})
-    } else {
+  patchUserData() {
+    !!this.user ? this.formContactUs.patchValue({name: this.user.name, email: this.user.email, phone: this.user.phone}) :
       this.formContactUs.reset();
-    }
   }
-
 
   ngOnDestroy(): void {
     this.phoneSubscr.unsubscribe();
-    this.routerSubscription.unsubscribe();
+    this.routerSubscr.unsubscribe();
     this.auhtSubscr.unsubscribe();
   }
 
