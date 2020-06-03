@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AddTokenInterceptor } from './shared/interceptors/add-token.interceptor';
-import { ErrorsInterceptor } from './shared/interceptors/errors.interceptor';
-import { LoaderInterceptor } from './shared/interceptors/loader.interceptor';
+import { AddTokenInterceptor } from './add-token.interceptor';
+import { ErrorsInterceptor } from './errors.interceptor';
+import { LoaderInterceptor } from './loader.interceptor';
 
 export const INTERCEPTORS = [
   {provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true},

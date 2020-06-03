@@ -17,7 +17,6 @@ import { FooterModule } from './footer/footer.module';
 import { LoginModule } from './main/form/login.module';
 import { MessagesModule } from './main/messages/messages.module';
 import { ContactsComponent, DeliveryComponent, ErrorPageComponent, HomeComponent, PaymentComponent } from './main';
-import { INTERCEPTORS } from './interceptors';
 
 @NgModule({
   declarations: [
@@ -46,7 +45,6 @@ import { INTERCEPTORS } from './interceptors';
     AngularFireStorageModule,
   ],
   providers: [
-    ...INTERCEPTORS,
     { provide: BUCKET, useValue: environment.bucketUrl}
   ],
   bootstrap: [AppComponent]
