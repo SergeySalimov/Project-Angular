@@ -95,7 +95,7 @@ export class ContactUsComponent implements OnInit, OnDestroy {
         {
           title: 'Ваше сообщение было отправлено',
           message: 'Ваше сообщение было отправлено',
-          style: 'success'})
+          style: 'success'}, 5000)
       )
     )
       .subscribe(() => {
@@ -106,12 +106,12 @@ export class ContactUsComponent implements OnInit, OnDestroy {
           this.router.navigate(['/form', 'registration'], { queryParams: (forQueryParams as UserData)})
         }
         this.resetForm();
-        if (this.user) this.patchUserData();
       });
   }
 
   resetForm() {
     this.formGroupDirective.resetForm();
+    if (this.user) this.patchUserData();
   }
 
   patchUserData() {
