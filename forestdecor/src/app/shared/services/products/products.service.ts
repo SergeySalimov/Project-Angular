@@ -17,12 +17,11 @@ export class ProductsService {
   private productsPlacer: ProductPlacer[] = [];
 
   constructor(private http: HttpClient, private auth: AuthService) {
+    this.auth.autoLogin();
     this.getProductsFromServer().pipe(
       take(1),
       exhaustMap(() => this.auth.getAdminsFromServer()),
-      ).subscribe(() => {
-        this.auth.autoLogin();
-    });
+      ).subscribe(() => {});
   }
 
   get products() {
