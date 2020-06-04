@@ -29,7 +29,7 @@
       <i class="icon-login" style="font-size: 2rem"></i>
     </a>
 
-    <div class="dropdown" [ngClass]="{'show': showDropdown}" *ngIf="user$ | async">
+    <div [class]="(user$ | async)?.isAdmin ? 'dropleft' :'dropdown'" [ngClass]="{'show': showDropdown}" *ngIf="user$ | async">
       <button class="btn btn-secondary dropdown-toggle"
               (click)="showDropdown = !showDropdown"
               (focusout)="hideDropDown()">

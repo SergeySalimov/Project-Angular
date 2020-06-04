@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-messages-headers',
-  templateUrl: './messages-headers.component.html',
-  styleUrls: ['./messages-headers.component.scss']
+  selector: 'app-messages-controls',
+  templateUrl: './messages-controls.component.html',
+  styleUrls: ['./messages-controls.component.scss']
 })
-export class MessagesHeadersComponent implements OnInit {
+export class MessagesControlsComponent implements OnInit {
 
   // curCategories: string = 'Новые';
   // categories: string[] = ['Все', 'Новые', 'Прочитанные', 'Удаленные'];
 
-  messageNavigation = new FormGroup({
+  messageNav = new FormGroup({
     categorie: new FormControl('new'),
     selectAll: new FormControl(),
   });

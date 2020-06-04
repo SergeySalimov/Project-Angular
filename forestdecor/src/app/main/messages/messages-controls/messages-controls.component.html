@@ -1,12 +1,12 @@
 <div class="control-messages">
       <div class="list-group list-group-horizontal-sm">
-          <form [formGroup]="messageNavigation">
+          <form [formGroup]="messageNav">
             <input type="radio" formControlName="categorie" value="all" id="all"><label for="all"><span>Все</span></label>
             <input type="radio" formControlName="categorie" value="new" id="new"><label for="new"><span>Нов</span></label>
             <input type="radio" formControlName="categorie" value="readed" id="readed"><label for="readed"><span>Прочит</span></label>
             <input type="radio" formControlName="categorie" value="deleted" id="deleted"><label for="deleted"><span>Удал</span></label>
             <input type="checkbox" formControlName="selectAll" class="ml-4">
-            <i class="icon-trash-1 mb-1 btn" formControlName="deleteBtn"></i>
+            <i class="icon-trash-1 mb-1 btn"></i>
           </form>
 
 

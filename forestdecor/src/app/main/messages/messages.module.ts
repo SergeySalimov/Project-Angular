@@ -1,12 +1,17 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MessagesComponent } from './messages.component';
 import { AdminGuard } from '../../shared/services/auth/admin.guard';
 import { MaterialModule } from '../../material/material-module';
-import { MessagesHeadersComponent } from './messages-headers/messages-headers.component';
+import { MessagesControlsComponent } from './messages-controls/messages-controls.component';
 import { MessagesAccordeonComponent } from './messages-accordeon/messages-accordeon.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+import { SharedModule } from '../../shared/shared.module';
+
+registerLocaleData(localeRu, 'ru');
 
 const routes: Routes = [
   {path: 'messages', component: MessagesComponent, canActivate: [AdminGuard]}
@@ -15,15 +20,18 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     MessagesComponent,
-    MessagesHeadersComponent,
+    MessagesControlsComponent,
     MessagesAccordeonComponent
   ],
   imports: [
     CommonModule,
-    FormsModule,
     RouterModule.forChild(routes),
     MaterialModule,
     ReactiveFormsModule,
+    SharedModule,
+  ],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'ru' },
   ],
   exports: [
     RouterModule,
