@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactUsMsg } from '../../../shared/models/contactUsMsg.model';
-
-enum Categorie {
-  new,
-  readed,
-  deleted
-}
+import { Categorie } from '../../../shared/models/categories-of-messages';
 
 @Component({
   selector: 'app-messages-accordeon',

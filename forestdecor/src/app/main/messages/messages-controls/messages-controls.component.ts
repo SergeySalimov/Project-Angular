@@ -8,14 +8,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class MessagesControlsComponent implements OnInit {
 
-  // curCategories: string = 'Новые';
-  // categories: string[] = ['Все', 'Новые', 'Прочитанные', 'Удаленные'];
-
   messageNav = new FormGroup({
     categorie: new FormControl('new'),
     selectAll: new FormControl(),
   });
-
 
   constructor() { }
 

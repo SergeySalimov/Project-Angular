@@ -2,12 +2,13 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { ContactUsService } from './contact-us-service/contact-us.service';
 import { UserData } from '../shared/models/userData';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../shared/services/auth/auth.service';
 import { User } from '../shared/services/auth/user';
 import { ConsoleService } from '../shared/services/console/console.service';
+import { MsgsService } from '../shared/services/messages/msgs.service';
+import { Categorie } from '../shared/models/categories-of-messages';
 
 @Component({
   selector: 'app-contact-us',
@@ -27,7 +28,7 @@ export class ContactUsComponent implements OnInit, OnDestroy {
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
 
   constructor(private router: Router,
-              private contactUs: ContactUsService,
+              private contactUs: MsgsService,
               private console: ConsoleService,
               private auth: AuthService) {
   }
@@ -90,7 +91,7 @@ export class ContactUsComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.isRegisterAfter = this.formContactUs.value.isRegisterAfter;
-    this.contactUs.sendMessage(this.formContactUs.value).pipe(
+    this.contactUs.sendMessage(this.formContactUs.value, Categorie.new).pipe(
       tap(() => this.console.showInfoMessage(
         {
           title: 'Ваше сообщение было отправлено',
