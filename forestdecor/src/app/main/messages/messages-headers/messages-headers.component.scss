@@ -1,9 +1,46 @@
+@import "custom.variables";
 :host {
-  ul {
-    li {
-      span {
-        margin: 0 10px;
-      }
+
+  .control-messages {
+    input, label {
+      cursor: pointer;
     }
+
+    position: fixed;
+    top: 100px;
+    right: 40px;
+    font-size: 0.7rem;
+    z-index: 1111;
+    @media (min-width: map-get($grid-breakpoints, "sm")) {
+      font-size: 0.85rem;
+    }
+    @media (min-width: map-get($grid-breakpoints, "sm")) {
+      right: 15%;
+      font-size: 0.85rem;
+    }
+    @media (min-width: map-get($grid-breakpoints, "md")) {
+      right: 13%;
+      font-size: 1rem;
+    }
+    @media (min-width: map-get($grid-breakpoints, "lg")) {
+    right: 11%;
+    font-size: 1.1rem;
+  }
+    @media (min-width: map-get($grid-breakpoints, "xl")) {
+      right: 15.5%;
+      font-size: 1.2rem;
+    }
+    span {
+      margin-right: 5px;
+      margin-left: 2px;
+    }
+
+
+      i {
+        color: $red;
+        padding: 0;
+      }
+
+
   }
 }

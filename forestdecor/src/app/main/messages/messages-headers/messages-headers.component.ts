@@ -13,8 +13,9 @@ export class MessagesHeadersComponent implements OnInit {
 
   messageNavigation = new FormGroup({
     categorie: new FormControl('new'),
+    selectAll: new FormControl(),
   });
-  selectAll = new FormControl(true);
+
 
   constructor() { }
 
