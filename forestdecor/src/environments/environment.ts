@@ -14,6 +14,7 @@ export const environment = {
   afterLoginRedirectAdminUrl: '/messages',
   dividerForDisplayName: '-|-',
   GLOBAL_SPINNER: 'X-loader',
+  NEED_TOKEN: 'need-token',
   USER_KEY_IN_LOCAL_STORAGE: 'Active-user-in-forestdecor-app',
   firebase: {
     apiKey: "AIzaSyDIGANkFkG2s7bszuIFcyJrByruYVSsYPg",

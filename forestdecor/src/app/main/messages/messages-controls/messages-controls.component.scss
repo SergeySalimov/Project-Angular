@@ -2,12 +2,13 @@
 :host {
 
   .control-messages {
-    input, label {
+    input, label, i {
       cursor: pointer;
     }
 
+
     position: fixed;
-    top: 100px;
+    top: 95px;
     right: 40px;
     font-size: 0.7rem;
     z-index: 1111;
@@ -34,12 +35,18 @@
       margin-right: 5px;
       margin-left: 2px;
     }
+    button {
+      background-color: transparent;
+    }
 
-
-      i {
+      i.icon-trash-1 {
         color: $red;
         padding: 0;
       }
+
+    i.icon-spin3 {
+      font-size: 1.1rem;
+    }
 
 
   }

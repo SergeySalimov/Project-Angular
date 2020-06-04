@@ -8,8 +8,8 @@ import { MessagesControlsComponent } from './messages-controls/messages-controls
 import { MessagesAccordeonComponent } from './messages-accordeon/messages-accordeon.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
-import localeRu from '@angular/common/locales/ru';
 import { SharedModule } from '../../shared/shared.module';
+import localeRu from '@angular/common/locales/ru';
 
 registerLocaleData(localeRu, 'ru');
 

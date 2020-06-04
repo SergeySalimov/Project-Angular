@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ContactUsMsg } from '../../../shared/models/contactUsMsg.model';
+import { Message } from '../../../shared/models/message.model';
 import { Categorie } from '../../../shared/models/categories-of-messages';
+import { MsgsService } from '../../../shared/services/messages/msgs.service';
 
 @Component({
   selector: 'app-messages-accordeon',
@@ -10,24 +11,27 @@ import { Categorie } from '../../../shared/models/categories-of-messages';
 export class MessagesAccordeonComponent implements OnInit {
 
   msgIcon = ['mail', 'drafts', 'remove_circle'];
-  newMessages: ContactUsMsg[] = [
-    {name: '1212121', email: '1@1', date: +(new Date()), message: 'Beliberda dfdfdf dfg ddf gg g dfgdfgdgd', checked: false, categorie: Categorie.readed, phone: '2911111111'},
-    {name: '1212121', email: '1@1', date: +(new Date()), message: 'Beliberda dfdfdfdfd dfdssfdsf dsf dfg ddf gg g dfgdfgdgd', checked: false, categorie: Categorie.readed},
-    {name: '1212121', email: '1@1', date: +(new Date()), message: 'Beliberda dfdfdfdfd dfdssfdsf dsf dfg ddf gg g dfgdfgdgd', checked: false, categorie: Categorie.readed},
-    {name: '1212121', email: '1@1', date: +(new Date()), message: 'Beliberda dfdfdfdfd dfdssfdsf dsf dfg ddf gg g dfgdfgdgd', checked: false, categorie: Categorie.readed},
-    {name: '1212121', email: '1@1', date: +(new Date()), message: 'Beliberda dfdfdfdfd dfdssfdsf dsf dfg ddf gg g dfgdfgdgd', checked: false, categorie: Categorie.readed},
-    {name: '1212121', email: '1@1', date: +(new Date()), message: 'Beliberda dfdfdfdfd dfdssfdsf dsf dfg ddf gg g dfgdfgdgd', checked: false, categorie: Categorie.readed},
-    {name: '1212121', email: '1@1', date: +(new Date()), message: 'Beliberda dfdfdfdfd dfdssfdsf dsf dfg ddf gg g dfgdfgdgd', checked: false, categorie: Categorie.readed},
-    {name: '1212121', email: '1@1', date: +(new Date()), message: 'Beliberda dfdfdfdfd dfdssfdsf dsf dfg ddf gg g dfgdfgdgd', checked: false, categorie: Categorie.readed},
-    {name: '1212121', email: '1@1', date: +(new Date()), message: 'Beliberda dfdfdfdfd dfdssfdsf dsf dfg ddf gg g dfgdfgdgd', checked: false, categorie: Categorie.readed},
-    {name: '1212121', email: '1@1', date: +(new Date()), message: 'Beliberda dfdfdfdfd dfdssfdsf dsf dfg ddf gg g dfgdfgdgd', checked: false, categorie: Categorie.readed},
-  ];
-  message: ContactUsMsg = {name: '1212121', email: '1@1', date: +(new Date()), message: 'Beliberda dfdfdfdfd dfdssfdsf dsf dfg ddf gg g dfgdfgdgd', checked: false, categorie: Categorie.readed};
-  step: number = 0;
+  checkedMessages: string[] = [];
+  messages: Message[];
+  step: number;
 
-  constructor() { }
+  constructor(private msgsService: MsgsService) { }
 
   ngOnInit(): void {
+  }
+
+  onCheckMessageCheckbox(event, value) {
+    console.log(value);
+    console.log(event.toElement.checked);
+
+  }
+
+  showMsgs() {
+    this.msgsService.getMessagesFromServer(Categorie.new).subscribe(
+      (data) => {
+        this.messages = data;
+      }
+    )
   }
 
   setStep(index: number) {

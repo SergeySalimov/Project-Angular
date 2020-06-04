@@ -1,11 +1,10 @@
-export interface ContactUsMsg {
+export interface Message {
   name: string,
   message: string,
   date: number,
   categorie: number,
-  checked: boolean,
-  isRegisterAfter?: boolean,
   id?: string,
+  isRegisterAfter?: boolean,
   email?: string,
   phone?: string,
 }

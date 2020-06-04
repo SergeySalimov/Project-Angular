@@ -1,32 +1,57 @@
-import { Injectable } from '@angular/core';
-import { ContactUsMsg } from '../../models/contactUsMsg.model';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, OnInit } from '@angular/core';
+import { Message } from '../../models/message.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-
-enum Categorie {
-  new,
-  readed,
-  deleted
-}
+import { Categorie } from '../../models/categories-of-messages';
+import { exhaustMap, finalize, map, take, tap } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
+import { User } from '../auth/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MsgsService {
 
-  curMessage: ContactUsMsg;
+  private curMessage: Message;
+  private _messages: Message[];
 
-  constructor( private http: HttpClient) {
+  constructor(private http: HttpClient, private auth: AuthService) {
   }
 
-  sendMessage(msg: ContactUsMsg, folder: Categorie): Observable<Object> {
+  get messages() {
+    return [...this._messages];
+  }
+
+  sendMessage(msg: Message, folder: Categorie): Observable<Object> {
     this.curMessage = {...msg};
     if (folder === Categorie.new) {
       const date: number = +Date.now();
-      this.curMessage = {...msg, date, categorie: Categorie.new, checked: false};
+      this.curMessage = {...msg, date, categorie: Categorie.new};
       delete this.curMessage.isRegisterAfter;
     }
-    return this.http.post<Object>(`${environment.firebase.databaseURL}/messages/${Categorie[0]}.json`, this.curMessage);
+    return this.http.post<Message>(`${environment.firebase.databaseURL}/messages/${Categorie[folder]}.json`, this.curMessage).pipe(
+      tap((data) => {
+        console.log(data);
+      })
+    );
   }
+
+  getMessagesFromServer(folder: Categorie) {
+    const headers: HttpHeaders = new HttpHeaders({[environment.NEED_TOKEN]: 'Add-my-token'});
+    return this.http.get(`${environment.firebase.databaseURL}/messages/${Categorie[folder]}.json`, {headers})
+      .pipe(
+        map((data: any) => {
+          const messages: Message[] = [];
+          console.log(data);
+          for (let key in data) {
+            messages.push({id: key, ...data[key]});
+          }
+          console.log(messages);
+          return messages;
+        }),
+      );
+  }
+
 }
+
