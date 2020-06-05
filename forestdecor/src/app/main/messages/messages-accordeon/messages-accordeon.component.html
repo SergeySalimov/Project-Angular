@@ -1,3 +1,19 @@
+<div class="control-messages">
+  <div class="list-group list-group-horizontal-sm">
+    <form [formGroup]="messageNav">
+      <input type="radio" formControlName="categorie" value="all" id="all"><label for="all"><span>Все</span></label>
+      <input type="radio" formControlName="categorie" value="new" id="new"><label for="new"><span>Нов</span></label>
+      <input type="radio" formControlName="categorie" value="readed" id="readed"><label for="readed"><span>Прочит</span></label>
+      <input type="radio" formControlName="categorie" value="deleted" id="deleted"><label for="deleted"><span>Удал</span></label>
+      <i class="icon-spin3 ml-2" [ngClass]="{'animate-spin': serverWork}"></i>
+      <input type="checkbox" #selectAll (click)="selectAllMessages($event)" class="ml-2">
+      <i class="icon-back mb-1 ml-1" *ngIf="messageNav.value.categorie === 'deleted'"></i>
+      <i class="icon-trash-1 mb-1 ml-1" (click)="deleteAllChecked()"></i>
+    </form>
+    <!--        <p>Form value: {{ messageNav.value | json }}</p>  &lt;!&ndash; {food: 'lamb' } &ndash;&gt;-->
+  </div>
+</div>
+
 <mat-accordion class="example-headers-align">
 
   <div *ngIf="messages?.length > 0; else noMessages">
@@ -16,7 +32,8 @@
         </mat-panel-title>
         <mat-panel-description>
           <mat-icon class="mr-1">date_range</mat-icon>
-          {{message.date | date:'от dd MMMM, yyyy в HH:mm':'UTC +3': 'ru' }}
+          <span>{{message.date | date:'от dd MMMM, yyyy в HH:mm':'UTC +3': 'ru' }}</span>
+          <span class="ml-3 small">от {{message.name}}, email<{{message.email}}></span>
         </mat-panel-description>
       </mat-expansion-panel-header>
 

@@ -14,8 +14,6 @@ export class MsgsService {
 
   private curMessage: Message;
   private _messages: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
-  private _serverWork: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
 
   constructor(private http: HttpClient, private auth: AuthService) {
     this.auth.user.subscribe(user => {
@@ -25,10 +23,6 @@ export class MsgsService {
 
   get messages() {
     return this._messages.asObservable();
-  }
-
-  get serverWork() {
-    return this._serverWork;
   }
 
   sendChangesToServer(id: string, msg: Message, categorieFrom: Categorie, categorieTo: Categorie) {
@@ -43,29 +37,14 @@ export class MsgsService {
       this.http.delete(`${environment.firebase.databaseURL}/messages/${Categorie[folder]}/${id}.json`);
   }
 
-
-
-  // getAllMessages() {
-  //   this.serverWork.next(true);
-  //   const allMsgs: Message[] = [];
-  //   combineLatest([
-  //     this.getMessagesFromNew(),
-  //     this.getMessageFromReadedOrDeleted()
-  //   ]).subscribe(([newMessages, readedMessages]) => {
-  //     console.log(newMessages);
-  //     console.log(readedMessages);
-  //   });
-  //
-  //   setTimeout(() => {this.serverWork.next(false)}, 5000)
-  //
-  // }
-
   sendMessageToServer(msg: Message, folder: Categorie): Observable<Object> {
     this.curMessage = {...msg};
     if (folder === Categorie.new) {
       const date: number = +Date.now();
       this.curMessage = {...msg, date, categorie: Categorie.new};
       delete this.curMessage.isRegisterAfter;
+    } else {
+      this.curMessage.isChecked = false;
     }
     return this.http.post<Message>(`${environment.firebase.databaseURL}/messages/${Categorie[folder]}.json`, this.curMessage).pipe(
       tap((data) => {
@@ -92,6 +71,25 @@ export class MsgsService {
         }),
       );
   }
+
+
+
+  // getAllMessages() {
+  //   this.serverWork.next(true);
+  //   const allMsgs: Message[] = [];
+  //   combineLatest([
+  //     this.getMessagesFromNew(),
+  //     this.getMessageFromReadedOrDeleted()
+  //   ]).subscribe(([newMessages, readedMessages]) => {
+  //     console.log(newMessages);
+  //     console.log(readedMessages);
+  //   });
+  //
+  //   setTimeout(() => {this.serverWork.next(false)}, 5000)
+  //
+  // }
+
+
 
 
 

@@ -1,5 +1,6 @@
 export enum Categorie {
   new,
   readed,
-  deleted
+  deleted,
+  all
 }
