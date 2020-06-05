@@ -14,7 +14,6 @@ import { NavigationModule } from './navigation/navigation.module';
 import { HeaderModule } from './header/header.module';
 import { FooterModule } from './footer/footer.module';
 import { LoginModule } from './main/form/login.module';
-import { MessagesModule } from './main/messages/messages.module';
 import { ContactsComponent, DeliveryComponent, ErrorPageComponent, HomeComponent, PaymentComponent } from './main';
 
 @NgModule({
@@ -38,7 +37,6 @@ import { ContactsComponent, DeliveryComponent, ErrorPageComponent, HomeComponent
     HeaderModule,
     FooterModule,
     LoginModule,
-    MessagesModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
   ],

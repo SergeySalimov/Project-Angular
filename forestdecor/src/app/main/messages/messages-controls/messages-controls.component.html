@@ -7,9 +7,10 @@
       <input type="radio" formControlName="categorie" value="deleted" id="deleted"><label for="deleted"><span>Удал</span></label>
       <i class="icon-spin3 ml-2" (click)="showMsgs()"></i>
       <input type="checkbox" formControlName="selectAll" class="ml-2">
+      <i class="icon-back mb-1 ml-1" *ngIf="messageNav.value.categorie === 'deleted'"></i>
       <i class="icon-trash-1 mb-1 ml-1" (click)="deleteAll()"></i>
     </form>
-    <!--    <p>Form value: {{ form.value | json }}</p>  &lt;!&ndash; {food: 'lamb' } &ndash;&gt;-->
+<!--        <p>Form value: {{ messageNav.value | json }}</p>  &lt;!&ndash; {food: 'lamb' } &ndash;&gt;-->
   </div>
 
 </div>

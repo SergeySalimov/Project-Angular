@@ -34,6 +34,7 @@
 .icon-lock:before { content: '\e820'; } /* '' */
 .icon-lock-open:before { content: '\e821'; } /* '' */
 .icon-key:before { content: '\e822'; } /* '' */
+.icon-back:before { content: '\e823'; } /* '' */
 .icon-spin1:before { content: '\e830'; } /* '' */
 .icon-spin3:before { content: '\e832'; } /* '' */
 .icon-spin4:before { content: '\e834'; } /* '' */

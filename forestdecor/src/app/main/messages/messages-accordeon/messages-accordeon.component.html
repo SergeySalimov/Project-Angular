@@ -9,7 +9,9 @@
                          hideToggle>
 
       <mat-expansion-panel-header>
-        <input type="checkbox" (click)="$event.stopPropagation(); onCheckMessageCheckbox($event, message.id)">
+        <input type="checkbox"
+               [checked] = message.isChecked
+               (click)="$event.stopPropagation(); onCheckMessageCheckbox($event, message.id)">
 
         <mat-panel-title>
           <mat-icon>{{msgIcon[message.categorie]}}</mat-icon>

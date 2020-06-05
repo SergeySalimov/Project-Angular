@@ -13,7 +13,7 @@ export class MessagesControlsComponent implements OnInit {
 
   messageNav = new FormGroup({
     categorie: new FormControl('new'),
-    selectAll: new FormControl(),
+    selectAll: new FormControl(false),
   });
 
   constructor(private msgsService: MsgsService) { }

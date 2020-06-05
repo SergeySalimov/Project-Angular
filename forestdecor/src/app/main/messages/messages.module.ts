@@ -10,11 +10,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import localeRu from '@angular/common/locales/ru';
+import { MsgsResolver } from '../../shared/services/messages/msgs.resolver';
 
 registerLocaleData(localeRu, 'ru');
 
 const routes: Routes = [
-  {path: 'messages', component: MessagesComponent, canActivate: [AdminGuard]}
+  {path: '', component: MessagesComponent, resolve: {messages: MsgsResolver}, canActivate: [AdminGuard]}
 ];
 
 @NgModule({

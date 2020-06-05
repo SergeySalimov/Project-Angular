@@ -1,10 +1,13 @@
+import { Categorie } from './categories-of-messages';
+
 export interface Message {
   name: string,
   message: string,
   date: number,
-  categorie: number,
-  id?: string,
-  isRegisterAfter?: boolean,
+  categorie: Categorie,
   email?: string,
   phone?: string,
+  id?: string,
+  isChecked?: boolean,
+  isRegisterAfter?: boolean,
 }

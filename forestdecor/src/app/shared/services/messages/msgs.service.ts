@@ -1,12 +1,11 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Message } from '../../models/message.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Categorie } from '../../models/categories-of-messages';
-import { exhaustMap, finalize, map, take, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
-import { User } from '../auth/user';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +16,9 @@ export class MsgsService {
   private _messages: Message[];
 
   constructor(private http: HttpClient, private auth: AuthService) {
+    this.auth.user.subscribe( user => {
+      user.isAdmin ? this.getMessagesFromServer().subscribe((messages: Message[]) => this._messages = messages) : null;
+    });
   }
 
   get messages() {
@@ -37,7 +39,7 @@ export class MsgsService {
     );
   }
 
-  getMessagesFromServer(folder: Categorie) {
+  getMessagesFromServer(folder: Categorie = Categorie.new) {
     const headers: HttpHeaders = new HttpHeaders({[environment.NEED_TOKEN]: 'Add-my-token'});
     return this.http.get(`${environment.firebase.databaseURL}/messages/${Categorie[folder]}.json`, {headers})
       .pipe(
@@ -45,7 +47,7 @@ export class MsgsService {
           const messages: Message[] = [];
           console.log(data);
           for (let key in data) {
-            messages.push({id: key, ...data[key]});
+            messages.push({id: key, isChecked: false, ...data[key]});
           }
           console.log(messages);
           return messages;

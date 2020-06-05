@@ -1,4 +1,5 @@
 @import "custom.variables";
+
 :host {
 
   .control-messages {
@@ -24,25 +25,32 @@
       font-size: 1rem;
     }
     @media (min-width: map-get($grid-breakpoints, "lg")) {
-    right: 11%;
-    font-size: 1.1rem;
-  }
+      right: 11%;
+      font-size: 1.1rem;
+    }
     @media (min-width: map-get($grid-breakpoints, "xl")) {
       right: 15.5%;
       font-size: 1.2rem;
     }
+
     span {
       margin-right: 5px;
       margin-left: 2px;
     }
+
     button {
       background-color: transparent;
     }
 
-      i.icon-trash-1 {
-        color: $red;
-        padding: 0;
-      }
+    i.icon-trash-1 {
+      color: $red;
+      padding: 0;
+    }
+
+    i.icon-back {
+      color: $green;
+      padding: 0;
+    }
 
     i.icon-spin3 {
       font-size: 1.1rem;
