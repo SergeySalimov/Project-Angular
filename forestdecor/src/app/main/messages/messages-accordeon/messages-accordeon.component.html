@@ -1,11 +1,9 @@
 <mat-accordion class="example-headers-align">
 
-  <button class="btn btn-block mt-5" (click)="showMsgs()">Show</button>
-
   <div *ngIf="messages?.length > 0; else noMessages">
     <mat-expansion-panel *ngFor="let message of messages, let i = index"
                          [expanded]="step === i"
-                         (opened)="setStep(i)"
+                         (opened)="setStep(i, message.id)"
                          hideToggle>
 
       <mat-expansion-panel-header>
@@ -41,7 +39,7 @@
           <p>{{message.message}}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button color="warn">УДАЛИТЬ</button>
+          <button mat-button (click)="deleteMessage(message.id)" color="warn">УДАЛИТЬ</button>
         </mat-card-actions>
       </mat-card>
 

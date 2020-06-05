@@ -5,7 +5,7 @@
       <input type="radio" formControlName="categorie" value="new" id="new"><label for="new"><span>Нов</span></label>
       <input type="radio" formControlName="categorie" value="readed" id="readed"><label for="readed"><span>Прочит</span></label>
       <input type="radio" formControlName="categorie" value="deleted" id="deleted"><label for="deleted"><span>Удал</span></label>
-      <i class="icon-spin3 ml-2" (click)="showMsgs()"></i>
+      <i class="icon-spin3 ml-2" [ngClass]="{'animate-spin': serverWork$ | async}"></i>
       <input type="checkbox" formControlName="selectAll" class="ml-2">
       <i class="icon-back mb-1 ml-1" *ngIf="messageNav.value.categorie === 'deleted'"></i>
       <i class="icon-trash-1 mb-1 ml-1" (click)="deleteAll()"></i>

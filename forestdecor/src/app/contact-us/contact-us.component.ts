@@ -91,7 +91,7 @@ export class ContactUsComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.isRegisterAfter = this.formContactUs.value.isRegisterAfter;
-    this.contactUs.sendMessage(this.formContactUs.value, Categorie.new).pipe(
+    this.contactUs.sendMessageToServer(this.formContactUs.value, Categorie.new).pipe(
       tap(() => this.console.showInfoMessage(
         {
           title: 'Ваше сообщение было отправлено',

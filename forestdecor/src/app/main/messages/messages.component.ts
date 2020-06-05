@@ -9,17 +9,11 @@ import { MsgsService } from '../../shared/services/messages/msgs.service';
 })
 export class MessagesComponent implements OnInit {
 
-  constructor(private msgsService: MsgsService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  showMsgs() {
-    this.msgsService.getMessagesFromServer(Categorie.new).subscribe(
-      data => {
-        console.log(data);
-      }
-    )
-  }
+
 
 }

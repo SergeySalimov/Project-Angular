@@ -7,7 +7,7 @@ import { Message } from '../../models/message.model';
 @Injectable({
   providedIn: 'root'
 })
-export class MsgsResolver implements Resolve<Message[]> {
+export class MsgsResolver implements Resolve<Message[] | null> {
 
   constructor (private msgsService: MsgsService) {
   }
