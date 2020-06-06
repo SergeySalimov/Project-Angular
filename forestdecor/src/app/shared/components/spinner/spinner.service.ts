@@ -16,12 +16,4 @@ export class SpinnerService {
     this._isLoading.next(status);
   }
 
-  on() {
-    this._isLoading.next(true);
-  }
-
-  off() {
-    this._isLoading.next(false);
-  }
-
 }
