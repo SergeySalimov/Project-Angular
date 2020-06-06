@@ -1,11 +1,12 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Message } from '../../../shared/models/message.model';
 import { Categorie } from '../../../shared/models/categories-of-messages';
 import { MsgsService } from '../../../shared/services/messages/msgs.service';
 import { SpinnerService } from '../../../shared/services/spinners/spinner.service';
 import { ConsoleService } from '../../../shared/services/console/console.service';
 import { Subscription } from 'rxjs';
-import { switchMap, take, tap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-messages-accordeon',
@@ -16,7 +17,7 @@ export class MessagesAccordeonComponent implements OnInit, OnDestroy {
 
   msgIcon = ['mail', 'drafts', 'local_grocery_store'];//cancel, remove_circle, local_grocery_store
   messages: Message[];
-  curState: Categorie;
+  curState: Categorie = environment.START_CATEGORIE;
   stateSubscr: Subscription;
   chAllSubscr: Subscription;
   step: number;
@@ -25,7 +26,6 @@ export class MessagesAccordeonComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.msgsService.messages.pipe(take(1)).subscribe((messages: Message[]) => this.messages = messages);
     this.stateSubscr = this.msgsService.categorie.pipe(
       tap((categorie: Categorie) => this.curState = categorie),
       switchMap(categorie => this.msgsService.messages),
@@ -51,10 +51,6 @@ export class MessagesAccordeonComponent implements OnInit, OnDestroy {
     this.nextStep();
   }
 
-  onDeleteAllClick() {
-    console.log('delete All')
-  }
-
   onRecoveryClick(message: Message, index) {
     this.messages[index].categorie = Categorie.readed;
 
@@ -74,6 +70,7 @@ export class MessagesAccordeonComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.msgsService.setCategorie(Categorie.new);
     this.stateSubscr.unsubscribe();
     this.chAllSubscr.unsubscribe();
   }
