@@ -80,6 +80,12 @@ export class MsgsService {
     this.setSelectAll(false);
   }
 
+  loadNewMessages() {
+    this.getMessagesFromServer().subscribe((messages: Message[]) => {
+      this._messages.next(messages);
+    })
+  }
+
   //Server Block
   updateMessage(id: string, message: Message) {
     const headers: HttpHeaders = new HttpHeaders({

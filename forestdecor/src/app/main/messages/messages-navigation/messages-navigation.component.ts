@@ -40,6 +40,10 @@ export class MessagesNavigationComponent implements OnInit, OnDestroy, AfterView
     this.selectAllSubscr = this.msgsService.selectAll.subscribe(state => this.checkbox.nativeElement.checked = state);
   }
 
+  loadFromServer() {
+    this.msgsService.loadNewMessages();
+  }
+
   selectAllMessages(event) {
     this.msgsService.setSelectAll(event.toElement.checked);
   }

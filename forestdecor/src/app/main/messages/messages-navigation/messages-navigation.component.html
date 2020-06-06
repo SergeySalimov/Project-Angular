@@ -8,7 +8,7 @@
       for="deleted"><span>Корзина</span></label>
       <i class="icon-spin3 ml-2" [ngClass]="{'animate-spin': serverWork$ | async}"></i>
       <input type="checkbox" #selectAll (click)="selectAllMessages($event)" class="ml-2">
-      <i class="icon-trash-1 mb-1 ml-1" #deleteAll (click)="deleteAllChecked()"></i>
+      <i class="icon-trash-1 mb-1 ml-1" (click)="deleteAllChecked()"></i>
       <i class="icon-back mb-1 ml-1 {{messageNav.value.categorie !== 'deleted' ? 'disabled' : ''}}"
          (click)="recoveryAllChecked()"></i>
     </form>

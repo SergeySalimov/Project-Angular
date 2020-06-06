@@ -3,7 +3,7 @@
 :host {
 
   .control-messages {
-    input, label, i {
+    input, label {
       cursor: pointer;
     }
 
@@ -46,15 +46,28 @@
       color: $red;
       font-size: 1.1rem;
       padding: 0;
+      cursor: pointer;
     }
 
     i.icon-back {
       color: $green;
       padding: 0;
+      cursor: pointer;
     }
 
     i.icon-spin3 {
       font-size: 1.1rem;
+      //padding: 2px;
+    }
+
+    //i.icon-spin3:hover {
+    //  border: 1px solid $alterFontColor;
+    //  border-radius: 4px;
+    //  padding: 1px;
+    //}
+
+    i.icon-spin3:active {
+
     }
 
     i.disabled {
