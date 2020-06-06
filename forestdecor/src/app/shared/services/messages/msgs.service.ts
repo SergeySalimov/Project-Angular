@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Categorie } from '../../models/categories-of-messages';
-import { exhaustMap, finalize, map, switchMap, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable({
@@ -14,6 +14,8 @@ export class MsgsService {
 
   private curMessage: Message;
   private _messages: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
+  private _currentState: BehaviorSubject<Categorie> = new BehaviorSubject<Categorie>(environment.START_CATEGORIE);
+  private _selectAll: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private auth: AuthService) {
     this.auth.user.subscribe(user => {
@@ -21,82 +23,99 @@ export class MsgsService {
     });
   }
 
-  get messages() {
+  get messages(): Observable<Message[]> {
     return this._messages.asObservable();
   }
 
-  sendChangesToServer(id: string, msg: Message, categorieFrom: Categorie, categorieTo: Categorie) {
-    return this.sendMessageToServer(msg, categorieTo).pipe(
-      switchMap(() => this.deleteMessageFromServer(id, categorieFrom)),
-    )
+  get categorie(): Observable<Categorie> {
+    return this._currentState.asObservable();
   }
 
-  deleteMessageFromServer(id: string, folder: Categorie) {
-    const headers: HttpHeaders = new HttpHeaders({[environment.NEED_TOKEN]: 'Add-my-token'});
-    return id === 'all' ? this.http.delete(`${environment.firebase.databaseURL}/messages/${Categorie[folder]}.json`) :
-      this.http.delete(`${environment.firebase.databaseURL}/messages/${Categorie[folder]}/${id}.json`);
+  get selectAll(): Observable<boolean> {
+    return this._selectAll.asObservable();
   }
 
-  sendMessageToServer(msg: Message, folder: Categorie): Observable<Object> {
-    this.curMessage = {...msg};
-    if (folder === Categorie.new) {
-      const date: number = +Date.now();
-      this.curMessage = {...msg, date, categorie: Categorie.new};
-      delete this.curMessage.isRegisterAfter;
-    } else {
-      this.curMessage.isChecked = false;
+  setCategorie (newCategorie: Categorie) {
+    this._currentState.next(newCategorie);
+  }
+
+  setSelectAll (state: boolean) {
+    this._selectAll.next(state);
+  }
+
+  static getStringReturnEnumCategorie(data: string): Categorie {
+    let categorie: Categorie;
+    switch (data) {
+      case 'new':
+        categorie = Categorie.new;
+        break;
+      case 'readed':
+        categorie = Categorie.readed;
+        break;
+      case 'deleted':
+        categorie = Categorie.deleted;
+        break;
+      default:
+        categorie = Categorie.new;
     }
-    return this.http.post<Message>(`${environment.firebase.databaseURL}/messages/${Categorie[folder]}.json`, this.curMessage).pipe(
-      tap((data) => {
-        console.log(data);
-      })
-    );
+    return categorie;
   }
 
-  getMessagesFromServer(folder: Categorie = Categorie.new): Observable<Message[]> {
-    const headers: HttpHeaders = new HttpHeaders({[environment.NEED_TOKEN]: 'Add-my-token'});
-    return this.http.get<Message[]>(`${environment.firebase.databaseURL}/messages/${Categorie[folder]}.json`, {headers})
+  changeAllCheckedMessage(del: boolean = true) {
+    this._messages.getValue().forEach(msg => {
+      if (msg.isChecked) {
+        msg.isChecked = false;
+        msg.categorie = del ? Categorie.deleted : Categorie.readed;
+      }
+    });
+    this.setSelectAll(false);
+  }
+
+  //Server Block
+  updateMessage(id: string, message: Message) {
+    const headers: HttpHeaders = new HttpHeaders({
+      [environment.NEED_TOKEN]: 'Add-my-token',
+      [environment.LITTLE_SPINNER]: 'Little-spinner-needed'
+    });
+    return this.http.put<Message>(`${environment.firebase.databaseURL}/messages/${id}.json`, message, {headers})
+  }
+
+  deleteMessageFromServer(id: string) {
+    const headers: HttpHeaders = new HttpHeaders({
+      [environment.NEED_TOKEN]: 'Add-my-token',
+      [environment.LITTLE_SPINNER]: 'Little-spinner-needed'
+    });
+    return this.http.delete(`${environment.firebase.databaseURL}/messages/${id}.json`, {headers});
+  }
+
+  sendMessageToServer(msg: Message): Observable<Object> {
+    const headers: HttpHeaders = new HttpHeaders({[environment.LITTLE_SPINNER]: 'Little-spinner-needed'});
+    this.prepareCurMessageForSendingToServer(msg);
+    return this.http.post<Message>(`${environment.firebase.databaseURL}/messages.json`, this.curMessage, {headers});
+  }
+
+  getMessagesFromServer(): Observable<Message[]> {
+    const headers: HttpHeaders = new HttpHeaders({
+      [environment.NEED_TOKEN]: 'Add-my-token',
+      [environment.LITTLE_SPINNER]: 'Little-spinner-needed'
+    });
+    return this.http.get<Message[]>(`${environment.firebase.databaseURL}/messages.json`, {headers})
       .pipe(
         map((data: any) => {
           const messages: Message[] = [];
-          if (!data?.id) {
-            for (let key in data) {
-              messages.push({id: key, isChecked: false, ...data[key]});
-            }
-          } else {
-            messages.push(data.value)
-            console.log(data.value);
+          for (let key in data) {
+            messages.push({id: key, isChecked: false, ...data[key]});
           }
           return messages;
         }),
       );
   }
 
-
-
-  // getAllMessages() {
-  //   this.serverWork.next(true);
-  //   const allMsgs: Message[] = [];
-  //   combineLatest([
-  //     this.getMessagesFromNew(),
-  //     this.getMessageFromReadedOrDeleted()
-  //   ]).subscribe(([newMessages, readedMessages]) => {
-  //     console.log(newMessages);
-  //     console.log(readedMessages);
-  //   });
-  //
-  //   setTimeout(() => {this.serverWork.next(false)}, 5000)
-  //
-  // }
-
-
-
-
-
-  // getMessageFromReadedOrDeleted(folder: Categorie = Categorie.readed): Observable<Message[]> {
-  //   const headers: HttpHeaders = new HttpHeaders({[environment.NEED_TOKEN]: 'Add-my-token'});
-  //   return this.http.get<Message[]>(`${environment.firebase.databaseURL}/messages/${Categorie[folder]}.json`, {headers});
-  // }
-
+  prepareCurMessageForSendingToServer(msg: Message) {
+    this.curMessage = {...msg};
+    const date: number = +Date.now();
+    this.curMessage = {...msg, date, categorie: Categorie.new, isChecked: false};
+    delete this.curMessage.isRegisterAfter;
+  }
 }
 

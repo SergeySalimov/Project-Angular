@@ -23,7 +23,7 @@ import { ContactsComponent, DeliveryComponent, ErrorPageComponent, HomeComponent
     ErrorPageComponent,
     PaymentComponent,
     DeliveryComponent,
-    ContactsComponent
+    ContactsComponent,
   ],
   imports: [
     BrowserModule,

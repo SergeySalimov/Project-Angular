@@ -57,25 +57,12 @@
       font-size: 1.1rem;
     }
 
-
-  }
-
-  mat-accordion {
-    mat-expansion-panel {
-      mat-expansion-panel-header {
-        mat-panel-title {
-
-        }
-        mat-panel-description {
-          font-size: 0.7rem;
-          @media (min-width: map-get($grid-breakpoints, "sm")) {
-            font-size: 1rem;
-          }
-          @media (min-width: map-get($grid-breakpoints, "sm")) {
-            font-size: 1.2rem;
-          }
-        }
-      }
+    i.disabled {
+      opacity: 0;
+      pointer-events: none;
     }
+
+
   }
+
 }

@@ -11,6 +11,7 @@ import { SharedModule } from '../../shared/shared.module';
 import localeRu from '@angular/common/locales/ru';
 import { MsgsResolver } from '../../shared/services/messages/msgs.resolver';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MessagesNavigationComponent } from './messages-navigation/messages-navigation.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -21,7 +22,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     MessagesComponent,
-    MessagesAccordeonComponent
+    MessagesAccordeonComponent,
+    MessagesNavigationComponent
   ],
   imports: [
     CommonModule,

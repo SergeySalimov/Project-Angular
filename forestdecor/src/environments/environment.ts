@@ -2,6 +2,8 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { Categorie } from '../app/shared/models/categories-of-messages';
+
 export const environment = {
   production: false,
   phoneNumber: '291234567', // whithout +375 to use pipe for beauty
@@ -14,7 +16,9 @@ export const environment = {
   afterLoginRedirectAdminUrl: '/messages',
   dividerForDisplayName: '-|-',
   GLOBAL_SPINNER: 'X-loader',
+  LITTLE_SPINNER: 'Go-messages',
   NEED_TOKEN: 'need-token',
+  START_CATEGORIE: Categorie.new,
   USER_KEY_IN_LOCAL_STORAGE: 'Active-user-in-forestdecor-app',
   firebase: {
     apiKey: "AIzaSyDIGANkFkG2s7bszuIFcyJrByruYVSsYPg",
