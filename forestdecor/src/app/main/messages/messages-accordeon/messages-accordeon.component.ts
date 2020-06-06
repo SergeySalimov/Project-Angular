@@ -46,9 +46,14 @@ export class MessagesAccordeonComponent implements OnInit, OnDestroy {
   }
 
   onDeleteClick(message: Message, index) {
-    this.messages[index].categorie = Categorie.deleted;
-    this.msgsService.updateMessage(message.id, message).subscribe();
-    this.nextStep();
+    if (this.curState !== Categorie.deleted) {
+      this.messages[index].categorie = Categorie.deleted;
+      this.msgsService.updateMessage(message.id, message).subscribe();
+      this.nextStep();
+    } else {
+      this.messages.splice(index, 1);
+      this.msgsService.deleteMessageFromServer(message.id).subscribe();
+    }
   }
 
   onRecoveryClick(message: Message, index) {

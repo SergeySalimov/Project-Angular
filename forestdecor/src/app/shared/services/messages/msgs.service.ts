@@ -35,11 +35,11 @@ export class MsgsService {
     return this._selectAll.asObservable();
   }
 
-  setCategorie (newCategorie: Categorie) {
+  setCategorie(newCategorie: Categorie) {
     this._currentState.next(newCategorie);
   }
 
-  setSelectAll (state: boolean) {
+  setSelectAll(state: boolean) {
     this._selectAll.next(state);
   }
 
@@ -62,13 +62,21 @@ export class MsgsService {
   }
 
   changeAllCheckedMessage(del: boolean = true) {
-    this._messages.getValue().forEach(message => {
-      if (message.isChecked) {
-        message.isChecked = false;
-        message.categorie = del ? Categorie.deleted : Categorie.readed;
-        this.updateMessage(message.id, message).subscribe();
-      }
-    });
+    if (this._currentState.getValue() === Categorie.deleted && del) {
+      const messagesToDelete: Message[] = [];
+      const messagesToNotDelete: Message[] = [];
+      [...this._messages.getValue()].forEach(message => message.isChecked ? messagesToDelete.push(message) : messagesToNotDelete.push(message));
+      this._messages.next(messagesToNotDelete);
+      messagesToDelete.forEach(message => this.deleteMessageFromServer(message.id).subscribe());
+    } else {
+      this._messages.getValue().forEach(message => {
+        if (message.isChecked) {
+          message.isChecked = false;
+          message.categorie = del ? Categorie.deleted : Categorie.readed;
+          this.updateMessage(message.id, message).subscribe();
+        }
+      });
+    }
     this.setSelectAll(false);
   }
 
