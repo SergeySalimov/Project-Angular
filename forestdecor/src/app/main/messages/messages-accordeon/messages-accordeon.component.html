@@ -1,0 +1,63 @@
+<mat-accordion class="example-headers-align">
+
+  <div *ngIf="messages?.length > 0; else noMessages">
+    <mat-expansion-panel *ngFor="let message of messages, let i = index"
+                         [expanded]="step === i"
+                         (opened)="openMessageInAccordeon(message, i)"
+                         hideToggle>
+
+      <mat-expansion-panel-header>
+        <input type="checkbox"
+               [checked]=message.isChecked
+               (click)="$event.stopPropagation(); onCheckMessageCheckbox(i, $event)">
+
+        <mat-panel-title>
+          <mat-icon>{{msgIcon[message.categorie]}}</mat-icon>
+        </mat-panel-title>
+
+        <mat-panel-description>
+              <mat-icon>date_range</mat-icon>
+              <span>{{message.date | date:'от dd MMMM, yyyy в HH:mm':'UTC +3': 'ru' }}</span>
+             <span class="col-5 small">от {{message.name | dot: 6}}, email<{{message.email | dot: 6}}></span>
+        </mat-panel-description>
+
+      </mat-expansion-panel-header>
+
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon>account_circle</mat-icon>
+          </div>
+          <mat-card-title>Имя: {{message.name}}</mat-card-title>
+          <mat-card-subtitle>
+            <span>Email: <{{message.email}}>, </span>
+            <span>
+            <a href="tel:+375{{message.phone}}"><button class="btn btn-sm btn-light"><i class="icon-phone"></i></button></a>
+            : +375 {{message.phone | phoneBY}}
+          </span>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <hr>
+        <mat-card-content>
+          <p>{{message.message}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="onDeleteClick(message, i)" color="warn">{{message.categorie !== 2 ? 'КОРЗИНА' : 'УДАЛИТЬ'}}</button>
+          <button mat-button (click)="onRecoveryClick(message, i)"
+                  *ngIf="message.categorie === 2"
+                  color="primary">ВОССТАНОВИТЬ</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Предыдущее</button>
+        <button mat-button color="primary" (click)="nextStep()">Следующее</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </div>
+
+  <ng-template #noMessages>
+    <p class="my-5 h3 text-center">Нет сообщений</p>
+  </ng-template>
+
+</mat-accordion>

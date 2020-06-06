@@ -17,7 +17,7 @@
       color: yellow;
     }
 
-    .dropdown {
+    .dropdown, .dropleft {
       margin-top: -7px;
       margin-bottom: -8px;
       opacity: 0.9;
@@ -36,6 +36,9 @@
         background-color: $additFontColor;
       }
       .dropdown-menu {
+        .dropdown-item {
+          z-index: 4444;
+        }
         a:hover {
           background-color: $blue;
         }

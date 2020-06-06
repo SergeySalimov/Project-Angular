@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { User } from './user';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
@@ -15,6 +15,7 @@ export class NoAuthGuard implements CanActivate{
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree>  {
     return this.auth.user.pipe(
+      take(1),
       map((user: User) => !user ? true : this.router.createUrlTree([environment.afterLoginRedirectUrl])),
     );
   }

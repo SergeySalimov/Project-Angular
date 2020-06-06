@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConsoleService } from './console.service';
 import { CustomConsole } from './customConsole';
-import { fade } from '../animations/fade.animation';
+import { fade } from '../../animations/fade.animation';
 
 @Component({
   selector: 'app-errors',
@@ -11,19 +11,19 @@ import { fade } from '../animations/fade.animation';
 })
 export class ConsoleComponent implements OnInit {
 
-  error: CustomConsole = null;
+  console: CustomConsole = null;
 
   constructor( private errorsService: ConsoleService) { }
 
   ngOnInit(): void {
-    this.errorsService.error.subscribe((error: CustomConsole) => {
-        this.error = error;
+    this.errorsService.console.subscribe((console1: CustomConsole) => {
+        this.console = console1;
       }
     );
   }
 
   hide() {
-    this.errorsService.hideError();
+    this.errorsService.hideConsole();
   }
 
 }

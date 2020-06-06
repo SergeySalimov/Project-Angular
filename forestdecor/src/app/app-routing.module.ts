@@ -15,6 +15,7 @@ const routes: Routes = [
   {path: 'form/authorization/recovery', redirectTo: 'form/authorization/recovery', pathMatch: 'full'},
   {path: 'form/registration', redirectTo: 'form/registration', pathMatch: 'full'},
   {path: 'messages', redirectTo: 'messages', pathMatch: 'full'},
+  {path: 'messages', loadChildren: () => import('./main/messages/messages.module').then(m => m.MessagesModule)},
   {path: '**', redirectTo: '404'}
 ];
 

@@ -7,6 +7,8 @@ import { BehaviorSubject } from 'rxjs';
 export class SpinnerService {
 
   _isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  _messagesSpiner: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
 
   get isLoading() {
     return this._isLoading;
@@ -16,12 +18,13 @@ export class SpinnerService {
     this._isLoading.next(status);
   }
 
-  on() {
-    this._isLoading.next(true);
+  get msgsSpiner() {
+    return this._messagesSpiner;
   }
 
-  off() {
-    this._isLoading.next(false);
+  setMessagesSpinerStatus(status: boolean) {
+    this._messagesSpiner.next(status);
   }
+
 
 }

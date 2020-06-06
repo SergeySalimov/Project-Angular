@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { UserData } from '../../../shared/models/userData';
 import { AuthService } from '../../../shared/services/auth/auth.service';
 import { AuthResponse } from '../../../shared/services/auth/auth-response';
-import { SpinnerService } from '../../../shared/components/spinner/spinner.service';
+import { SpinnerService } from '../../../shared/services/spinners/spinner.service';
 
 @Component({
   selector: 'app-registration',

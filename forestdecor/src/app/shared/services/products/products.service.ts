@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../../models/product.model';
 import { ProductPlacer } from '../../models/productsPlacer';
 import { environment } from '../../../../environments/environment';
-import { exhaustMap, mergeMap, take, tap } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
@@ -17,12 +17,9 @@ export class ProductsService {
   private productsPlacer: ProductPlacer[] = [];
 
   constructor(private http: HttpClient, private auth: AuthService) {
-    this.getProductsFromServer().pipe(
-      take(1),
-      exhaustMap(() => this.auth.getAdminsFromServer()),
-      ).subscribe(() => {
-        this.auth.autoLogin();
-    });
+    this.auth.autoLogin();
+    this.auth.getAdminsFromServer().pipe(take(1)).subscribe(() => {});
+    this.getProductsFromServer().pipe(take(1)).subscribe(() => {});
   }
 
   get products() {
@@ -30,6 +27,7 @@ export class ProductsService {
   }
 
   getProductsFromServer(): Observable<Product[]> {
+    // const headers: HttpHeaders = new HttpHeaders({[environment.GLOBAL_SPINNER]: 'spinnerNeeded'});
     return this.http.get<Product[]>(`${environment.firebase.databaseURL}/products.json`).pipe(
       tap((prd: Product[]) => this._products = [...prd]),
       tap(() => this.createAllUrls()),

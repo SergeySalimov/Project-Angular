@@ -4,7 +4,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../../shared/services/auth/auth.service';
-import { ConsoleService } from '../../../shared/console/console.service';
+import { ConsoleService } from '../../../shared/services/console/console.service';
 
 @Component({
   selector: 'app-authentication',
