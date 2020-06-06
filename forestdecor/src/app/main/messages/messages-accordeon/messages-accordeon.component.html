@@ -42,7 +42,7 @@
           <p>{{message.message}}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button (click)="onDeleteClick(message, i)" color="warn">УДАЛИТЬ</button>
+          <button mat-button (click)="onDeleteClick(message, i)" color="warn">{{message.categorie !== 2 ? 'КОРЗИНА' : 'УДАЛИТЬ'}}</button>
           <button mat-button (click)="onRecoveryClick(message, i)"
                   *ngIf="message.categorie === 2"
                   color="primary">ВОССТАНОВИТЬ</button>

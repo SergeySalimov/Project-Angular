@@ -40,20 +40,20 @@ export class MessagesAccordeonComponent implements OnInit, OnDestroy {
   openMessageInAccordeon(message: Message, index) {
     if (message.categorie === Categorie.new) {
       this.messages[index].categorie = Categorie.readed;
+      this.msgsService.updateMessage(message.id, message).subscribe();
     }
-
     this.step = index;
   }
 
   onDeleteClick(message: Message, index) {
     this.messages[index].categorie = Categorie.deleted;
-
+    this.msgsService.updateMessage(message.id, message).subscribe();
     this.nextStep();
   }
 
   onRecoveryClick(message: Message, index) {
     this.messages[index].categorie = Categorie.readed;
-
+    this.msgsService.updateMessage(message.id, message).subscribe();
     this.nextStep();
   }
 

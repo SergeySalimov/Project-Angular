@@ -62,10 +62,11 @@ export class MsgsService {
   }
 
   changeAllCheckedMessage(del: boolean = true) {
-    this._messages.getValue().forEach(msg => {
-      if (msg.isChecked) {
-        msg.isChecked = false;
-        msg.categorie = del ? Categorie.deleted : Categorie.readed;
+    this._messages.getValue().forEach(message => {
+      if (message.isChecked) {
+        message.isChecked = false;
+        message.categorie = del ? Categorie.deleted : Categorie.readed;
+        this.updateMessage(message.id, message).subscribe();
       }
     });
     this.setSelectAll(false);
