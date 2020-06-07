@@ -7,13 +7,9 @@
         <div class="col-sm-12 col-lg-5 mt-2">
           <img src="{{curProduct.img}}" class="img-fluid" alt="{{curProduct.name}}">
           <h5 class="card-title" [ngClass]="{'pl-5': !catalogNavigation.status}">
-            <button mat-button
-                    class="mx-auto mt-2"
-                    [disabled]="!curProduct.photos?.length"
-                    (click)="needPhotos(curProduct.photos); $event.stopPropagation()">
-              <span *ngIf="!!curProduct.photos?.length; else noPhoto"><i class="icon-camera mr-1"></i>Посмотреть</span>
-              <ng-template #noPhoto>Нет фотографий</ng-template>
-            </button>
+            <app-button-show [product]="curProduct"></app-button-show>
+            <app-button-add [product]="curProduct"></app-button-add>
+            <app-button-delete [product]="curProduct"></app-button-delete>
           </h5>
         </div>
 

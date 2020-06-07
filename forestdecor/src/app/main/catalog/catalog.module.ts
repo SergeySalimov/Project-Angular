@@ -9,7 +9,7 @@ import { CatalogProductsComponent } from './catalog-products/catalog-products.co
 import { CatalogCardDeskComponent } from './catalog-products/catalog-card-desk/catalog-card-desk.component';
 import { CatalogSingleProductComponent } from './catalog-products/catalog-single-product/catalog-single-product.component';
 import { CatalogRoutingModule } from './catalog-routing.module';
-import { ButtonShowComponent } from './catalog-products/buttons/button-show/button-show.component';
+import { ButtonAddComponent, ButtonDeleteComponent, ButtonShowComponent } from './catalog-products/buttons';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,9 @@ import { ButtonShowComponent } from './catalog-products/buttons/button-show/butt
     CatalogProductsComponent,
     CatalogCardDeskComponent,
     CatalogSingleProductComponent,
-    ButtonShowComponent
+    ButtonShowComponent,
+    ButtonAddComponent,
+    ButtonDeleteComponent
   ],
   imports: [
     CommonModule,

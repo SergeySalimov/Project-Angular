@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
+import { Observable } from 'rxjs';
+import { User } from '../../../../shared/services/auth/user';
+import { AuthService } from '../../../../shared/services/auth/auth.service';
+import { Product } from '../../../../shared/models/product.model';
 
 @Component({
   selector: 'app-catalog-card-desk',
@@ -8,7 +12,7 @@ import { CatalogNavigationService } from '../../catalog-service/catalog-navigati
 })
 export class CatalogCardDeskComponent implements OnInit {
 
-  @Input() curProductData;
+  @Input() curProductData : Product[];
 
   constructor(public catalogNavigation: CatalogNavigationService) { }
 

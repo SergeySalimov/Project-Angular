@@ -15,6 +15,7 @@ export class CatalogSingleProductComponent implements OnInit {
   @Input() curProduct: Product;
   @Input() previous: string;
 
+
   constructor(
     public catalogNavigation: CatalogNavigationService,
     private productsService: ProductsService,
