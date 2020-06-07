@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { User } from '../../../../../shared/services/auth/user';
 import { AuthService } from '../../../../../shared/services/auth/auth.service';
 import { Product } from '../../../../../shared/models/product.model';
+import { PhotoService } from '../../../../../shared/services/photo/photo.service';
 
 @Component({
   selector: 'app-button-add',
@@ -22,7 +23,7 @@ export class ButtonAddComponent implements OnInit {
   @Input() product: Product;
   user$: Observable<User> = this.auth.user;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private photo: PhotoService) { }
 
   ngOnInit(): void {
   }
