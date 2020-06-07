@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../shared/services/auth/auth.service';
-import { User } from '../shared/services/auth/user';
 import { Observable } from 'rxjs';
+import { AuthService, User } from '../shared';
 
 @Component({
   selector: 'app-navigation',

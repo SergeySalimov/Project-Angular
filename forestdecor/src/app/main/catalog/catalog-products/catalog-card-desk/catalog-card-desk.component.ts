@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Product } from '../../../../shared';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
 
 @Component({
@@ -8,15 +9,11 @@ import { CatalogNavigationService } from '../../catalog-service/catalog-navigati
 })
 export class CatalogCardDeskComponent implements OnInit {
 
-  @Input() curProductData;
+  @Input() curProductData : Product[];
 
   constructor(public catalogNavigation: CatalogNavigationService) { }
 
   ngOnInit(): void {
-  }
-
-  needPhotos(prodPhoto: string[]) {
-    console.log(prodPhoto);
   }
 
 }

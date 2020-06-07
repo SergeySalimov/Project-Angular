@@ -2,15 +2,14 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MessagesComponent } from './messages.component';
-import { AdminGuard } from '../../shared/services/auth/admin.guard';
 import { MaterialModule } from '../../material/material-module';
 import { MessagesAccordeonComponent } from './messages-accordeon/messages-accordeon.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
-import { SharedModule } from '../../shared/shared.module';
 import localeRu from '@angular/common/locales/ru';
-import { MsgsResolver } from '../../shared/services/messages/msgs.resolver';
 import { MessagesNavigationComponent } from './messages-navigation/messages-navigation.component';
+import { SharedModule } from '../../shared/shared.module';
+import { AdminGuard, MsgsResolver } from '../../shared';
 
 registerLocaleData(localeRu, 'ru');
 

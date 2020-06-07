@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../shared/services/auth/auth.service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { User } from '../shared/services/auth/user';
+import { AuthService, User } from '../shared';
 
 @Component({
   selector: 'app-header',

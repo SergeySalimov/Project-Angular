@@ -1,8 +1,6 @@
-import { Component, Output, OnInit, EventEmitter, OnDestroy, Input } from '@angular/core';
-import { NavigationService } from '../../shared/services/navigation/navigation.service';
-import { NavigationLink } from '../../shared/models/navigationLink';
-import { AuthService } from '../../shared/services/auth/auth.service';
+import { Component, Output, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService, NavigationLink, NavigationService } from '../../shared';
 
 @Component({
   selector: 'app-navigation-link',

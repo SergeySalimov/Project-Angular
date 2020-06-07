@@ -1,11 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MsgsService } from '../../../shared/services/messages/msgs.service';
-import { SpinnerService } from '../../../shared/services/spinners/spinner.service';
-import { Categorie } from '../../../shared/models/categories-of-messages';
 import { environment } from '../../../../environments/environment';
 import { map, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { Categorie, MsgsService, SpinnerService } from '../../../shared';
 
 @Component({
   selector: 'app-messages-navigation',

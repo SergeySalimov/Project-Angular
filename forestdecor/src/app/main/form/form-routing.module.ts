@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormComponent } from './form.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
-import { NoAuthGuard } from '../../shared/services/auth/no-auth.guard';
+import { NoAuthGuard } from '../../shared';
 
 const routes: Routes = [
   {

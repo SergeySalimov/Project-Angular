@@ -3,8 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../../shared/services/auth/auth.service';
-import { ConsoleService } from '../../../shared/services/console/console.service';
+import { AuthService, ConsoleService } from '../../../shared';
 
 @Component({
   selector: 'app-authentication',

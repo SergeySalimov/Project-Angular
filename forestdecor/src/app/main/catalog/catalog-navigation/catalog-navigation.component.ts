@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { ProductsService } from '../../../shared/services/products/products.service';
-import { Product } from '../../../shared/models/product.model';
+import { Product, ProductsService } from '../../../shared';
 import { CatalogNavigationService } from '../catalog-service/catalog-navigation.service';
-
 
 /** Flat node with expandable and level information */
 interface FlatNode {
