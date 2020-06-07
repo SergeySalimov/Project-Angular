@@ -6,4 +6,5 @@ export const ERROR_LIST = {
   INVALID_PASSWORD: 'Неправильный пароль или у пользователя нет пароля',
   USER_DISABLED: 'Аккаунт пользователя был отключен администратором',
   'Permission denied': 'Доступ запрещен',
+  'TOO_MANY_ATTEMPTS_TRY_LATER : Too many unsuccessful login attempts. Please try again later.': 'Мы заблокировали все запросы с этого устройства из-за многочисленной активности. Попробуйте обратиться позже',
 };
