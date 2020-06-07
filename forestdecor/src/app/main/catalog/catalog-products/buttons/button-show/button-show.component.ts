@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from '../../../../../shared/models/product.model';
+import { Product } from '../../../../../shared';
 
 @Component({
   selector: 'app-button-show',
   template: `
     <button mat-button
-            class="mx-auto mt-1"
+            class="mx-auto"
             [disabled]="!product.photos?.length"
             (click)="needPhotos(product); $event.stopPropagation()">
       <span *ngIf="!!product.photos?.length; else noPhoto"><i class="icon-camera mr-1"></i>Посмотреть</span>

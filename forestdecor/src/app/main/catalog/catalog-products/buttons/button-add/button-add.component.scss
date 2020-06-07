@@ -1,0 +1,26 @@
+@import "custom.variables";
+:host {
+  .button-add {
+    padding-top: 1.5px;
+    height: 37px;
+    cursor: pointer;
+    i, span {
+      cursor: pointer;
+    }
+  }
+  .button-add:hover {
+    background-color: rgba($additFontColor, .07);
+  }
+  .button-add:active {
+    padding-top: 0;
+    border: $alterFontColor solid 1.5px;
+    border-radius: 4px;
+  }
+
+
+
+  input[type=file] {
+    display: none;
+  }
+
+}

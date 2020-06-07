@@ -23,4 +23,5 @@ export * from './services/photo/photo.service';
 export * from './services/products/products.service';
 export * from './services/spinners/spinner.service';
 export * from './services/users/users.service';
+export * from './components/progress-bar/progress-bar.component';
 

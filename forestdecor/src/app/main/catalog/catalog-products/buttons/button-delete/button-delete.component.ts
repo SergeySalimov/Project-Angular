@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from '../../../../../shared/services/auth/auth.service';
 import { Observable } from 'rxjs';
-import { User } from '../../../../../shared/services/auth/user';
-import { Product } from '../../../../../shared/models/product.model';
+import { AuthService, Product, User } from '../../../../../shared';
 
 @Component({
   selector: 'app-button-delete',
