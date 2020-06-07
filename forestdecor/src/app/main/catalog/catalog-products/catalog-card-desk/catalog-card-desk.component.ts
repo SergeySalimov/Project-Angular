@@ -1,8 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
-import { Observable } from 'rxjs';
-import { User } from '../../../../shared/services/auth/user';
-import { AuthService } from '../../../../shared/services/auth/auth.service';
 import { Product } from '../../../../shared/models/product.model';
 
 @Component({

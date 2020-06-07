@@ -9,6 +9,7 @@ import { Product } from '../../../../../shared/models/product.model';
   template: `
     <button mat-button
             *ngIf="(user$ | async)?.isAdmin"
+            (click)="$event.stopPropagation()"
             class="mx-auto"
             color="primary">
       <span><i class="icon-camera mr-1"></i>Добавить</span>

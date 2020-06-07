@@ -7,10 +7,11 @@ import { Product } from '../../../../../shared/models/product.model';
 @Component({
   selector: 'app-button-delete',
   template: `
-   <button mat-button
-                  *ngIf="(user$ | async)?.isAdmin"
-                  class="mx-auto"
-                  color="warn">
+   <button mat-button                  
+           *ngIf="(user$ | async)?.isAdmin"
+           class="mx-auto"
+           (click)="$event.stopPropagation()"
+           color="warn">
             <span><i class="icon-camera mr-1"></i>Удалить</span>
           </button>
   `,
