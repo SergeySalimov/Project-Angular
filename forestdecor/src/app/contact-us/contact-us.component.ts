@@ -2,13 +2,8 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { UserData } from '../shared/models/userData';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../shared/services/auth/auth.service';
-import { User } from '../shared/services/auth/user';
-import { ConsoleService } from '../shared/services/console/console.service';
-import { MsgsService } from '../shared/services/messages/msgs.service';
-import { Categorie } from '../shared/models/categories-of-messages';
+import { AuthService, ConsoleService, MsgsService, User, UserData } from '../shared';
 
 @Component({
   selector: 'app-contact-us',

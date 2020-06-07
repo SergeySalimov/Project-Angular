@@ -1,12 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Message } from '../../../shared/models/message.model';
-import { Categorie } from '../../../shared/models/categories-of-messages';
-import { MsgsService } from '../../../shared/services/messages/msgs.service';
-import { SpinnerService } from '../../../shared/services/spinners/spinner.service';
-import { ConsoleService } from '../../../shared/services/console/console.service';
 import { Subscription } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
+import { Categorie, ConsoleService, Message, MsgsService, SpinnerService } from '../../../shared';
 
 @Component({
   selector: 'app-messages-accordeon',

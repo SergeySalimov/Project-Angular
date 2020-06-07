@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from '../../../../shared/models/product.model';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
-import { ProductsService } from '../../../../shared/services/products/products.service';
-import { ProductPlacer } from '../../../../shared/models/productsPlacer';
 import { Router } from '@angular/router';
+import { Product, ProductPlacer, ProductsService } from '../../../../shared';
 
 @Component({
   selector: 'app-catalog-single-product',
@@ -32,10 +30,6 @@ export class CatalogSingleProductComponent implements OnInit {
       this.previous = prd.parents.length > 0 ? prd.parents.pop() : 'all';
     }
     this.router.navigate(['/catalog', this.previous]);
-  }
-
-  needPhotos(prodPhoto: string[]) {
-    console.log(prodPhoto);
   }
 
 }

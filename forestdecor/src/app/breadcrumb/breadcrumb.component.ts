@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { NavigationService } from '../shared/services/navigation/navigation.service';
-import { NavigationLink } from '../shared/models/navigationLink';
-import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
-import { ProductsService } from '../shared/services/products/products.service';
-import { ProductPlacer } from '../shared/models/productsPlacer';
+import { NavigationEnd, Router } from '@angular/router';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { NavigationLink, NavigationService, ProductPlacer, ProductsService } from '../shared';
 
 @Component({
   selector: 'app-breadcrumb',

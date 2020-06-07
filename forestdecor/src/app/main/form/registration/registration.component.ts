@@ -2,10 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { UserData } from '../../../shared/models/userData';
-import { AuthService } from '../../../shared/services/auth/auth.service';
-import { AuthResponse } from '../../../shared/services/auth/auth-response';
-import { SpinnerService } from '../../../shared/services/spinners/spinner.service';
+import { AuthResponse, AuthService, SpinnerService, UserData } from '../../../shared';
 
 @Component({
   selector: 'app-registration',

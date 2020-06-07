@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, ParamMap, Router } from '@angular/router';
-import { ProductsService } from '../../../shared/services/products/products.service';
-import { ProductPlacer } from '../../../shared/models/productsPlacer';
 import { Subscription } from 'rxjs';
 import { filter, map, pairwise } from 'rxjs/operators';
+import { ProductPlacer, ProductsService } from '../../../shared';
 
 @Component({
   selector: 'app-catalog-products',

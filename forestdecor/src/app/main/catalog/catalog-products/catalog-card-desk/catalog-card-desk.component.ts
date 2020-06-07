@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Product } from '../../../../shared';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
-import { Product } from '../../../../shared/models/product.model';
 
 @Component({
   selector: 'app-catalog-card-desk',
@@ -14,10 +14,6 @@ export class CatalogCardDeskComponent implements OnInit {
   constructor(public catalogNavigation: CatalogNavigationService) { }
 
   ngOnInit(): void {
-  }
-
-  needPhotos(prodPhoto: string[]) {
-    console.log(prodPhoto);
   }
 
 }
