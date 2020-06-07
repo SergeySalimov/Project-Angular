@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { CatalogNavigationService } from '../../../main/catalog/catalog-service/catalog-navigation.service';
 
 @Component({
@@ -8,10 +8,11 @@ import { CatalogNavigationService } from '../../../main/catalog/catalog-service/
 })
 export class ButtonGoTopComponent{
 
+  @Input() heightOfShow: number = 1000;
   @ViewChild('goTop', {static: true}) goTop: ElementRef;
 
   @HostListener('window:scroll', ['$event']) onWindowScroll(): void {
-    (window.scrollY > 1000) ? (this.goTop.nativeElement as HTMLElement).classList.add('show') :
+    (window.scrollY > this.heightOfShow) ? (this.goTop.nativeElement as HTMLElement).classList.add('show') :
       (this.goTop.nativeElement as HTMLElement).classList.remove('show');
   }
 
