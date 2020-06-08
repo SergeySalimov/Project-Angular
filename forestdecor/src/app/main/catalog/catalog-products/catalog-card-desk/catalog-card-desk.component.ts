@@ -18,6 +18,6 @@ export class CatalogCardDeskComponent {
               private photo: PhotoService) { }
 
   showPhotos(product: Product) {
-    this.photo.setCarouselStatus(product.photos);
+    this.photo.setCarouselStatus(product);
   }
 }

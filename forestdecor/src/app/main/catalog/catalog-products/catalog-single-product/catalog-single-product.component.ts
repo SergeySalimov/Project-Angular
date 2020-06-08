@@ -25,7 +25,7 @@ export class CatalogSingleProductComponent {
   }
 
   showPhotos(product: Product) {
-    this.photo.setCarouselStatus(product.photos);
+    this.photo.setCarouselStatus(product);
   }
 
   onDeletePhoto(product: Product) {
