@@ -8,6 +8,7 @@ import { ButtonGoTopComponent } from './components/button-go-top/button-go-top.c
 import { INTERCEPTORS } from './interceptors/interceptors';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { MaterialModule } from '../material/material-module';
+import { CarouselDirective } from './directives/carousel.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MaterialModule } from '../material/material-module';
     PhoneBYPipe,
     ConsoleComponent,
     ButtonGoTopComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    CarouselDirective
   ],
   exports: [
     SpinnerComponent,
@@ -24,7 +26,8 @@ import { MaterialModule } from '../material/material-module';
     PhoneBYPipe,
     ConsoleComponent,
     ButtonGoTopComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    CarouselDirective
   ],
   imports: [
     CommonModule,

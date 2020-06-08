@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
 import { Router } from '@angular/router';
 import { AuthService, PhotoService, Product, ProductPlacer, ProductsService, User } from '../../../../shared';
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   templateUrl: './catalog-single-product.component.html',
   styleUrls: ['./catalog-single-product.component.scss']
 })
-export class CatalogSingleProductComponent implements OnInit {
+export class CatalogSingleProductComponent {
 
   @Input() curProduct: Product;
   @Input() previous: string;
@@ -24,23 +24,13 @@ export class CatalogSingleProductComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {}
-
   showPhotos(product: Product) {
-    console.log(product.photos);
+    this.photo.setCarouselStatus(product.photos);
   }
 
   onDeletePhoto(product: Product) {
     console.log('Need to deleted some images');
-
   }
-
-  // onAddPhoto(event, product: Product) {
-  //   console.log(product);
-  //   if (!!event.target.files[0]) {
-  //     this.photo.uploadFile(event.target.files[0], product.urlName);
-  //   }
-  // }
 
   goBack(urlName: string, noPrev = false) {
     if (!this.previous || noPrev) {

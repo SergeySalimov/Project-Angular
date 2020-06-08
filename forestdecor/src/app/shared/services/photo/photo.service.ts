@@ -12,12 +12,22 @@ import { PhotoUrl } from '../../models/photo-url.model';
 export class PhotoService {
 
   private _uploadProgress: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  private _showCarousel: BehaviorSubject<PhotoUrl[] | null> = new BehaviorSubject<PhotoUrl[] | null>(null);
 
   constructor(private storage: AngularFireStorage, private http: HttpClient) {
   }
 
-  get uploadProgress() {
+  get uploadProgress(): Observable<number> {
     return this._uploadProgress.asObservable();
+  }
+
+  get showCarousel(): Observable<PhotoUrl[] | null> {
+    return this._showCarousel.asObservable();
+  }
+
+
+  setCarouselStatus(status: PhotoUrl[] | null) {
+    this._showCarousel.next(status);
   }
 
   uploadFile(file, folder: string) {

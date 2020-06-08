@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogNavigationService } from './catalog-service/catalog-navigation.service';
+import { PhotoService } from '../../shared';
+import { PhotoUrl } from '../../shared/models/photo-url.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-catalog',
@@ -8,9 +11,15 @@ import { CatalogNavigationService } from './catalog-service/catalog-navigation.s
 })
 export class CatalogComponent implements OnInit {
 
- constructor(public catalogNavigation: CatalogNavigationService) { }
+  showCarousel$ = this.photo.showCarousel;
+
+
+ constructor(public catalogNavigation: CatalogNavigationService, private photo: PhotoService) {
+
+ }
 
   ngOnInit(): void {
+
   }
 
 }
