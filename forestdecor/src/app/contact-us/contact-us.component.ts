@@ -4,7 +4,7 @@ import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService, ConsoleService, MsgsService, User, UserData } from '../shared';
-import { MESSAGE } from '../shared/models/msgs-list';
+import { MESSAGE } from '../shared/services/console/response-messages-list';
 
 @Component({
   selector: 'app-contact-us',
