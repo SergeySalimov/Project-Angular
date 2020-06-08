@@ -7,9 +7,10 @@
         <div class="col-sm-12 col-lg-5 mt-2">
           <img src="{{curProduct.img}}" class="img-fluid mb-2" alt="{{curProduct.name}}">
           <h5 class="card-title" [ngClass]="{'pl-5': !catalogNavigation.status}">
-            <app-button-show [product]="curProduct"></app-button-show>
             <app-button-add [product]="curProduct"></app-button-add>
             <app-button-delete [product]="curProduct"></app-button-delete>
+            <app-button-show [product]="curProduct"></app-button-show>
+
           </h5>
         </div>
 

@@ -27,14 +27,13 @@ export class PhotoService {
 
 
   uploadFile(file, folder: string) {
-    console.log(folder);
     const filePath = `/${folder}/${file.name}`;
     const ref: AngularFireStorageReference = this.storage.ref(filePath);
     const task: AngularFireUploadTask = ref.put(file);
     task.percentageChanges().subscribe(number => this._uploadProgress.next(number));
     task.then((data) => {
       console.log(data.metadata.name);
-      this.console.showInfoMessage(MESSAGE.FILE_LOADED, MESSAGE.FILE_LOADED_TIMER);
+      // this.console.showInfoMessage(MESSAGE.FILE_LOADED, MESSAGE.FILE_LOADED_TIMER);
       setTimeout(() => {this._uploadProgress.next(0)}, 2000)
     });
   }

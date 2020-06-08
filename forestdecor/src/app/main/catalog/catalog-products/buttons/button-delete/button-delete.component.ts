@@ -5,10 +5,10 @@ import { AuthService, Product, User } from '../../../../../shared';
 @Component({
   selector: 'app-button-delete',
   template: `
-   <button mat-button                  
-           *ngIf="(user$ | async)?.isAdmin"
+<!--    *ngIf="(user$ | async)?.isAdmin"-->
+   <button mat-button
+           
            class="mx-auto"
-           (click)="$event.stopPropagation()"
            color="warn">
             <span><i class="icon-camera mr-1"></i>Удалить</span>
           </button>

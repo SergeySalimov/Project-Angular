@@ -5,12 +5,12 @@ import { AuthService, PhotoService, Product, User } from '../../../../../shared'
 @Component({
   selector: 'app-button-add',
   template: `
-    <span class="mat-button mat-primary button-add">
+    <span class="mat-button button-add">
       <label class="label" for="fileAdd">
-        <span><i class="icon-camera mr-1"></i>Добавить</span>
+        <span class="mx-3"><i class="icon-camera mr-1"></i>Добавить</span>
         <input type="file"
                id="fileAdd"
-               (change)="onAddPhoto($event, product)">
+               (change)="onAddPhoto($event, product);">
       </label>
     </span>
   `,
@@ -25,7 +25,7 @@ export class ButtonAddComponent {
   }
 
   onAddPhoto(event, product: Product) {
-    console.log(event.target.files[0]);
+    console.log(product);
     if (!!event.target.files[0]) {
       this.photo.uploadFile(event.target.files[0], product.urlName);
     }

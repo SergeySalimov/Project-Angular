@@ -5,7 +5,7 @@ import { PhotoService } from '../../services/photo/photo.service';
   selector: 'app-progress-bar',
   template: `
     <div class="upload-progress" *ngIf="(uploadProgress$ | async) > 0">
-      <span class="h6 ml-3">PROGRESS</span>
+      <span class="h6">PROGRESS<i class="icon-thumbs-up" *ngIf="(uploadProgress$ | async) === 100"></i></span>      
       <mat-progress-bar mode="determinate" [value]="(uploadProgress$ | async)"></mat-progress-bar>
     </div>
   `,

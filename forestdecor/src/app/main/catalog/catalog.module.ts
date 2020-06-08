@@ -10,6 +10,7 @@ import { CatalogSingleProductComponent } from './catalog-products/catalog-single
 import { CatalogRoutingModule } from './catalog-routing.module';
 import { ButtonAddComponent, ButtonDeleteComponent, ButtonShowComponent } from './catalog-products/buttons';
 import { CatalogComponent } from './catalog.component';
+import { ButtonEditComponent } from './catalog-products/buttons/button-edit/button-edit.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CatalogComponent } from './catalog.component';
     CatalogSingleProductComponent,
     ButtonShowComponent,
     ButtonAddComponent,
-    ButtonDeleteComponent
+    ButtonDeleteComponent,
+    ButtonEditComponent
   ],
   imports: [
     CommonModule,
