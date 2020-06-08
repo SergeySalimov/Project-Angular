@@ -24,8 +24,8 @@ export class ProductsService {
     this.getProductsFromServer().pipe(take(1)).subscribe(() => {
       this.photo.getPhotosFromServer().pipe(take(1)).subscribe((data: PhotoUrl[]) => {
         this.addPhotoUrlsToProducts(data);
-        console.log(this.productsPlacer);
-        console.log(data);
+        // console.log(this.productsPlacer);
+        // console.log(data);
       })
     });
   }
