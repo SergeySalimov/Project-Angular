@@ -9,7 +9,7 @@
           <h5 class="card-title" [ngClass]="{'pl-5': !catalogNavigation.status}">
             <app-button-add [product]="curProduct" *ngIf="(user$ | async)?.isAdmin"></app-button-add>
             <app-button-delete (click)="onDeletePhoto(curProduct)" *ngIf="(user$ | async)?.isAdmin"></app-button-delete>
-            <app-button-show [product]="curProduct"></app-button-show>
+            <app-button-show [product]="curProduct" (click)="showPhotos(curProduct)"></app-button-show>
           </h5>
         </div>
 

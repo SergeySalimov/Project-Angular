@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { map, switchMap, tap } from 'rxjs/operators';
@@ -55,7 +55,7 @@ export class PhotoService {
     return this.http.delete<string[]>(`${environment.firebase.databaseURL}/photos/${folder}.json`, {headers});
   }
 
-  getPhotosFromServer() {
+  getPhotosFromServer(): Observable<PhotoUrl[]> {
     return this.http.get<PhotoUrl[]>(`${environment.firebase.databaseURL}/photos.json`).pipe(
       map(data => {
         const photoUrl: PhotoUrl[] = [];

@@ -15,8 +15,8 @@ export class CatalogCardDeskComponent {
 
   constructor(public catalogNavigation: CatalogNavigationService, private auth: AuthService) { }
 
-  needPhotos(product: Product) {
-
+  showPhotos(product: Product) {
+    console.log(product.photos);
   }
 
 }

@@ -26,8 +26,13 @@ export class CatalogSingleProductComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  showPhotos(product: Product) {
+    console.log(product.photos);
+  }
+
   onDeletePhoto(product: Product) {
-    console.log(product);
+    console.log('Need to deleted some images');
+
   }
 
   // onAddPhoto(event, product: Product) {

@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { Product } from '../../models/product.model';
 import { ProductPlacer } from '../../models/productsPlacer';
 import { environment } from '../../../../environments/environment';
-import { take, tap } from 'rxjs/operators';
+import { map, mergeMap, take, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { PhotoService } from '../photo/photo.service';
+import { PhotoUrl } from '../../models/photo-url.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +18,31 @@ export class ProductsService {
   private accumulator: Product[];
   private productsPlacer: ProductPlacer[] = [];
 
-  constructor(private http: HttpClient, private auth: AuthService) {
+  constructor(private http: HttpClient, private auth: AuthService, private photo: PhotoService) {
     this.auth.autoLogin();
     this.auth.getAdminsFromServer().pipe(take(1)).subscribe(() => {});
-    this.getProductsFromServer().pipe(take(1)).subscribe(() => {});
+    this.getProductsFromServer().pipe(take(1)).subscribe(() => {
+      this.photo.getPhotosFromServer().pipe(take(1)).subscribe((data: PhotoUrl[]) => {
+        this.addPhotoUrlsToProducts(data);
+        console.log(this.productsPlacer);
+        console.log(data);
+      })
+    });
   }
 
   get products() {
     return [...this._products];
+  }
+
+  addPhotoUrlsToProducts(photosUrls: PhotoUrl[]) {
+
+    this.productsPlacer.forEach((item: ProductPlacer) => {
+      const photoUrls: PhotoUrl = photosUrls.filter((url: PhotoUrl) => url.urlName === item.urlName)[0];
+      if (!!photoUrls) {
+        item.content[0].photos = [];
+        item.content[0].photos.push(photoUrls);
+      }
+    });
   }
 
   getProductsFromServer(): Observable<Product[]> {

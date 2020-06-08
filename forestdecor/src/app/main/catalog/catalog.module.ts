@@ -11,6 +11,7 @@ import { CatalogRoutingModule } from './catalog-routing.module';
 import { ButtonAddComponent, ButtonDeleteComponent, ButtonShowComponent } from './catalog-products/buttons';
 import { CatalogComponent } from './catalog.component';
 import { ButtonEditComponent } from './catalog-products/buttons/button-edit/button-edit.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ButtonEditComponent } from './catalog-products/buttons/button-edit/butt
     ButtonShowComponent,
     ButtonAddComponent,
     ButtonDeleteComponent,
-    ButtonEditComponent
+    ButtonEditComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,
