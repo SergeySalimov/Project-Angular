@@ -4,6 +4,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { AuthService, ConsoleService } from '../../../shared';
+import { MESSAGE } from '../../../shared/models/msgs-list';
 
 @Component({
   selector: 'app-authentication',
@@ -60,18 +61,12 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
       },
       () => this.authForm.controls['authPsw'].reset(),
       () => {
-      if (isRecovery) this.console.showInfoMessage({
-          title: 'Проверьте Вашу почту',
-          message: 'Вам на почту было выслано письмо с ссылкой для изменения пароля',
-          style: 'success'
-        }, 10000)}
+      if (isRecovery) this.console.showInfoMessage(MESSAGE.RECOVERY_SEND, MESSAGE.RECOVERY_SEND_TIMER)}
     );
   }
 
   ngOnDestroy() {
     this.routerSubscription.unsubscribe()
   }
-
-  // mergeMap((data: AuthResponse) => forkJoin([of(data), this.auth.getAdminsFromServer()])),
 
 }

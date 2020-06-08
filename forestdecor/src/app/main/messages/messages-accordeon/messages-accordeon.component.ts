@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
-import { Categorie, ConsoleService, Message, MsgsService, SpinnerService } from '../../../shared';
+import { Categorie, Message, MsgsService, SpinnerService } from '../../../shared';
 
 @Component({
   selector: 'app-messages-accordeon',
@@ -18,7 +18,7 @@ export class MessagesAccordeonComponent implements OnInit, OnDestroy {
   chAllSubscr: Subscription;
   step: number;
 
-  constructor(private msgsService: MsgsService, private spinner: SpinnerService, private console: ConsoleService) {
+  constructor(private msgsService: MsgsService, private spinner: SpinnerService) {
   }
 
   ngOnInit(): void {

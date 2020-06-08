@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { ConsoleService } from '../console/console.service';
-import { MESSAGES } from '../../models/console-messages';
+import { MESSAGE } from '../../models/msgs-list';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -35,7 +35,7 @@ export class PhotoService {
     task.percentageChanges().subscribe(number => this._uploadProgress.next(number));
     task.then((data) => {
       console.log(data.metadata.name);
-      this.console.showInfoMessage(MESSAGES.FILE_LOADED, MESSAGES.FILE_LOADED_TIMER);
+      this.console.showInfoMessage(MESSAGE.FILE_LOADED, MESSAGE.FILE_LOADED_TIMER);
       setTimeout(() => {this._uploadProgress.next(0)}, 2000)
     });
   }

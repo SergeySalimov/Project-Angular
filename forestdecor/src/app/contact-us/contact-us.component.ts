@@ -4,6 +4,7 @@ import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService, ConsoleService, MsgsService, User, UserData } from '../shared';
+import { MESSAGE } from '../shared/models/msgs-list';
 
 @Component({
   selector: 'app-contact-us',
@@ -87,11 +88,7 @@ export class ContactUsComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.isRegisterAfter = this.formContactUs.value.isRegisterAfter;
     this.contactUs.sendMessageToServer(this.formContactUs.value).pipe(
-      tap(() => this.console.showInfoMessage(
-        {
-          title: 'Ваше сообщение было отправлено',
-          message: 'Ваше сообщение было отправлено',
-          style: 'success'}, 5000)
+      tap(() => this.console.showInfoMessage(MESSAGE.CONTACT_US_MESSAGE_SEND, MESSAGE.CONTACT_US_MESSAGE_SEND_TIMER),
       )
     )
       .subscribe(() => {
