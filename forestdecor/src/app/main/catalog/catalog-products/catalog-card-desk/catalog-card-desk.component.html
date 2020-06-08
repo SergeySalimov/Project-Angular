@@ -22,8 +22,8 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <app-button-show [product]="product"></app-button-show>
-          <app-button-edit></app-button-edit>
+          <app-button-show [product]="product" (click)="needPhotos(product); $event.stopPropagation()"></app-button-show>
+          <app-button-edit *ngIf="(user$ | async)?.isAdmin"></app-button-edit>
         </mat-card-actions>
       </mat-card>
     </div>

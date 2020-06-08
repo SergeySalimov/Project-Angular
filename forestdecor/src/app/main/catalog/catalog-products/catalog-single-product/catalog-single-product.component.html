@@ -7,21 +7,19 @@
         <div class="col-sm-12 col-lg-5 mt-2">
           <img src="{{curProduct.img}}" class="img-fluid mb-2" alt="{{curProduct.name}}">
           <h5 class="card-title" [ngClass]="{'pl-5': !catalogNavigation.status}">
-            <app-button-add [product]="curProduct"></app-button-add>
-            <app-button-delete [product]="curProduct"></app-button-delete>
+            <app-button-add [product]="curProduct" *ngIf="(user$ | async)?.isAdmin"></app-button-add>
+            <app-button-delete (click)="onDeletePhoto(curProduct)" *ngIf="(user$ | async)?.isAdmin"></app-button-delete>
             <app-button-show [product]="curProduct"></app-button-show>
-
           </h5>
         </div>
 
         <div class="col-sm-12 col-lg-7 mt-1">
-          <p class="card-text pl-md-2"
-             [ngClass]="{'pl-4': !catalogNavigation.status}">
+          <p class="card-text pl-md-2" [ngClass]="{'pl-4': !catalogNavigation.status}">
             {{curProduct.description}}
           </p>
         </div>
-
       </div>
+
       <div class="card-footer">
         <button class="btn btn-link btn-sm m-1 " (click)="goBack(curProduct.urlName)">Назад</button>
         <button class="btn btn-link btn-sm m-1" (click)="goBack(curProduct.urlName, true)">Наверх</button>
