@@ -5,6 +5,7 @@ export interface CarouselContext {
   controller: {
     next: () => void;
     prev: () => void;
+    selected: (i) => void;
   };
 }
 
@@ -25,6 +26,7 @@ export class CarouselDirective implements OnInit {
       controller: {
         next: () => this.next(),
         prev: () => this.prev(),
+        selected: (i) => this.selected(i),
       },
     };
     this.vcr.createEmbeddedView(this.tmpl, this.context);
@@ -43,6 +45,12 @@ export class CarouselDirective implements OnInit {
     if (this.index < 0) {
       this.index = this.images.length - 1;
     }
+    this.context!.$implicit = this.images[this.index];
+  }
+
+  selected(i) {
+    console.log(i);
+    this.index = i;
     this.context!.$implicit = this.images[this.index];
   }
 }

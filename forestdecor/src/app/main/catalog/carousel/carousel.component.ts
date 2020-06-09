@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class CarouselComponent implements OnInit, OnDestroy {
 
-  showCarousel: string[] | number = null;
+  showCarousel: string[] | null = null;
   showCarouselSubscription: Subscription;
   product: Product | null = null;
 
@@ -21,6 +21,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
     this.showCarouselSubscription = this.photo.showCarousel.subscribe((product: Product | null) => {
       this.product = product;
       this.showCarousel = product?.photos[0].urlList;
+      console.log(this.showCarousel);
     })
   }
 

@@ -1,15 +1,26 @@
 <div class="container carousel">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 offset-md-3 col-md-6 carousel slide" id="carouselIndicators">
 
-      <div class="header-text h4 my-3 text-center text-md-left">
+      <div class="header-text display-4 my-3 text-md-left">
         <img [src]="product.img" [alt]="product.name" class="img-thumbnail">
-        Фото для : {{product.name}}
+        Фотографии : {{product.name}}
         <i class="icon-cancel close-btn" (click)="closeCarousel()"></i>
       </div>
 
       <div *carousel="let url from showCarousel; let ctrl = controller" class="my-md-2">
-        <img class="img-fluid w-100 mb-3" src="{{url}}" alt="Image of {{product.name}} from carousel">
+
+
+        <ol class="carousel-indicators">
+          <li data-target="#carouselIndicators"
+              *ngFor="let li of showCarousel; let i = index"
+              class="{{(showCarousel?.indexOf(url) === i) ? 'active' : ''}}"
+              (click)="ctrl.selected(i)"></li>
+        </ol>
+
+        <div class="carousel-inner">
+          <img class="img-fluid w-100 mb-3 rounded d-block" src="{{url}}" alt="Image of {{product.name}} from carousel">
+        </div>
 
         <a class="carousel-control-prev" role="button" (click)="ctrl.prev()">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
