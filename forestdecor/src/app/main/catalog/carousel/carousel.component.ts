@@ -19,8 +19,8 @@ export class CarouselComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.showCarouselSubscription = this.productsService.showInCatalog.subscribe((data: Show | null) => {
-      this.product = data.product;
-      this.showCarousel = data.product?.photos[0].urlList;
+      this.product = data?.product;
+      this.showCarousel = data?.product?.photos[0].urlList;
     })
   }
 
