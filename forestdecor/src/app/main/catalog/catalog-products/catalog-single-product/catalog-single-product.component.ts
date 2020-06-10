@@ -22,7 +22,7 @@ export class CatalogSingleProductComponent {
     private auth: AuthService) { }
 
   onDeletePhoto(product: Product) {
-    console.log('Need to deleted some images');
+    this.productsService.setModalStatus({product, show: 'delete-photos'});
   }
 
   goBack(urlName: string, noPrev = false) {

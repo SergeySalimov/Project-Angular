@@ -25,7 +25,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
   }
 
   closeCarousel() {
-    this.productsService.setCarouselStatus(null);
+    this.productsService.setModalStatus(null);
   }
 
   ngOnDestroy(): void {

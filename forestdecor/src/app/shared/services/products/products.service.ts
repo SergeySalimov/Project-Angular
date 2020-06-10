@@ -45,7 +45,7 @@ export class ProductsService {
     return this._showInCatalog.asObservable();
   }
 
-  setCarouselStatus(status: Show | null) {
+  setModalStatus(status: Show | null) {
     this._showInCatalog.next(status);
   }
 

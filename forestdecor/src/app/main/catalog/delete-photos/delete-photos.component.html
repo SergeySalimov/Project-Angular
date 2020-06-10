@@ -1,26 +1,47 @@
-<div class="card-deck">
-  <div class="card">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Название карточки</h5>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Название карточки</h5>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Название карточки</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <div class="delete-header my-2 p-3 w-100 rounded">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeWindow()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="h4 mr-4">Редактирование фотографий:</div>
+        <div class="h6">выбрано 0 фото</div>
+
+        <div>
+          <button type="button" class="btn btn-danger mr-4 my-2">Удалить</button>
+          <button type="button" class="btn btn-dark my-2">Отмена</button>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-6 col-md-4 col-lg-3 my-1" *ngFor="let photo of photos; let i = index">
+          <div class="card">
+            <div class="card-header">
+              Не выбрано
+            </div>
+            <img src="https://firebasestorage.googleapis.com/v0/b/prj-forestdecor.appspot.com/o/chalfei%2Fmozhzhevel.jpg?alt=media&token=80fe9644-b4b0-4581-b034-77db747ddcc7"
+                 class="card-img-top img-fluid p-1"
+                 alt="...">
+
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 my-1">
+          <div class="card text-white bg-danger ">
+            <div class="card-header">
+              Не выбрано
+            </div>
+            <img src="https://firebasestorage.googleapis.com/v0/b/prj-forestdecor.appspot.com/o/chalfei%2Fmozhzhevel.jpg?alt=media&token=80fe9644-b4b0-4581-b034-77db747ddcc7"
+                 class="card-img-top img-fluid p-1"
+                 alt="...">
+
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
 </div>
