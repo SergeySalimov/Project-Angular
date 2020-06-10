@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { PhotoService, Product } from '../../../shared';
-import { PhotoUrl } from '../../../shared/models/photo-url.model';
+import { Product, ProductsService } from '../../../shared';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,14 +13,13 @@ export class CarouselComponent implements OnInit, OnDestroy {
   showCarouselSubscription: Subscription;
   product: Product | null = null;
 
-  constructor(private photo: PhotoService) {
+  constructor(private productsService: ProductsService) {
   }
 
   ngOnInit(): void {
-    this.showCarouselSubscription = this.photo.showCarousel.subscribe((product: Product | null) => {
+    this.showCarouselSubscription = this.productsService.showCarousel.subscribe((product: Product | null) => {
       this.product = product;
       this.showCarousel = product?.photos[0].urlList;
-      console.log(this.showCarousel);
     })
   }
 
@@ -30,7 +28,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
   }
 
   closeCarousel() {
-    this.photo.setCarouselStatus(null);
+    this.productsService.setCarouselStatus(null);
   }
 
   ngOnDestroy(): void {

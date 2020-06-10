@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
 import { Router } from '@angular/router';
-import { AuthService, PhotoService, Product, ProductPlacer, ProductsService, User } from '../../../../shared';
+import { AuthService, Product, ProductPlacer, ProductsService, User } from '../../../../shared';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -19,13 +19,12 @@ export class CatalogSingleProductComponent {
     public catalogNavigation: CatalogNavigationService,
     private productsService: ProductsService,
     private router: Router,
-    private photo: PhotoService,
     private auth: AuthService,
   ) {
   }
 
   showPhotos(product: Product) {
-    this.photo.setCarouselStatus(product);
+    this.productsService.setCarouselStatus(product);
   }
 
   onDeletePhoto(product: Product) {

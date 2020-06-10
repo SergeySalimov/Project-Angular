@@ -3,9 +3,8 @@ import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { map, switchMap, tap } from 'rxjs/operators';
-import { PhotoUrl } from '../../models/photo-url.model';
-import { Product, ProductPlacer } from '../..';
+import { switchMap, tap } from 'rxjs/operators';
+import { Product } from '../..';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +24,6 @@ export class PhotoService {
   get showCarousel(): Observable<Product | null> {
     return this._showCarousel.asObservable();
   }
-
 
   setCarouselStatus(status: Product | null) {
     this._showCarousel.next(status);
@@ -66,19 +64,5 @@ export class PhotoService {
     return this.http.delete<string[]>(`${environment.firebase.databaseURL}/photos/${folder}.json`, {headers});
   }
 
-  getPhotosFromServer(): Observable<PhotoUrl[]> {
-    return this.http.get<PhotoUrl[]>(`${environment.firebase.databaseURL}/photos.json`).pipe(
-      map(data => {
-        const photoUrl: PhotoUrl[] = [];
-        for (let key in data) {
-          const [fakeCopy, urlArr] = [data[key], []];
-          for (let key2 in fakeCopy) {
-            urlArr.push(...fakeCopy[key2])
-          }
-          photoUrl.push({urlName: key, urlList: [...new Set(urlArr)]});
-        }
-        return photoUrl;
-      }),
-    )
-  }
+
 }

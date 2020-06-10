@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PhotoService } from '../../services/photo/photo.service';
+import { ProductsService } from '../../services/products/products.service';
 
 @Component({
   selector: 'app-progress-bar',
@@ -12,6 +12,6 @@ import { PhotoService } from '../../services/photo/photo.service';
   styleUrls: ['./progress-bar.component.scss']
 })
 export class ProgressBarComponent {
- constructor(private photo: PhotoService) { }
- uploadProgress$ = this.photo.uploadProgress;
+ constructor(private productsService: ProductsService) { }
+ uploadProgress$ = this.productsService.uploadProgress;
 }

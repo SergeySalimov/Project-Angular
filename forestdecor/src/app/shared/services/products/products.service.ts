@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Product } from '../../models/product.model';
 import { ProductPlacer } from '../../models/productsPlacer';
 import { environment } from '../../../../environments/environment';
-import { map, mergeMap, take, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, switchMap, take, tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { PhotoService } from '../photo/photo.service';
 import { PhotoUrl } from '../../models/photo-url.model';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +17,15 @@ export class ProductsService {
   private _products: Product[];
   private accumulator: Product[];
   private productsPlacer: ProductPlacer[] = [];
+  private _uploadProgress: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  private _showCarousel: BehaviorSubject<Product | null> = new BehaviorSubject<Product | null>(null);
 
-  constructor(private http: HttpClient, private auth: AuthService, private photo: PhotoService) {
+  constructor(private http: HttpClient, private auth: AuthService, private storage: AngularFireStorage) {
     this.auth.autoLogin();
     this.auth.getAdminsFromServer().pipe(take(1)).subscribe(() => {});
     this.getProductsFromServer().pipe(take(1)).subscribe(() => {
-      this.photo.getPhotosFromServer().pipe(take(1)).subscribe((data: PhotoUrl[]) => {
-        this.addPhotoUrlsToProducts(data);
-        // console.log(this.productsPlacer);
-        // console.log(data);
-      })
+      this.getPhotosFromServer().pipe(take(1))
+        .subscribe((data: PhotoUrl[]) => this.addPhotoUrlsToProducts(data))
     });
   }
 
@@ -34,15 +33,37 @@ export class ProductsService {
     return [...this._products];
   }
 
-  addPhotoUrlsToProducts(photosUrls: PhotoUrl[]) {
+  get uploadProgress(): Observable<number> {
+    return this._uploadProgress.asObservable();
+  }
 
-    this.productsPlacer.forEach((item: ProductPlacer) => {
-      const photoUrls: PhotoUrl = photosUrls.filter((url: PhotoUrl) => url.urlName === item.urlName)[0];
-      if (!!photoUrls) {
-        item.content[0].photos = [];
-        item.content[0].photos.push(photoUrls);
-      }
-    });
+  get showCarousel(): Observable<Product | null> {
+    return this._showCarousel.asObservable();
+  }
+
+  setCarouselStatus(status: Product | null) {
+    this._showCarousel.next(status);
+  }
+
+  // Server block
+  getPhotosFromServer(): Observable<PhotoUrl[]> {
+    return this.http.get<PhotoUrl[]>(`${environment.firebase.databaseURL}/photos.json`).pipe(
+      map(data => {
+        const photoUrl: PhotoUrl[] = [];
+        for (let key in data) {
+          if (data.hasOwnProperty(key)) {
+            const [fakeCopy, urlArr] = [data[key], []];
+            for (let key2 in fakeCopy) {
+              if (fakeCopy.hasOwnProperty(key2)) {
+                urlArr.push(...fakeCopy[key2])
+              }
+            }
+            photoUrl.push({urlName: key, urlList: [...new Set(urlArr)]});
+          }
+        }
+        return photoUrl;
+      }),
+    )
   }
 
   getProductsFromServer(): Observable<Product[]> {
@@ -51,6 +72,51 @@ export class ProductsService {
       tap((prd: Product[]) => this._products = [...prd]),
       tap(() => this.createAllUrls()),
     );
+  }
+
+  uploadFile(file, folder: string) {
+    const filePath = `/${folder}/${file.name}`;
+    const ref: AngularFireStorageReference = this.storage.ref(filePath);
+    const task: AngularFireUploadTask = ref.put(file);
+    task.percentageChanges().subscribe(number => this._uploadProgress.next(number));
+    task.then((data) => {
+      console.log(data.metadata.name);
+      const filePath = `/${folder}/${data.metadata.name}`;
+      this.storage.ref(filePath).getDownloadURL().pipe(
+        tap(() => setTimeout(() => {this._uploadProgress.next(0)}, 2000)),
+        switchMap((url: string) => this.sendPhotoUrlToServer(folder, [url])),
+      )
+        .subscribe(data => {
+          console.log(data);
+        });
+    });
+  }
+
+  updatePhotoUrl(folder, newestData) {
+    return this.deletePhotoFromServer(folder).pipe(
+      switchMap(() => this.sendPhotoUrlToServer(folder, newestData))
+    );
+  }
+
+  sendPhotoUrlToServer(folder: string, data) {
+    const headers: HttpHeaders = new HttpHeaders({[environment.NEED_TOKEN]: 'Add-my-token', [environment.GLOBAL_SPINNER]: 'spinnerNeeded'});
+    return this.http.post<string[]>(`${environment.firebase.databaseURL}/photos/${folder}.json`, data, {headers});
+  }
+
+  deletePhotoFromServer(folder: string) {
+    const headers: HttpHeaders = new HttpHeaders({[environment.NEED_TOKEN]: 'Add-my-token', [environment.GLOBAL_SPINNER]: 'spinnerNeeded'});
+    return this.http.delete<string[]>(`${environment.firebase.databaseURL}/photos/${folder}.json`, {headers});
+  }
+
+  //Calculations
+  addPhotoUrlsToProducts(photosUrls: PhotoUrl[]) {
+    this.productsPlacer.forEach((item: ProductPlacer) => {
+      const photoUrls: PhotoUrl = photosUrls.filter((url: PhotoUrl) => url.urlName === item.urlName)[0];
+      if (!!photoUrls) {
+        item.content[0].photos = [];
+        item.content[0].photos.push(photoUrls);
+      }
+    });
   }
 
   getProductUrlInfo(url): ProductPlacer {

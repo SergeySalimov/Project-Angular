@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AuthService, PhotoService, Product, User } from '../../../../shared';
+import { AuthService, Product, ProductsService, User } from '../../../../shared';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
 import { Observable } from 'rxjs';
 
@@ -15,9 +15,9 @@ export class CatalogCardDeskComponent {
 
   constructor(public catalogNavigation: CatalogNavigationService,
               private auth: AuthService,
-              private photo: PhotoService) { }
+              private productsService: ProductsService) { }
 
   showPhotos(product: Product) {
-    this.photo.setCarouselStatus(product);
+    this.productsService.setCarouselStatus(product);
   }
 }
