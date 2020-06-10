@@ -1,4 +1,4 @@
-<div class="control-messages">
+<div class="control-messages" *ngIf="collapseBurger$ | async">
   <div class="list-group list-group-horizontal-sm">
     <form [formGroup]="messageNav">
       <input type="radio" formControlName="categorie" value="new" id="new"><label for="new"><span>Новые</span></label>
