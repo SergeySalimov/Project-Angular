@@ -16,6 +16,7 @@ export class ProductsService {
 
   private _products: Product[];
   private accumulator: Product[];
+  private photoUrls: PhotoUrl[];
   private productsPlacer: ProductPlacer[] = [];
   private _uploadProgress: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private _showCarousel: BehaviorSubject<Product | null> = new BehaviorSubject<Product | null>(null);
@@ -24,8 +25,10 @@ export class ProductsService {
     this.auth.autoLogin();
     this.auth.getAdminsFromServer().pipe(take(1)).subscribe(() => {});
     this.getProductsFromServer().pipe(take(1)).subscribe(() => {
-      this.getPhotosFromServer().pipe(take(1))
-        .subscribe((data: PhotoUrl[]) => this.addPhotoUrlsToProducts(data))
+      this.getPhotosFromServer().pipe(take(1)).subscribe((data: PhotoUrl[]) => {
+        this.photoUrls = data;
+        this.addPhotoUrlsToProducts(data);
+      });
     });
   }
 
@@ -80,14 +83,16 @@ export class ProductsService {
     const task: AngularFireUploadTask = ref.put(file);
     task.percentageChanges().subscribe(number => this._uploadProgress.next(number));
     task.then((data) => {
-      console.log(data.metadata.name);
       const filePath = `/${folder}/${data.metadata.name}`;
       this.storage.ref(filePath).getDownloadURL().pipe(
         tap(() => setTimeout(() => {this._uploadProgress.next(0)}, 2000)),
         switchMap((url: string) => this.sendPhotoUrlToServer(folder, [url])),
       )
         .subscribe(data => {
-          console.log(data);
+          this.getPhotosFromServer().pipe(take(1)).subscribe((data: PhotoUrl[]) => {
+            this.photoUrls = data;
+            this.addPhotoUrlsToProducts(data);
+          });
         });
     });
   }
