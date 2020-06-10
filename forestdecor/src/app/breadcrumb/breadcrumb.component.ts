@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 import { NavigationLink, NavigationService, ProductPlacer, ProductsService } from '../shared';
 
 @Component({
@@ -28,6 +28,7 @@ export class BreadcrumbComponent implements OnInit {
       map ( strUrl => strUrl.split('#')[0]),
       map ( strUrl => strUrl.split('/')),
       distinctUntilChanged(),
+      tap(() => this.productsService.setModalStatus(null)),
     )
       .subscribe((urlArr: string[]) => {
         // first element

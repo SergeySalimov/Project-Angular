@@ -49,7 +49,6 @@ export class DeletePhotosComponent implements OnInit, OnDestroy {
       this.photosUrls = newPhotoUrlsArr;
       this.curProduct.photos[0].urlList = newPhotoUrlsArr;
       this.selectedIndex = [];
-
       // может не надо
       this.productsService.updatePhotos();
     });
