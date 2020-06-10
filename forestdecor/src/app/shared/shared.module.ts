@@ -6,6 +6,9 @@ import { PhoneBYPipe } from './pipes/phone-by.pipe';
 import { ConsoleComponent } from './services/console/console.component';
 import { ButtonGoTopComponent } from './components/button-go-top/button-go-top.component';
 import { INTERCEPTORS } from './interceptors/interceptors';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { MaterialModule } from '../material/material-module';
+import { CarouselDirective } from './directives/carousel.directive';
 
 @NgModule({
   declarations: [
@@ -13,17 +16,22 @@ import { INTERCEPTORS } from './interceptors/interceptors';
     DotPipe,
     PhoneBYPipe,
     ConsoleComponent,
-    ButtonGoTopComponent
+    ButtonGoTopComponent,
+    ProgressBarComponent,
+    CarouselDirective
   ],
   exports: [
     SpinnerComponent,
     DotPipe,
     PhoneBYPipe,
     ConsoleComponent,
-    ButtonGoTopComponent
+    ButtonGoTopComponent,
+    ProgressBarComponent,
+    CarouselDirective
   ],
   imports: [
     CommonModule,
+    MaterialModule,
   ],
   providers: INTERCEPTORS,
 })

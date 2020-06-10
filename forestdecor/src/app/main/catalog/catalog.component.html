@@ -1,10 +1,9 @@
-<div class="container clearfix">
+<div class="container clearfix" *ngIf="!(showInCatalog$ | async) || (showInCatalog$ | async)?.show === 'close-delete'">
   <div class="row">
 
     <button *ngIf="!catalogNavigation.status" (click)="this.catalogNavigation.show()">
       <i class="icon-angle-double-right"></i>
     </button>
-
     <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3 mt-2 catalog-navigation" *ngIf="catalogNavigation.status">
       <app-catalog-navigation></app-catalog-navigation>
     </div>
@@ -19,6 +18,9 @@
     </div>
 
     <app-button-go-top></app-button-go-top>
-
   </div>
 </div>
+
+<app-progress-bar></app-progress-bar>
+<app-carousel *ngIf="(showInCatalog$ | async)?.show === 'carousel'"></app-carousel>
+<app-delete-photos *ngIf="(showInCatalog$ | async)?.show === 'delete-photos'"></app-delete-photos>

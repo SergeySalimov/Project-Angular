@@ -1,0 +1,17 @@
+:host {
+  .upload-progress {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    z-index: 9999;
+  }
+  i.icon-thumbs-up {
+    color: green;
+  }
+  span {
+    position: fixed;
+    bottom: 10px;
+    left: calc(50% - 2.5rem);
+    z-index: 9999;
+  }
+}

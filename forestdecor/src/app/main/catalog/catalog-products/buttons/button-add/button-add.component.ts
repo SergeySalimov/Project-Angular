@@ -1,31 +1,33 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../../../../../shared/services/auth/user';
-import { AuthService } from '../../../../../shared/services/auth/auth.service';
-import { Product } from '../../../../../shared/models/product.model';
-import { PhotoService } from '../../../../../shared/services/photo/photo.service';
+import { AuthService, Product, ProductsService, User } from '../../../../../shared';
 
 @Component({
   selector: 'app-button-add',
   template: `
-    <button mat-button
-            *ngIf="(user$ | async)?.isAdmin"
-            (click)="$event.stopPropagation()"
-            class="mx-auto"
-            color="primary">
-      <span><i class="icon-camera mr-1"></i>Добавить</span>
-    </button>
+    <span class="mat-button button-add">
+      <label class="label" for="fileAdd">
+        <span class="mx-3"><i class="icon-camera mr-1"></i>Добавить</span>
+        <input type="file"
+               id="fileAdd"
+               (change)="onAddPhoto($event, product);">
+      </label>
+    </span>
   `,
   styleUrls: ['./button-add.component.scss']
 })
-export class ButtonAddComponent implements OnInit {
+export class ButtonAddComponent {
 
   @Input() product: Product;
   user$: Observable<User> = this.auth.user;
 
-  constructor(private auth: AuthService, private photo: PhotoService) { }
+  constructor(private auth: AuthService, private productsService: ProductsService) {
+  }
 
-  ngOnInit(): void {
+  onAddPhoto(event, product: Product) {
+    if (!!event.target.files[0]) {
+      this.productsService.uploadFile(event.target.files[0], product.urlName);
+    }
   }
 
 }

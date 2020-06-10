@@ -1,27 +1,29 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
 import { Router } from '@angular/router';
-import { Product, ProductPlacer, ProductsService } from '../../../../shared';
+import { AuthService, Product, ProductPlacer, ProductsService, User } from '../../../../shared';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-catalog-single-product',
   templateUrl: './catalog-single-product.component.html',
   styleUrls: ['./catalog-single-product.component.scss']
 })
-export class CatalogSingleProductComponent implements OnInit {
+export class CatalogSingleProductComponent {
 
   @Input() curProduct: Product;
   @Input() previous: string;
-
+  user$: Observable<User> = this.auth.user;
 
   constructor(
     public catalogNavigation: CatalogNavigationService,
     private productsService: ProductsService,
     private router: Router,
-  ) {
-  }
+    private auth: AuthService) { }
 
-  ngOnInit(): void {}
+  onDeletePhoto(product: Product) {
+    this.productsService.setModalStatus({product, show: 'delete-photos'});
+  }
 
   goBack(urlName: string, noPrev = false) {
     if (!this.previous || noPrev) {

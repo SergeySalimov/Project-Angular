@@ -23,8 +23,7 @@
         </mat-card-content>
         <mat-card-actions>
           <app-button-show [product]="product"></app-button-show>
-          <app-button-add [product]="product"></app-button-add>
-          <app-button-delete [product]="product"></app-button-delete>
+          <app-button-edit *ngIf="(user$ | async)?.isAdmin"></app-button-edit>
         </mat-card-actions>
       </mat-card>
     </div>

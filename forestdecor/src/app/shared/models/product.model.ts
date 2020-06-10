@@ -1,9 +1,11 @@
+import { PhotoUrl } from './photo-url.model';
+
 export interface Product {
   name: string;
   urlName: string;
   description?: string;
   img?: string;
-  photos?: string[];
+  photos?: PhotoUrl[];
   id?: string;
   children?: Product[];
 }

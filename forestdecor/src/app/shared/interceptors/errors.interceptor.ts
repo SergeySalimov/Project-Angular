@@ -3,7 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { ConsoleService } from '../services/console/console.service';
-import { ERROR_LIST } from '../services/console/error-list';
+import { ERROR_LIST } from '../models/error-list';
 
 @Injectable({
   providedIn: 'root'

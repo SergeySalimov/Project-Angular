@@ -50,8 +50,8 @@
       </mat-card>
 
       <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Предыдущее</button>
-        <button mat-button color="primary" (click)="nextStep()">Следующее</button>
+        <button mat-button color="warn" (click)="prevStep()">{{i !== 0 ? 'Предыдущее' : 'В начало'}}</button>
+        <button mat-button color="primary" (click)="nextStep()">{{i !== (messages.length - 1) ? 'Следующее' : 'Закончили'}}</button>
       </mat-action-row>
     </mat-expansion-panel>
   </div>
@@ -61,3 +61,5 @@
   </ng-template>
 
 </mat-accordion>
+
+<app-button-go-top [heightOfShow]="500"></app-button-go-top>

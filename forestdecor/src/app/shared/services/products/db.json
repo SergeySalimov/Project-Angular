@@ -269,7 +269,7 @@
           "urlName": "yagel",
           "description": "Lorem ipsum",
           "img": "/assets/images/yagel.jpg",
-          "photos": ["1"]
+          "photos": []
         }
       ]
     },
@@ -291,7 +291,7 @@
           "urlName": "kapy",
           "description": "Lorem ipsum",
           "img": "/assets/images/kapa.jpg",
-          "photos": ["1"]
+          "photos": []
         },
         {
           "name": "Сувели",
