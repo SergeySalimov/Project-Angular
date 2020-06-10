@@ -1,4 +1,4 @@
-import { Component, Output, OnInit, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService, NavigationLink, NavigationService } from '../../shared';
 
@@ -8,8 +8,6 @@ import { AuthService, NavigationLink, NavigationService } from '../../shared';
   styleUrls: ['./navigation-link.component.scss']
 })
 export class NavigationLinkComponent implements OnInit, OnDestroy {
-
-  @Output() needToCollapse: EventEmitter<void> = new EventEmitter<void>();
 
   public navigationLinks: NavigationLink[];
   private userSubscription: Subscription;
@@ -21,6 +19,10 @@ export class NavigationLinkComponent implements OnInit, OnDestroy {
       user?.isAdmin ? this.navigationLinks = this.navigationService.getNavigationLinks(true) :
         this.navigationLinks = this.navigationService.getNavigationLinks(false);
     });
+  }
+
+  collapseBurger(state) {
+    this.navigationService.setCollapseBurger(state);
   }
 
   ngOnDestroy(): void {

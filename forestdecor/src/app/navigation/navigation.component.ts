@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthService, User } from '../shared';
+import { AuthService, NavigationService, User } from '../shared';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navigation',
@@ -12,8 +13,14 @@ export class NavigationComponent{
   collapse = true;
   showDropdown = false;
   user$: Observable<User> = this.auth.user;
+  collapse$ = this.navigation.collapseBurger;
 
-  constructor(public auth: AuthService) {
+
+  constructor(public auth: AuthService, private navigation: NavigationService) {
+  }
+
+  onBurgerClick() {
+    this.collapse$.pipe(take(1)).subscribe((state: boolean) => this.navigation.setCollapseBurger(!state));
   }
 
   userLogout() {
@@ -23,10 +30,6 @@ export class NavigationComponent{
 
   hideDropDown() {
     setTimeout(() => this.showDropdown = false, 500);
-  }
-
-  doCollapse() {
-    this.collapse = true;
   }
 
 }

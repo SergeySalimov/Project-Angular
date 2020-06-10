@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NavigationLink } from '../../models/navigationLink';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,17 @@ export class NavigationService {
     { name: 'Указанная страница не найдена', routerLink: '/404'},
   ];
 
+  private _collapseBurger: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
   constructor() { }
+
+  get collapseBurger() {
+    return this._collapseBurger.asObservable();
+  }
+
+  setCollapseBurger(state: boolean) {
+    this._collapseBurger.next(state);
+  }
 
   getNavigationLinks(all = false): NavigationLink[] {
     return all ? this.allLinks.slice(0,5) : this.allLinks.slice(0,4);
@@ -42,6 +53,4 @@ export class NavigationService {
   get recovery(): NavigationLink {
     return this.allLinks.filter(item => item.routerLink === '/form/authorization/recovery')[0];
   }
-
-
 }

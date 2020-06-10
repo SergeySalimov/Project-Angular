@@ -12,15 +12,12 @@
 
     <button class="navbar-toggler float-right"
             type="button"
-            (click)="collapse = !collapse"
+            (click)="onBurgerClick()"
             data-target="#navbar">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <app-navigation-link class="navbar-collapse"
-                         (needToCollapse)="doCollapse()"
-                         [ngClass]="{'collapse': collapse}">
-    </app-navigation-link>
+    <app-navigation-link [class]="(collapse$ | async) ? 'navbar-collapse collapse' : 'navbar-collapse'"></app-navigation-link>
 
     <a class="navbar-brand btn-nav"
        *ngIf="!(user$ | async)"
