@@ -25,7 +25,6 @@ export class ButtonAddComponent {
   }
 
   onAddPhoto(event, product: Product) {
-    console.log(product);
     if (!!event.target.files[0]) {
       this.productsService.uploadFile(event.target.files[0], product.urlName);
     }

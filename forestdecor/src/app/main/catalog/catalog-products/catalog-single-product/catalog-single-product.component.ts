@@ -19,13 +19,7 @@ export class CatalogSingleProductComponent {
     public catalogNavigation: CatalogNavigationService,
     private productsService: ProductsService,
     private router: Router,
-    private auth: AuthService,
-  ) {
-  }
-
-  showPhotos(product: Product) {
-    this.productsService.setCarouselStatus(product);
-  }
+    private auth: AuthService) { }
 
   onDeletePhoto(product: Product) {
     console.log('Need to deleted some images');
