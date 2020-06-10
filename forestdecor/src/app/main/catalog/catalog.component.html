@@ -1,4 +1,4 @@
-<div class="container clearfix" *ngIf="!(showCarousel$ | async)">
+<div class="container clearfix" *ngIf="!(showInCatalog$ | async)">
   <div class="row">
 
     <button *ngIf="!catalogNavigation.status" (click)="this.catalogNavigation.show()">
@@ -22,4 +22,4 @@
 </div>
 
 <app-progress-bar></app-progress-bar>
-<app-carousel *ngIf="!!(showCarousel$ | async)"></app-carousel>
+<app-carousel *ngIf="(showInCatalog$ | async)?.show === 'carousel'"></app-carousel>

@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { PhotoUrl } from '../../models/photo-url.model';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
+import { Show } from '../../models/showInCatalog';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ProductsService {
   private photoUrls: PhotoUrl[];
   private productsPlacer: ProductPlacer[] = [];
   private _uploadProgress: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  private _showCarousel: BehaviorSubject<Product | null> = new BehaviorSubject<Product | null>(null);
+  private _showInCatalog: BehaviorSubject<Show | null> = new BehaviorSubject<Show | null>(null);
 
   constructor(private http: HttpClient, private auth: AuthService, private storage: AngularFireStorage) {
     this.auth.autoLogin();
@@ -40,12 +41,12 @@ export class ProductsService {
     return this._uploadProgress.asObservable();
   }
 
-  get showCarousel(): Observable<Product | null> {
-    return this._showCarousel.asObservable();
+  get showInCatalog(): Observable<Show | null> {
+    return this._showInCatalog.asObservable();
   }
 
-  setCarouselStatus(status: Product | null) {
-    this._showCarousel.next(status);
+  setCarouselStatus(status: Show | null) {
+    this._showInCatalog.next(status);
   }
 
   // Server block

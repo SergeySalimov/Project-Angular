@@ -15,6 +15,6 @@ export class ButtonShowComponent {
   @Input() product: Product;
   constructor(private productsService: ProductsService) {}
   showPhotos(product: Product) {
-      this.productsService.setCarouselStatus(product);
+      this.productsService.setCarouselStatus({product, show: 'carousel'});
   }
 }
