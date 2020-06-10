@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductsService } from '../../../shared';
-import { PhotoUrl } from '../../../shared/models/photo-url.model';
+import { Product, ProductsService } from '../../../shared';
 import { Subscription } from 'rxjs';
 import { Show } from '../../../shared/models/showInCatalog';
 
@@ -11,7 +10,8 @@ import { Show } from '../../../shared/models/showInCatalog';
 })
 export class DeletePhotosComponent implements OnInit, OnDestroy {
 
-  photosUrls: string[] = [];
+  photosUrls: string[] | null = [];
+  curProduct: Product | null = null;
   selectedIndex: number[] = [];
   productsSubscr: Subscription;
 
@@ -19,12 +19,18 @@ export class DeletePhotosComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.productsSubscr = this.productsService.showInCatalog.subscribe( (data: Show) => {
-      this.photosUrls = data?.product?.photos[0].urlList;
+      if (!!data) {
+        this.curProduct = data?.product;
+        this.photosUrls = !!data.product.photos ? data.product?.photos[0].urlList : [];
+      } else {
+        this.curProduct = null;
+        this.photosUrls = [];
+      }
     });
   }
 
   closeWindow() {
-    this.productsService.setModalStatus(null);
+    this.productsService.setModalStatus({product: this.curProduct, show: 'close-delete'});
   }
 
   clickONPhoto(i: number) {
@@ -33,8 +39,25 @@ export class DeletePhotosComponent implements OnInit, OnDestroy {
   }
 
   deleteSelected() {
-    console.log(this.selectedIndex);
+    const newPhotoUrlsArr: string[] = [];
+    this.photosUrls.forEach((photoUrl, index) => {
+      if (this.selectedIndex.indexOf(index) === -1) {
+        newPhotoUrlsArr.push(photoUrl);
+      }
+    });
+    this.productsService.updatePhotoUrlOnServer(this.curProduct.urlName, newPhotoUrlsArr).subscribe(() => {
+      this.photosUrls = newPhotoUrlsArr;
+      this.curProduct.photos[0].urlList = newPhotoUrlsArr;
+      this.selectedIndex = [];
+
+      // может не надо
+      this.productsService.updatePhotos();
+    });
+  }
+
+  selectAll() {
     this.selectedIndex = [];
+    this.photosUrls.forEach((item, index) => this.selectedIndex.push(index));
   }
 
   ngOnDestroy(): void {

@@ -3,6 +3,7 @@ import { ActivatedRoute, NavigationEnd, ParamMap, Router } from '@angular/router
 import { Subscription } from 'rxjs';
 import { filter, map, pairwise } from 'rxjs/operators';
 import { ProductPlacer, ProductsService } from '../../../shared';
+import { Show } from '../../../shared/models/showInCatalog';
 
 @Component({
   selector: 'app-catalog-products',
@@ -36,6 +37,17 @@ export class CatalogProductsComponent implements OnInit, OnDestroy {
     ).subscribe(([prev, cur]) => {
       this.previous = prev;
     });
+
+    this.productsService.showInCatalog.subscribe((data: Show) => {
+      if (data?.show === 'close-delete') {
+        if (!!data.product.photos && data.product.photos[0].urlList?.length > 0) {
+          this.curProducts.content[0].photos = data.product.photos;
+        } else {
+          delete this.curProducts.content[0].photos;
+        }
+        this.productsService.setModalStatus(null);
+      }
+    })
   }
 
   ngOnDestroy(): void {

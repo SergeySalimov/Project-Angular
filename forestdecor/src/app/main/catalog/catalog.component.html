@@ -1,4 +1,4 @@
-<div class="container clearfix" *ngIf="!(showInCatalog$ | async)">
+<div class="container clearfix" *ngIf="!(showInCatalog$ | async) || (showInCatalog$ | async)?.show === 'close-delete'">
   <div class="row">
 
     <button *ngIf="!catalogNavigation.status" (click)="this.catalogNavigation.show()">

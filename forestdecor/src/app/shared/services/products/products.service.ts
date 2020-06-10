@@ -25,12 +25,7 @@ export class ProductsService {
   constructor(private http: HttpClient, private auth: AuthService, private storage: AngularFireStorage) {
     this.auth.autoLogin();
     this.auth.getAdminsFromServer().pipe(take(1)).subscribe(() => {});
-    this.getProductsFromServer().pipe(take(1)).subscribe(() => {
-      this.getPhotosFromServer().pipe(take(1)).subscribe((data: PhotoUrl[]) => {
-        this.photoUrls = data;
-        this.addPhotoUrlsToProducts(data);
-      });
-    });
+    this.getProductsFromServer().pipe(take(1)).subscribe(() => this.updatePhotos());
   }
 
   get products() {
@@ -89,22 +84,24 @@ export class ProductsService {
         tap(() => setTimeout(() => {this._uploadProgress.next(0)}, 2000)),
         switchMap((url: string) => this.sendPhotoUrlToServer(folder, [url])),
       )
-        .subscribe(data => {
-          this.getPhotosFromServer().pipe(take(1)).subscribe((data: PhotoUrl[]) => {
-            this.photoUrls = data;
-            this.addPhotoUrlsToProducts(data);
-          });
-        });
+        .subscribe(data => this.updatePhotos());
     });
   }
 
-  updatePhotoUrl(folder, newestData) {
+  updatePhotos() {
+    this.getPhotosFromServer().pipe(take(1)).subscribe((data: PhotoUrl[]) => {
+      this.photoUrls = data;
+      this.addPhotoUrlsToProducts(data);
+    });
+  }
+
+  updatePhotoUrlOnServer(folder, newestData: string[]) {
     return this.deletePhotoFromServer(folder).pipe(
       switchMap(() => this.sendPhotoUrlToServer(folder, newestData))
     );
   }
 
-  sendPhotoUrlToServer(folder: string, data) {
+  sendPhotoUrlToServer(folder: string, data: string[]) {
     const headers: HttpHeaders = new HttpHeaders({[environment.NEED_TOKEN]: 'Add-my-token', [environment.GLOBAL_SPINNER]: 'spinnerNeeded'});
     return this.http.post<string[]>(`${environment.firebase.databaseURL}/photos/${folder}.json`, data, {headers});
   }
