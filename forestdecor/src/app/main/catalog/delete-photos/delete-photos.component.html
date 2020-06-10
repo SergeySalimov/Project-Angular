@@ -7,41 +7,28 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <div class="h4 mr-4">Редактирование фотографий:</div>
-        <div class="h6">выбрано 0 фото</div>
-
+        <div class="h6">выбрано {{selectedIndex.length}} фото</div>
         <div>
-          <button type="button" class="btn btn-danger mr-4 my-2">Удалить</button>
-          <button type="button" class="btn btn-dark my-2">Отмена</button>
+          <button type="button" class="btn btn-danger mr-4 my-2" (click)="deleteSelected()">Удалить</button>
+          <button type="button" class="btn btn-dark my-2" (click)="selectedIndex = []">Отмена</button>
         </div>
       </div>
 
       <div class="row">
-
-        <div class="col-sm-6 col-md-4 col-lg-3 my-1" *ngFor="let photo of photos; let i = index">
-          <div class="card">
+        <div class="col-sm-6 col-md-4 col-lg-3 my-1" *ngFor="let photoUrl of photosUrls; let i = index">
+          <div class="card {{selectedIndex.indexOf(i) === -1 ? '' : 'text-white bg-danger'}}" (click)="clickONPhoto(i)">
             <div class="card-header">
-              Не выбрано
+              {{selectedIndex.indexOf(i) === -1 ? 'Не выбрано' : 'Выбрано'}}
             </div>
-            <img src="https://firebasestorage.googleapis.com/v0/b/prj-forestdecor.appspot.com/o/chalfei%2Fmozhzhevel.jpg?alt=media&token=80fe9644-b4b0-4581-b034-77db747ddcc7"
+            <img [src]="photoUrl"
                  class="card-img-top img-fluid p-1"
                  alt="...">
-
           </div>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-3 my-1">
-          <div class="card text-white bg-danger ">
-            <div class="card-header">
-              Не выбрано
-            </div>
-            <img src="https://firebasestorage.googleapis.com/v0/b/prj-forestdecor.appspot.com/o/chalfei%2Fmozhzhevel.jpg?alt=media&token=80fe9644-b4b0-4581-b034-77db747ddcc7"
-                 class="card-img-top img-fluid p-1"
-                 alt="...">
-
-          </div>
-        </div>
-
       </div>
 
     </div>
   </div>
 </div>
+
+<app-button-go-top [heightOfShow]="700"></app-button-go-top>

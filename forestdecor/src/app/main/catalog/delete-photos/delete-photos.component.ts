@@ -11,7 +11,7 @@ import { Show } from '../../../shared/models/showInCatalog';
 })
 export class DeletePhotosComponent implements OnInit, OnDestroy {
 
-  photos: PhotoUrl[] = [];
+  photosUrls: string[] = [];
   selectedIndex: number[] = [];
   productsSubscr: Subscription;
 
@@ -19,12 +19,22 @@ export class DeletePhotosComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.productsSubscr = this.productsService.showInCatalog.subscribe( (data: Show) => {
-      this.photos = data?.product?.photos;
+      this.photosUrls = data?.product?.photos[0].urlList;
     });
   }
 
   closeWindow() {
     this.productsService.setModalStatus(null);
+  }
+
+  clickONPhoto(i: number) {
+    this.selectedIndex.indexOf(i) === -1 ? this.selectedIndex.push(i) :
+      this.selectedIndex = this.selectedIndex.filter(number => number !== i);
+  }
+
+  deleteSelected() {
+    console.log(this.selectedIndex);
+    this.selectedIndex = [];
   }
 
   ngOnDestroy(): void {
