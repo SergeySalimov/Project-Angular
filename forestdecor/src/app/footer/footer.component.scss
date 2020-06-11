@@ -1,0 +1,15 @@
+:host {
+  position: relative;
+  .contacts {
+    position: absolute;
+    width: 250px;
+    left: 20px;
+    top: 30px;
+    ul{
+      li {
+        list-style-type: none;
+      }
+    }
+
+  }
+}
