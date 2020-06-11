@@ -42,7 +42,9 @@
 .icon-spin6:before { content: '\e839'; } /* '' */
 .icon-login-1:before { content: '\f02c'; } /* '' */
 .icon-logout-1:before { content: '\f02d'; } /* '' */
+.icon-twitter:before { content: '\f099'; } /* '' */
 .icon-facebook:before { content: '\f09a'; } /* '' */
+.icon-linkedin:before { content: '\f0e1'; } /* '' */
 .icon-lightbulb:before { content: '\f0eb'; } /* '' */
 .icon-bell-alt:before { content: '\f0f3'; } /* '' */
 .icon-angle-double-left:before { content: '\f100'; } /* '' */
@@ -54,7 +56,9 @@
 .icon-attention-alt:before { content: '\f12a'; } /* '' */
 .icon-anchor:before { content: '\f13d'; } /* '' */
 .icon-lock-open-alt:before { content: '\f13e'; } /* '' */
+.icon-youtube-squared:before { content: '\f166'; } /* '' */
 .icon-instagram:before { content: '\f16d'; } /* '' */
+.icon-tumblr:before { content: '\f173'; } /* '' */
 .icon-skype:before { content: '\f17e'; } /* '' */
 .icon-vkontakte:before { content: '\f189'; } /* '' */
 .icon-right-circled2:before { content: '\f18e'; } /* '' */
@@ -68,4 +72,6 @@
 .icon-server:before { content: '\f233'; } /* '' */
 .icon-user-plus:before { content: '\f234'; } /* '' */
 .icon-user-times:before { content: '\f235'; } /* '' */
+.icon-odnoklassniki:before { content: '\f263'; } /* '' */
 .icon-shopping-basket:before { content: '\f291'; } /* '' */
+.icon-telegram:before { content: '\f2c6'; } /* '' */
