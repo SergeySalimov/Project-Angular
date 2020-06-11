@@ -42,7 +42,9 @@
 .icon-spin6 { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe839;&nbsp;'); }
 .icon-login-1 { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf02c;&nbsp;'); }
 .icon-logout-1 { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf02d;&nbsp;'); }
+.icon-twitter { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf099;&nbsp;'); }
 .icon-facebook { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf09a;&nbsp;'); }
+.icon-linkedin { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0e1;&nbsp;'); }
 .icon-lightbulb { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0eb;&nbsp;'); }
 .icon-bell-alt { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0f3;&nbsp;'); }
 .icon-angle-double-left { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf100;&nbsp;'); }
@@ -54,7 +56,9 @@
 .icon-attention-alt { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf12a;&nbsp;'); }
 .icon-anchor { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf13d;&nbsp;'); }
 .icon-lock-open-alt { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf13e;&nbsp;'); }
+.icon-youtube-squared { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf166;&nbsp;'); }
 .icon-instagram { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf16d;&nbsp;'); }
+.icon-tumblr { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf173;&nbsp;'); }
 .icon-skype { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf17e;&nbsp;'); }
 .icon-vkontakte { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf189;&nbsp;'); }
 .icon-right-circled2 { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf18e;&nbsp;'); }
@@ -68,4 +72,6 @@
 .icon-server { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf233;&nbsp;'); }
 .icon-user-plus { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf234;&nbsp;'); }
 .icon-user-times { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf235;&nbsp;'); }
+.icon-odnoklassniki { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf263;&nbsp;'); }
 .icon-shopping-basket { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf291;&nbsp;'); }
+.icon-telegram { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf2c6;&nbsp;'); }

@@ -1,0 +1,28 @@
+@import "custom.variables";
+:host {
+  ul {
+    li {
+      list-style-type: none;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      @media (min-width: map-get($grid-breakpoints, "sm")) {
+        font-size: 1.3rem;
+      }
+      @media (min-width: map-get($grid-breakpoints, "md")) {
+        font-size: 1.5rem;
+      }
+      i {
+        padding-right: 2rem;
+      }
+      a {
+        text-decoration: none;
+        color: $additFontColor;
+        font-style: normal;
+      }
+      a:hover {
+        color: $mainFontColor;
+        text-shadow: $alterFontColor 0 0 2px;
+      }
+    }
+  }
+}

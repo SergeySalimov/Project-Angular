@@ -18,7 +18,7 @@ import { CarouselDirective } from './directives/carousel.directive';
     ConsoleComponent,
     ButtonGoTopComponent,
     ProgressBarComponent,
-    CarouselDirective
+    CarouselDirective,
   ],
   exports: [
     SpinnerComponent,

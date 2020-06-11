@@ -1,3 +1,26 @@
-.mat-card {
-  cursor: pointer;
+@import "custom.variables";
+
+:host {
+  mat-card {
+    cursor: pointer;
+    height: 390px;
+    @media (min-width: map-get($grid-breakpoints, "minsm")) {
+      height: 450px;
+    }
+    @media (min-width: map-get($grid-breakpoints, "sm")) {
+      height: 350px;
+    }
+    @media (min-width: map-get($grid-breakpoints, "md")) {
+      height: 380px;
+    }
+    @media (min-width: map-get($grid-breakpoints, "lg")) {
+      height: 360px;
+    }
+    position: relative;
+  }
+
+  mat-card-actions {
+    position: absolute;
+    bottom: 1rem;
+  }
 }

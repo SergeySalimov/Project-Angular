@@ -9,10 +9,8 @@ import { AuthService, User } from '../shared';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-
   user$: Observable<User> = this.auth.user;
-  phoneNumber = environment.phoneNumber;
-
+  phoneNumber: string = environment.phoneNumber;
   constructor(public auth: AuthService) {
   }
 
