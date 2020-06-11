@@ -7,14 +7,14 @@
     }
 
     .btn-nav {
-      //color: $backGrey;
-      color: $mainFontColor;
+      color: $backGrey;
+      //color: $mainFontColor;
 
     }
 
     .btn-nav.active {
-      //color: $mainFontColor;
-      color: yellow;
+      color: $mainFontColor;
+      //color: yellow;
     }
 
     .dropdown, .dropleft {
@@ -56,13 +56,8 @@
         width: auto;
       }
     }
-
     .navbar-brand:hover {
-      background-color: $additFontColor;
-    }
-
-    .navbar-brand.no-autoriz:hover {
-      background-color: $red;
+      //background-color: $additFontColor;
     }
   }
 }

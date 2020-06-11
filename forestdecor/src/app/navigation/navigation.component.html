@@ -23,14 +23,15 @@
        *ngIf="!(user$ | async)"
        [routerLink]="['/form']"
        [routerLinkActive]="'active'">
-      <i class="icon-login" style="font-size: 2rem"></i>
+      <i class="icon-user" style="font-size: 1.5rem"></i>
+      <span>Войти</span>
     </a>
 
     <div [class]="(user$ | async)?.isAdmin ? 'dropleft' :'dropdown'" [ngClass]="{'show': showDropdown}" *ngIf="user$ | async">
       <button class="btn btn-secondary dropdown-toggle"
               (click)="showDropdown = !showDropdown"
               (focusout)="hideDropDown()">
-              <i class="icon-logout" style="font-size: 2rem"></i>
+        <i class="icon-logout" style="font-size: 2rem"></i>
       </button>
       <div class="dropdown-menu dropdown-menu-right"
            [ngClass]="{'show': showDropdown}">
