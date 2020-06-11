@@ -1,15 +1,22 @@
+@import "custom.variables";
 :host {
   position: relative;
   .contacts {
     position: absolute;
     width: 250px;
-    left: 20px;
-    top: 30px;
+    left: 0;
+    top: 0;
+    @media (min-width: map-get($grid-breakpoints, "sm")) {
+      left: 20px;
+      top: 30px;
+    }
     ul{
       li {
         list-style-type: none;
+        a:hover {
+          color: $alterFontColor;
+        }
       }
     }
-
   }
 }
