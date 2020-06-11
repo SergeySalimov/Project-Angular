@@ -10,7 +10,7 @@
           'col-lg-3': !catalogNavigation.status,
           'col-xl-2': !catalogNavigation.status}"
          *ngFor="let product of curProductData">
-      <mat-card routerLink="/catalog/{{product.urlName}}">
+      <mat-card routerLink="/catalog/{{product.urlName | dot: 24}}">
         <mat-card-header>
           <mat-card-title style="font-size: 1rem">{{product.name}}</mat-card-title>
           <!--        <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
@@ -25,6 +25,7 @@
           <app-button-show [product]="product"></app-button-show>
           <app-button-edit *ngIf="(user$ | async)?.isAdmin"></app-button-edit>
         </mat-card-actions>
+
       </mat-card>
     </div>
   </div>
