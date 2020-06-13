@@ -3,7 +3,7 @@
 :host {
   mat-card {
     cursor: pointer;
-    height: 420px;
+    height: 380px;
     @media (min-width: map-get($grid-breakpoints, "minsm")) {
       height: 450px;
     }
