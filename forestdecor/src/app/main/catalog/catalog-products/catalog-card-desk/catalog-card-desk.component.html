@@ -16,7 +16,7 @@
         <img mat-card-image src="{{product.img}}" alt="Картинка: {{product.name}}">
         <mat-card-content>
           <p class="small">
-            {{product.description | dot : 120}}
+            {{(user$ | async)?.isAdmin ? (product.description | dot : 60) : (product.description | dot : 110)}}
           </p>
         </mat-card-content>
         <mat-card-actions>
