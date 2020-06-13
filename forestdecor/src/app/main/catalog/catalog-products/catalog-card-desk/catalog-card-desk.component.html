@@ -2,13 +2,11 @@
   <div class="row card-group">
     <div class="my-1" [ngClass]="{
           'col-sm-12': catalogNavigation.status,
-          'col-md-6': catalogNavigation.status,
-          'col-lg-4': catalogNavigation.status,
-          'col-xl-3': catalogNavigation.status,
+          'col-lg-6': catalogNavigation.status,
+          'col-xl-4': catalogNavigation.status,
           'col-sm-6': !catalogNavigation.status,
-          'col-md-4': !catalogNavigation.status,
-          'col-lg-3': !catalogNavigation.status,
-          'col-xl-2': !catalogNavigation.status}"
+          'col-lg-4': !catalogNavigation.status,
+          'col-xl-3': !catalogNavigation.status}"
          *ngFor="let product of curProductData">
       <mat-card routerLink="/catalog/{{product.urlName | dot: 24}}">
         <mat-card-header>
@@ -18,7 +16,7 @@
         <img mat-card-image src="{{product.img}}" alt="Картинка: {{product.name}}">
         <mat-card-content>
           <p class="small">
-            {{product.description | dot : 70}}
+            {{product.description | dot : 120}}
           </p>
         </mat-card-content>
         <mat-card-actions>
