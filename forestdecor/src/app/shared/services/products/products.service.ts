@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../../models/product.model';
+import { OldProduct } from '../../models/product.model';
 import { ProductPlacer } from '../../models/productsPlacer';
 import { environment } from '../../../../environments/environment';
 import { map, switchMap, take, tap } from 'rxjs/operators';
@@ -15,8 +15,11 @@ import { Show } from '../../models/showInCatalog';
 })
 export class ProductsService {
 
-  private _products: Product[];
-  private accumulator: Product[];
+
+
+  //ToDo rewrite
+  private _oldProducts: OldProduct[];
+  private accumulator: OldProduct[];
   private photoUrls: PhotoUrl[];
   private productsPlacer: ProductPlacer[] = [];
   private _uploadProgress: BehaviorSubject<number> = new BehaviorSubject<number>(0);
@@ -28,8 +31,8 @@ export class ProductsService {
     this.getProductsFromServer().pipe(take(1)).subscribe(() => this.updatePhotos());
   }
 
-  get products() {
-    return [...this._products];
+  get oldProducts() {
+    return [...this._oldProducts];
   }
 
   get uploadProgress(): Observable<number> {
@@ -65,10 +68,10 @@ export class ProductsService {
     )
   }
 
-  getProductsFromServer(): Observable<Product[]> {
+  getProductsFromServer(): Observable<OldProduct[]> {
     // const headers: HttpHeaders = new HttpHeaders({[environment.GLOBAL_SPINNER]: 'spinnerNeeded'});
-    return this.http.get<Product[]>(`${environment.firebase.databaseURL}/products.json`).pipe(
-      tap((prd: Product[]) => this._products = [...prd]),
+    return this.http.get<OldProduct[]>(`${environment.firebase.databaseURL}/products.json`).pipe(
+      tap((prd: OldProduct[]) => this._oldProducts = [...prd]),
       tap(() => this.createAllUrls()),
     );
   }
@@ -131,7 +134,7 @@ export class ProductsService {
     this.createUrlsInformation();
   }
 
-  createUrlsInformation(data: Product[] = this._products, parents: string[] = []): void {
+  createUrlsInformation(data: OldProduct[] = this._oldProducts, parents: string[] = []): void {
     for (const item of data) {
       if (item.children) {
         this.createPlacingProduct(item.urlName, item.name, [...parents]);
@@ -145,22 +148,22 @@ export class ProductsService {
   }
 
   createPlacingProduct(urlName: string, name: string, parents: string[] = []): void {
-    const content: Product[] = this.getAllElements(urlName);
+    const content: OldProduct[] = this.getAllElements(urlName);
     // this.prdTemp = {name, urlName, content, parents};
     this.productsPlacer.push({urlName, name, content, parents});
   }
 
-  getAllElements(forUrl: string): Product[] {
-    return this.initProducts(this._products, forUrl);
+  getAllElements(forUrl: string): OldProduct[] {
+    return this.initProducts(this._oldProducts, forUrl);
   }
 
-  initProducts(data: Product[], url = 'all'): Product[] {
+  initProducts(data: OldProduct[], url = 'all'): OldProduct[] {
     this.accumulator = [];
     url === 'all' ? this.parsingProducts(data) : this.findUrlContent(data, url);
     return this.accumulator;
   }
 
-  findUrlContent(data: Product[], url: string): void {
+  findUrlContent(data: OldProduct[], url: string): void {
     for (const item of data) {
       if (item.children) {
         if (item.urlName === url) {
@@ -177,7 +180,7 @@ export class ProductsService {
     }
   }
 
-  parsingProducts(data: Product[]): void {
+  parsingProducts(data: OldProduct[]): void {
     for (const item of data) {
       item.children ? this.parsingProducts(item.children) : this.accumulator.push(item);
     }

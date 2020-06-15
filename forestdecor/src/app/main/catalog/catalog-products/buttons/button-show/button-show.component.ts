@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product, ProductsService } from '../../../../../shared';
+import { OldProduct, ProductsService } from '../../../../../shared';
 
 @Component({
   selector: 'app-button-show',
@@ -12,9 +12,9 @@ import { Product, ProductsService } from '../../../../../shared';
   styleUrls: ['./button-show.component.scss']
 })
 export class ButtonShowComponent {
-  @Input() product: Product;
+  @Input() product: OldProduct;
   constructor(private productsService: ProductsService) {}
-  showPhotos(product: Product) {
+  showPhotos(product: OldProduct) {
       this.productsService.setModalStatus({product, show: 'carousel'});
   }
 }

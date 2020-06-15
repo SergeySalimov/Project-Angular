@@ -1,8 +1,8 @@
-import { Product } from './product.model';
+import { OldProduct } from './product.model';
 
 export interface ProductPlacer {
   urlName: string;
   name: string;
-  content: Product[];
+  content: OldProduct[];
   parents: string[];
 }

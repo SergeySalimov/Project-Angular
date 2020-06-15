@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Product, ProductsService } from '../../../shared';
+import { OldProduct, ProductsService } from '../../../shared';
 import { Subscription } from 'rxjs';
 import { Show } from '../../../shared/models/showInCatalog';
 
@@ -12,7 +12,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
 
   showCarousel: string[] | null = null;
   showCarouselSubscription: Subscription;
-  product: Product | null = null;
+  product: OldProduct | null = null;
 
   constructor(private productsService: ProductsService) {
   }

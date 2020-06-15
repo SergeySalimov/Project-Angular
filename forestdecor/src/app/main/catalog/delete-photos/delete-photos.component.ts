@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Product, ProductsService } from '../../../shared';
+import { OldProduct, ProductsService } from '../../../shared';
 import { Subscription } from 'rxjs';
 import { Show } from '../../../shared/models/showInCatalog';
 
@@ -11,7 +11,7 @@ import { Show } from '../../../shared/models/showInCatalog';
 export class DeletePhotosComponent implements OnInit, OnDestroy {
 
   photosUrls: string[] | null = [];
-  curProduct: Product | null = null;
+  curProduct: OldProduct | null = null;
   selectedIndex: number[] = [];
   productsSubscr: Subscription;
 

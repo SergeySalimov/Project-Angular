@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { switchMap, tap } from 'rxjs/operators';
-import { Product } from '../..';
+import { OldProduct } from '../..';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ import { Product } from '../..';
 export class PhotoService {
 
   private _uploadProgress: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  private _showCarousel: BehaviorSubject<Product | null> = new BehaviorSubject<Product | null>(null);
+  private _showCarousel: BehaviorSubject<OldProduct | null> = new BehaviorSubject<OldProduct | null>(null);
 
   constructor(private storage: AngularFireStorage, private http: HttpClient) {
   }
@@ -21,11 +21,11 @@ export class PhotoService {
     return this._uploadProgress.asObservable();
   }
 
-  get showCarousel(): Observable<Product | null> {
+  get showCarousel(): Observable<OldProduct | null> {
     return this._showCarousel.asObservable();
   }
 
-  setCarouselStatus(status: Product | null) {
+  setCarouselStatus(status: OldProduct | null) {
     this._showCarousel.next(status);
   }
 

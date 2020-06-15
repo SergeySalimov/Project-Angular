@@ -1,6 +1,6 @@
-import { Product } from './product.model';
+import { OldProduct } from './product.model';
 
 export interface Show {
-  product: Product,
+  product: OldProduct,
   show: string,
 }

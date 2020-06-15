@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
 import { Router } from '@angular/router';
-import { AuthService, Product, ProductPlacer, ProductsService, User } from '../../../../shared';
+import { AuthService, OldProduct, ProductPlacer, ProductsService, User } from '../../../../shared';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class CatalogSingleProductComponent {
 
-  @Input() curProduct: Product;
+  @Input() curProduct: OldProduct;
   @Input() previous: string;
   user$: Observable<User> = this.auth.user;
 
@@ -21,7 +21,7 @@ export class CatalogSingleProductComponent {
     private router: Router,
     private auth: AuthService) { }
 
-  onDeletePhoto(product: Product) {
+  onDeletePhoto(product: OldProduct) {
     this.productsService.setModalStatus({product, show: 'delete-photos'});
   }
 
