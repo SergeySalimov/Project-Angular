@@ -79,7 +79,7 @@ export class TransliterateService {
       };
       str = rus.split('').map(char => change[char] || char).join('');
     }
-    return str;
+    return str.toLowerCase();
   }
 
 }

@@ -17,6 +17,7 @@ export class ProductsService {
 
 
 
+
   //ToDo rewrite
   private _oldProducts: OldProduct[];
   private accumulator: OldProduct[];
