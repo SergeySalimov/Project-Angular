@@ -10,7 +10,7 @@ export class TransliterateService {
     if (!!rus) {
       const change = {
         "Ё": "YO",
-        "Й": "I",
+        "Й": "YI",
         "Ц": "TS",
         "У": "U",
         "К": "K",
@@ -21,9 +21,9 @@ export class TransliterateService {
         "Щ": "SCH",
         "З": "Z",
         "Х": "H",
-        "Ъ": "'",
+        "Ъ": "''",
         "ё": "yo",
-        "й": "i",
+        "й": "yi",
         "ц": "ts",
         "у": "u",
         "к": "k",
@@ -34,7 +34,7 @@ export class TransliterateService {
         "щ": "sch",
         "з": "z",
         "х": "h",
-        "ъ": "'",
+        "ъ": "''",
         "Ф": "F",
         "Ы": "Y",
         "В": "V",
@@ -45,7 +45,7 @@ export class TransliterateService {
         "Л": "L",
         "Д": "D",
         "Ж": "ZH",
-        "Э": "E",
+        "Э": "'E",
         "ф": "f",
         "ы": "y",
         "в": "v",
@@ -56,7 +56,7 @@ export class TransliterateService {
         "л": "l",
         "д": "d",
         "ж": "zh",
-        "э": "e",
+        "э": "'e",
         "Я": "YA",
         "Ч": "CH",
         "С": "S",
@@ -79,7 +79,92 @@ export class TransliterateService {
       };
       str = rus.split('').map(char => change[char] || char).join('');
     }
-    return str;
+    return str.toLowerCase();
   }
 
+  urlToRus(url: string): string {
+    let str = url;
+    if (!!str) {
+      // 3 to 1
+      if (str.length >= 3) {
+        const change3To1 = { "SCH": "Щ","sch": "щ", };
+        for (let key in change3To1) { str.split(key).join(change3To1[key]); }
+      }
+      // 2 to 1
+      if (str.length >=2) {
+        // problem of Ъ need to check first
+        str.split("''").join("ъ");
+        const change2To1 = {
+          "YO": "Ё",
+          "yo": "ё",
+          "TS": "Ц",
+          "ts": "ц",
+          "SH": "Ш",
+          "sh": "ш",
+          "CH": "Ч",
+          "ch": "ч",
+          "YA": "Я",
+          "ya": "я",
+          "YU": "Ю",
+          "yu": "ю",
+          "zh": "ж",
+          "ZH": "Ж",
+          "'E": "Э",
+          "'e": "э",
+          "YI": "Й",
+          "yi": "й",
+        };
+        for (let key in change2To1) { str.split(key).join(change2To1[key]); }
+      }
+      // 1 to 1 ...the rest
+      const change = {
+        "U": "У",
+        "K": "К",
+        "E": "Е",
+        "N": "Н",
+        "G": "Г",
+        "Z": "З",
+        "H": "Х",
+        "u": "у",
+        "k": "к",
+        "e": "е",
+        "n": "н",
+        "g": "г",
+        "z": "з",
+        "h": "х",
+        "F": "Ф",
+        "Y": "Ы",
+        "V": "В",
+        "A": "А",
+        "P": "П",
+        "R": "Р",
+        "O": "О",
+        "L": "Л",
+        "D": "Д",
+        "f": "ф",
+        "y": "ы",
+        "v": "в",
+        "a": "а",
+        "p": "п",
+        "r": "р",
+        "o": "о",
+        "l": "л",
+        "d": "д",
+        "S": "С",
+        "M": "М",
+        "I": "И",
+        "T": "Т",
+        "B": "Б",
+        "s": "с",
+        "m": "м",
+        "i": "и",
+        "t": "т",
+        "'": "ь",
+        "b": "б",
+        "-": " "
+      };
+      for (let key in change) { str.split(key).join(change[key]); }
+    }
+    return str;
+  }
 }
