@@ -21,7 +21,7 @@ export class TransliterateService {
         "Щ": "SCH",
         "З": "Z",
         "Х": "H",
-        "Ъ": "''",
+        "Ъ": "'",
         "ё": "yo",
         "й": "yi",
         "ц": "ts",
@@ -34,7 +34,7 @@ export class TransliterateService {
         "щ": "sch",
         "з": "z",
         "х": "h",
-        "ъ": "''",
+        "ъ": "'",
         "Ф": "F",
         "Ы": "Y",
         "В": "V",
@@ -63,7 +63,7 @@ export class TransliterateService {
         "М": "M",
         "И": "I",
         "Т": "T",
-        "Ь": "'",
+        "Ь": "^",
         "Б": "B",
         "Ю": "YU",
         "я": "ya",
@@ -72,7 +72,7 @@ export class TransliterateService {
         "м": "m",
         "и": "i",
         "т": "t",
-        "ь": "'",
+        "ь": "^",
         "б": "b",
         "ю": "yu",
         " ": "-"
@@ -92,8 +92,6 @@ export class TransliterateService {
       }
       // 2 to 1
       if (str.length >=2) {
-        // problem of Ъ need to check first
-        str.split("''").join("ъ");
         const change2To1 = {
           "YO": "Ё",
           "yo": "ё",
@@ -159,9 +157,10 @@ export class TransliterateService {
         "m": "м",
         "i": "и",
         "t": "т",
-        "'": "ь",
+        "^": "ь",
+        "'": "ъ",
         "b": "б",
-        "-": " "
+        "-": " ",
       };
       for (let key in change) { str.split(key).join(change[key]); }
     }
