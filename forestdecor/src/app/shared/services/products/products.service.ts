@@ -126,6 +126,7 @@ export class ProductsService {
   createUrlsOfCatalog(products: Product[]) {
     const newUrlsOfCatalog: UrlOfCatalog[] = [{urlName: 'all', name: 'весь каталог', parents: null, content: products}];
     products.forEach((product: Product) => {
+
       if (product.parents?.length > 0) {
         // create parent url of Catalog
         let parentsHistory: string[] | null = [];
@@ -136,7 +137,7 @@ export class ProductsService {
             newUrlsOfCatalog.push({
               urlName: parentUrl.urlName,
               name: parentUrl.name,
-              parents: (parentsHistory.length > 0) ? parentsHistory : null,
+              parents: (parentsHistory.length > 1) ? [...parentsHistory] : null,
               content: [product]
             });
           } else {

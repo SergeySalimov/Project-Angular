@@ -9,7 +9,9 @@
     ol {
       padding-left: 0;
       padding-right: 0;
-
+      li > button {
+        text-transform: capitalize;
+      }
       button {
         padding-left: 0;
         padding-right: 0;

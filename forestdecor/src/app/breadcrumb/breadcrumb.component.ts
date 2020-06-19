@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 import { NavigationLink, NavigationService, ProductPlacer, ProductsService } from '../shared';
+import { UrlOfCatalog } from '../shared/models/url-of-catalog';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -17,16 +18,17 @@ export class BreadcrumbComponent implements OnInit {
     private router: Router,
     private navigation: NavigationService,
     private productsService: ProductsService
-  ) {  }
+  ) {
+  }
 
   ngOnInit(): void {
     this.navLinks = this.navigation.allLinks;
     this.router.events.pipe(
-      filter( event => event instanceof NavigationEnd),
-      map( event => (event as NavigationEnd).urlAfterRedirects),
-      map ( strUrl => strUrl.split('?')[0]),
-      map ( strUrl => strUrl.split('#')[0]),
-      map ( strUrl => strUrl.split('/')),
+      filter(event => event instanceof NavigationEnd),
+      map(event => (event as NavigationEnd).urlAfterRedirects),
+      map(strUrl => strUrl.split('?')[0]),
+      map(strUrl => strUrl.split('#')[0]),
+      map(strUrl => strUrl.split('/')),
       distinctUntilChanged(),
       tap(() => this.productsService.setModalStatus(null)),
     )
@@ -41,13 +43,13 @@ export class BreadcrumbComponent implements OnInit {
             (urlArr[1] === 'form') ? this.doBreadcrumbForForm(urlArr) : this.doBreadcrumbForProducts(urlArr);
           }
         }
-    })
+      })
   }
 
   doBreadcrumbForProducts(urlArr: string[]): void {
-    const curPrd: ProductPlacer = this.productsService.getProductUrlInfo(urlArr[2]);
+    const curPrd: UrlOfCatalog = this.productsService.getProductUrlInfo(urlArr[2]);
     if (!!curPrd) {
-      if (curPrd.parents.length > 0) {
+      if (curPrd.parents?.length > 0) {
         curPrd.parents.forEach(url => this.breadcrumbTree.push(this.doBreadCrumb(url, urlArr[1])));
       }
       this.breadcrumbTree.push({name: curPrd.name, routerLink: `${urlArr[1]}/${curPrd.urlName}`});
@@ -64,8 +66,8 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   doBreadCrumb(url: string, parentUrl: string): NavigationLink {
-    const curPrd: ProductPlacer = this.productsService.getProductUrlInfo(url);
-    return { name: curPrd.name, routerLink: `${parentUrl}/${curPrd.urlName}` };
+    const curPrd: UrlOfCatalog = this.productsService.getProductUrlInfo(url);
+    return {name: curPrd.name, routerLink: `${parentUrl}/${curPrd.urlName}`};
   }
 
 }
