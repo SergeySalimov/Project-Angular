@@ -3,6 +3,7 @@ import { CatalogNavigationService } from '../../catalog-service/catalog-navigati
 import { Router } from '@angular/router';
 import { AuthService, Product, ProductsService, UrlOfCatalog, User } from '../../../../shared';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-catalog-single-product',
@@ -21,8 +22,8 @@ export class CatalogSingleProductComponent {
     private router: Router,
     private auth: AuthService) { }
 
-  onDeletePhoto(product: Product) {
-    this.productsService.setModalStatus({product, show: 'delete-photos'});
+  onEditPhoto(product: Product) {
+    this.productsService.setModalStatus({product, show: environment.SHOW_EDIT_PHOTOS});
   }
 
   goBack(urlName: string, noPrev = false) {

@@ -18,6 +18,8 @@ export class ProductsService {
 
   private _urlsOfCatalog: BehaviorSubject<UrlOfCatalog[]> = new BehaviorSubject<UrlOfCatalog[]>([]);
   private _treeData: BehaviorSubject<TreeData[]> = new BehaviorSubject<TreeData[]>([]);
+  private _showInCatalog: BehaviorSubject<Show | null> = new BehaviorSubject<Show | null>(null);
+  private _uploadProgress: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   get urlsOfCatalog(): UrlOfCatalog[] {
     return this._urlsOfCatalog.value;
@@ -25,22 +27,6 @@ export class ProductsService {
 
   get treeData(): TreeData[] {
     return this._treeData.value;
-  }
-
-  //ToDo rewrite
-  private photoUrls: PhotoUrl[];
-  private _uploadProgress: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  private _showInCatalog: BehaviorSubject<Show | null> = new BehaviorSubject<Show | null>(null);
-
-  constructor(private http: HttpClient, private auth: AuthService, private storage: AngularFireStorage) {
-    this.auth.autoLogin();
-    this.auth.getAdminsFromServer().pipe(take(1)).subscribe();
-    this.getProductsFromServer().pipe(take(1)).subscribe((products: Product[]) => {
-      this.createUrlsOfCatalog(products);
-      this.createTreeDataForCatalogNavigation(products);
-    });
-    //old code
-    // this.getProductsFromServer().pipe(take(1)).subscribe(() => this.updatePhotos());
   }
 
   get uploadProgress(): Observable<number> {
@@ -55,9 +41,22 @@ export class ProductsService {
     this._showInCatalog.next(status);
   }
 
+  //ToDo rewrite
+  private photoUrls: PhotoUrl[];
+
+  constructor(private http: HttpClient, private auth: AuthService, private storage: AngularFireStorage) {
+    this.auth.autoLogin();
+    this.auth.getAdminsFromServer().pipe(take(1)).subscribe();
+    this.getProductsFromServer().pipe(take(1)).subscribe((products: Product[]) => {
+      this.createUrlsOfCatalog(products);
+      this.createTreeDataForCatalogNavigation(products);
+    });
+    //old code
+    // this.getProductsFromServer().pipe(take(1)).subscribe(() => this.updatePhotos());
+  }
+
   // Server block new
   getProductsFromServer(): Observable<Product[]> {
-    // const headers: HttpHeaders = new HttpHeaders({[environment.GLOBAL_SPINNER]: 'spinnerNeeded'});
     return this.http.get<Product[]>(`${environment.firebase.databaseURL}/catalogProducts.json`);
   }
 

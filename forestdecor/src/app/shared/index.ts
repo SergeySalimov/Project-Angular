@@ -8,6 +8,7 @@ export * from './models/product';
 export * from './models/url-of-catalog';
 export * from './models/showInCatalog';
 export * from './models/userData';
+export * from './models/tree-data.model';
 export * from './pipes/dot.pipe';
 export * from './pipes/phone-by.pipe';
 export * from './services/console/console.service';

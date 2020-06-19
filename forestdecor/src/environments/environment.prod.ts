@@ -16,6 +16,8 @@ export const environment = {
   NEED_TOKEN: 'need-token',
   START_CATEGORIE: Categorie.new,
   USER_KEY_IN_LOCAL_STORAGE: 'Active-user-in-forestdecor-app',
+  SHOW_CAROUSEL: 'carousel',
+  SHOW_EDIT_PHOTOS: 'edit-photos',
   firebase: {
     apiKey: "AIzaSyDIGANkFkG2s7bszuIFcyJrByruYVSsYPg",
     authDomain: "prj-forestdecor.firebaseapp.com",

@@ -21,7 +21,7 @@
         </mat-card-content>
         <mat-card-actions>
           <app-button-show [product]="product"></app-button-show>
-          <app-button-edit *ngIf="(user$ | async)?.isAdmin"></app-button-edit>
+          <app-button-edit *ngIf="(user$ | async)?.isAdmin" (click)="onEditPhoto(product)"></app-button-edit>
         </mat-card-actions>
 
       </mat-card>

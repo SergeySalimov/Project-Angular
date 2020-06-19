@@ -3,11 +3,11 @@ import { Product, ProductsService, Show } from '../../../shared';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-delete-photos',
-  templateUrl: './delete-photos.component.html',
-  styleUrls: ['./delete-photos.component.scss']
+  selector: 'app-edit-photos',
+  templateUrl: './edit-photos.component.html',
+  styleUrls: ['./edit-photos.component.scss']
 })
-export class DeletePhotosComponent implements OnInit, OnDestroy {
+export class EditPhotosComponent implements OnInit, OnDestroy {
 
   photosUrls: string[] | null = [];
   curProduct: Product | null = null;
