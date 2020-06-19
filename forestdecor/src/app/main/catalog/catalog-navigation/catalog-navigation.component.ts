@@ -37,10 +37,11 @@ export class CatalogNavigationComponent implements OnInit {
 
   constructor( private productsService: ProductsService,
                public catalogNavigation: CatalogNavigationService) {
-    this.dataSource.data = productsService.oldProducts;
+    this.dataSource.data = productsService.treeData;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   hasChild = (_: number, node: FlatNode) => node.expandable;
 

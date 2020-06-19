@@ -8,6 +8,7 @@ import { ProductsService } from '../../shared';
   styleUrls: ['./catalog.component.scss']
 })
 export class CatalogComponent {
+  // ToDO need to review
   showInCatalog$ = this.productsService.showInCatalog;
   constructor(public catalogNavigation: CatalogNavigationService, private productsService: ProductsService) {
   }

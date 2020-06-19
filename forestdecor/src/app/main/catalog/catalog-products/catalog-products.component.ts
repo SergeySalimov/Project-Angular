@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { filter, map, pairwise } from 'rxjs/operators';
 import { ProductPlacer, ProductsService } from '../../../shared';
 import { Show } from '../../../shared/models/showInCatalog';
+import { UrlOfCatalog } from '../../../shared/models/url-of-catalog';
 
 @Component({
   selector: 'app-catalog-products',
@@ -12,7 +13,7 @@ import { Show } from '../../../shared/models/showInCatalog';
 })
 export class CatalogProductsComponent implements OnInit, OnDestroy {
 
-  curProducts: ProductPlacer;
+  curProducts: UrlOfCatalog;
   routerSubscription: Subscription;
   activatedRouteSubscription: Subscription;
   previous: string = null;
@@ -38,16 +39,16 @@ export class CatalogProductsComponent implements OnInit, OnDestroy {
       this.previous = prev;
     });
 
-    this.productsService.showInCatalog.subscribe((data: Show) => {
-      if (data?.show === 'close-delete') {
-        if (!!data.product.photos && data.product.photos[0].urlList?.length > 0) {
-          this.curProducts.content[0].photos = data.product.photos;
-        } else {
-          delete this.curProducts.content[0].photos;
-        }
-        this.productsService.setModalStatus(null);
-      }
-    })
+    // this.productsService.showInCatalog.subscribe((data: Show) => {
+    //   if (data?.show === 'close-delete') {
+    //     if (!!data.product.photos && data.product.photos[0].urlList?.length > 0) {
+    //       this.curProducts.content[0].photos = data.product.photos;
+    //     } else {
+    //       delete this.curProducts.content[0].photos;
+    //     }
+    //     this.productsService.setModalStatus(null);
+    //   }
+    // })
   }
 
   ngOnDestroy(): void {
