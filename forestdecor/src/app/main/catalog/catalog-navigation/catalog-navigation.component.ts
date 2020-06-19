@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { OldProduct, ProductsService } from '../../../shared';
+import { ProductsService } from '../../../shared';
 import { CatalogNavigationService } from '../catalog-service/catalog-navigation.service';
+import { TreeData } from '../../../shared/models/tree-data.model';
 
 /** Flat node with expandable and level information */
 interface FlatNode {
@@ -18,7 +19,7 @@ interface FlatNode {
 })
 export class CatalogNavigationComponent implements OnInit {
 
-  private _transformer = (node: OldProduct, level: number) => {
+  private _transformer = (node: TreeData, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,

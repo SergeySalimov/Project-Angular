@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
-import { NavigationLink, NavigationService, ProductPlacer, ProductsService } from '../shared';
-import { UrlOfCatalog } from '../shared/models/url-of-catalog';
+import { NavigationLink, NavigationService, ProductsService, UrlOfCatalog } from '../shared';
 
 @Component({
   selector: 'app-breadcrumb',

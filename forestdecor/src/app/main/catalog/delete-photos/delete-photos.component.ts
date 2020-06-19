@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { OldProduct, ProductsService } from '../../../shared';
+import { Product, ProductsService, Show } from '../../../shared';
 import { Subscription } from 'rxjs';
-import { Show } from '../../../shared/models/showInCatalog';
 
 @Component({
   selector: 'app-delete-photos',
@@ -11,22 +10,22 @@ import { Show } from '../../../shared/models/showInCatalog';
 export class DeletePhotosComponent implements OnInit, OnDestroy {
 
   photosUrls: string[] | null = [];
-  curProduct: OldProduct | null = null;
+  curProduct: Product | null = null;
   selectedIndex: number[] = [];
   productsSubscr: Subscription;
 
   constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
-    this.productsSubscr = this.productsService.showInCatalog.subscribe( (data: Show) => {
-      if (!!data) {
-        this.curProduct = data?.product;
-        this.photosUrls = !!data.product.photos ? data.product?.photos[0].urlList : [];
-      } else {
-        this.curProduct = null;
-        this.photosUrls = [];
-      }
-    });
+    // this.productsSubscr = this.productsService.showInCatalog.subscribe( (data: Show) => {
+    //   if (!!data) {
+    //     this.curProduct = data?.product;
+    //     this.photosUrls = !!data.product.photos ? data.product?.photos[0].urlList : [];
+    //   } else {
+    //     this.curProduct = null;
+    //     this.photosUrls = [];
+    //   }
+    // });
   }
 
   closeWindow() {
@@ -39,19 +38,19 @@ export class DeletePhotosComponent implements OnInit, OnDestroy {
   }
 
   deleteSelected() {
-    const newPhotoUrlsArr: string[] = [];
-    this.photosUrls.forEach((photoUrl, index) => {
-      if (this.selectedIndex.indexOf(index) === -1) {
-        newPhotoUrlsArr.push(photoUrl);
-      }
-    });
-    this.productsService.updatePhotoUrlOnServer(this.curProduct.urlName, newPhotoUrlsArr).subscribe(() => {
-      this.photosUrls = newPhotoUrlsArr;
-      this.curProduct.photos[0].urlList = newPhotoUrlsArr;
-      this.selectedIndex = [];
-      // может не надо
-      this.productsService.updatePhotos();
-    });
+    // const newPhotoUrlsArr: string[] = [];
+    // this.photosUrls.forEach((photoUrl, index) => {
+    //   if (this.selectedIndex.indexOf(index) === -1) {
+    //     newPhotoUrlsArr.push(photoUrl);
+    //   }
+    // });
+    // this.productsService.updatePhotoUrlOnServer(this.curProduct.urlName, newPhotoUrlsArr).subscribe(() => {
+    //   this.photosUrls = newPhotoUrlsArr;
+    //   this.curProduct.photos[0].urlList = newPhotoUrlsArr;
+    //   this.selectedIndex = [];
+    //   // может не надо
+    //   this.productsService.updatePhotos();
+    // });
   }
 
   selectAll() {

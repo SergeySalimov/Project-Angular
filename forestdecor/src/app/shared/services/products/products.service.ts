@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ProductPlacer } from '../../models/productsPlacer';
 import { environment } from '../../../../environments/environment';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -30,7 +29,6 @@ export class ProductsService {
 
   //ToDo rewrite
   private photoUrls: PhotoUrl[];
-  private productsPlacer: ProductPlacer[] = [];
   private _uploadProgress: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private _showInCatalog: BehaviorSubject<Show | null> = new BehaviorSubject<Show | null>(null);
 
@@ -198,13 +196,13 @@ export class ProductsService {
 
   // old
   addPhotoUrlsToProducts(photosUrls: PhotoUrl[]) {
-    this.productsPlacer.forEach((item: ProductPlacer) => {
-      const photoUrls: PhotoUrl = photosUrls.filter((url: PhotoUrl) => url.urlName === item.urlName)[0];
-      if (!!photoUrls) {
-        item.content[0].photos = [];
-        item.content[0].photos.push(photoUrls);
-      }
-    });
+    // this.productsPlacer.forEach((item: UrlOfCatalog) => {
+    //   const photoUrls: PhotoUrl = photosUrls.filter((url: PhotoUrl) => url.urlName === item.urlName)[0];
+    //   if (!!photoUrls) {
+    //     item.content[0].photos = [];
+    //     item.content[0].photos.push(photoUrls);
+    //   }
+    // });
   }
 
 }

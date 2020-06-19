@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
 import { Router } from '@angular/router';
-import { AuthService, OldProduct, ProductPlacer, ProductsService, User } from '../../../../shared';
+import { AuthService, Product, ProductsService, UrlOfCatalog, User } from '../../../../shared';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class CatalogSingleProductComponent {
 
-  @Input() curProduct: OldProduct;
+  @Input() curProduct: Product;
   @Input() previous: string;
   user$: Observable<User> = this.auth.user;
 
@@ -21,14 +21,14 @@ export class CatalogSingleProductComponent {
     private router: Router,
     private auth: AuthService) { }
 
-  onDeletePhoto(product: OldProduct) {
+  onDeletePhoto(product: Product) {
     this.productsService.setModalStatus({product, show: 'delete-photos'});
   }
 
   goBack(urlName: string, noPrev = false) {
     if (!this.previous || noPrev) {
       // if no previous go to parent
-      const prd: ProductPlacer = this.productsService.getProductUrlInfo(urlName);
+      const prd: UrlOfCatalog = this.productsService.getProductUrlInfo(urlName);
       this.previous = prd.parents.length > 0 ? prd.parents.pop() : 'all';
     }
     this.router.navigate(['/catalog', this.previous]);

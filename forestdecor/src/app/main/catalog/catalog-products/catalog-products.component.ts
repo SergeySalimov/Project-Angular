@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter, map, pairwise } from 'rxjs/operators';
-import { ProductPlacer, ProductsService } from '../../../shared';
+import { ProductsService } from '../../../shared';
 import { Show } from '../../../shared/models/showInCatalog';
 import { UrlOfCatalog } from '../../../shared/models/url-of-catalog';
 

@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { OldProduct, ProductsService } from '../../../shared';
+import { Product, ProductsService, Show } from '../../../shared';
 import { Subscription } from 'rxjs';
-import { Show } from '../../../shared/models/showInCatalog';
 
 @Component({
   selector: 'app-carousel',
@@ -12,7 +11,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
 
   showCarousel: string[] | null = null;
   showCarouselSubscription: Subscription;
-  product: OldProduct | null = null;
+  product: Product | null = null;
 
   constructor(private productsService: ProductsService) {
   }
@@ -20,7 +19,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.showCarouselSubscription = this.productsService.showInCatalog.subscribe((data: Show | null) => {
       this.product = data?.product;
-      this.showCarousel = data?.product?.photos[0].urlList;
+      // this.showCarousel = data?.product?.photos[0].urlList;
     })
   }
 
