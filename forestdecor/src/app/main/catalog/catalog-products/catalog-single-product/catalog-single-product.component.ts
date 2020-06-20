@@ -23,7 +23,7 @@ export class CatalogSingleProductComponent {
     private auth: AuthService) { }
 
   onEditPhoto(product: Product) {
-    this.productsService.setModalStatus({product, show: environment.SHOW_EDIT_PHOTOS});
+    this.productsService.setShowInCatalog({product, show: environment.SHOW_EDIT_PHOTOS});
   }
 
   goBack(urlName: string, noPrev = false) {

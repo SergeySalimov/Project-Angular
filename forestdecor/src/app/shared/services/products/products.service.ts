@@ -10,6 +10,7 @@ import { Show } from '../../models/showInCatalog';
 import { Parent, Product } from '../../models/product';
 import { UrlOfCatalog } from '../../models/url-of-catalog';
 import { TreeData } from '../../models/tree-data.model';
+import { Message } from '../..';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class ProductsService {
     return this._showInCatalog.asObservable();
   }
 
-  setModalStatus(status: Show | null) {
+  setShowInCatalog(status: Show | null) {
     this._showInCatalog.next(status);
   }
 
@@ -47,17 +48,73 @@ export class ProductsService {
   constructor(private http: HttpClient, private auth: AuthService, private storage: AngularFireStorage) {
     this.auth.autoLogin();
     this.auth.getAdminsFromServer().pipe(take(1)).subscribe();
-    this.getProductsFromServer().pipe(take(1)).subscribe((products: Product[]) => {
-      this.createUrlsOfCatalog(products);
-      this.createTreeDataForCatalogNavigation(products);
-    });
+    this.getProductsFromServer().pipe(take(1)).subscribe();
     //old code
     // this.getProductsFromServer().pipe(take(1)).subscribe(() => this.updatePhotos());
   }
 
   // Server block new
   getProductsFromServer(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${environment.firebase.databaseURL}/catalogProducts.json`);
+    return this.http.get<Product[]>(`${environment.firebase.databaseURL}/catalogProducts.json`).pipe(
+      map((data: any) => {
+        const product: Product[] = [];
+        for (let key in data) {
+          if (data.hasOwnProperty(key)) {
+            product.push({id: key, ...data[key]});
+          }
+        }
+        return product;
+      }),
+      tap((products: Product[]) => this.createUrlsOfCatalog(products)),
+      tap((products: Product[]) => this.createTreeDataForCatalogNavigation(products)),
+    );
+  }
+
+  uploadFile(file, product: Product) {
+    let folder = product.urlName;
+    const filePath = `/${folder}/${file.name}`;
+
+    const ref: AngularFireStorageReference = this.storage.ref(filePath);
+    const task: AngularFireUploadTask = ref.put(file);
+    task.percentageChanges().subscribe(number => this._uploadProgress.next(number));
+    task.then((data) => {
+      const filePath = `/${folder}/${data.metadata.name}`;
+      this.storage.ref(filePath).getDownloadURL().pipe(
+        map((url: string) => {
+          !!product.photos ? product.photos.push(url) : product.photos = [url];
+          !!product.photosInFolder ? product.photosInFolder.push(filePath) : product.photosInFolder = [filePath];
+          return product;
+        }),
+        switchMap((prd: Product) => this.updateProductOnServer(prd)),
+        tap(data => console.log(data)),
+      )
+        .subscribe(() => this._uploadProgress.next(0));
+    });
+  }
+
+  updateProductOnServer(product: Product) {
+    const headers: HttpHeaders = new HttpHeaders({
+      [environment.NEED_TOKEN]: 'Add-my-token',
+      [environment.GLOBAL_SPINNER]: 'spinnerNeeded'
+    });
+    return this.http.put(`${environment.firebase.databaseURL}/catalogProducts/${product.id}.json`, product, {headers});
+  }
+
+  deleteFile(downloadUrl: string) {
+    return this.storage.storage.refFromURL(downloadUrl).delete();
+  }
+
+
+  deletePhotosInStorage(delArr: string[]) {
+    delArr.forEach((url: string) => {
+      console.log(url);
+      this.deleteFile(url).catch(err => {
+        throw new Error(err);
+      })
+        .finally(() => console.log('done'))
+
+
+    })
   }
 
   // old
@@ -81,28 +138,6 @@ export class ProductsService {
     )
   }
 
-  uploadFile(file, folder: string) {
-    const filePath = `/${folder}/${file.name}`;
-    const ref: AngularFireStorageReference = this.storage.ref(filePath);
-    const task: AngularFireUploadTask = ref.put(file);
-    task.percentageChanges().subscribe(number => this._uploadProgress.next(number));
-    task.then((data) => {
-      const filePath = `/${folder}/${data.metadata.name}`;
-      this.storage.ref(filePath).getDownloadURL().pipe(
-        tap(() => setTimeout(() => {this._uploadProgress.next(0)}, 2000)),
-        switchMap((url: string) => this.sendPhotoUrlToServer(folder, [url])),
-      )
-        .subscribe(data => this.updatePhotos());
-    });
-  }
-
-  updatePhotos() {
-    this.getPhotosFromServer().pipe(take(1)).subscribe((data: PhotoUrl[]) => {
-      this.photoUrls = data;
-      this.addPhotoUrlsToProducts(data);
-    });
-  }
-
   updatePhotoUrlOnServer(folder, newestData: string[]) {
     return this.deletePhotoFromServer(folder).pipe(
       switchMap(() => this.sendPhotoUrlToServer(folder, newestData))
@@ -123,7 +158,6 @@ export class ProductsService {
   createUrlsOfCatalog(products: Product[]) {
     const newUrlsOfCatalog: UrlOfCatalog[] = [{urlName: 'all', name: 'весь каталог', parents: null, content: products}];
     products.forEach((product: Product) => {
-
       if (product.parents?.length > 0) {
         // create parent url of Catalog
         let parentsHistory: string[] | null = [];

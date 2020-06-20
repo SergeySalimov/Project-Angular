@@ -119,7 +119,9 @@ export class MsgsService {
         map((data: any) => {
           const messages: Message[] = [];
           for (let key in data) {
-            messages.push({id: key, isChecked: false, ...data[key]});
+            if (data.hasOwnProperty(key)) {
+              messages.push({id: key, isChecked: false, ...data[key]});
+            }
           }
           return messages;
         }),

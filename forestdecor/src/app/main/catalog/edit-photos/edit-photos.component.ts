@@ -9,7 +9,6 @@ import { Subscription } from 'rxjs';
 })
 export class EditPhotosComponent implements OnInit, OnDestroy {
 
-  photosUrls: string[] | null = [];
   curProduct: Product | null = null;
   selectedIndex: number[] = [];
   productsSubscr: Subscription;
@@ -17,20 +16,17 @@ export class EditPhotosComponent implements OnInit, OnDestroy {
   constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
-    this.productsSubscr = this.productsService.showInCatalog.subscribe( (data: Show) => {
-      console.log(data);
-      if (!!data) {
-        this.curProduct = data?.product;
-        this.photosUrls = !!data.product.photos ? data.product?.photos : [];
-      } else {
-        this.curProduct = null;
-        this.photosUrls = [];
-      }
-    });
+    this.productsSubscr = this.productsService.showInCatalog.subscribe( (data: Show) => this.curProduct = data?.product);
+  }
+
+  onAddPhoto(event) {
+    if (!!event.target.files[0]) {
+      this.productsService.uploadFile(event.target.files[0], this.curProduct);
+    }
   }
 
   closeWindow() {
-    this.productsService.setModalStatus({product: this.curProduct, show: 'close-delete'});
+    this.productsService.setShowInCatalog(null);
   }
 
   clickONPhoto(i: number) {
@@ -40,26 +36,41 @@ export class EditPhotosComponent implements OnInit, OnDestroy {
 
   deleteSelected() {
     const newPhotoUrlsArr: string[] = [];
-    this.photosUrls.forEach((photoUrl, index) => {
+    const delPhotoUrlsArr: string[] = [];
+    this.curProduct.photos?.forEach((photoUrl, index) => {
       if (this.selectedIndex.indexOf(index) === -1) {
         newPhotoUrlsArr.push(photoUrl);
+      } else {
+        delPhotoUrlsArr.push(photoUrl);
       }
     });
-    this.productsService.updatePhotoUrlOnServer(this.curProduct.urlName, newPhotoUrlsArr).subscribe(() => {
-      this.photosUrls = newPhotoUrlsArr;
-      this.curProduct.photos = newPhotoUrlsArr;
-      this.selectedIndex = [];
-      // может не надо
-      this.productsService.updatePhotos();
+    const toDeleteInFolderUrlsArr: string[] = [];
+    const toStayInFolderUrlsArr: string[] = [];
+    this.curProduct.photosInFolder?.forEach((photoUrl, index) => {
+      if (this.selectedIndex.indexOf(index) === -1) {
+        toStayInFolderUrlsArr.push(photoUrl);
+      } else {
+        toDeleteInFolderUrlsArr.push(photoUrl);
+      }
     });
+    this.curProduct.photos = [...newPhotoUrlsArr];
+    this.curProduct.photosInFolder = [...toStayInFolderUrlsArr];
+    this.productsService.updateProductOnServer(this.curProduct).subscribe(data => {
+      if (delPhotoUrlsArr?.length > 0) {
+        this.productsService.deletePhotosInStorage(delPhotoUrlsArr)
+      }
+    });
+
+
   }
 
   selectAll() {
     this.selectedIndex = [];
-    this.photosUrls.forEach((item, index) => this.selectedIndex.push(index));
+    this.curProduct.photos?.forEach((item, index) => this.selectedIndex.push(index));
   }
 
   ngOnDestroy(): void {
+    this.curProduct = null;
     this.productsSubscr.unsubscribe();
   }
 

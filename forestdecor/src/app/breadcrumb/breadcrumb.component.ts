@@ -29,7 +29,7 @@ export class BreadcrumbComponent implements OnInit {
       map(strUrl => strUrl.split('#')[0]),
       map(strUrl => strUrl.split('/')),
       distinctUntilChanged(),
-      tap(() => this.productsService.setModalStatus(null)),
+      tap(() => this.productsService.setShowInCatalog(null)),
     )
       .subscribe((urlArr: string[]) => {
         // first element

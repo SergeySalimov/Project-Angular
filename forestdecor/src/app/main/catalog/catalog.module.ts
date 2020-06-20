@@ -11,7 +11,6 @@ import { CatalogRoutingModule } from './catalog-routing.module';
 import {ButtonShowComponent, ButtonEditComponent } from './catalog-products/buttons';
 import { CatalogComponent } from './catalog.component';
 import { CarouselComponent } from './carousel/carousel.component';
-import { DeletePhotosComponent } from './delete-photos/delete-photos.component';
 import { EditPhotosComponent } from './edit-photos/edit-photos.component';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { EditPhotosComponent } from './edit-photos/edit-photos.component';
     ButtonShowComponent,
     ButtonEditComponent,
     CarouselComponent,
-    DeletePhotosComponent,
     EditPhotosComponent
   ],
   imports: [
