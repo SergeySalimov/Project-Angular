@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { AuthService, Product, ProductsService, User } from '../../../../shared';
+import { AuthService, MODALS_NAME, Product, ProductsService, User } from '../../../../shared';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-catalog-card-desk',
@@ -17,6 +16,6 @@ export class CatalogCardDeskComponent {
               private productsService: ProductsService) { }
 
   onEditPhoto(product: Product) {
-    this.productsService.setShowInCatalog({product, show: environment.SHOW_EDIT_PHOTOS});
+    this.productsService.setShowInCatalog({product, show: MODALS_NAME.SHOW_EDIT_PHOTOS});
   }
 }

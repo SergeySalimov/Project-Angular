@@ -22,6 +22,7 @@ export * from './services/auth/admin.guard';
 export * from './services/auth/auth.guard';
 export * from './services/navigation/navigation.service';
 export * from './services/products/products.service';
+export * from './services/products/madals.name';
 export * from './services/spinners/spinner.service';
 export * from './services/users/users.service';
 export * from './components/progress-bar/progress-bar.component';

@@ -19,4 +19,17 @@ export const MESSAGE = {
     style: 'primary'
   },
   FILE_LOADED_TIMER: 5000,
+
+  FILE_DELETED_SUCCESS: {
+    title: 'Все успешно удалено',
+    message: 'Ваш файл или файлы были удалены из хранилища',
+    style: 'primary'
+  },
+  FILE_DELETED_ERROR: {
+    title: 'При удалении файла произошла ошибка',
+    message: 'При удалении файла произошла ошибка',
+    style: 'danger'
+  },
+  FILE_DELETED_TIMER: 5000,
+
 };

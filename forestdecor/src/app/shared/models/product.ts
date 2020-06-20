@@ -10,6 +10,5 @@ export interface Product {
   img: string | null,
   photos: string[] | null,
   description: string | null,
-  photosInFolder?: string[] | null,
   id?: string
 }

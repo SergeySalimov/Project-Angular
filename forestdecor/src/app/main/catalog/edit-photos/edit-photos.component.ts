@@ -44,24 +44,13 @@ export class EditPhotosComponent implements OnInit, OnDestroy {
         delPhotoUrlsArr.push(photoUrl);
       }
     });
-    const toDeleteInFolderUrlsArr: string[] = [];
-    const toStayInFolderUrlsArr: string[] = [];
-    this.curProduct.photosInFolder?.forEach((photoUrl, index) => {
-      if (this.selectedIndex.indexOf(index) === -1) {
-        toStayInFolderUrlsArr.push(photoUrl);
-      } else {
-        toDeleteInFolderUrlsArr.push(photoUrl);
-      }
-    });
     this.curProduct.photos = [...newPhotoUrlsArr];
-    this.curProduct.photosInFolder = [...toStayInFolderUrlsArr];
     this.productsService.updateProductOnServer(this.curProduct).subscribe(data => {
       if (delPhotoUrlsArr?.length > 0) {
-        this.productsService.deletePhotosInStorage(delPhotoUrlsArr)
+        this.productsService.deletePhotosInStorage(delPhotoUrlsArr);
+        this.selectedIndex = [];
       }
     });
-
-
   }
 
   selectAll() {
@@ -71,6 +60,7 @@ export class EditPhotosComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.curProduct = null;
+    this.selectedIndex = [];
     this.productsSubscr.unsubscribe();
   }
 

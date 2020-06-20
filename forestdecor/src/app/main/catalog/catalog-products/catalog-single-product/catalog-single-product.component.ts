@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
 import { Router } from '@angular/router';
-import { AuthService, Product, ProductsService, UrlOfCatalog, User } from '../../../../shared';
+import { AuthService, MODALS_NAME, Product, ProductsService, UrlOfCatalog, User } from '../../../../shared';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-catalog-single-product',
@@ -23,7 +22,7 @@ export class CatalogSingleProductComponent {
     private auth: AuthService) { }
 
   onEditPhoto(product: Product) {
-    this.productsService.setShowInCatalog({product, show: environment.SHOW_EDIT_PHOTOS});
+    this.productsService.setShowInCatalog({product, show: MODALS_NAME.SHOW_EDIT_PHOTOS});
   }
 
   goBack(urlName: string, noPrev = false) {

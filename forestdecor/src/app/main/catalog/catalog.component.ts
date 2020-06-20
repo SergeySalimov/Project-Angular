@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CatalogNavigationService } from './catalog-service/catalog-navigation.service';
-import { ProductsService } from '../../shared';
-import { environment } from '../../../environments/environment';
+import { MODALS_NAME, ProductsService } from '../../shared';
 
 @Component({
   selector: 'app-catalog',
@@ -9,8 +8,8 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./catalog.component.scss']
 })
 export class CatalogComponent {
-  showCarousel = environment.SHOW_CAROUSEL;
-  editPhotos = environment.SHOW_EDIT_PHOTOS;
+  showCarousel = MODALS_NAME.SHOW_CAROUSEL;
+  editPhotos = MODALS_NAME.SHOW_EDIT_PHOTOS;
   showInCatalog$ = this.productsService.showInCatalog;
   constructor(public catalogNavigation: CatalogNavigationService, private productsService: ProductsService) {
   }

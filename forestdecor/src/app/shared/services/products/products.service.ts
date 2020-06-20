@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { PhotoUrl } from '../../models/photo-url.model';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { Show } from '../../models/showInCatalog';
 import { Parent, Product } from '../../models/product';
 import { UrlOfCatalog } from '../../models/url-of-catalog';
 import { TreeData } from '../../models/tree-data.model';
-import { Message } from '../..';
+import { ConsoleService } from '../../services/console/console.service';
+import { MESSAGE } from '../console/response-messages-list';
 
 @Injectable({
   providedIn: 'root'
@@ -42,18 +42,16 @@ export class ProductsService {
     this._showInCatalog.next(status);
   }
 
-  //ToDo rewrite
-  private photoUrls: PhotoUrl[];
-
-  constructor(private http: HttpClient, private auth: AuthService, private storage: AngularFireStorage) {
+  constructor(private http: HttpClient,
+              private auth: AuthService,
+              private storage: AngularFireStorage,
+              private console: ConsoleService) {
     this.auth.autoLogin();
     this.auth.getAdminsFromServer().pipe(take(1)).subscribe();
     this.getProductsFromServer().pipe(take(1)).subscribe();
-    //old code
-    // this.getProductsFromServer().pipe(take(1)).subscribe(() => this.updatePhotos());
   }
 
-  // Server block new
+  // Server block
   getProductsFromServer(): Observable<Product[]> {
     return this.http.get<Product[]>(`${environment.firebase.databaseURL}/catalogProducts.json`).pipe(
       map((data: any) => {
@@ -73,7 +71,6 @@ export class ProductsService {
   uploadFile(file, product: Product) {
     let folder = product.urlName;
     const filePath = `/${folder}/${file.name}`;
-
     const ref: AngularFireStorageReference = this.storage.ref(filePath);
     const task: AngularFireUploadTask = ref.put(file);
     task.percentageChanges().subscribe(number => this._uploadProgress.next(number));
@@ -82,11 +79,9 @@ export class ProductsService {
       this.storage.ref(filePath).getDownloadURL().pipe(
         map((url: string) => {
           !!product.photos ? product.photos.push(url) : product.photos = [url];
-          !!product.photosInFolder ? product.photosInFolder.push(filePath) : product.photosInFolder = [filePath];
           return product;
         }),
         switchMap((prd: Product) => this.updateProductOnServer(prd)),
-        tap(data => console.log(data)),
       )
         .subscribe(() => this._uploadProgress.next(0));
     });
@@ -104,57 +99,21 @@ export class ProductsService {
     return this.storage.storage.refFromURL(downloadUrl).delete();
   }
 
-
   deletePhotosInStorage(delArr: string[]) {
-    delArr.forEach((url: string) => {
-      console.log(url);
+    delArr.forEach((url: string, i: number) => {
       this.deleteFile(url).catch(err => {
+        this.console.showInfoMessage({...MESSAGE.FILE_DELETED_ERROR, title: err}, MESSAGE.FILE_DELETED_TIMER);
         throw new Error(err);
       })
-        .finally(() => console.log('done'))
-
-
+        .finally(() => {
+          if (delArr.length === i + 1) {
+            this.console.showInfoMessage(MESSAGE.FILE_DELETED_SUCCESS, MESSAGE.FILE_DELETED_TIMER);
+          }
+        })
     })
   }
 
-  // old
-  getPhotosFromServer(): Observable<PhotoUrl[]> {
-    return this.http.get<PhotoUrl[]>(`${environment.firebase.databaseURL}/photos.json`).pipe(
-      map(data => {
-        const photoUrl: PhotoUrl[] = [];
-        for (let key in data) {
-          if (data.hasOwnProperty(key)) {
-            const [fakeCopy, urlArr] = [data[key], []];
-            for (let key2 in fakeCopy) {
-              if (fakeCopy.hasOwnProperty(key2)) {
-                urlArr.push(...fakeCopy[key2])
-              }
-            }
-            photoUrl.push({urlName: key, urlList: [...new Set(urlArr)]});
-          }
-        }
-        return photoUrl;
-      }),
-    )
-  }
-
-  updatePhotoUrlOnServer(folder, newestData: string[]) {
-    return this.deletePhotoFromServer(folder).pipe(
-      switchMap(() => this.sendPhotoUrlToServer(folder, newestData))
-    );
-  }
-
-  sendPhotoUrlToServer(folder: string, data: string[]) {
-    const headers: HttpHeaders = new HttpHeaders({[environment.NEED_TOKEN]: 'Add-my-token', [environment.GLOBAL_SPINNER]: 'spinnerNeeded'});
-    return this.http.post<string[]>(`${environment.firebase.databaseURL}/photos/${folder}.json`, data, {headers});
-  }
-
-  deletePhotoFromServer(folder: string) {
-    const headers: HttpHeaders = new HttpHeaders({[environment.NEED_TOKEN]: 'Add-my-token', [environment.GLOBAL_SPINNER]: 'spinnerNeeded'});
-    return this.http.delete<string[]>(`${environment.firebase.databaseURL}/photos/${folder}.json`, {headers});
-  }
-
-  //Calculations new
+  //Calculations
   createUrlsOfCatalog(products: Product[]) {
     const newUrlsOfCatalog: UrlOfCatalog[] = [{urlName: 'all', name: 'весь каталог', parents: null, content: products}];
     products.forEach((product: Product) => {
@@ -218,24 +177,17 @@ export class ProductsService {
         }
         let index2: number = newTreeData[index].children.findIndex(item => item.urlName === prd.parents[1].urlName);
         if (index2 === -1) {
-          newTreeData[index].children.push({name: prd.parents[1].name, urlName: prd.parents[1].urlName, children: [treeDataElement]});
+          newTreeData[index].children.push({
+            name: prd.parents[1].name,
+            urlName: prd.parents[1].urlName,
+            children: [treeDataElement]
+          });
         } else {
           newTreeData[index].children[index2].children.push(treeDataElement);
         }
       }
     });
     this._treeData.next(newTreeData);
-  }
-
-  // old
-  addPhotoUrlsToProducts(photosUrls: PhotoUrl[]) {
-    // this.productsPlacer.forEach((item: UrlOfCatalog) => {
-    //   const photoUrls: PhotoUrl = photosUrls.filter((url: PhotoUrl) => url.urlName === item.urlName)[0];
-    //   if (!!photoUrls) {
-    //     item.content[0].photos = [];
-    //     item.content[0].photos.push(photoUrls);
-    //   }
-    // });
   }
 
 }
