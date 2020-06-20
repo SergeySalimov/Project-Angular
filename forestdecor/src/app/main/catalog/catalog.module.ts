@@ -8,11 +8,10 @@ import { CatalogProductsComponent } from './catalog-products/catalog-products.co
 import { CatalogCardDeskComponent } from './catalog-products/catalog-card-desk/catalog-card-desk.component';
 import { CatalogSingleProductComponent } from './catalog-products/catalog-single-product/catalog-single-product.component';
 import { CatalogRoutingModule } from './catalog-routing.module';
-import { ButtonAddComponent, ButtonDeleteComponent, ButtonShowComponent } from './catalog-products/buttons';
+import {ButtonShowComponent, ButtonEditComponent } from './catalog-products/buttons';
 import { CatalogComponent } from './catalog.component';
-import { ButtonEditComponent } from './catalog-products/buttons/button-edit/button-edit.component';
 import { CarouselComponent } from './carousel/carousel.component';
-import { DeletePhotosComponent } from './delete-photos/delete-photos.component';
+import { EditPhotosComponent } from './edit-photos/edit-photos.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +21,9 @@ import { DeletePhotosComponent } from './delete-photos/delete-photos.component';
     CatalogCardDeskComponent,
     CatalogSingleProductComponent,
     ButtonShowComponent,
-    ButtonAddComponent,
-    ButtonDeleteComponent,
     ButtonEditComponent,
     CarouselComponent,
-    DeletePhotosComponent
+    EditPhotosComponent
   ],
   imports: [
     CommonModule,

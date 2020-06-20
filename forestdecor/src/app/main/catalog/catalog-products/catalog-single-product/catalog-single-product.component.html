@@ -7,15 +7,8 @@
         <div class="col-sm-12 col-lg-5 mt-2">
           <img src="{{curProduct.img}}" class="img-fluid mb-2" alt="{{curProduct.name}}">
           <h5 class="card-title" [ngClass]="{'pl-5': !catalogNavigation.status}">
-            <app-button-add [product]="curProduct" *ngIf="(user$ | async)?.isAdmin"></app-button-add>
-            <button mat-button class="mx-auto"
-                    color="warn"
-                    [disabled]="!curProduct.photos"
-                    (click)="onDeletePhoto(curProduct)"
-                    *ngIf="(user$ | async)?.isAdmin">
-              <span><i class="icon-camera mr-1"></i>Удалить</span>
-            </button>
             <app-button-show [product]="curProduct"></app-button-show>
+            <app-button-edit *ngIf="(user$ | async)?.isAdmin" (click)="onEditPhoto(curProduct)"></app-button-edit>
           </h5>
         </div>
 

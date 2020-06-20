@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AuthService, Product, User } from '../../../../shared';
+import { AuthService, MODALS_NAME, Product, ProductsService, User } from '../../../../shared';
 import { CatalogNavigationService } from '../../catalog-service/catalog-navigation.service';
 import { Observable } from 'rxjs';
 
@@ -12,5 +12,10 @@ export class CatalogCardDeskComponent {
   @Input() curProductData : Product[];
   user$: Observable<User> = this.auth.user;
   constructor(public catalogNavigation: CatalogNavigationService,
-              private auth: AuthService) { }
+              private auth: AuthService,
+              private productsService: ProductsService) { }
+
+  onEditPhoto(product: Product) {
+    this.productsService.setShowInCatalog({product, show: MODALS_NAME.SHOW_EDIT_PHOTOS});
+  }
 }
