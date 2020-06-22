@@ -31,7 +31,9 @@
     margin-top: 4px;
     margin-bottom: 4px;
     background-color: $backGrey;
-    text-transform: capitalize;
+  }
+  .btn::first-letter {
+    text-transform: uppercase;
   }
 
   .btn:focus {
