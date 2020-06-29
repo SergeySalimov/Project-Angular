@@ -9,6 +9,7 @@ import { INTERCEPTORS } from './interceptors/interceptors';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { MaterialModule } from '../material/material-module';
 import { CarouselDirective } from './directives/carousel.directive';
+import { ProgressBarForPageScrollComponent } from './components/progress-bar-for-page-scroll/progress-bar-for-page-scroll.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CarouselDirective } from './directives/carousel.directive';
     ButtonGoTopComponent,
     ProgressBarComponent,
     CarouselDirective,
+    ProgressBarForPageScrollComponent,
   ],
   exports: [
     SpinnerComponent,
@@ -27,7 +29,8 @@ import { CarouselDirective } from './directives/carousel.directive';
     ConsoleComponent,
     ButtonGoTopComponent,
     ProgressBarComponent,
-    CarouselDirective
+    CarouselDirective,
+    ProgressBarForPageScrollComponent,
   ],
   imports: [
     CommonModule,
