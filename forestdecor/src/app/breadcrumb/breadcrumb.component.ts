@@ -12,6 +12,7 @@ export class BreadcrumbComponent implements OnInit {
 
   breadcrumbTree: NavigationLink[];
   navLinks: NavigationLink[];
+  curRoute: string;
 
   constructor(
     private router: Router,
@@ -28,6 +29,7 @@ export class BreadcrumbComponent implements OnInit {
       map(strUrl => strUrl.split('?')[0]),
       map(strUrl => strUrl.split('#')[0]),
       map(strUrl => strUrl.split('/')),
+      tap(strUrl => this.curRoute = strUrl[1]),
       distinctUntilChanged(),
       tap(() => this.productsService.setShowInCatalog(null)),
     )
