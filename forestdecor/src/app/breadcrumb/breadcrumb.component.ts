@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 import { NavigationLink, NavigationService, ProductsService, UrlOfCatalog } from '../shared';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss']
 })
-export class BreadcrumbComponent implements OnInit {
+export class BreadcrumbComponent implements OnInit, OnDestroy {
 
   breadcrumbTree: NavigationLink[];
   navLinks: NavigationLink[];
   curRoute: string;
+  routerSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -23,7 +25,7 @@ export class BreadcrumbComponent implements OnInit {
 
   ngOnInit(): void {
     this.navLinks = this.navigation.allLinks;
-    this.router.events.pipe(
+    this.routerSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       map(event => (event as NavigationEnd).urlAfterRedirects),
       map(strUrl => strUrl.split('?')[0]),
@@ -69,6 +71,10 @@ export class BreadcrumbComponent implements OnInit {
   doBreadCrumb(url: string, parentUrl: string): NavigationLink {
     const curPrd: UrlOfCatalog = this.productsService.getProductUrlInfo(url);
     return {name: curPrd.name, routerLink: `${parentUrl}/${curPrd.urlName}`};
+  }
+
+  ngOnDestroy(): void {
+    this.routerSubscription.unsubscribe();
   }
 
 }
