@@ -12,7 +12,13 @@ import { Component, HostListener } from '@angular/core';
 })
 export class ProgressBarForPageScrollComponent{
   value: number = 0;
-  @HostListener('window:scroll') onWindowScroll(): void {
+  calculation = (): void => {
     this.value = Math.round(window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100);
+  };
+  @HostListener('window:scroll') onWindowScroll(): void {
+    this.calculation();
+  }
+  @HostListener('window:click') onWindowClick(): void {
+    this.calculation();
   }
 }
